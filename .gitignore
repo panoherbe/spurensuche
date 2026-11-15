@@ -5,3 +5,5 @@ nachweis/tmp/
 .DS_Store
 ._*
 *.log
+.env
+!.env.beispiel
