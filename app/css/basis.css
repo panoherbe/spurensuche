@@ -1,8 +1,11 @@
-/* Gestaltung für alle Seiten: Farbvariablen (hell, dunkel, kontrastreich), Schrift, Bedienelemente.
+/* Gestaltung für alle Seiten: Farbvariablen (hell, dunkel, kontrastreich), Schriften, Bedienelemente.
    Spiele nutzen dieselben Variablen (docs/SCHNITTSTELLE.md 2.6). Kontrast: Text ≥ 4,5 : 1 auf Grund und Fläche.
-   Schrift: Atkinson Hyperlegible Next (SIL Open Font License 1.1, Text in app/schrift/OFL.txt), gut lesbar,
-   auch bei Sehschwäche; die Teilmenge „erweitertes Latein“ bringt die sorbischen Buchstaben (Budyšin). Die Dateien
-   liegen in app/schrift/, damit die App sie mit jedem Inhaltspaket hat. */
+   Farbwelt: Himmelblau als Grund, Sonnengelb für Knöpfe und Sterne, dunkle Tinte für Schrift und Umrisse; dazu
+   je Ort eine eigene Farbe (.ort-farbe-1 … -6), die Karte, Aufgaben und Sammelstücke verbindet.
+   Lesetext: Atkinson Hyperlegible Next (SIL Open Font License 1.1, Text in app/schrift/OFL.txt), gut lesbar,
+   auch bei Sehschwäche. Überschriften und Knöpfe: Grandstander (SIL Open Font License 1.1, Text in
+   app/schrift/OFL-Grandstander.txt). Beide bringen in der Teilmenge „erweitertes Latein“ die sorbischen Buchstaben
+   mit (Budyšin). Die Dateien liegen in app/schrift/, damit die App sie mit jedem Inhaltspaket hat. */
 @font-face {
   font-family: "Atkinson Hyperlegible Next"; font-style: normal; font-weight: 200 800; font-display: swap;
   src: url("../schrift/AtkinsonHyperlegibleNext-latin-ext.woff2") format("woff2");
@@ -13,35 +16,57 @@
   src: url("../schrift/AtkinsonHyperlegibleNext-latin.woff2") format("woff2");
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+@font-face {
+  font-family: "Grandstander"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("../schrift/Grandstander-latin-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Grandstander"; font-style: normal; font-weight: 100 900; font-display: swap;
+  src: url("../schrift/Grandstander-latin.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 :root {
   color-scheme: light;
-  --sp-grund: #f5f2ea;
+  --sp-grund: #d6eeff;
   --sp-flaeche: #ffffff;
-  --sp-flaeche-2: #ece7db;
-  --sp-text: #1c2420;
-  --sp-text-leise: #4b5651;
-  --sp-rand: #cfc7b6;
-  --sp-akzent: #1d6b47;
+  --sp-flaeche-2: #e9f3ff;
+  --sp-text: #1b2340;
+  --sp-text-leise: #46506e;
+  --sp-rand: #a9bbdb;
+  --sp-kontur: #1b2340;
+  --sp-akzent: #1553c7;
   --sp-akzent-text: #ffffff;
-  --sp-akzent-weich: #dcefe3;
-  --sp-zweit: #24527a;
-  --sp-zweit-weich: #dde8f3;
-  --sp-erfolg: #1d6b47;
-  --sp-hinweis: #8a5300;
-  --sp-hinweis-weich: #fbeed5;
-  --sp-fehler: #b3261e;
-  --sp-fehler-weich: #fbe3e0;
-  --sp-fokus: #0b57d0;
-  --sp-karte-land: #e4eedf;
-  --sp-karte-rand: #8aa384;
+  --sp-akzent-weich: #dbe7ff;
+  --sp-zweit: #5b3cc4;
+  --sp-zweit-weich: #e9e2ff;
+  --sp-erfolg: #146c34;
+  --sp-erfolg-weich: #d9f5df;
+  --sp-hinweis: #8a5200;
+  --sp-hinweis-weich: #fff0c2;
+  --sp-fehler: #b3221a;
+  --sp-fehler-weich: #ffe3df;
+  --sp-fokus: #c2185b;
+  --sp-knopf: #ffd43b;
+  --sp-knopf-text: #1b2340;
+  --sp-sonne: #ffd43b;
+  --sp-tinte: #1b2340;
+  --sp-kopf: #ffd43b;
+  --sp-kopf-text: #1b2340;
+  --sp-karte-grund: #e8f7d3;
+  --sp-karte-nachbar: #f3fbe4;
+  --sp-karte-land: #8fdc82;
+  --sp-karte-rand: #1b2340;
   --sp-karte-kreis: #c8d8c3;
-  --sp-karte-wasser: #78a9cf;
-  --sp-schatten: 0 1px 2px rgb(30 35 30 / 0.05), 0 4px 14px rgb(30 35 30 / 0.06);
-  --sp-radius: 12px;
-  --sp-radius-klein: 8px;
+  --sp-karte-wasser: #2f8fe6;
+  --sp-schatten: 0 4px 0 rgb(27 35 64 / 0.16);
+  --sp-schatten-hart: 0 4px 0 var(--sp-kontur);
+  --sp-radius: 20px;
+  --sp-radius-klein: 14px;
   --sp-abstand: 16px;
   --sp-schrift: "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --sp-schrift-titel: "Grandstander", "Atkinson Hyperlegible Next", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
   --sp-schriftgroesse: 18px;
   --sp-tempo: 1;
   --sp-dauer: 200ms;
@@ -50,81 +75,130 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-darstellung="hell"]) {
     color-scheme: dark;
-    --sp-grund: #121614;
-    --sp-flaeche: #1b2220;
-    --sp-flaeche-2: #232c29;
-    --sp-text: #eef3ef;
-    --sp-text-leise: #b6c1bb;
-    --sp-rand: #3a4642;
-    --sp-akzent: #6fcf9a;
-    --sp-akzent-text: #0b1f14;
-    --sp-akzent-weich: #1d3a2b;
-    --sp-zweit: #9cc3ea;
-    --sp-zweit-weich: #1f3245;
-    --sp-erfolg: #7ad8a5;
-    --sp-hinweis: #f1c26b;
-    --sp-hinweis-weich: #3a2e14;
-    --sp-fehler: #ff9a8f;
-    --sp-fehler-weich: #43201c;
-    --sp-fokus: #8ab4ff;
-    --sp-karte-land: #22302a;
-    --sp-karte-rand: #6f8f7a;
+    --sp-grund: #0f1630;
+    --sp-flaeche: #1a2346;
+    --sp-flaeche-2: #232e5a;
+    --sp-text: #f2f5ff;
+    --sp-text-leise: #b8c2e8;
+    --sp-rand: #44528a;
+    --sp-kontur: #6f7fc0;
+    --sp-akzent: #8db4ff;
+    --sp-akzent-text: #0c1533;
+    --sp-akzent-weich: #1f2f63;
+    --sp-zweit: #c3b1ff;
+    --sp-zweit-weich: #2c2760;
+    --sp-erfolg: #7ee2a0;
+    --sp-erfolg-weich: #173d2a;
+    --sp-hinweis: #ffd37a;
+    --sp-hinweis-weich: #3d3010;
+    --sp-fehler: #ffa097;
+    --sp-fehler-weich: #4a1f1b;
+    --sp-fokus: #ff9ecb;
+    --sp-kopf: #1a2346;
+    --sp-kopf-text: #f2f5ff;
+    --sp-karte-grund: #16203f;
+    --sp-karte-nachbar: #1b2748;
+    --sp-karte-land: #2a6b47;
+    --sp-karte-rand: #0a0f22;
     --sp-karte-kreis: #34453c;
-    --sp-karte-wasser: #4f7fa6;
-    --sp-schatten: 0 1px 2px rgb(0 0 0 / 0.45), 0 4px 14px rgb(0 0 0 / 0.3);
+    --sp-karte-wasser: #5aa9f0;
+    --sp-schatten: 0 4px 0 rgb(0 0 0 / 0.45);
+    --sp-schatten-hart: 0 4px 0 #05081a;
   }
 }
 
 :root[data-darstellung="dunkel"] {
   color-scheme: dark;
-  --sp-grund: #121614;
-  --sp-flaeche: #1b2220;
-  --sp-flaeche-2: #232c29;
-  --sp-text: #eef3ef;
-  --sp-text-leise: #b6c1bb;
-  --sp-rand: #3a4642;
-  --sp-akzent: #6fcf9a;
-  --sp-akzent-text: #0b1f14;
-  --sp-akzent-weich: #1d3a2b;
-  --sp-zweit: #9cc3ea;
-  --sp-zweit-weich: #1f3245;
-  --sp-erfolg: #7ad8a5;
-  --sp-hinweis: #f1c26b;
-  --sp-hinweis-weich: #3a2e14;
-  --sp-fehler: #ff9a8f;
-  --sp-fehler-weich: #43201c;
-  --sp-fokus: #8ab4ff;
-  --sp-karte-land: #22302a;
-  --sp-karte-rand: #6f8f7a;
+  --sp-grund: #0f1630;
+  --sp-flaeche: #1a2346;
+  --sp-flaeche-2: #232e5a;
+  --sp-text: #f2f5ff;
+  --sp-text-leise: #b8c2e8;
+  --sp-rand: #44528a;
+  --sp-kontur: #6f7fc0;
+  --sp-akzent: #8db4ff;
+  --sp-akzent-text: #0c1533;
+  --sp-akzent-weich: #1f2f63;
+  --sp-zweit: #c3b1ff;
+  --sp-zweit-weich: #2c2760;
+  --sp-erfolg: #7ee2a0;
+  --sp-erfolg-weich: #173d2a;
+  --sp-hinweis: #ffd37a;
+  --sp-hinweis-weich: #3d3010;
+  --sp-fehler: #ffa097;
+  --sp-fehler-weich: #4a1f1b;
+  --sp-fokus: #ff9ecb;
+  --sp-kopf: #1a2346;
+  --sp-kopf-text: #f2f5ff;
+  --sp-karte-grund: #16203f;
+  --sp-karte-nachbar: #1b2748;
+  --sp-karte-land: #2a6b47;
+  --sp-karte-rand: #0a0f22;
   --sp-karte-kreis: #34453c;
-  --sp-karte-wasser: #4f7fa6;
-  --sp-schatten: 0 1px 2px rgb(0 0 0 / 0.45), 0 4px 14px rgb(0 0 0 / 0.3);
+  --sp-karte-wasser: #5aa9f0;
+  --sp-schatten: 0 4px 0 rgb(0 0 0 / 0.45);
+  --sp-schatten-hart: 0 4px 0 #05081a;
 }
 
 /* Hoher Kontrast: Schwarz auf Weiß (bzw. Weiß auf Schwarz bei dunkler Darstellung), keine Zwischentöne */
 :root[data-kontrast="hoch"] {
   --sp-grund: #ffffff; --sp-flaeche: #ffffff; --sp-flaeche-2: #ffffff; --sp-text: #000000; --sp-text-leise: #000000;
-  --sp-rand: #000000; --sp-akzent: #00502f; --sp-akzent-text: #ffffff; --sp-akzent-weich: #ffffff; --sp-zweit: #00336b;
-  --sp-zweit-weich: #ffffff; --sp-erfolg: #00502f; --sp-hinweis: #5c3700; --sp-hinweis-weich: #ffffff; --sp-fehler: #8c0000;
-  --sp-fehler-weich: #ffffff; --sp-fokus: #c00000; --sp-karte-land: #ffffff; --sp-karte-rand: #000000; --sp-karte-kreis: #555555;
-  --sp-karte-wasser: #00336b; --sp-schatten: none;
+  --sp-rand: #000000; --sp-kontur: #000000; --sp-akzent: #00502f; --sp-akzent-text: #ffffff; --sp-akzent-weich: #ffffff; --sp-zweit: #00336b;
+  --sp-zweit-weich: #ffffff; --sp-erfolg: #00502f; --sp-erfolg-weich: #ffffff; --sp-hinweis: #5c3700; --sp-hinweis-weich: #ffffff; --sp-fehler: #8c0000;
+  --sp-fehler-weich: #ffffff; --sp-fokus: #c00000; --sp-knopf: #00502f; --sp-knopf-text: #ffffff; --sp-kopf: #ffffff; --sp-kopf-text: #000000;
+  --sp-karte-grund: #ffffff; --sp-karte-nachbar: #ffffff; --sp-karte-land: #ffffff; --sp-karte-rand: #000000; --sp-karte-kreis: #555555;
+  --sp-karte-wasser: #00336b; --sp-schatten: none; --sp-schatten-hart: none;
 }
 @media (prefers-color-scheme: dark) {
   :root[data-kontrast="hoch"]:not([data-darstellung="hell"]) {
     --sp-grund: #000000; --sp-flaeche: #000000; --sp-flaeche-2: #000000; --sp-text: #ffffff; --sp-text-leise: #ffffff;
-    --sp-rand: #ffffff; --sp-akzent: #ffe14d; --sp-akzent-text: #000000; --sp-akzent-weich: #000000; --sp-zweit: #9fd3ff;
-    --sp-zweit-weich: #000000; --sp-erfolg: #8dffb4; --sp-hinweis: #ffe14d; --sp-hinweis-weich: #000000; --sp-fehler: #ff9e9e;
-    --sp-fehler-weich: #000000; --sp-fokus: #ffe14d; --sp-karte-land: #000000; --sp-karte-rand: #ffffff; --sp-karte-kreis: #aaaaaa;
+    --sp-rand: #ffffff; --sp-kontur: #ffffff; --sp-akzent: #ffe14d; --sp-akzent-text: #000000; --sp-akzent-weich: #000000; --sp-zweit: #9fd3ff;
+    --sp-zweit-weich: #000000; --sp-erfolg: #8dffb4; --sp-erfolg-weich: #000000; --sp-hinweis: #ffe14d; --sp-hinweis-weich: #000000; --sp-fehler: #ff9e9e;
+    --sp-fehler-weich: #000000; --sp-fokus: #ffe14d; --sp-knopf: #ffe14d; --sp-knopf-text: #000000; --sp-kopf: #000000; --sp-kopf-text: #ffffff;
+    --sp-karte-grund: #000000; --sp-karte-nachbar: #000000; --sp-karte-land: #000000; --sp-karte-rand: #ffffff; --sp-karte-kreis: #aaaaaa;
     --sp-karte-wasser: #9fd3ff;
   }
 }
 :root[data-kontrast="hoch"][data-darstellung="dunkel"] {
   --sp-grund: #000000; --sp-flaeche: #000000; --sp-flaeche-2: #000000; --sp-text: #ffffff; --sp-text-leise: #ffffff;
-  --sp-rand: #ffffff; --sp-akzent: #ffe14d; --sp-akzent-text: #000000; --sp-akzent-weich: #000000; --sp-zweit: #9fd3ff;
-  --sp-zweit-weich: #000000; --sp-erfolg: #8dffb4; --sp-hinweis: #ffe14d; --sp-hinweis-weich: #000000; --sp-fehler: #ff9e9e;
-  --sp-fehler-weich: #000000; --sp-fokus: #ffe14d; --sp-karte-land: #000000; --sp-karte-rand: #ffffff; --sp-karte-kreis: #aaaaaa;
+  --sp-rand: #ffffff; --sp-kontur: #ffffff; --sp-akzent: #ffe14d; --sp-akzent-text: #000000; --sp-akzent-weich: #000000; --sp-zweit: #9fd3ff;
+  --sp-zweit-weich: #000000; --sp-erfolg: #8dffb4; --sp-erfolg-weich: #000000; --sp-hinweis: #ffe14d; --sp-hinweis-weich: #000000; --sp-fehler: #ff9e9e;
+  --sp-fehler-weich: #000000; --sp-fokus: #ffe14d; --sp-knopf: #ffe14d; --sp-knopf-text: #000000; --sp-kopf: #000000; --sp-kopf-text: #ffffff;
+  --sp-karte-grund: #000000; --sp-karte-nachbar: #000000; --sp-karte-land: #000000; --sp-karte-rand: #ffffff; --sp-karte-kreis: #aaaaaa;
   --sp-karte-wasser: #9fd3ff;
 }
+
+/* Farbe je Ort. --ort: kräftiger Ton, auf dem --ort-text steht und der selbst als Schrift auf Flächen taugt
+   (hell ≥ 4,5 : 1 auf Weiß, dunkel ≥ 4,5 : 1 auf der dunklen Fläche); --ort-kraeftig: leuchtender Ton für Flächen
+   mit dunkler Tinte darauf; --ort-hell: zarter Ton für Hintergründe. Bei hohem Kontrast gelten die Farben der App. */
+[class*="ort-farbe-"] { --ort-text: #ffffff; --ort-tinte: var(--sp-tinte, #1b2340); --ort-hell: color-mix(in srgb, var(--ort-kraeftig) 24%, var(--sp-flaeche)); }
+.ort-farbe-1 { --ort: #c2410c; --ort-kraeftig: #ff9a3d; }
+.ort-farbe-2 { --ort: #b8235a; --ort-kraeftig: #ff7fae; }
+.ort-farbe-3 { --ort: #0a6c7d; --ort-kraeftig: #3fd0dd; }
+.ort-farbe-4 { --ort: #5b3cc4; --ort-kraeftig: #a78bfa; }
+.ort-farbe-5 { --ort: #b42318; --ort-kraeftig: #ff7a6b; }
+.ort-farbe-6 { --ort: #1553c7; --ort-kraeftig: #6ea8ff; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-darstellung="hell"]) [class*="ort-farbe-"] { --ort-text: #10162e; --ort-hell: color-mix(in srgb, var(--ort-kraeftig) 14%, var(--sp-flaeche)); }
+  :root:not([data-darstellung="hell"]) .ort-farbe-1 { --ort: #ffa552; --ort-kraeftig: #ffa552; }
+  :root:not([data-darstellung="hell"]) .ort-farbe-2 { --ort: #ff8fb8; --ort-kraeftig: #ff8fb8; }
+  :root:not([data-darstellung="hell"]) .ort-farbe-3 { --ort: #4fd8e4; --ort-kraeftig: #4fd8e4; }
+  :root:not([data-darstellung="hell"]) .ort-farbe-4 { --ort: #b9a2ff; --ort-kraeftig: #b9a2ff; }
+  :root:not([data-darstellung="hell"]) .ort-farbe-5 { --ort: #ff8f82; --ort-kraeftig: #ff8f82; }
+  :root:not([data-darstellung="hell"]) .ort-farbe-6 { --ort: #86b6ff; --ort-kraeftig: #86b6ff; }
+}
+:root[data-darstellung="dunkel"] [class*="ort-farbe-"] { --ort-text: #10162e; --ort-hell: color-mix(in srgb, var(--ort-kraeftig) 14%, var(--sp-flaeche)); }
+:root[data-darstellung="dunkel"] .ort-farbe-1 { --ort: #ffa552; --ort-kraeftig: #ffa552; }
+:root[data-darstellung="dunkel"] .ort-farbe-2 { --ort: #ff8fb8; --ort-kraeftig: #ff8fb8; }
+:root[data-darstellung="dunkel"] .ort-farbe-3 { --ort: #4fd8e4; --ort-kraeftig: #4fd8e4; }
+:root[data-darstellung="dunkel"] .ort-farbe-4 { --ort: #b9a2ff; --ort-kraeftig: #b9a2ff; }
+:root[data-darstellung="dunkel"] .ort-farbe-5 { --ort: #ff8f82; --ort-kraeftig: #ff8f82; }
+:root[data-darstellung="dunkel"] .ort-farbe-6 { --ort: #86b6ff; --ort-kraeftig: #86b6ff; }
+:root[data-kontrast="hoch"] [class*="ort-farbe-"] { --ort: #00502f; --ort-text: #ffffff; --ort-kraeftig: var(--sp-flaeche); --ort-hell: var(--sp-flaeche); --ort-tinte: var(--sp-text); }
+@media (prefers-color-scheme: dark) {
+  :root[data-kontrast="hoch"]:not([data-darstellung="hell"]) [class*="ort-farbe-"] { --ort: #ffe14d; --ort-text: #000000; }
+}
+:root[data-kontrast="hoch"][data-darstellung="dunkel"] [class*="ort-farbe-"] { --ort: #ffe14d; --ort-text: #000000; }
 
 :root[data-schrift="gross"] { --sp-schriftgroesse: 21px; }
 :root[data-schrift="sehr-gross"] { --sp-schriftgroesse: 24px; }
@@ -144,103 +218,104 @@ body {
   min-height: 100dvh;
 }
 img, svg { max-width: 100%; display: block; }
-h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; letter-spacing: -0.01em; }
-h1 { font-size: 1.75rem; }
-h2 { font-size: 1.35rem; }
-h3 { font-size: 1.1rem; }
+h1, h2, h3 { font-family: var(--sp-schrift-titel); font-weight: 800; line-height: 1.15; margin: 0 0 0.5em; overflow-wrap: break-word; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.45rem; }
+h3 { font-size: 1.15rem; }
 p { margin: 0 0 0.8em; }
-a { color: var(--sp-zweit); text-underline-offset: 0.18em; }
+a { color: var(--sp-zweit); font-weight: 600; text-underline-offset: 0.18em; text-decoration-thickness: 2px; }
 small, .leise { color: var(--sp-text-leise); }
 [hidden] { display: none !important; }
 
-:focus-visible { outline: 3px solid var(--sp-fokus); outline-offset: 3px; border-radius: 6px; }
+:focus-visible { outline: 4px solid var(--sp-fokus); outline-offset: 3px; border-radius: 8px; }
 /* Überschriften bekommen nach einem Seitenwechsel den Fokus für Bildschirmleser; sie sind nicht bedienbar, daher ohne Rahmen */
 h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
 .symbol { width: 1.25em; height: 1.25em; flex: none; }
 .marke .symbol { width: 1em; height: 1em; }
 .nur-vorlesbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
-.sprung { position: absolute; left: 8px; top: -60px; background: var(--sp-flaeche); color: var(--sp-text); padding: 10px 14px; z-index: 100; border-radius: var(--sp-radius-klein); border: 2px solid var(--sp-fokus); }
+.sprung { position: absolute; left: 8px; top: -80px; background: var(--sp-flaeche); color: var(--sp-text); padding: 10px 14px; z-index: 100; border-radius: var(--sp-radius-klein); border: 3px solid var(--sp-fokus); }
 .sprung:focus { top: 8px; }
 
-/* Knöpfe */
+/* Knöpfe: groß, rund, mit Umriss und festem Schatten wie ausgeschnittene Pappe; gedrückt sinken sie ein */
 .knopf {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
-  min-height: 48px; min-width: 48px; padding: 0.6em 1.2em;
-  font: inherit; font-weight: 600; line-height: 1.2; text-decoration: none; text-align: center;
-  border: 2px solid var(--sp-akzent); border-radius: var(--sp-radius-klein);
-  background: var(--sp-akzent); color: var(--sp-akzent-text); cursor: pointer;
-  transition: transform calc(var(--sp-dauer) / var(--sp-tempo)) ease, background-color calc(var(--sp-dauer) / var(--sp-tempo));
+  min-height: 52px; min-width: 52px; padding: 0.55em 1.35em;
+  font-family: var(--sp-schrift-titel); font-size: 1.05rem; font-weight: 700; line-height: 1.2; text-decoration: none; text-align: center;
+  border: 3px solid var(--sp-kontur); border-radius: 999px;
+  background: var(--sp-knopf); color: var(--sp-knopf-text); cursor: pointer;
+  box-shadow: var(--sp-schatten-hart);
+  transition: transform calc(var(--sp-dauer) / var(--sp-tempo)) ease, box-shadow calc(var(--sp-dauer) / var(--sp-tempo)) ease;
 }
-.knopf:hover { filter: brightness(1.05); }
-.knopf:active { transform: scale(0.98); }
-.knopf.zweit { background: var(--sp-flaeche); color: var(--sp-akzent); }
-.knopf.leise { background: transparent; color: var(--sp-text); border-color: var(--sp-rand); }
-.knopf.warnung { background: var(--sp-flaeche); color: var(--sp-fehler); border-color: var(--sp-fehler); }
-.knopf.gross { min-height: 60px; font-size: 1.1rem; padding: 0.8em 1.6em; }
+.knopf:hover { transform: translateY(-2px); }
+.knopf:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--sp-kontur); }
+.knopf.zweit { background: var(--sp-flaeche); color: var(--sp-text); }
+.knopf.leise { background: var(--sp-flaeche); color: var(--sp-text); border-width: 2px; box-shadow: none; font-size: 1rem; }
+.knopf.warnung { background: var(--sp-flaeche); color: var(--sp-fehler); border-color: var(--sp-fehler); box-shadow: 0 4px 0 var(--sp-fehler); }
+.knopf.gross { min-height: 64px; font-size: 1.25rem; padding: 0.65em 1.7em; }
 .knopf.breit { width: 100%; }
 .knopf[disabled], .knopf[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
 .knopf .symbol { width: 1.3em; height: 1.3em; flex: none; }
-.symbolknopf { min-width: 48px; min-height: 48px; padding: 0.5em; border-radius: 999px; }
+.symbolknopf { min-width: 52px; min-height: 52px; padding: 0.45em; border-radius: 999px; }
 
-.knopfreihe { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.knopfreihe { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
 
 /* Flächen */
 .karte {
-  background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius);
+  background: var(--sp-flaeche); border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius);
   padding: var(--sp-abstand); box-shadow: var(--sp-schatten);
 }
-.karte + .karte { margin-top: 14px; }
-.hinweisfeld { border-radius: var(--sp-radius-klein); padding: 12px 14px; background: var(--sp-hinweis-weich); color: var(--sp-text); border: 1px solid var(--sp-hinweis); }
-.hinweisfeld.gut { background: var(--sp-akzent-weich); border-color: var(--sp-erfolg); }
+.karte + .karte { margin-top: 16px; }
+.hinweisfeld { border-radius: var(--sp-radius-klein); padding: 12px 14px; background: var(--sp-hinweis-weich); color: var(--sp-text); border: 2px solid var(--sp-hinweis); }
+.hinweisfeld.gut { background: var(--sp-erfolg-weich); border-color: var(--sp-erfolg); }
 .hinweisfeld.fehler { background: var(--sp-fehler-weich); border-color: var(--sp-fehler); }
-.marke { display: inline-flex; align-items: center; gap: 0.35em; font-size: 0.85rem; font-weight: 600; padding: 0.15em 0.6em; border-radius: 6px; background: var(--sp-flaeche-2); color: var(--sp-text); border: 1px solid var(--sp-rand); }
-.marke.gut { background: var(--sp-akzent-weich); border-color: var(--sp-erfolg); }
-.marke.warten { background: var(--sp-hinweis-weich); border-color: var(--sp-hinweis); }
+.marke { display: inline-flex; align-items: center; gap: 0.35em; font-size: 0.85rem; font-weight: 700; padding: 0.2em 0.75em; border-radius: 999px; background: var(--sp-flaeche); color: var(--sp-text); border: 2px solid var(--sp-kontur); }
+.marke.gut { background: var(--sp-erfolg-weich); }
+.marke.warten { background: var(--sp-hinweis-weich); }
 
 /* Formulare */
-label { font-weight: 600; display: block; margin-bottom: 0.3em; }
-input[type="text"], input[type="search"], input[type="number"], select, textarea {
+label { font-weight: 700; display: block; margin-bottom: 0.3em; }
+input[type="text"], input[type="search"], input[type="number"], input[type="password"], select, textarea {
   font: inherit; color: var(--sp-text); background: var(--sp-flaeche);
-  border: 2px solid var(--sp-rand); border-radius: var(--sp-radius-klein);
-  padding: 0.6em 0.8em; min-height: 48px; width: 100%;
+  border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius-klein);
+  padding: 0.6em 0.8em; min-height: 52px; width: 100%;
 }
 textarea { min-height: 10em; line-height: 1.5; }
 input:focus-visible, select:focus-visible, textarea:focus-visible { border-color: var(--sp-fokus); }
 .feld { margin-bottom: 16px; }
 .feld .erklaerung { font-size: 0.9rem; color: var(--sp-text-leise); margin-top: 0.3em; }
-fieldset { border: 1px solid var(--sp-rand); border-radius: var(--sp-radius-klein); padding: 12px 14px; margin: 0 0 16px; }
-legend { font-weight: 700; padding: 0 0.3em; }
-.wahl { display: flex; flex-wrap: wrap; gap: 8px; }
+fieldset { border: 2px solid var(--sp-rand); border-radius: var(--sp-radius-klein); padding: 12px 14px; margin: 0 0 16px; }
+legend { font-family: var(--sp-schrift-titel); font-weight: 700; padding: 0 0.3em; }
+.wahl { display: flex; flex-wrap: wrap; gap: 10px; }
 .wahl input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .wahl label {
-  display: inline-flex; align-items: center; min-height: 48px; padding: 0.5em 1em; margin: 0; font-weight: 600;
-  border: 2px solid var(--sp-rand); border-radius: var(--sp-radius-klein); background: var(--sp-flaeche); cursor: pointer;
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0.45em 1.1em; margin: 0; font-weight: 700;
+  border: 3px solid var(--sp-kontur); border-radius: 999px; background: var(--sp-flaeche); cursor: pointer;
 }
-.wahl input:checked + label { background: var(--sp-akzent); color: var(--sp-akzent-text); border-color: var(--sp-akzent); }
-.wahl input:focus-visible + label { outline: 3px solid var(--sp-fokus); outline-offset: 3px; }
-.schalter { display: flex; align-items: center; gap: 12px; min-height: 48px; font-weight: 600; cursor: pointer; }
-.schalter input { width: 26px; height: 26px; accent-color: var(--sp-akzent); }
+.wahl input:checked + label { background: var(--sp-akzent); color: var(--sp-akzent-text); box-shadow: var(--sp-schatten-hart); }
+.wahl input:focus-visible + label { outline: 4px solid var(--sp-fokus); outline-offset: 3px; }
+.schalter { display: flex; align-items: center; gap: 12px; min-height: 48px; font-weight: 700; cursor: pointer; }
+.schalter input { width: 28px; height: 28px; accent-color: var(--sp-akzent); flex: none; }
 input[type="range"] { width: 100%; min-height: 48px; accent-color: var(--sp-akzent); }
 
 /* Dialoge */
 dialog {
-  border: 1px solid color-mix(in srgb, var(--sp-text) 30%, var(--sp-flaeche)); border-radius: var(--sp-radius); padding: 0; max-width: min(36rem, calc(100vw - 24px)); width: 100%;
-  background: var(--sp-flaeche); color: var(--sp-text);
+  border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius); padding: 0; max-width: min(36rem, calc(100vw - 24px)); width: 100%;
+  background: var(--sp-flaeche); color: var(--sp-text); box-shadow: 0 8px 0 rgb(10 14 34 / 0.35);
 }
-dialog::backdrop { background: rgb(10 16 13 / 0.55); }
+dialog::backdrop { background: rgb(13 20 48 / 0.6); }
 dialog .kopf { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px 0; }
 dialog .inhalt { padding: 12px 18px 18px; max-height: 75vh; overflow: auto; }
 dialog h2 { margin: 0; }
 
 /* Meldungen */
 .meldung {
-  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 50; max-width: calc(100vw - 24px);
-  background: var(--sp-text); color: var(--sp-grund); padding: 12px 18px; border-radius: var(--sp-radius-klein); font-weight: 600;
-  box-shadow: var(--sp-schatten);
+  position: fixed; left: 12px; right: 12px; bottom: 20px; width: fit-content; margin-inline: auto; z-index: 50;
+  background: var(--sp-text); color: var(--sp-flaeche); padding: 12px 20px; border-radius: 22px; font-weight: 700; text-align: center;
+  border: 3px solid var(--sp-flaeche);
 }
 
 /* Vorlesen: gerade gelesenes Element */
-.wird-gelesen { outline: 3px dashed var(--sp-zweit); outline-offset: 4px; border-radius: 6px; }
+.wird-gelesen { outline: 4px dashed var(--sp-zweit); outline-offset: 4px; border-radius: 8px; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }

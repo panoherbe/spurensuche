@@ -3,30 +3,22 @@
 import { h, leere, symbol, frage } from '../ui.js';
 import { t } from '../einstellungen.js';
 import { aktuellesTeam, teamVerlassen } from '../spielstand.js';
-import { KARTE } from '../karte-daten.js';
-
-function silhouette() {
-  const s = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-  s.setAttribute('viewBox', `0 0 ${KARTE.breite} ${KARTE.hoehe}`);
-  s.setAttribute('class', 'silhouette');
-  s.setAttribute('aria-hidden', 'true');
-  const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-  p.setAttribute('d', KARTE.sachsen);
-  s.append(p);
-  return s;
-}
+import { himmel, wappen, BEISPIEL_TIERE } from '../zeichnungen.js';
 
 export async function zeige({ haupt, navigiere, inhalte, api }) {
   const team = aktuellesTeam();
   const anzahl = inhalte.orte.length;
   leere(haupt,
-    h('section', { class: 'start-buehne' }, silhouette(),
-      h('h1', { 'data-vorlesen': '' }, 'Spurensuche Sachsen'),
-      h('p', { 'data-vorlesen': '' }, t({
-        standard: `Entdeckt ${anzahl} Orte in Sachsen, löst kurze Rätsel im Team und sammelt Spuren für euer eigenes Bild. Vor Ort oder im Klassenzimmer, auch ohne Netz.`,
-        einfach: `Ihr entdeckt ${anzahl} Orte in Sachsen. Ihr löst Rätsel im Team. Ihr sammelt Dinge für ein Bild. Das geht vor Ort und in der Schule.`,
-      }))),
-    team ? h('div', { class: 'karte', stil: { 'margin-bottom': '14px' } },
+    h('section', { class: 'start-buehne' }, himmel(),
+      h('div', { class: 'start-text' },
+        h('h1', { 'data-vorlesen': '' }, 'Spurensuche Sachsen'),
+        h('p', { class: 'start-satz', 'data-vorlesen': '' }, t({
+          standard: `Entdeckt ${anzahl} Orte, löst Rätsel im Team und findet Sammelstücke für euer eigenes Bild.`,
+          einfach: `Ihr entdeckt ${anzahl} Orte. Ihr löst Rätsel im Team. Ihr sammelt Dinge für ein Bild.`,
+        })),
+        h('p', { class: 'start-marken', 'data-vorlesen': '' }, h('span', { class: 'marke' }, 'vor Ort oder in der Schule'), ' ', h('span', { class: 'marke' }, 'auch ohne Netz'))),
+      h('div', { class: 'start-wiese', 'aria-hidden': 'true' }, BEISPIEL_TIERE.map((tier) => wappen(tier)))),
+    team ? h('div', { class: 'karte', stil: { 'margin-bottom': '18px' } },
       h('p', { 'data-vorlesen': '' }, `Auf diesem Gerät spielt gerade ${team.modus === 'schule' ? 'die Gruppe' : 'das Team'} „${team.name}“.`),
       h('div', { class: 'knopfreihe' },
         h('a', { class: 'knopf gross', href: '#/karte' }, symbol('karte'), 'Weiterspielen'),
@@ -38,10 +30,10 @@ export async function zeige({ haupt, navigiere, inhalte, api }) {
         } }, 'Anderes Team'))) : null,
     h('h2', { 'data-vorlesen': '' }, t({ standard: 'Wie spielt ihr?', einfach: 'Wie spielt ihr?' })),
     h('div', { class: 'wahlkarten' },
-      h('a', { class: 'wahlkarte', href: '#/beitritt' }, symbol('schule'), h('strong', { 'data-vorlesen': '' }, 'Mit der Klasse'),
-        h('span', { 'data-vorlesen': '' }, t({ standard: 'Code von der Lehrkraft eingeben. Keine Namen nötig.', einfach: 'Ihr gebt den Code von der Lehrkraft ein. Ihr braucht keine Namen.' }))),
-      h('a', { class: 'wahlkarte', href: '#/familie' }, symbol('familie'), h('strong', { 'data-vorlesen': '' }, 'Als Familie oder Gruppe'),
-        h('span', { 'data-vorlesen': '' }, t({ standard: 'Ohne Anmeldung. Den Teamnamen wählt ihr selbst; er bleibt auf diesem Gerät.', einfach: 'Ihr braucht keine Anmeldung. Ihr denkt euch einen Teamnamen aus. Der Name bleibt auf diesem Gerät.' })))),
+      h('a', { class: 'wahlkarte klasse', href: '#/beitritt' }, symbol('schule'), h('strong', { 'data-vorlesen': '' }, 'Mit der Klasse'),
+        h('span', { 'data-vorlesen': '' }, t({ standard: 'Mit dem Code von eurer Lehrkraft. Ohne Namen.', einfach: 'Ihr habt einen Code von der Lehrkraft. Ihr braucht keine Namen.' }))),
+      h('a', { class: 'wahlkarte familie', href: '#/familie' }, symbol('familie'), h('strong', { 'data-vorlesen': '' }, 'Als Familie oder Gruppe'),
+        h('span', { 'data-vorlesen': '' }, t({ standard: 'Ohne Anmeldung. Denkt euch einen Teamnamen aus.', einfach: 'Ihr braucht keine Anmeldung. Ihr denkt euch einen Teamnamen aus.' })))),
     h('nav', { class: 'fusslinks', 'aria-label': 'Weitere Seiten' },
       h('a', { href: 'lehrkraefte.html' }, 'Für Lehrkräfte'),
       h('a', { href: '#/datenschutz' }, 'Datenschutz'),

@@ -9,6 +9,7 @@ import { ladeTeam, aktuellesTeam, beiTeamAenderung } from './spielstand.js';
 import { starteSync, syncZustand, beiSyncAenderung } from './sync.js';
 import { dauerhaftBitten } from './speicher.js';
 import { KARTE } from './karte-daten.js';
+import { wappen } from './zeichnungen.js';
 
 const SEITEN = {
   '': () => import('./seiten/startseite.js'),
@@ -38,9 +39,7 @@ function logo() {
     s.setAttribute('viewBox', `0 0 ${KARTE.breite} ${KARTE.hoehe}`);
     const p = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     p.setAttribute('d', KARTE.sachsen);
-    p.setAttribute('fill', 'currentColor');
     s.append(p);
-    s.style.setProperty('color', 'var(--sp-akzent)');
     return s;
   })());
 }
@@ -51,7 +50,7 @@ function netzAnzeige() {
   if (!team || team.modus !== 'schule') return h('span', { class: 'netz', id: 'netz', hidden: true });
   const offline = !navigator.onLine;
   const text = offline ? (z.offen ? `Offline · ${z.offen} warten` : 'Offline') : z.offen ? `${z.offen} werden übertragen` : 'Alles übertragen';
-  return h('span', { class: `netz${offline ? ' offline' : ''}`, id: 'netz', role: 'status' }, symbol(offline ? 'ohneNetz' : 'wolke'), text);
+  return h('span', { class: `netz${offline ? ' offline' : ''}`, id: 'netz', role: 'status' }, symbol(offline ? 'ohneNetz' : 'wolke'), h('span', { class: 'netz-text' }, text));
 }
 
 function zeichneKopf() {
@@ -63,7 +62,8 @@ function zeichneKopf() {
       leere(vorleseKnopf, symbol(an ? 'stopp' : 'lautsprecher'));
     }) }, symbol('lautsprecher'));
   leere(kopf,
-    h('a', { class: 'marke-app', href: team ? '#/karte' : '#/' }, logo(), h('span', {}, 'Spurensuche', team ? h('span', { class: 'team' }, ` · ${team.name}`) : null)),
+    h('a', { class: `marke-app${team ? ' mit-team' : ''}`, href: team ? '#/karte' : '#/' }, logo(), h('span', { class: 'wortmarke' }, 'Spurensuche'),
+      team ? h('span', { class: 'team' }, wappen(team.name, 'wappen klein'), h('span', { class: 'name' }, team.name)) : null),
     netzAnzeige(),
     vorleseKnopf,
     h('button', { type: 'button', class: 'knopf leise symbolknopf', 'aria-label': 'Einstellungen: Sprache, Vorlesen, Tempo, Darstellung', title: 'Einstellungen', onclick: async () => { await zeigeEinstellungen(); zeige(); } }, symbol('zahnrad')));
@@ -74,7 +74,8 @@ function zeichneUnten(aktiv) {
   const team = aktuellesTeam();
   nav.hidden = !team || ['', 'beitritt', 'familie', 'anmeldung'].includes(aktiv);
   if (nav.hidden) return;
-  const eintrag = (ziel, text, sym) => h('a', { href: `#/${ziel}`, 'aria-current': aktiv === ziel || (ziel === 'karte' && ['ort', 'aufgabe'].includes(aktiv)) ? 'page' : null }, symbol(sym), text);
+  const eintrag = (ziel, text, sym) => h('a', { href: `#/${ziel}`, class: `nav-${ziel}`, 'aria-current': aktiv === ziel || (ziel === 'karte' && ['ort', 'aufgabe'].includes(aktiv)) ? 'page' : null },
+    h('span', { class: 'nav-symbol' }, symbol(sym)), text);
   leere(nav, eintrag('karte', 'Karte', 'karte'), eintrag('sammlung', 'Sammelbuch', 'buch'), eintrag('figur', 'Figur', 'figur'), eintrag('bild', 'Bild', 'bild'));
 }
 

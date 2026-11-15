@@ -7,8 +7,8 @@
   "scope": "./",
   "display": "standalone",
   "orientation": "any",
-  "background_color": "#f5f2ea",
-  "theme_color": "#1d6b47",
+  "background_color": "#d6eeff",
+  "theme_color": "#ffd43b",
   "icons": [
     { "src": "app/bilder/symbol.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
     { "src": "app/bilder/symbol-192.png", "sizes": "192x192", "type": "image/png" },

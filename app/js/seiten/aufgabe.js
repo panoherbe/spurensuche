@@ -9,6 +9,8 @@ import { aktuellesTeam, orteDesTeams, stationVon, speichereLauf, zaehleAktiv, no
 import { pruefeErgebnis, pruefeModul } from '../kern/ereignisse.js';
 import { schreibe, entferne } from '../speicher.js';
 import { bald } from '../sync.js';
+import { ortFarbe, wappen, stern, stempel, konfetti } from '../zeichnungen.js';
+import { figurBild } from '../figurbild.js';
 
 export async function zeige(ctx) {
   const { haupt, inhalte, teile, navigiere, aufraeumen } = ctx;
@@ -26,7 +28,8 @@ export async function zeige(ctx) {
   const position = alle.findIndex((a) => a.kennung === kennung) + 1;
 
   const wurzel = h('section', { class: 'spiel-wurzel', 'aria-label': `Spiel: ${aufgabe.titel}` });
-  const rahmen = h('div', { class: 'aufgabe-rahmen' },
+  const farbe = ortFarbe(inhalte, ort.id);
+  const rahmen = h('div', { class: `aufgabe-rahmen ${farbe}` },
     h('div', { class: 'aufgabe-kopf' },
       // Die Spiele zeigen den Titel groß auf ihrer Startkarte; die Seitenüberschrift bleibt für Bildschirmleser da.
       h('div', {}, h('p', { class: 'wo' }, `Aufgabe ${position} von ${alle.length} · ${ort.name}`), h('h1', { class: 'nur-vorlesbar' }, aufgabe.titel)),
@@ -111,11 +114,16 @@ export async function zeige(ctx) {
     ? h('a', { class: 'knopf gross', href: `#/aufgabe/${naechste.kennung}` }, symbol('weiter'), 'Nächste Aufgabe')
     : h('a', { class: 'knopf gross', href: '#/karte' }, symbol('karte'), 'Zur Karte');
   const items = neueItems.map((id) => inhalte.itemNach.get(id)).filter(Boolean);
+  // Was neu ist, klebt sich beim nächsten Blick ins Sammelbuch sichtbar ein (nur Anzeige, bleibt im Gerät).
+  if (neueItems.length) { try { sessionStorage.setItem('spur-neu-im-buch', JSON.stringify(neueItems)); } catch { /* privates Fenster */ } }
+  const figur = await figurBild(aktuellesTeam().figur);
+  const gefeiert = stationFertig || ergebnis.geloest;
   const abschluss = h('div', { class: 'feier' },
-    symbol(stationFertig ? 'stern' : 'haken'),
+    gefeiert ? konfetti() : null,
+    h('div', { class: 'feier-kopf' }, wappen(team.name), gefeiert ? (stationFertig ? stempel('feier-stern') : stern('feier-stern')) : symbol('haken'), figur),
     h('h2', { 'data-vorlesen': '', tabindex: '-1' }, stationFertig ? `${ort.name} geschafft!` : ergebnis.geloest ? 'Geschafft!' : 'Aufgabe beendet'),
-    items.length ? h('div', {}, h('p', { 'data-vorlesen': '' }, items.length === 1 ? 'Neu im Sammelbuch:' : 'Neu im Sammelbuch:'),
-      items.map((i) => h('div', { class: 'neues-item' }, h('img', { src: url(i.bild), alt: i.alt }), h('strong', {}, i.name)))) : null,
+    items.length ? h('div', {}, h('p', { 'data-vorlesen': '' }, 'Neu im Sammelbuch:'),
+      h('div', { class: 'neue-items' }, items.map((i) => h('div', { class: 'neues-item' }, h('span', { class: 'klebeplatz' }, h('img', { src: url(i.bild), alt: i.alt })), h('strong', {}, i.name))))) : null,
     stationFertig && ort.id === inhalte.finale ? h('p', { class: 'hinweisfeld gut' }, 'Ihr habt die Abschlussaufgabe geschafft. Jetzt könnt ihr euer Bild gestalten.', ' ', h('a', { href: '#/bild' }, 'Zum Bild')) : null,
     h('div', { class: 'knopfreihe', stil: { 'justify-content': 'center' } }, weiterKnopf, h('a', { class: 'knopf leise', href: `#/ort/${ort.id}` }, 'Zum Ort')));
 

@@ -2,6 +2,7 @@
    Farben, Ecken und Abstände kommen nur aus den Variablen der App (--sp-grund, --sp-flaeche, --sp-text, …);
    die Rückfallwerte gelten nur, wenn ein Spiel ohne die App läuft. Helle, dunkle und kontrastreiche Darstellung
    kommen damit von der App. Abgeleitete Töne entstehen mit color-mix aus diesen Variablen.
+   Karten und Knöpfe haben einen dunklen Umriss (--sp-kontur) und einen festen Schatten, wie in der App.
    Bewegung: Dauer = Grunddauer / --sp-tempo; bei reduzierter Bewegung keine Animation. */
 
 .sp-spiel {
@@ -10,6 +11,8 @@
   --spi-text: var(--sp-text, #1f2a30);
   --spi-leise: var(--sp-text-leise, #45545d);
   --spi-rand: var(--sp-rand, #857865);
+  --spi-kontur: var(--sp-kontur, #263238);
+  --spi-titelschrift: var(--sp-schrift-titel, inherit);
   --spi-akzent: var(--sp-akzent, #1e7a4c);
   --spi-akzent-text: var(--sp-akzent-text, #ffffff);
   --spi-erfolg: var(--sp-erfolg, #1e7a4c);
@@ -21,10 +24,10 @@
 
   --spi-flaeche-2: color-mix(in srgb, var(--spi-text) 4%, var(--spi-flaeche));
   --spi-linie: color-mix(in srgb, var(--spi-rand) 45%, var(--spi-flaeche));
-  --spi-akzent-hell: color-mix(in srgb, var(--spi-akzent) 11%, var(--spi-flaeche));
+  --spi-akzent-hell: var(--sp-akzent-weich, color-mix(in srgb, var(--spi-akzent) 11%, var(--spi-flaeche)));
   --spi-erfolg-hell: color-mix(in srgb, var(--spi-erfolg) 13%, var(--spi-flaeche));
   --spi-hinweis-hell: color-mix(in srgb, var(--spi-hinweis) 12%, var(--spi-flaeche));
-  --spi-schatten: 0 1px 2px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.08);
+  --spi-schatten: var(--sp-schatten, 0 4px 0 rgb(0 0 0 / 0.16));
   --spi-schatten-hoch: 0 2px 4px rgb(0 0 0 / 0.1), 0 14px 34px rgb(0 0 0 / 0.18);
   --spi-dauer: calc(220ms / var(--sp-tempo, 1));
 
@@ -39,7 +42,7 @@
 .sp-spiel *, .sp-spiel *::before, .sp-spiel *::after { box-sizing: inherit; }
 .sp-spiel img { max-width: 100%; height: auto; }
 .sp-spiel p { margin: 0; }
-.sp-spiel h2, .sp-spiel h3 { margin: 0; line-height: 1.2; font-weight: 750; }
+.sp-spiel h2, .sp-spiel h3 { margin: 0; line-height: 1.2; font-weight: 800; font-family: var(--spi-titelschrift); }
 .sp-spiel ul, .sp-spiel ol { margin: 0; }
 /* hidden gilt immer, auch wo eine Klasse display setzt */
 .sp-spiel [hidden] { display: none !important; }
@@ -61,8 +64,8 @@
   color: var(--spi-leise); font-weight: 700; font-size: 0.85em; letter-spacing: 0.03em; text-transform: uppercase;
 }
 .sp-ueberzeile .sp-symbol { width: 1.15em; height: 1.15em; color: var(--spi-akzent); }
-.sp-titel { font-size: clamp(1.4em, 2vw + 0.9em, 1.9em); letter-spacing: -0.01em; margin: 0.15em 0 0.25em; }
-.sp-titel--gross { font-size: clamp(1.6em, 3vw + 1em, 2.3em); }
+.sp-titel { font-size: clamp(1.5em, 2vw + 1em, 2.1em); margin: 0.15em 0 0.25em; }
+.sp-titel--gross { font-size: clamp(1.7em, 3vw + 1.1em, 2.6em); }
 .sp-aufgabe-titel {
   display: flex; align-items: center; gap: 0.45em;
   font-size: 0.9em; font-weight: 750; letter-spacing: 0.03em; text-transform: uppercase; color: var(--spi-leise);
@@ -77,7 +80,7 @@
 /* Karten */
 .sp-start, .sp-flaeche, .sp-abschluss {
   background: var(--spi-flaeche); border-radius: var(--spi-radius); box-shadow: var(--spi-schatten);
-  border: 1px solid var(--spi-linie); padding: clamp(16px, 3vw, 32px);
+  border: 3px solid var(--spi-kontur); padding: clamp(16px, 3vw, 32px);
 }
 .sp-flaeche { display: grid; gap: calc(var(--spi-a) * 2.5); }
 .sp-buehne { min-width: 0; }
@@ -87,33 +90,35 @@
 .sp-start { display: grid; gap: calc(var(--spi-a) * 3); container: sp-start / inline-size; }
 .sp-start-kopf { display: grid; gap: calc(var(--spi-a) * 3); grid-template-columns: minmax(0, 1fr); align-items: center; }
 @container sp-start (min-width: 680px) { .sp-start-kopf:has(.sp-start-bild) { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } }
+/* Ulla neben dem Text statt darüber, sobald Platz ist: der Startknopf rückt nach oben */
+@container sp-start (min-width: 560px) { .sp-start-kopf:has(.sp-start-ulla) { grid-template-columns: minmax(120px, 0.3fr) minmax(0, 1fr); } .sp-start-kopf .sp-start-ulla { width: 100%; max-width: 200px; } }
 .sp-start-ulla { width: min(220px, 60%); justify-self: center; }
-.sp-start-bild { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: calc(var(--spi-radius) * 0.75); box-shadow: var(--spi-schatten); background: var(--spi-flaeche-2); }
+.sp-start-bild { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: calc(var(--spi-radius) * 0.75); border: 3px solid var(--spi-kontur); box-shadow: var(--spi-schatten); background: var(--spi-flaeche-2); }
 .sp-start-text { display: grid; gap: calc(var(--spi-a) * 1.25); justify-items: start; }
 .sp-start-unten { display: grid; gap: calc(var(--spi-a) * 3); }
-@container sp-start (min-width: 920px) { .sp-start-unten:has(.sp-gewinnvorschau):has(.sp-rollen) { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+@container sp-start (min-width: 700px) { .sp-start-unten:has(.sp-gewinnvorschau):has(.sp-rollen) { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); } }
 /* Rollen: eine Spalte, ab 27em Platz zwei Spalten (bei vier Rollen 2 × 2, nie 3 + 1). em statt px: Bei großer
    Schrift bleibt es länger einspaltig. minmax(0, 1fr) und Umbruch im Wort verhindern, dass ein langes Wort
    („Nachschlagen“, „einverstanden“) über den Kartenrand läuft. */
 .sp-rollen { container: sp-rollen / inline-size; }
 .sp-rollenliste { list-style: none; padding: 0; display: grid; gap: var(--spi-a); grid-template-columns: minmax(0, 1fr); }
-@container sp-rollen (min-width: 27em) { .sp-rollenliste { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@container sp-rollen (min-width: 22em) { .sp-rollenliste { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .sp-rolle {
   display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: calc(var(--spi-a) * 1.25); align-items: start; align-content: start;
-  padding: calc(var(--spi-a) * 1.5); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie);
+  padding: calc(var(--spi-a) * 1.5); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-akzent-hell); border: 2px solid var(--spi-kontur);
 }
-.sp-rolle-symbol { grid-row: span 2; width: 2.1em; height: 2.1em; padding: 0.38em; border-radius: 50%; background: var(--spi-akzent-hell); color: var(--spi-akzent); }
+.sp-rolle-symbol { grid-row: span 2; width: 2.3em; height: 2.3em; padding: 0.4em; border-radius: 50%; background: var(--spi-akzent); color: var(--spi-akzent-text); }
 .sp-rolle-name, .sp-rolle-aufgabe { min-width: 0; overflow-wrap: break-word; }
-.sp-rolle-name { font-weight: 750; }
-.sp-rolle-aufgabe { color: var(--spi-leise); font-size: 0.9em; line-height: 1.35; }
+.sp-rolle-name { font-weight: 800; font-family: var(--spi-titelschrift); }
+.sp-rolle-aufgabe { color: var(--spi-text); font-size: 0.9em; line-height: 1.35; }
 /* Keine automatische Silbentrennung: Kinder lesen ganze Wörter leichter, einfache Sprache trennt nicht am Zeilenende.
    Der Platz kommt aus der Spaltenwahl oben; break-word greift nur, wenn ein Wort allein nicht mehr in die Zeile passt. */
-.sp-gewinnvorschau { align-self: start; padding: calc(var(--spi-a) * 1.75); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-hinweis-hell); border: 2px dashed var(--spi-hinweis); }
+.sp-gewinnvorschau { align-self: start; padding: calc(var(--spi-a) * 1.75); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-flaeche); border: 3px dashed var(--spi-kontur); }
 .sp-gewinnliste { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 2); justify-content: center; }
 
 /* Sammelstücke als Sticker */
 .sp-item { margin: 0; display: grid; justify-items: center; gap: calc(var(--spi-a) * 0.75); text-align: center; font-weight: 700; font-size: 0.92em; }
-.sp-item img { width: 96px; height: 96px; filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.18)); }
+.sp-item img { width: 96px; height: 96px; filter: drop-shadow(0 4px 0 rgb(0 0 0 / 0.22)); }
 .sp-item--klein img { width: 80px; height: 80px; }
 .sp-item--gross img { width: clamp(120px, 22vw, 170px); height: clamp(120px, 22vw, 170px); }
 .sp-gewinn .sp-item--gross img { animation: sp-auftauchen calc(560ms / var(--sp-tempo, 1)) cubic-bezier(.2, 1.4, .4, 1) both; }
@@ -126,23 +131,24 @@
 .sp-knopf {
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
   min-height: 48px; min-width: 48px; padding: 0.55em 1.05em;
-  border-radius: 999px; border: 2px solid var(--spi-rand); background: var(--spi-flaeche); color: var(--spi-text);
-  font: inherit; font-weight: 700; line-height: 1.15; cursor: pointer; text-align: center;
+  border-radius: 999px; border: 3px solid var(--spi-kontur); background: var(--spi-flaeche); color: var(--spi-text);
+  font: inherit; font-family: var(--spi-titelschrift); font-weight: 700; line-height: 1.15; cursor: pointer; text-align: center;
   transition: transform var(--spi-dauer) ease, background-color var(--spi-dauer) ease;
   -webkit-tap-highlight-color: transparent; touch-action: manipulation;
 }
 .sp-knopf:hover { background: var(--spi-flaeche-2); }
 .sp-knopf:active { transform: translateY(1px) scale(0.98); }
 .sp-spiel :focus-visible { outline: 3px solid var(--spi-fokus); outline-offset: 3px; }
-.sp-knopf--haupt { background: var(--spi-akzent); border-color: var(--spi-akzent); color: var(--spi-akzent-text); box-shadow: 0 3px 0 color-mix(in srgb, var(--spi-akzent) 60%, #000); }
-.sp-knopf--haupt:hover { background: color-mix(in srgb, var(--spi-akzent) 86%, #000); }
-.sp-knopf--leise { border-color: transparent; background: var(--spi-akzent-hell); color: var(--spi-text); }
+/* Hauptknopf: in der App sonnengelb wie alle Hauptknöpfe (--sp-knopf), ohne die App in der Akzentfarbe */
+.sp-knopf--haupt { background: var(--sp-knopf, var(--spi-akzent)); border-color: var(--spi-kontur); color: var(--sp-knopf-text, var(--spi-akzent-text)); box-shadow: 0 4px 0 var(--spi-kontur); }
+.sp-knopf--haupt:hover { background: color-mix(in srgb, var(--sp-knopf, var(--spi-akzent)) 88%, #000); }
+.sp-knopf--leise { border-width: 2px; background: var(--spi-akzent-hell); color: var(--spi-text); }
 .sp-knopf--leise .sp-symbol { color: var(--spi-akzent); }
 .sp-knopf--leise:hover { background: color-mix(in srgb, var(--spi-akzent) 18%, var(--spi-flaeche)); }
 .sp-knopf--tipp { background: var(--spi-hinweis-hell); border-color: var(--spi-hinweis); color: var(--spi-text); }
 .sp-knopf--tipp .sp-symbol { color: var(--spi-hinweis); }
 .sp-knopf--tipp:hover { background: color-mix(in srgb, var(--spi-hinweis) 20%, var(--spi-flaeche)); }
-.sp-knopf--gross { min-height: 56px; padding: 0.7em 1.6em; font-size: 1.1em; }
+.sp-knopf--gross { min-height: 64px; padding: 0.7em 1.8em; font-size: 1.25em; }
 .sp-knopf--klein { min-height: 44px; padding: 0.4em 0.85em; font-size: 0.92em; }
 .sp-knopf--aus, .sp-knopf[aria-disabled='true'] { opacity: 0.55; cursor: not-allowed; box-shadow: none; }
 .sp-zaehler { display: inline-block; min-width: 2.4em; padding: 0.05em 0.45em; border-radius: 999px; background: color-mix(in srgb, var(--spi-text) 10%, transparent); font-size: 0.85em; }
@@ -156,12 +162,12 @@
 /* Kartenknopf: große Wahlfläche mit Symbol, Titel und Text */
 .sp-knopf--karte {
   display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--spi-a) * 1.5); align-items: start; justify-content: stretch;
-  text-align: left; border-radius: var(--spi-radius); padding: calc(var(--spi-a) * 2); min-height: 88px; font-weight: 500;
-  border: 2px solid var(--spi-rand); background: var(--spi-flaeche);
+  text-align: left; border-radius: var(--spi-radius); padding: calc(var(--spi-a) * 2); min-height: 88px; font-weight: 500; font-family: inherit;
+  border: 3px solid var(--spi-kontur); background: var(--spi-flaeche); box-shadow: var(--spi-schatten);
 }
 .sp-knopf--karte:hover { background: var(--spi-akzent-hell); border-color: var(--spi-akzent); }
 .sp-knopf--karte .sp-symbol { grid-row: span 2; width: 2.4em; height: 2.4em; padding: 0.45em; border-radius: 50%; background: var(--spi-akzent-hell); color: var(--spi-akzent); }
-.sp-wahl-titel { font-weight: 750; font-size: 1.05em; }
+.sp-wahl-titel { font-weight: 800; font-size: 1.1em; font-family: var(--spi-titelschrift); }
 .sp-wahl-text { color: var(--spi-leise); font-size: 0.92em; line-height: 1.35; }
 
 /* Rückmeldung: immer mit Wort und Symbol, nie nur Farbe */
@@ -211,7 +217,7 @@
 /* Kontrastreich: kräftigere Ränder (Farben setzt die App) */
 .sp-kontrast .sp-start, .sp-kontrast .sp-flaeche, .sp-kontrast .sp-abschluss, .sp-kontrast .sp-rolle,
 .sp-kontrast .sp-tippbox, .sp-kontrast .sp-wusstet, .sp-kontrast .sp-knopf { border-width: 3px; border-color: var(--spi-text); }
-.sp-kontrast .sp-knopf--haupt { border-color: var(--spi-akzent); }
+.sp-kontrast .sp-knopf--haupt { border-color: var(--spi-akzent); box-shadow: none; }
 
 /* Bewegung */
 @keyframes sp-einblenden { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }

@@ -1,9 +1,10 @@
-/* Lehrkräfte und Verwaltung: ruhige Arbeitsansicht mit Tabellen, Raster und Reitern */
+/* Lehrkräfte und Verwaltung: ruhige Arbeitsansicht mit Tabellen, Raster und Reitern, in den Farben der Spieler-Ansicht */
 
-.lk-kopf { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 16px; border-bottom: 1px solid var(--sp-rand); background: var(--sp-flaeche); }
-.lk-kopf .marke-app { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--sp-text); text-decoration: none; margin-right: auto; min-height: 48px; }
-.lk-kopf .marke-app .logo { width: 30px; height: 30px; color: var(--sp-akzent); }
-.lk-grundsatz { margin: 0; padding: 10px 16px; background: var(--sp-zweit-weich); border-bottom: 1px solid var(--sp-rand); font-size: 0.95rem; }
+.lk-kopf { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 8px 16px; border-bottom: 3px solid var(--sp-kontur); background: var(--sp-kopf); color: var(--sp-kopf-text); }
+.lk-kopf .marke-app { display: flex; align-items: center; gap: 10px; font-family: var(--sp-schrift-titel); font-size: 1.15rem; font-weight: 800; color: inherit; text-decoration: none; margin-right: auto; min-height: 48px; }
+.lk-kopf .marke-app .logo { width: 34px; height: 34px; color: #2f9e44; }
+.lk-kopf .knopf { min-height: 44px; font-size: 1rem; box-shadow: none; border-width: 2px; }
+.lk-grundsatz { margin: 0; padding: 10px 16px; background: var(--sp-zweit-weich); border-bottom: 2px solid var(--sp-kontur); font-size: 0.95rem; }
 .lk-grundsatz strong { color: var(--sp-zweit); }
 .lk-haupt { max-width: 72rem; margin: 0 auto; padding: 20px 16px 60px; }
 .brotkrumen { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0 0 10px; font-size: 0.95rem; }
@@ -14,11 +15,11 @@
 .kennzahlen { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; }
 
 .reiter { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 16px; border-bottom: 2px solid var(--sp-rand); }
-.reiter a { padding: 10px 14px; min-height: 48px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--sp-text); font-weight: 700; border-bottom: 4px solid transparent; margin-bottom: -2px; }
+.reiter a { padding: 10px 14px; min-height: 48px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--sp-text); font-family: var(--sp-schrift-titel); font-weight: 700; border-bottom: 5px solid transparent; margin-bottom: -2px; }
 .reiter a[aria-current="page"] { border-bottom-color: var(--sp-akzent); color: var(--sp-akzent); }
 .reiter .symbol { width: 20px; height: 20px; }
 
-.tabelle-rahmen { overflow-x: auto; border: 1px solid var(--sp-rand); border-radius: var(--sp-radius); background: var(--sp-flaeche); }
+.tabelle-rahmen { overflow-x: auto; border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius); background: var(--sp-flaeche); box-shadow: var(--sp-schatten); }
 table { border-collapse: collapse; width: 100%; }
 th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--sp-rand); vertical-align: top; }
 thead th { background: var(--sp-flaeche-2); font-size: 0.9rem; }

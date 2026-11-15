@@ -4,6 +4,7 @@ import { h, leere, knopf, symbol } from '../ui.js';
 import { t } from '../einstellungen.js';
 import { neuesTeam } from '../spielstand.js';
 import { bald } from '../sync.js';
+import { wappen, konfetti } from '../zeichnungen.js';
 
 const FEHLER = {
   'nicht-erreichbar': 'Die Schulanmeldung ist gerade nicht erreichbar. Wenn ihr schon einen Code habt, könnt ihr ihn direkt eingeben.',
@@ -26,7 +27,7 @@ export async function zeige({ haupt, api, konfig, navigiere, params }) {
       const r = await api.beitritt(feld.value);
       await neuesTeam({ modus: 'schule', name: r.gruppe.bezeichnung, token: r.token, freigabe: r.freigabe });
       bald();
-      leere(haupt, h('div', { class: 'karte feier' }, symbol('haken'),
+      leere(haupt, h('div', { class: 'karte feier' }, konfetti(), h('div', { class: 'feier-kopf' }, wappen(r.gruppe.bezeichnung)),
         h('h1', { 'data-vorlesen': '' }, `Ihr seid Gruppe ${r.gruppe.bezeichnung}`),
         h('p', { 'data-vorlesen': '' }, `Quest: ${r.freigabe.titel} · ${r.freigabe.orte.length} ${r.freigabe.orte.length === 1 ? 'Ort' : 'Orte'}`),
         r.freigabe.erfassung ? null : h('p', { class: 'leise' }, 'Für diese Quest wird nichts ausgewertet; ihr spielt frei.'),

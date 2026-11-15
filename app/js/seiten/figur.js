@@ -7,6 +7,7 @@ import { t, einstellungen, reduzierteBewegung } from '../einstellungen.js';
 import { vorlesen } from '../vorlesen.js';
 import { url } from '../inhalte.js';
 import { aktuellesTeam, setzeFigur } from '../spielstand.js';
+import { konfetti } from '../zeichnungen.js';
 
 export async function zeige({ haupt, inhalte, aufraeumen }) {
   const team = aktuellesTeam();
@@ -40,7 +41,7 @@ export async function zeige({ haupt, inhalte, aufraeumen }) {
         const svg = new DOMParser().parseFromString(modul.figurSvg(figur, katalog), 'image/svg+xml').documentElement;
         bild = h('div', { class: 'figur-gross', role: 'img', 'aria-label': modul.figurText ? modul.figurText(figur, katalog) : 'Eure Figur' }, document.importNode(svg, true));
       } else if (modul.figurElement) bild = modul.figurElement(figur, { groesse: 220 });
-      leere(wurzel, h('div', { class: 'feier' }, symbol('haken'), h('h2', { tabindex: '-1' }, 'Figur gespeichert'), bild,
+      leere(wurzel, h('div', { class: 'feier' }, konfetti(), symbol('haken'), h('h2', { tabindex: '-1' }, 'Figur gespeichert'), bild,
         h('p', {}, h('a', { class: 'knopf', href: '#/karte' }, 'Zur Karte'))));
       wurzel.querySelector('h2')?.focus();
     }

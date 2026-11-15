@@ -1,10 +1,10 @@
 /* Betriebsseite und Statusseite: Ampel, Punkte, Knöpfe, Verlauf. Farbe nie allein: immer Symbol und Wort dazu. */
 
-.ampel { display: flex; gap: 16px; align-items: center; border-radius: var(--sp-radius); padding: 18px 20px; border: 2px solid var(--sp-rand); background: var(--sp-flaeche); margin: 8px 0 20px; }
+.ampel { display: flex; gap: 16px; align-items: center; border-radius: var(--sp-radius); padding: 18px 20px; border: 3px solid var(--sp-rand); background: var(--sp-flaeche); margin: 8px 0 20px; }
 .ampel .symbol { width: 2.6rem; height: 2.6rem; flex: none; }
 .ampel h2 { margin: 0 0 4px; font-size: 1.45rem; }
 .ampel p { margin: 0; }
-.ampel.gut { border-color: var(--sp-erfolg); background: var(--sp-akzent-weich); }
+.ampel.gut { border-color: var(--sp-erfolg); background: var(--sp-erfolg-weich); }
 .ampel.gut .symbol { color: var(--sp-erfolg); }
 .ampel.achtung, .ampel.eingeschraenkt { border-color: var(--sp-hinweis); background: var(--sp-hinweis-weich); }
 .ampel.achtung .symbol, .ampel.eingeschraenkt .symbol { color: var(--sp-hinweis); }

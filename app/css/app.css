@@ -1,154 +1,284 @@
-/* Spieler-Ansicht: Kopfleiste, Startseite, Karte, Orte, Aufgabenrahmen, Sammelbuch, Bild */
+/* Spieler-Ansicht: Kopfleiste, Startseite, Entdeckerkarte, Orte, Aufgabenrahmen, Sammelbuch, Bild.
+   Aussehen: Flächen mit dunklem Umriss und festem Schatten (wie ausgeschnitten und aufgeklebt), keine Verläufe,
+   keine weichen Schatten. Bewegung nur, wenn Gerät und Einstellung „wenig Bewegung“ sie erlauben. */
+
+:root[data-kontrast="hoch"] { --sp-tinte: var(--sp-text); --sp-sonne: var(--sp-flaeche); }
 
 .kopfleiste {
   position: sticky; top: 0; z-index: 20;
-  display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-  background: var(--sp-flaeche);
-  border-bottom: 1px solid var(--sp-rand);
+  display: flex; align-items: center; gap: 8px; padding: 6px 12px;
+  background: var(--sp-kopf); color: var(--sp-kopf-text);
+  border-bottom: 3px solid var(--sp-kontur);
 }
-.kopfleiste .marke-app { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--sp-text); font-weight: 800; font-size: 1.05rem; min-height: 48px; margin-right: auto; }
-.kopfleiste .marke-app .logo { width: 34px; height: 34px; }
-.kopfleiste .team { font-size: 0.9rem; color: var(--sp-text-leise); font-weight: 600; }
-.netz { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 600; color: var(--sp-text-leise); padding: 0 6px; }
+.kopfleiste .marke-app { display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit; font-family: var(--sp-schrift-titel); font-weight: 800; font-size: 1.25rem; min-height: 52px; margin-right: auto; min-width: 0; }
+.kopfleiste .marke-app .logo { width: 40px; height: 40px; flex: none; }
+.kopfleiste .logo path { fill: #51cf66; stroke: var(--sp-tinte); stroke-width: 60; stroke-linejoin: round; paint-order: stroke; }
+.kopfleiste .team { display: inline-flex; align-items: center; gap: 6px; padding: 2px 12px 2px 3px; min-width: 0; background: var(--sp-flaeche); color: var(--sp-text); border: 2px solid var(--sp-kontur); border-radius: 999px; font-family: var(--sp-schrift); font-size: 0.95rem; font-weight: 700; }
+.kopfleiste .team .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wappen { display: block; width: 64px; height: 64px; flex: none; }
+.wappen.klein { width: 32px; height: 32px; }
+.kopfleiste .knopf.leise { border-width: 2px; }
+.netz { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; color: var(--sp-text); background: var(--sp-flaeche); border: 2px solid var(--sp-kontur); border-radius: 999px; padding: 4px 10px; min-height: 36px; }
 .netz .symbol { width: 20px; height: 20px; }
-.netz.offline { color: var(--sp-hinweis); }
+.netz.offline { background: var(--sp-hinweis-weich); }
+@media (max-width: 560px) {
+  .kopfleiste { gap: 6px; padding: 6px 8px; }
+  .kopfleiste .marke-app.mit-team .wortmarke, .netz .netz-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .netz { padding: 4px 7px; }
+  .kopfleiste .symbolknopf { min-width: 48px; min-height: 48px; }
+}
 
-main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 110px; }
+main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 128px; }
 .seitenkopf { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
 .seitenkopf p { margin: 0; }
 
 .unterleiste {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
-  display: flex; justify-content: center; gap: 4px; padding: 6px 8px calc(6px + env(safe-area-inset-bottom));
-  background: var(--sp-flaeche); border-top: 1px solid var(--sp-rand);
+  display: flex; justify-content: center; gap: 6px; padding: 7px 8px calc(7px + env(safe-area-inset-bottom));
+  background: var(--sp-flaeche); border-top: 3px solid var(--sp-kontur);
 }
 .unterleiste a {
-  flex: 1 1 0; max-width: 9rem; display: flex; flex-direction: column; align-items: center; gap: 2px;
-  min-height: 56px; padding: 6px 4px; border-radius: var(--sp-radius-klein); color: var(--sp-text-leise); text-decoration: none; font-size: 0.8rem; font-weight: 700;
+  flex: 1 1 0; max-width: 10rem; display: flex; flex-direction: column; align-items: center; gap: 1px;
+  min-height: 64px; padding: 5px 2px 3px; border-radius: 18px; border: 3px solid transparent;
+  color: var(--sp-text); text-decoration: none; font-family: var(--sp-schrift-titel); font-size: 0.85rem; font-weight: 700;
 }
-.unterleiste a .symbol { width: 26px; height: 26px; }
-.unterleiste a[aria-current="page"] { color: var(--sp-akzent); background: var(--sp-akzent-weich); }
+.unterleiste .nav-symbol { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; border: 2.5px solid var(--sp-kontur); background: var(--nav-farbe); color: var(--sp-tinte); }
+.unterleiste .nav-symbol .symbol { width: 22px; height: 22px; }
+@media (max-width: 360px) { .unterleiste { gap: 2px; padding-inline: 4px; } .unterleiste a { font-size: 0.76rem; } }
+.nav-karte { --nav-farbe: #8fdc82; }
+.nav-sammlung { --nav-farbe: #ff9a3d; }
+.nav-figur { --nav-farbe: #ff7fae; }
+.nav-bild { --nav-farbe: #3fd0dd; }
+:root[data-kontrast="hoch"] .unterleiste a { --nav-farbe: var(--sp-flaeche); }
+.unterleiste a[aria-current="page"] { background: var(--sp-sonne); color: var(--sp-tinte); border-color: var(--sp-kontur); }
 
 /* Startseite */
-.start-buehne { position: relative; overflow: hidden; border-radius: var(--sp-radius); padding: 28px 22px; margin-bottom: 18px;
-  background: var(--sp-flaeche); border: 1px solid var(--sp-rand); }
-.start-buehne h1 { font-size: 2.1rem; margin-bottom: 0.25em; }
-.start-buehne p { font-size: 1.1rem; max-width: 30rem; }
-.start-buehne .silhouette { position: absolute; right: -40px; bottom: -30px; width: 300px; opacity: 0.35; pointer-events: none; }
-.start-buehne .silhouette path { fill: var(--sp-akzent); }
-.wahlkarten { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: 14px; }
+.start-buehne { --buehne: #7cc8ff; --wiese: #8fdc82; position: relative; overflow: hidden; border-radius: var(--sp-radius); margin-bottom: 22px;
+  background: var(--buehne); color: var(--sp-tinte); border: 3px solid var(--sp-kontur); box-shadow: var(--sp-schatten); }
+:root[data-kontrast="hoch"] .start-buehne { --buehne: var(--sp-flaeche); --wiese: var(--sp-flaeche); }
+.start-buehne .himmel { position: absolute; right: 0; top: 0; width: min(100%, 570px); height: auto; pointer-events: none; }
+.start-text { position: relative; padding: 24px 22px 6px; }
+@media (max-width: 560px) { .start-text { padding-top: clamp(58px, 21vw, 110px); } }
+.start-buehne h1 { font-size: clamp(2.1rem, 8vw, 3.6rem); line-height: 1.02; margin-bottom: 0.2em; max-width: 7.5em; }
+.start-satz { font-size: 1.2rem; font-weight: 700; max-width: 24rem; margin-bottom: 0.6em; }
+.start-marken { display: flex; flex-wrap: wrap; gap: 8px; }
+.start-marken .marke { background: #fff; color: #1b2340; border-color: #1b2340; }
+.start-wiese { position: relative; display: flex; align-items: flex-end; gap: clamp(6px, 2vw, 14px); margin-top: 44px; padding: 0 22px 14px; background: var(--wiese); border-top: 3px solid var(--sp-kontur); }
+.start-wiese .wappen { width: clamp(46px, 13vw, 92px); height: auto; margin-top: clamp(-46px, -6.5vw, -23px); }
+.start-wiese .wappen:nth-child(even) { margin-top: clamp(-58px, -8.5vw, -30px); }
+.wahlkarten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 16px; }
 .wahlkarte {
-  display: flex; flex-direction: column; gap: 8px; text-align: left; padding: 20px; min-height: 9rem; cursor: pointer;
-  background: var(--sp-flaeche); color: var(--sp-text); border: 2px solid var(--sp-rand); border-radius: var(--sp-radius); box-shadow: var(--sp-schatten);
-  font: inherit; text-decoration: none;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 2px 16px; align-items: center; text-align: left; padding: 18px; min-height: 7rem; cursor: pointer;
+  background: var(--sp-flaeche); color: var(--sp-text); border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius); box-shadow: var(--sp-schatten-hart);
+  font: inherit; text-decoration: none; transition: transform calc(var(--sp-dauer) / var(--sp-tempo)) ease, box-shadow calc(var(--sp-dauer) / var(--sp-tempo)) ease;
 }
-.wahlkarte:hover { border-color: var(--sp-akzent); }
-.wahlkarte .symbol { width: 40px; height: 40px; color: var(--sp-akzent); }
-.wahlkarte strong { font-size: 1.25rem; }
-.wahlkarte span { color: var(--sp-text-leise); }
+.wahlkarte:hover { transform: translateY(-2px); }
+.wahlkarte:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--sp-kontur); }
+.wahlkarte .symbol { grid-row: span 2; width: 72px; height: 72px; padding: 15px; border-radius: 50%; border: 3px solid var(--sp-kontur); background: var(--wahl-farbe, var(--sp-sonne)); color: var(--sp-tinte); }
+.wahlkarte.klasse { --wahl-farbe: #ffd43b; }
+.wahlkarte.familie { --wahl-farbe: #ff9a3d; }
+:root[data-kontrast="hoch"] .wahlkarte { --wahl-farbe: var(--sp-flaeche); }
+.wahlkarte strong { font-family: var(--sp-schrift-titel); font-size: 1.4rem; line-height: 1.15; align-self: end; }
+.wahlkarte span { color: var(--sp-text-leise); font-weight: 400; align-self: start; }
 .fusslinks { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 22px; }
 .fusslinks a { min-height: 44px; display: inline-flex; align-items: center; }
 
-/* Fortschritt */
-.fortschritt { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 14px; }
-.fortschritt .marke { font-size: 0.95rem; padding: 0.3em 0.8em; }
+/* Gruppe und Fortschritt über der Karte */
+.team-banner { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.team-banner > .wappen { width: clamp(56px, 14vw, 88px); height: auto; }
+.team-text { flex: 1; min-width: 0; }
+.team-name { margin: 0; font-family: var(--sp-schrift-titel); font-weight: 700; color: var(--sp-text-leise); }
+.team-banner h1 { margin: 0 0 0.15em; font-size: clamp(1.45rem, 5vw, 2rem); }
+.team-banner p { margin: 0; }
+.team-figur { flex: none; display: block; width: clamp(56px, 13vw, 84px); aspect-ratio: 3 / 4; border-radius: 18px; border: 3px solid var(--sp-kontur); background: var(--sp-sonne); overflow: hidden; box-shadow: var(--sp-schatten-hart); }
+.team-figur .figur-bild, .team-figur svg { display: block; width: 100%; height: 100%; }
+@media (max-width: 480px) {
+  .team-banner { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-areas: "wappen name figur" "titel titel titel" "satz satz satz"; gap: 4px 10px; }
+  .team-text { display: contents; }
+  .team-banner > .wappen { grid-area: wappen; width: 48px; }
+  .team-name { grid-area: name; align-self: center; }
+  .team-figur { grid-area: figur; width: 46px; border-radius: 12px; }
+  .team-banner h1 { grid-area: titel; margin-top: 6px; }
+  .team-text .leise { grid-area: satz; }
+}
+.fortschritt { display: flex; flex-wrap: wrap; gap: 10px; margin: 6px 0 16px; }
+.fortschritt .marke { font-size: 0.95rem; padding: 0.3em 0.9em; }
+.fortschritt .stern { width: 1.3em; height: 1.3em; }
+.fortschritt .stern.leer { color: var(--sp-text-leise); }
+.fortschritt a.marke { text-decoration: none; background: var(--sp-sonne); color: var(--sp-tinte); box-shadow: var(--sp-schatten-hart); }
 
-/* Karte */
-.karte-rahmen { margin: 0 auto 18px; max-width: 56rem; }
-.karte-flaeche { position: relative; width: 100%; aspect-ratio: 1000 / 792; border-radius: var(--sp-radius); overflow: hidden; background: var(--sp-flaeche-2); border: 1px solid var(--sp-rand); }
+/* Entdeckerkarte */
+.karte-rahmen { margin: 0 auto 22px; max-width: 56rem; }
+.karte-flaeche { position: relative; width: 100%; aspect-ratio: 1000 / 792; border-radius: var(--sp-radius); overflow: hidden; background: var(--sp-karte-grund); border: 3px solid var(--sp-kontur); box-shadow: var(--sp-schatten); }
 .karte-svg { width: 100%; height: 100%; }
-.karte-grund { fill: var(--sp-flaeche-2); }
-.karte-nachbarn path { fill: var(--sp-flaeche); stroke: var(--sp-rand); stroke-width: 1.2; }
-.karte-sachsen { fill: var(--sp-karte-land); stroke: var(--sp-karte-rand); stroke-width: 3; stroke-linejoin: round; }
-.karte-fluesse path { fill: none; stroke: var(--sp-karte-wasser); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; opacity: 0.9; }
-.karte-staedte circle { fill: var(--sp-text-leise); }
-.karte-stadt { position: absolute; transform: translate(8px, -50%); font-size: 0.7rem; color: var(--sp-text-leise); font-weight: 600; pointer-events: none; white-space: nowrap; display: none; }
+.karte-grund { fill: var(--sp-karte-grund); }
+.karte-nachbarn path { fill: var(--sp-karte-nachbar); stroke: var(--sp-karte-kreis); stroke-width: 2.5; stroke-dasharray: 2 8; stroke-linecap: round; }
+.karte-sachsen-schatten { fill: rgb(27 35 64 / 0.22); }
+.karte-sachsen { fill: var(--sp-karte-land); stroke: var(--sp-karte-rand); stroke-width: 5; stroke-linejoin: round; }
+.karte-fluesse path { fill: none; stroke: var(--sp-karte-wasser); stroke-width: 4.5; stroke-linecap: round; stroke-linejoin: round; }
+.karte-staedte circle { fill: var(--sp-flaeche); stroke: var(--sp-karte-rand); stroke-width: 2.5; }
+.karte-weg-grund { fill: none; stroke: var(--sp-flaeche); stroke-width: 15; stroke-linecap: round; opacity: 0.6; }
+.karte-weg { fill: none; stroke: var(--sp-text); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 1 18; }
+:root[data-kontrast="hoch"] .karte-schmuck, :root[data-kontrast="hoch"] .karte-sachsen-schatten { display: none; }
+.karte-stadt { position: absolute; transform: translate(9px, -50%); font-size: 0.72rem; color: var(--sp-text); font-weight: 700; pointer-events: none; white-space: nowrap; display: none; }
 .karte-stadt.gross { display: block; }
 @media (min-width: 760px) { .karte-stadt { display: block; } }
 .karte-marker {
-  position: absolute; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center;
-  background: none; border: none; padding: 0; cursor: pointer; font: inherit; color: var(--sp-text); min-width: 48px; min-height: 48px; justify-content: center;
+  --marker: clamp(44px, 8vw, 64px);
+  position: absolute; transform: translate(-50%, -50%); z-index: 2; display: grid; place-items: center;
+  width: var(--marker); height: var(--marker); border-radius: 50%;
+  background: none; border: none; padding: 0; cursor: pointer; font: inherit; color: var(--sp-text);
 }
+.karte-marker:hover, .karte-marker:focus-visible { z-index: 5; }
 .marker-punkt {
-  display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%;
-  background: var(--sp-flaeche); color: var(--sp-akzent); border: 3px solid var(--sp-akzent); font-weight: 800; box-shadow: var(--sp-schatten);
+  display: block; width: 100%; height: 100%; border-radius: 50%; overflow: hidden; background: var(--ort-kraeftig, var(--sp-sonne));
+  border: clamp(3px, 0.6vw, 5px) solid var(--ort-kraeftig, var(--sp-sonne));
+  box-shadow: 0 0 0 3px var(--sp-kontur), 0 6px 0 3px var(--sp-kontur);
+  transition: transform calc(var(--sp-dauer) / var(--sp-tempo)) ease;
 }
-.marker-symbol { width: 22px; height: 22px; }
-.karte-marker.status-begonnen .marker-punkt { background: var(--sp-hinweis-weich); border-color: var(--sp-hinweis); color: var(--sp-text); }
-.karte-marker.status-abgeschlossen .marker-punkt { background: var(--sp-akzent); color: var(--sp-akzent-text); }
-.karte-marker.finale .marker-punkt { border-color: var(--sp-zweit); color: var(--sp-zweit); }
-.karte-marker.finale.status-abgeschlossen .marker-punkt { background: var(--sp-zweit); color: var(--sp-flaeche); }
-.marker-name { position: absolute; top: calc(50% + 24px); font-size: 0.72rem; font-weight: 700; white-space: nowrap; padding: 1px 6px; border-radius: 4px;
-  background: color-mix(in srgb, var(--sp-flaeche) 88%, transparent); display: none; }
-@media (min-width: 760px) { .marker-name { display: block; } }
+.marker-punkt img { display: block; width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
+.karte-marker:hover .marker-punkt { transform: scale(1.08) rotate(-4deg); }
+.marker-stempel, .marker-ziel { position: absolute; top: 50%; width: 66%; height: 66%; pointer-events: none; }
+.marker-stempel { right: -36%; transform: translateY(-58%) rotate(12deg); }
+.marker-ziel { left: -30%; transform: translateY(-70%) rotate(-8deg); width: 56%; height: 56%; }
+.marker-teil { position: absolute; right: -34%; top: 50%; transform: translateY(-50%); min-width: 2.3em; padding: 0 0.4em; border-radius: 999px; background: var(--sp-sonne); color: var(--sp-tinte); border: 2.5px solid var(--sp-kontur); font-family: var(--sp-schrift-titel); font-weight: 800; font-size: 0.8rem; line-height: 1.5; }
+.marker-name { position: absolute; left: 50%; top: calc(100% + 12px); transform: translateX(-50%); font-family: var(--sp-schrift-titel); font-size: 0.85rem; font-weight: 800; white-space: nowrap; padding: 1px 10px; border-radius: 999px;
+  background: var(--ort-kraeftig, var(--sp-flaeche)); color: var(--ort-tinte, var(--sp-text)); border: 2.5px solid var(--sp-kontur); display: none; }
+.marker-name.oben { top: auto; bottom: calc(100% + 9px); }
+@media (min-width: 620px) { .marker-name { display: block; } }
 .karte-marker:focus-visible { outline: none; }
-.karte-marker:focus-visible .marker-punkt { outline: 4px solid var(--sp-fokus); outline-offset: 3px; }
-.karte-quelle { font-size: 0.8rem; color: var(--sp-text-leise); margin-top: 6px; }
+.karte-marker:focus-visible .marker-punkt { outline: 4px solid var(--sp-fokus); outline-offset: 7px; }
+.karte-quelle { font-size: 0.8rem; color: var(--sp-text-leise); margin-top: 8px; }
 
 /* Ortsliste */
-.ortsliste { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 12px; }
+.ortsliste { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 17rem), 1fr)); gap: 16px; }
 .ortskarte {
-  display: flex; gap: 12px; align-items: center; width: 100%; text-align: left; padding: 12px; min-height: 84px; cursor: pointer;
-  background: var(--sp-flaeche); color: var(--sp-text); border: 2px solid var(--sp-rand); border-radius: var(--sp-radius); font: inherit;
+  position: relative; display: flex; gap: 14px; align-items: center; width: 100%; text-align: left; padding: 12px 14px; min-height: 100px; cursor: pointer;
+  background: var(--ort-hell, var(--sp-flaeche)); color: var(--sp-text); border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius); font: inherit;
+  box-shadow: var(--sp-schatten-hart); transition: transform calc(var(--sp-dauer) / var(--sp-tempo)) ease, box-shadow calc(var(--sp-dauer) / var(--sp-tempo)) ease;
 }
-.ortskarte:hover { border-color: var(--sp-akzent); }
-.ortskarte img { width: 64px; height: 64px; object-fit: cover; border-radius: var(--sp-radius-klein); flex: none; background: var(--sp-flaeche-2); }
-.ortskarte .text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-.ortskarte strong { font-size: 1.05rem; }
+.ortskarte:hover { transform: translateY(-2px); }
+.ortskarte:active { transform: translateY(3px); box-shadow: 0 1px 0 var(--sp-kontur); }
+.ortskarte img { width: 72px; height: 72px; object-fit: cover; border-radius: 50%; flex: none; background: var(--sp-flaeche-2); border: 3px solid var(--sp-kontur); }
+.ortskarte .text { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; min-width: 0; }
+.ortskarte strong { font-family: var(--sp-schrift-titel); font-size: 1.2rem; line-height: 1.15; }
 .ortskarte .leise { font-size: 0.9rem; }
+.ortskarte .stempel { position: absolute; right: -10px; top: -14px; width: 50px; height: 50px; transform: rotate(12deg); }
 
 /* Ort */
-.ortsbild { width: 100%; aspect-ratio: 16 / 9; max-height: 22rem; object-fit: cover; border-radius: var(--sp-radius); background: var(--sp-flaeche-2); border: 1px solid var(--sp-rand); margin-bottom: 14px; }
+.zurueck { display: inline-flex; align-items: center; gap: 0.35em; min-height: 44px; padding: 0 1em; margin-bottom: 14px; border-radius: 999px; border: 2px solid var(--sp-kontur); background: var(--sp-flaeche); color: var(--sp-text); text-decoration: none; font-weight: 700; }
+.ort-kopf { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); align-items: center; margin-bottom: 18px; }
+@media (min-width: 720px) { .ort-kopf { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.ortsfoto { margin: 4px; padding: 10px 10px 8px; background: #fff; border: 3px solid var(--sp-kontur); border-radius: 10px; box-shadow: 0 6px 0 rgb(27 35 64 / 0.2); transform: rotate(-1.5deg); }
+.ortsfoto .ortsbild { aspect-ratio: 4 / 3; max-height: none; margin: 0; border-width: 2px; border-radius: 4px; }
+.ortsfoto figcaption { font-size: 0.72rem; color: #46506e; margin-top: 6px; overflow-wrap: anywhere; }
+.ort-titel h1 { font-size: clamp(1.8rem, 5.6vw, 2.5rem); margin-bottom: 0.2em; }
+.ort-titel .region { display: inline-block; margin: 0 0 12px; padding: 1px 14px; border-radius: 999px; font-family: var(--sp-schrift-titel); font-weight: 700; background: var(--ort-kraeftig); color: var(--ort-tinte); border: 2.5px solid var(--sp-kontur); }
+.ort-titel .marke { margin-bottom: 10px; }
+.ortsbild { width: 100%; aspect-ratio: 16 / 9; max-height: 22rem; object-fit: cover; border-radius: var(--sp-radius-klein); background: var(--sp-flaeche-2); border: 3px solid var(--sp-kontur); margin-bottom: 14px; }
 .ortstext { font-size: 1.08rem; max-width: 42rem; }
-.pruefwahl { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 12px; margin: 14px 0; }
-.aufgabenliste { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.aufgabe-zeile { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: var(--sp-flaeche); border: 2px solid var(--sp-rand); border-radius: var(--sp-radius); }
-.aufgabe-zeile .nr { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; background: var(--sp-flaeche-2); flex: none; }
-.aufgabe-zeile.fertig .nr { background: var(--sp-akzent); color: var(--sp-akzent-text); }
-.aufgabe-zeile .text { flex: 1; display: flex; flex-direction: column; }
+.pruef { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); margin-bottom: 18px; }
+@media (min-width: 720px) { .pruef { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+.pruef-teil { display: flex; flex-direction: column; gap: 12px; padding: 16px; background: var(--ort-hell, var(--sp-flaeche)); border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius); box-shadow: var(--sp-schatten); }
+.pruef-teil h2, .pruef-teil p { margin: 0; }
+.pruef-teil .leise { font-size: 0.9rem; }
+.pruefwahl { display: grid; gap: 14px; }
+.pruef-teil .knopf { width: 100%; }
+.pruef-teil .knopf.gross { font-size: 1.15rem; padding-inline: 1em; }
+.aufgabenliste { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.aufgabe-zeile { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 14px; padding: 12px 14px; background: var(--sp-flaeche); border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius); box-shadow: var(--sp-schatten); }
+.aufgabe-zeile .nr { width: 54px; height: 54px; border-radius: 50%; display: grid; place-items: center; font-family: var(--sp-schrift-titel); font-weight: 800; font-size: 1.5rem; line-height: 1; background: var(--ort-kraeftig, var(--sp-flaeche-2)); color: var(--ort-tinte, var(--sp-text)); border: 3px solid var(--sp-kontur); flex: none; }
+.aufgabe-zeile .nr .stern { width: 36px; height: 36px; }
+.aufgabe-zeile.fertig { background: var(--ort-hell, var(--sp-flaeche)); }
+.aufgabe-zeile.fertig .nr { background: var(--sp-flaeche); }
+.aufgabe-zeile .text { flex: 1 1 9rem; min-width: 0; display: flex; flex-direction: column; }
+.aufgabe-zeile .text strong { font-family: var(--sp-schrift-titel); font-size: 1.15rem; line-height: 1.2; }
 .aufgabe-zeile .leise { font-size: 0.9rem; }
 
-/* Aufgabenrahmen */
+/* Aufgabenrahmen: Die Spiele übernehmen die Farbe des Orts über die Variablen der App. */
 .aufgabe-rahmen { min-height: 50vh; }
-.aufgabe-kopf { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
-.aufgabe-kopf .wo { margin: 0; font-size: 1.05rem; }
+.aufgabe-rahmen[class*="ort-farbe-"] { --sp-akzent: var(--ort); --sp-akzent-text: var(--ort-text); --sp-akzent-weich: var(--ort-hell); }
+.aufgabe-kopf { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+.aufgabe-kopf .wo { display: inline-flex; margin: 0; padding: 3px 16px; border-radius: 999px; font-family: var(--sp-schrift-titel); font-weight: 700; font-size: 1.05rem;
+  background: var(--ort-kraeftig, var(--sp-flaeche)); color: var(--ort-tinte, var(--sp-text)); border: 2.5px solid var(--sp-kontur); }
 /* Rückmeldungen der App um das Spiel (Abschluss, Fehler, Workshop-Fragen) als eigene Fläche */
-.aufgabe-rahmen .feier, .aufgabe-rahmen .spiel-fehler, .aufgabe-rahmen .rueckmeldung { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius); box-shadow: var(--sp-schatten); padding: 20px; }
-.aufgabe-kopf .wo { color: var(--sp-text-leise); font-weight: 600; }
+.aufgabe-rahmen .feier, .aufgabe-rahmen .spiel-fehler, .aufgabe-rahmen .rueckmeldung { background: var(--sp-flaeche); border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius); box-shadow: var(--sp-schatten); padding: 22px 18px; }
 .spiel-wurzel { outline: none; }
 .spiel-fehler { text-align: center; padding: 30px 10px; }
 
 /* Rückmeldung (Workshop) */
 .rueckmeldung fieldset { margin-bottom: 12px; }
 
-/* Sammelbuch */
-.sammelbuch { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(9.5rem, 1fr)); gap: 12px; }
-.sammelstueck { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 12px 8px; background: var(--sp-flaeche); border: 2px solid var(--sp-rand); border-radius: var(--sp-radius); min-height: 11rem; }
-.sammelstueck img { width: 88px; height: 88px; object-fit: contain; }
-.sammelstueck.offen img { filter: grayscale(1) brightness(0.9); opacity: 0.35; }
-.sammelstueck strong { font-size: 0.95rem; }
+/* Sammelbuch: je Ort eine Seite in seiner Farbe; gefundene Stücke kleben als Sticker, offene Plätze sind gestrichelt */
+.album-kopf { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-bottom: 6px; }
+.album-kopf h1 { margin: 0; }
+.album-zahl { display: inline-flex; padding: 0 16px; font-family: var(--sp-schrift-titel); font-weight: 800; font-size: 1.5rem; background: var(--sp-sonne); color: var(--sp-tinte); border: 3px solid var(--sp-kontur); border-radius: 999px; transform: rotate(-2deg); }
+.album-seite { margin: 0 0 18px; padding: 14px 14px 18px; background: var(--ort-hell, var(--sp-flaeche)); border: 3px solid var(--sp-kontur); border-radius: var(--sp-radius); box-shadow: var(--sp-schatten); }
+.album-seite h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; font-size: 1.35rem; margin-bottom: 12px; }
+.album-seite h2 .zahl { font-family: var(--sp-schrift); font-size: 0.9rem; font-weight: 700; padding: 1px 12px; border-radius: 999px; background: var(--ort-kraeftig, var(--sp-flaeche)); color: var(--ort-tinte, var(--sp-text)); border: 2.5px solid var(--sp-kontur); }
+.sammelbuch { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 6.6rem), 1fr)); gap: 14px 8px; }
+.sammelstueck { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; text-align: center; }
+.sammelstueck .platz { display: grid; place-items: center; width: 112px; height: 112px; border-radius: 50%; border: 3px dashed color-mix(in srgb, var(--sp-kontur) 50%, transparent); }
+.sammelstueck img { width: 94px; height: 94px; object-fit: contain; border-radius: 50%; }
+.sammelstueck.offen img { filter: grayscale(1); opacity: 0.3; }
+.sammelstueck:not(.offen) .platz { border-color: transparent; }
+.sammelstueck:not(.offen) img { width: 102px; height: 102px; background: #fff; border: 4px solid #fff; box-shadow: 0 0 0 3px var(--sp-kontur), 0 5px 0 3px rgb(27 35 64 / 0.28); transform: rotate(-5deg); }
+.sammelstueck:not(.offen):nth-child(even) img { transform: rotate(4deg); }
+.sammelstueck strong { font-family: var(--sp-schrift-titel); font-size: 1rem; line-height: 1.15; overflow-wrap: anywhere; }
 .sammelstueck .leise { font-size: 0.8rem; }
+.neu-marke { position: absolute; top: -4px; right: calc(50% - 64px); padding: 0 9px; font-family: var(--sp-schrift-titel); font-weight: 800; font-size: 0.85rem; background: var(--sp-sonne); color: var(--sp-tinte); border: 2.5px solid var(--sp-kontur); border-radius: 999px; transform: rotate(10deg); z-index: 1; }
 
 /* Bild */
-.bild-bereich { display: grid; gap: 16px; grid-template-columns: 1fr; }
+.bild-bereich { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 860px) { .bild-bereich { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
-.vorschau-rahmen { aspect-ratio: 1; width: 100%; border-radius: var(--sp-radius); overflow: hidden; background: var(--sp-flaeche-2); border: 1px solid var(--sp-rand); display: flex; align-items: center; justify-content: center; }
+/* gelber Bilderrahmen um die Vorschau */
+.vorschau-rahmen { aspect-ratio: 1; width: calc(100% - 28px); margin: 14px 14px 22px; border-radius: 6px; overflow: hidden; background: var(--sp-flaeche-2); border: 3px solid var(--sp-kontur);
+  box-shadow: 0 0 0 9px var(--sp-sonne), 0 0 0 12px var(--sp-kontur), 0 8px 0 12px var(--sp-kontur); display: flex; align-items: center; justify-content: center; }
 .vorschau-rahmen img, .vorschau-rahmen canvas { width: 100%; height: 100%; object-fit: contain; }
-.itemwahl { display: grid; grid-template-columns: repeat(auto-fill, minmax(6.5rem, 1fr)); gap: 8px; }
-.itemwahl label { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px; border: 2px solid var(--sp-rand); border-radius: var(--sp-radius-klein); cursor: pointer; font-weight: 600; font-size: 0.85rem; text-align: center; min-height: 48px; background: var(--sp-flaeche); }
+.itemwahl { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 6.2rem), 1fr)); gap: 10px; }
+.itemwahl label { display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 0; padding: 8px 6px; border: 3px solid var(--sp-rand); border-radius: var(--sp-radius-klein); cursor: pointer; font-weight: 700; font-size: 0.85rem; text-align: center; min-height: 48px; background: var(--sp-flaeche); }
 .itemwahl input { position: absolute; opacity: 0; width: 1px; height: 1px; }
-.itemwahl input:checked + label { border-color: var(--sp-akzent); background: var(--sp-akzent-weich); }
-.itemwahl input:focus-visible + label { outline: 3px solid var(--sp-fokus); outline-offset: 2px; }
-.itemwahl img { width: 56px; height: 56px; object-fit: contain; }
+.itemwahl input:checked + label { border-color: var(--sp-kontur); background: var(--sp-sonne); color: var(--sp-tinte); box-shadow: var(--sp-schatten-hart); }
+.itemwahl input:focus-visible + label { outline: 4px solid var(--sp-fokus); outline-offset: 2px; }
+.itemwahl img { width: 58px; height: 58px; object-fit: contain; }
 
-.feier { text-align: center; padding: 26px 16px; }
-.feier > .symbol { width: 64px; height: 64px; margin: 0 auto 10px; color: var(--sp-akzent); }
-.neues-item { display: flex; align-items: center; gap: 14px; justify-content: center; margin: 14px 0; }
-.neues-item img { width: 96px; height: 96px; object-fit: contain; }
-
-@media (prefers-reduced-motion: no-preference) {
-  :root:not([data-bewegung="reduziert"]) .feier > .symbol { animation: hupf calc(700ms / var(--sp-tempo)) ease-out 1; }
-}
-@keyframes hupf { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
+/* Feier nach einer Aufgabe, nach dem Beitritt und beim Speichern der Figur */
+.feier { position: relative; overflow: hidden; text-align: center; padding: 26px 16px; }
+.feier > * { position: relative; }
+.feier > .symbol { width: 64px; height: 64px; margin: 0 auto 10px; color: var(--sp-erfolg); }
+.feier h1, .feier h2 { font-size: clamp(1.7rem, 6vw, 2.5rem); margin-bottom: 0.3em; }
+.feier-kopf { display: flex; justify-content: center; align-items: flex-end; gap: clamp(4px, 2vw, 16px); min-height: 120px; margin-bottom: 10px; }
+.feier-kopf .wappen { width: clamp(64px, 16vw, 96px); height: auto; }
+.feier-kopf .figur-bild { display: block; width: clamp(70px, 17vw, 104px); }
+.feier-kopf .figur-bild svg { display: block; width: 100%; height: auto; }
+.feier-stern { width: clamp(84px, 22vw, 124px); height: auto; }
+.neue-items { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; margin: 12px 0 20px; }
+.neues-item { display: grid; justify-items: center; gap: 10px; }
+.klebeplatz { display: grid; place-items: center; width: 164px; height: 164px; border-radius: 50%; border: 4px dashed color-mix(in srgb, var(--sp-kontur) 45%, transparent); }
+.klebeplatz img { width: 132px; height: 132px; object-fit: contain; border-radius: 50%; background: #fff; border: 5px solid #fff; box-shadow: 0 0 0 3px var(--sp-kontur), 0 6px 0 3px rgb(27 35 64 / 0.3); transform: rotate(-5deg); }
+.neues-item strong { font-family: var(--sp-schrift-titel); font-size: 1.15rem; padding: 1px 16px; border-radius: 999px; background: var(--ort-kraeftig, var(--sp-sonne)); color: var(--ort-tinte, var(--sp-tinte)); border: 2.5px solid var(--sp-kontur); }
+.konfetti { position: absolute; inset: 0 0 auto 0; height: 260px; pointer-events: none; overflow: hidden; display: none; }
+.konfetti i { position: absolute; left: var(--k-x); top: -18px; width: 10px; height: 16px; border-radius: 3px; background: var(--k-farbe); opacity: 0; }
+.konfetti i.rund { width: 12px; height: 12px; border-radius: 50%; }
 .figur-gross { width: min(220px, 60vw); margin: 0 auto 12px; }
 .figur-gross svg { width: 100%; height: auto; display: block; }
+
+/* Beitritt */
+#code { font-family: var(--sp-schrift-titel); font-size: 1.7rem; font-weight: 800; letter-spacing: 0.12em; text-align: center; min-height: 72px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  :root:not([data-bewegung="reduziert"]) .feier > .symbol,
+  :root:not([data-bewegung="reduziert"]) .feier-stern { animation: hupf calc(700ms / var(--sp-tempo)) ease-out 1 both; }
+  :root:not([data-bewegung="reduziert"]) .feier-kopf .wappen,
+  :root:not([data-bewegung="reduziert"]) .feier-kopf .figur-bild { animation: jubel calc(900ms / var(--sp-tempo)) ease-in-out calc(300ms / var(--sp-tempo)) 2; transform-origin: 50% 100%; }
+  :root:not([data-bewegung="reduziert"]) .klebeplatz img { animation: einkleben calc(950ms / var(--sp-tempo)) cubic-bezier(0.3, 1.3, 0.5, 1) calc(450ms / var(--sp-tempo)) 1 both; }
+  :root:not([data-bewegung="reduziert"]) .sammelstueck.neu img { animation: einkleben calc(950ms / var(--sp-tempo)) cubic-bezier(0.3, 1.3, 0.5, 1) calc(500ms / var(--sp-tempo)) 1 both; }
+  :root:not([data-bewegung="reduziert"]) .sammelstueck.neu:nth-child(even) img { animation-name: einkleben-rechts; }
+  :root:not([data-bewegung="reduziert"]) .konfetti { display: block; }
+  :root:not([data-bewegung="reduziert"]) .konfetti i { animation: konfetti calc(1700ms / var(--sp-tempo)) cubic-bezier(0.3, 0.6, 0.7, 1) var(--k-zeit) 1 both; }
+}
+@keyframes hupf { 0% { transform: scale(0.4) rotate(-20deg); opacity: 0; } 60% { transform: scale(1.15) rotate(6deg); opacity: 1; } 100% { transform: scale(1) rotate(0); } }
+@keyframes jubel { 0%, 100% { transform: translateY(0) rotate(0); } 30% { transform: translateY(-14px) rotate(-5deg); } 60% { transform: translateY(0) rotate(4deg); } }
+@keyframes einkleben { 0% { transform: translateY(-150px) scale(1.7) rotate(20deg); opacity: 0; } 55% { transform: translateY(0) scale(0.9) rotate(-10deg); opacity: 1; } 78% { transform: scale(1.07) rotate(-3deg); } 100% { transform: scale(1) rotate(-5deg); opacity: 1; } }
+@keyframes einkleben-rechts { 0% { transform: translateY(-150px) scale(1.7) rotate(-20deg); opacity: 0; } 55% { transform: translateY(0) scale(0.9) rotate(9deg); opacity: 1; } 78% { transform: scale(1.07) rotate(2deg); } 100% { transform: scale(1) rotate(4deg); opacity: 1; } }
+@keyframes konfetti { 0% { transform: translateY(0) rotate(0); opacity: 1; } 80% { opacity: 1; } 100% { transform: translateY(var(--k-weg)) rotate(var(--k-dreh)); opacity: 0; } }

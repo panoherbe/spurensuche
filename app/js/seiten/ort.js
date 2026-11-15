@@ -6,6 +6,7 @@ import { url, aufgabenVon } from '../inhalte.js';
 import { aktuellesTeam, orteDesTeams, stationVon, beginneStation, brichStationAb } from '../spielstand.js';
 import { codePasst, leseQrInhalt, kannScannen, scanne, pruefeStandort } from '../ortspruefung.js';
 import { bald } from '../sync.js';
+import { ortFarbe, stern } from '../zeichnungen.js';
 
 const VERIFIKATION = { qr: 'vor Ort, QR-Code gescannt', code: 'vor Ort, Code eingetippt', gps: 'vor Ort, Standort bestätigt', ersatz: 'ortsunabhängig gespielt' };
 
@@ -38,7 +39,7 @@ export async function zeige(ctx) {
     neuZeichnen();
   };
 
-  const pruefBereich = station ? null : h('section', { class: 'karte', 'aria-labelledby': 'pruef-titel' },
+  const pruefBereich = station ? null : h('section', { class: 'pruef', 'aria-labelledby': 'pruef-titel' }, h('div', { class: 'pruef-teil' },
     h('h2', { id: 'pruef-titel', 'data-vorlesen': '' }, t({ standard: 'Seid ihr vor Ort?', einfach: 'Seid ihr an diesem Ort?' })),
     h('div', { class: 'pruefwahl' },
       kannScannen() ? knopf('QR-Code scannen', () => qrDialog(ort, bestaetigt), { art: 'gross', sym: 'qr' }) : null,
@@ -52,10 +53,11 @@ export async function zeige(ctx) {
         k.removeAttribute('aria-busy');
         if (r.ok) bestaetigt('gps'); else melde(r.grund, { dauer: 6000 });
       }, { art: 'zweit gross', sym: 'standort' })),
-    h('p', { class: 'leise' }, 'Der Standort wird nur im Gerät verglichen und nicht gespeichert.'),
-    h('h2', { 'data-vorlesen': '' }, t({ standard: 'Nicht vor Ort?', einfach: 'Ihr seid nicht dort?' })),
-    h('p', { 'data-vorlesen': '' }, t({ standard: 'Alle Aufgaben gehen auch im Klassenzimmer. Ihr bekommt dann Bilder und Texte zum Ort.', einfach: 'Ihr könnt auch in der Schule spielen. Dann seht ihr Bilder vom Ort.' })),
-    knopf('Im Klassenzimmer spielen', () => bestaetigt('ersatz'), { art: 'leise', sym: 'schule' }));
+    h('p', { class: 'leise' }, 'Der Standort wird nur im Gerät verglichen und nicht gespeichert.')),
+    h('div', { class: 'pruef-teil' },
+      h('h2', { 'data-vorlesen': '' }, t({ standard: 'Nicht vor Ort?', einfach: 'Ihr seid nicht dort?' })),
+      h('p', { 'data-vorlesen': '' }, t({ standard: 'Alle Aufgaben gehen auch im Klassenzimmer. Ihr bekommt Bilder und Texte zum Ort.', einfach: 'Ihr könnt auch in der Schule spielen. Dann seht ihr Bilder vom Ort.' })),
+      knopf('Im Klassenzimmer spielen', () => bestaetigt('ersatz'), { art: 'zweit gross', sym: 'schule' })));
 
   const ersatz = station?.verifikation === 'ersatz' ? h('section', { class: 'karte' },
     h('h2', { 'data-vorlesen': '' }, t({ standard: 'So sieht es dort aus', einfach: 'So ist es dort' })),
@@ -68,7 +70,7 @@ export async function zeige(ctx) {
     h('ol', { class: 'aufgabenliste' }, aufgaben.map((a, i) => {
       const fertig = !!team.laeufe[a.kennung];
       return h('li', { class: `aufgabe-zeile${fertig ? ' fertig' : ''}` },
-        h('span', { class: 'nr', 'aria-hidden': 'true' }, fertig ? symbol('haken') : String(i + 1)),
+        h('span', { class: 'nr', 'aria-hidden': 'true' }, fertig ? stern() : String(i + 1)),
         h('span', { class: 'text' }, h('strong', {}, a.titel), h('span', { class: 'leise' }, `${a.dauerMinuten} Minuten${fertig ? ' · erledigt' : ''}`)),
         h('a', { class: `knopf${fertig ? ' leise' : ''}`, href: `#/aufgabe/${a.kennung}`, 'aria-label': `${fertig ? 'Noch einmal spielen' : 'Starten'}: ${a.titel}` }, fertig ? 'Noch einmal' : 'Starten'));
     })),
@@ -83,16 +85,16 @@ export async function zeige(ctx) {
         }
       }, { art: 'leise' }) : null)) : null;
 
-  leere(haupt,
-    h('p', {}, h('a', { href: '#/karte' }, '← Karte')),
-    h('img', { class: 'ortsbild', src: url(ort.bild), alt: ort.alt }),
-    h('div', { class: 'seitenkopf' }, h('div', {},
-      h('h1', { 'data-vorlesen': '' }, ort.name),
-      h('p', { class: 'leise' }, ort.region, ort.id === inhalte.finale ? ' · Abschluss der Reise' : '')),
-      station ? h('span', { class: 'marke gut' }, symbol('haken'), VERIFIKATION[station.verifikation] ?? 'begonnen') : null),
-    h('p', { class: 'ortstext', 'data-vorlesen': '' }, t(ort.text)),
-    h('p', { class: 'leise' }, `Bild: ${ort.bildQuelle}`),
-    pruefBereich, ersatz, liste);
+  leere(haupt, h('div', { class: `ort-seite ${ortFarbe(inhalte, ort.id)}` },
+    h('a', { class: 'zurueck', href: '#/karte' }, symbol('zurueck'), 'Karte'),
+    h('div', { class: 'ort-kopf' },
+      h('figure', { class: 'ortsfoto' }, h('img', { class: 'ortsbild', src: url(ort.bild), alt: ort.alt }), h('figcaption', {}, `Bild: ${ort.bildQuelle}`)),
+      h('div', { class: 'ort-titel' },
+        h('h1', { 'data-vorlesen': '' }, ort.name.replace(/\//g, '/\u200b')),
+        h('p', { class: 'region' }, ort.region, ort.id === inhalte.finale ? ' · Abschluss der Reise' : ''),
+        station ? h('p', {}, h('span', { class: 'marke gut' }, symbol('haken'), VERIFIKATION[station.verifikation] ?? 'begonnen')) : null,
+        h('p', { class: 'ortstext', 'data-vorlesen': '' }, t(ort.text)))),
+    pruefBereich, ersatz, liste));
   return ort.name;
 }
 

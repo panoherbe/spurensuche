@@ -1,8 +1,8 @@
 /* Figur-Baukasten – nur Variablen aus basis.css (--spi-…), die aus den Variablen der App kommen. */
-.sp-figur-baukasten { display: grid; gap: calc(var(--spi-a) * 3); grid-template-columns: minmax(0, 1fr); background: var(--spi-flaeche); border: 1px solid var(--spi-linie); border-radius: var(--spi-radius); padding: clamp(16px, 3vw, 28px); box-shadow: var(--spi-schatten); }
+.sp-figur-baukasten { display: grid; gap: calc(var(--spi-a) * 3); grid-template-columns: minmax(0, 1fr); background: var(--spi-flaeche); border: 3px solid var(--spi-kontur); border-radius: var(--spi-radius); padding: clamp(16px, 3vw, 28px); box-shadow: var(--spi-schatten); }
 @media (min-width: 900px) { .sp-figur-baukasten { grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr); align-items: start; } .sp-figur-links { position: sticky; top: 12px; } }
 .sp-figur-links { display: grid; gap: calc(var(--spi-a) * 1.5); justify-items: center; text-align: center; }
-.sp-figur-vorschau { width: min(100%, 260px); padding: var(--spi-a); border-radius: var(--spi-radius); background: radial-gradient(circle at 50% 40%, var(--spi-akzent-hell), var(--spi-flaeche-2)); }
+.sp-figur-vorschau { width: min(100%, 260px); padding: var(--spi-a); border-radius: var(--spi-radius); background: var(--sp-sonne, var(--spi-akzent-hell)); border: 3px solid var(--spi-kontur); }
 .sp-figur { display: block; }
 .sp-figur svg { display: block; width: 100%; height: auto; }
 .sp-figur-felder { display: grid; gap: calc(var(--spi-a) * 1.5); }
