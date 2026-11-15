@@ -14,3 +14,5 @@ nachweis/2026-11-15/betrieb/browser/bilder/
 betrieb/.wechsel
 nachweis/2026-11-15/betrieb/browser/konzept/
 nachweis/2026-11-15/nach-merge/browser/bilder/
+# Bildschirmfotos aller Messläufe bleiben lokal; ins Repository kommen nur die Bilder für die Präsentation (browser/konzept)
+nachweis/*/browser/bilder/
