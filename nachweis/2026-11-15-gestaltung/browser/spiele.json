@@ -1,0 +1,190 @@
+{
+  "zeitpunkt": "2026-11-15T18:56:22.711Z",
+  "axe": "4.10.2",
+  "schritte": [
+    "spiel-bastei-1",
+    "spiel-bastei-2",
+    "spiel-bastei-3",
+    "spiel-frauenkirche-1",
+    "spiel-frauenkirche-2",
+    "spiel-frauenkirche-3",
+    "spiel-goeltzschtal-1",
+    "spiel-goeltzschtal-2",
+    "spiel-goeltzschtal-3",
+    "spiel-bautzen-1",
+    "spiel-bautzen-2",
+    "spiel-bautzen-3"
+  ],
+  "fehler": [],
+  "barrierefreiheit": {
+    "spiel-bastei/1": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-bastei/1-einfach-kontrast": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-bastei/2": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-bastei/2-einfach-kontrast": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-bastei/3": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-bastei/3-einfach-kontrast": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-frauenkirche/1": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-frauenkirche/1-einfach-kontrast": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-frauenkirche/2": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-frauenkirche/2-einfach-kontrast": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-frauenkirche/3": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-goeltzschtal/1": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-goeltzschtal/2": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-goeltzschtal/3": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-bautzen/1": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-bautzen/2": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    },
+    "spiel-bautzen/3": {
+      "verstoesse": [],
+      "bestanden": 26,
+      "unvollstaendig": 0
+    }
+  },
+  "messung": {
+    "aufgaben": 12,
+    "ergebnisse": {
+      "bastei/1": {
+        "format": "bildpuzzle",
+        "abbruchMs": 5,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "bastei/2": {
+        "format": "schaetzen",
+        "abbruchMs": 3,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "bastei/3": {
+        "format": "dilemma",
+        "abbruchMs": 2,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "frauenkirche/1": {
+        "format": "bildsuche",
+        "abbruchMs": 2,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "frauenkirche/2": {
+        "format": "sortieren",
+        "abbruchMs": 3,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "frauenkirche/3": {
+        "format": "dilemma",
+        "abbruchMs": 3,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "goeltzschtal/1": {
+        "format": "schaetzen",
+        "abbruchMs": 9,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "goeltzschtal/2": {
+        "format": "bildpuzzle",
+        "abbruchMs": 3,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "goeltzschtal/3": {
+        "format": "sortieren",
+        "abbruchMs": 2,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "bautzen/1": {
+        "format": "sortieren",
+        "abbruchMs": 4,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "bautzen/2": {
+        "format": "bildsuche",
+        "abbruchMs": 2,
+        "vertrag": true,
+        "abweichungen": []
+      },
+      "bautzen/3": {
+        "format": "schaetzen",
+        "abbruchMs": 6,
+        "vertrag": true,
+        "abweichungen": []
+      }
+    },
+    "formate": [
+      "bildpuzzle",
+      "schaetzen",
+      "dilemma",
+      "bildsuche",
+      "sortieren"
+    ]
+  }
+}

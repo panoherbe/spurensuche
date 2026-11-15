@@ -4,7 +4,7 @@
 Netz. Lehrkräfte sehen, wie ihre Gruppen zusammenarbeiten: ohne Noten und ohne Namen. Das läuft heute, als offener
 Prototyp, den Sie selbst ausprobieren und prüfen können.**
 
-![Rundgang durch die Spurensuche: Beitritt mit Code, Karte mit freier Reihenfolge, ein Ort im Klassenzimmer, einfache Sprache, ein kurzes Spiel mit Rollen, das Bild aus Sammelstücken, die Übersicht der Lehrkraft, das Kompetenzraster und die Betriebsseite mit Ampel](medien/rundgang.gif)
+![Rundgang durch die Spurensuche: Beitritt mit Code, Karte mit freier Reihenfolge, ein Ort im Klassenzimmer, ein kurzes Spiel in einfacher Sprache mit Rollen, das Bild aus Sammelstücken, die Übersicht der Lehrkraft, das Kompetenzraster und die Betriebsseite mit Ampel](medien/rundgang.gif)
 
 <sub>Rundgang, 90 Sekunden, ohne Ton, mit Untertiteln; aufgenommen am 15.11.2026 in der Vorführung (Beispielklasse,
 Gruppen simuliert). [Video herunterladen (MP4, 3,3 MB)](https://github.com/panoherbe/spurensuche/raw/main/medien/rundgang.mp4)
@@ -17,7 +17,7 @@ Gruppen simuliert). [Video herunterladen (MP4, 3,3 MB)](https://github.com/panoh
 <p align="center">
   <img src="medien/1-karte.png" width="24%" alt="Karte von Sachsen mit vier Orten, einer davon geschafft">
   <img src="medien/2-spiel-einfach-vorlesen.png" width="24%" alt="Ein Spiel in einfacher Sprache, der vorgelesene Text ist gerahmt">
-  <img src="medien/3-collage-regler.png" width="24%" alt="Das Bild der Gruppe aus ihren Sammelstücken, mit Reglern">
+  <img src="medien/3-collage-regler.png" width="24%" alt="Das Bild der Gruppe aus ihren Sammelstücken, darunter die Auswahl">
   <img src="medien/4-kompetenzraster.png" width="24%" alt="Kompetenzraster der Lehrkraft mit Vorschlag und Belegen">
 </p>
 
@@ -38,7 +38,7 @@ den Messungen sind simuliert: Ein Skript klickt im Browser oder schickt Anfragen
 | Sammeln und ein eigenes Bild | Sammelbuch zeigt, wo es was gibt (kein Zufall); Bild 2048 × 2048 aus den Sammelstücken, mit Reglern | Test: Schule wartet auf die Freigabe, die Ausstellung sieht nur Freigegebenes |
 | Auswertung für Lehrkräfte | Gruppen, Freigabe, laufende Übersicht, Beobachtungen, Kompetenzraster, PDF-Bericht, Textentwürfe, Löschen | 33 von 33 automatischen Tests bestanden |
 | Datenschutz | keine Daten über einzelne Kinder; Familien ohne Konto; Gruppendaten nach zwölf Wochen gelöscht | Test: Name und E-Mail der Schulanmeldung werden nie gespeichert |
-| Barrierefreiheit | Vorlesen, einfache Sprache, Tempo, hoher Kontrast, dunkel, große Schrift | 0 von axe-core 4.10.2 gefundene Verstöße (WCAG 2.1 AA) in 77 Ansichten |
+| Barrierefreiheit | Vorlesen, einfache Sprache, Tempo, hoher Kontrast, dunkel, große Schrift | 0 von axe-core 4.10.2 gefundene Verstöße (WCAG 2.1 AA) in 77 Ansichten; nach der schlichteren Gestaltung vom selben Abend erneut 77 Ansichten, 0 Verstöße |
 | Schulanmeldung | Standard OpenID Connect; fällt der Dienst aus, läuft die Stunde weiter | gegen Keycloak 26.0 geprüft: 5 von 5 Fällen ([Probelauf](nachweis/2026-11-15/keycloak/keycloak.json)); Ausfall und Schlüsselwechsel im Test |
 | Bilder für die Ausstellung | Freigabe durch die Lehrkraft, offene Schnittstelle, Archiv im offenen Format BagIt | Archiv: 99 Dateien exportiert, in eine leere Instanz übernommen und wieder exportiert, alle 99 Prüfsummen gleich (in diesem Lauf ohne Bildbeiträge) |
 | Viele Klassen zugleich | ein kleiner Server (2 CPU-Kerne, 2 GB) | 400 simulierte Gruppen gleichzeitig, 45 Minuten: 105.566 Anfragen, 0 Fehler; 95 % der Übertragungen in 2 ms, 99 % in 17 ms; mit 600 Gruppen: 0 Fehler |
@@ -78,20 +78,18 @@ Werte dort sind nachgebildet).
 
 | ab | Untertitel |
 |---|---|
-| 0:00 | **Titel:** Sachsen entdecken. In der Gruppe, auch ohne Netz. Schulklassen und Familien besuchen Orte, lösen kurze Spiele und sammeln Stücke für ein Bild. Lehrkräfte sehen, wie ihre Gruppen zusammenarbeiten, ohne Noten. (Klassen 4 bis 8 und Familien · im Browser, auf dem Tablet) |
-| 0:05 | Jede Gruppe tritt mit einem Code bei. Keine Namen, keine Konten. |
-| 0:10 | Die Karte zeigt die Orte. Die Reihenfolge wählt die Gruppe, kein Ort ist gesperrt. |
-| 0:15 | Vor Ort bestätigt ein QR-Code die Station. Im Klassenzimmer gibt es eine eigene Fassung. |
-| 0:21 | Alle Texte gibt es auch in einfacher Sprache. Vorlesen und Tempo stellt die Gruppe selbst ein. |
-| 0:27 | Kurze Spiele, fünf bis zehn Minuten. Jede Person hat eine Rolle, die Gruppe entscheidet gemeinsam. |
-| 0:34 | Zum Schluss gestaltet die Gruppe aus ihren Sammelstücken ein Bild für die Ausstellung. (Spielstand für den Rundgang vorbereitet.) |
-| 0:41 | Die Lehrkraft gibt das Bild frei. Erst dann geht es an die Ausstellung, ohne Gruppennamen. (Spielstand für den Rundgang vorbereitet.) |
-| 0:48 | Die Lehrkraft sieht live, an welchem Ort ihre Gruppen gerade sind. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 0:54 | Danach Beobachtungen zu Teamleistung, Problemlösung und Beteiligung, mit Vorschlag im Kompetenzraster. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 1:02 | In der Auswertung keine Noten, keine Punkte, keine Rangfolge. Die Einschätzung trifft die Lehrkraft. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 1:10 | Für den Betrieb: eine Ampel, die sagt, was zu tun ist, und vier sichere Knöpfe. (In der Vorführung sind die Werte nachgebildet.) |
-| 1:17 | **Gemessen am 15.11.2026:** 33 von 33 Tests bestanden (automatische Tests, dazu Browser-Prüfläufe aller Spiele) · 400 Gruppen gleichzeitig, 0 Fehler (Lasttest, simuliert, 45 Minuten: 95 % der Übertragungen in 2 ms) · Ganz ohne Netz spielbar (alle Orte im Gerät: 147 Dateien, 4,5 MB) · 0 Verstöße (Barrierefreiheit automatisch geprüft mit axe-core, WCAG 2.1 AA, 77 Ansichten). Alle Gruppen in Lasttest und Prüfläufen sind simuliert. |
-| 1:24 | **Selbst ausprobieren:** panoherbe.com/projekte/spurensuche. Die Vorführung läuft im Browser, ohne Konto und ohne Server. Quellcode, Tests, Betriebshandbuch und Messprotokoll liegen offen: github.com/panoherbe/spurensuche. Fotos der Orte: Wikimedia Commons, Urheber und Lizenz je Bild im Repository. (Code AGPL-3.0 · Texte und Zeichnungen CC BY-SA 4.0) |
+| 0:00 | **Titel:** Sachsen entdecken, in der Gruppe, auch ohne Netz. Kurze Spiele an Orten, für Schulklassen und Familien. |
+| 0:06 | Jede Gruppe tritt mit einem Code bei. Keine Namen, keine Konten. |
+| 0:15 | Die Karte zeigt die Orte. Die Reihenfolge wählt die Gruppe, kein Ort ist gesperrt. |
+| 0:22 | Vor Ort bestätigt die Gruppe den Besuch mit Code oder Standort. Im Klassenzimmer gibt es eine eigene Fassung. |
+| 0:31 | Kurze Spiele, fünf bis zehn Minuten, hier in einfacher Sprache. Jede Person hat eine Rolle. |
+| 0:38 | Zum Schluss gestaltet die Gruppe aus ihren Sammelstücken ein Bild für die Ausstellung. (Spielstand für den Rundgang vorbereitet.) |
+| 0:46 | Die Lehrkraft sieht live, an welchem Ort ihre Gruppen gerade sind. (Beispielklasse der Vorführung, Gruppen simuliert.) |
+| 0:53 | Danach Beobachtungen im Kompetenzraster, mit Vorschlag und Belegen. (Beispielklasse der Vorführung, Gruppen simuliert.) |
+| 0:59 | Keine Noten, keine Rangfolge. Die Einschätzung trifft die Lehrkraft. (Beispielklasse der Vorführung, Gruppen simuliert.) |
+| 1:05 | Für den Betrieb: eine Ampel, die sagt, was zu tun ist, und vier sichere Knöpfe. (In der Vorführung sind die Werte nachgebildet.) |
+| 1:13 | **Gemessen am 15.11.2026:** 33 von 33 Tests bestanden · 400 Gruppen gleichzeitig, 0 Fehler (simuliert) · 4,5 MB: alle Orte im Gerät, ohne Netz · 0 Verstöße: Barrierefreiheit, WCAG 2.1 AA. Alle Gruppen in Lasttest und Prüfläufen sind simuliert. |
+| 1:22 | **Selbst ausprobieren:** panoherbe.com/projekte/spurensuche. Im Browser, ohne Konto. (Code AGPL-3.0: github.com/panoherbe/spurensuche · Texte und Zeichnungen CC BY-SA 4.0 · Fotos der Orte: Wikimedia Commons, Urheber und Lizenz je Bild im Repository) |
 
 </details>
 
@@ -133,7 +131,10 @@ npm-Pakete zur Laufzeit); ein Container; alle Daten exportierbar.
   Lasttest und der ganze Messlauf: [`docs/TESTUMGEBUNG.md`](docs/TESTUMGEBUNG.md), `tools/messlauf.sh`
 - Nachweise: [`nachweis/2026-11-15-gesamt/`](nachweis/2026-11-15-gesamt/) (offizieller Messlauf, Code-Stand: Tag
   `messlauf-2026-11-15`; spätere Commits änderten Texte, Lizenzangaben und die Bremse gegen das Durchprobieren von
-  Codes, die Tests liefen danach erneut mit 33 von 33), [`nachweis/2026-11-15-konzeptbilder/`](nachweis/2026-11-15-konzeptbilder/) (Nachlauf zweier Bilder),
+  Codes, die Tests liefen danach erneut mit 33 von 33), [`nachweis/2026-11-15-gestaltung/`](nachweis/2026-11-15-gestaltung/)
+  (schlichtere Gestaltung, `c7d0532`: Tests und alle Browser-Prüfläufe des Messlaufs erneut, 33 von 33, 77 Ansichten ohne Verstoß,
+  Bilder neu),
+  [`nachweis/2026-11-15-konzeptbilder/`](nachweis/2026-11-15-konzeptbilder/) (Nachlauf zweier Bilder),
   [`nachweis/2026-11-15/`](nachweis/2026-11-15/) (Probeläufe)
 
 **Lizenz:** Programmcode GNU AGPL-3.0-only seit dem ersten Commit ([`LICENSE`](LICENSE)); Texte, Aufgaben und eigene
