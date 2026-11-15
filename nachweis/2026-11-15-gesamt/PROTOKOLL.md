@@ -68,7 +68,7 @@
 ## Nachbau aus frischem Klon
 
 - **2,3 s** vom Klonen bis zur ersten erfolgreichen Statusabfrage (Klonen 0,2 s, Bauen 1,3 s, Starten 0,9 s); Bau ohne Zwischenspeicher (--no-cache), Basis-Image neu geprüft (--pull); erste verschlüsselte Sicherung: ja (nachbau.json)
-- Hinweis: Das Basis-Image `node:24-alpine` lag auf dem Prüfrechner schon vor; auf einem neuen Rechner kommt sein Herunterladen hinzu.
+- Hinweis: Das Basis-Image `node:24-alpine` lag auf dem Messrechner schon vor; auf einem neuen Rechner kommt sein Herunterladen hinzu.
 
 ## Lasttest 400 Sitzungen (simuliert)
 

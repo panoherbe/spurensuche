@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Messlauf für den Nachweis: alle Prüfungen nacheinander, Ergebnisse nach nachweis/<datum>/, danach PROTOKOLL.md.
-# Läuft auf dem Prüfrechner im Repository (Docker nötig). Jede Zahl im Protokoll kommt aus einer Datei hier.
+# Läuft auf dem Messrechner im Repository (Docker nötig). Jede Zahl im Protokoll kommt aus einer Datei hier.
 # Aufruf: tools/messlauf.sh [ordner]   Umgebung: LAST_MIN (45), STRESS_MIN (15), BUENDEL (git-Quelle für den Nachbau)
-# Rechenlast: auf einem gemeinsam genutzten Prüfrechner unter einer Sperre starten (flock), damit keine fremde Last mitmisst.
+# Rechenlast: unter einer Sperre starten (flock), damit keine andere Messung mitläuft.
 set -uo pipefail
 DATUM="$(date +%Y-%m-%d)"
 ZIEL="${1:-nachweis/${DATUM}}"

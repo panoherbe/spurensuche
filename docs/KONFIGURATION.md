@@ -43,4 +43,6 @@ Bereich.
 
 Feste Werte im Code (Änderung nur mit neuer Version): Sitzungsdauer Lehrkraft 12 Stunden, Lernende 8 Stunden,
 Verwaltung 2 Stunden; höchstens 16 Gruppen je Quest, 15 Orte je Quest, 12 Sammelstücke je Bild; Anfragegröße
-1 MB (Bildbeiträge 16 MB); Bremse 20 Fehlversuche je Absender und Minute für Codes und Schlüssel.
+1 MB (Bildbeiträge 16 MB); Bremse 20 Fehlversuche je Absender und Minute für Codes und Schlüssel. Hinter einem
+Reverse Proxy sieht die Anwendung nur dessen Adresse; dann gilt die Bremse für alle Absender zusammen (die Weitergabe
+der Absenderadresse durch den Proxy ist noch nicht eingebaut).

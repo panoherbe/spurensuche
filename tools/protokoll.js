@@ -107,7 +107,7 @@ if (nb) {
   z('## Nachbau aus frischem Klon');
   z('');
   z(`- **${zahl(nb.sekundenGesamt, 1)} s** vom Klonen bis zur ersten erfolgreichen Statusabfrage (Klonen ${zahl(nb.sekundenKlonen, 1)} s, Bauen ${zahl(nb.sekundenBauen, 1)} s, Starten ${zahl(nb.sekundenStarten, 1)} s); Bau ${nb.bau}; erste verschlüsselte Sicherung: ${nb.ersteSicherung} (nachbau.json)`);
-  z('- Hinweis: Das Basis-Image `node:24-alpine` lag auf dem Prüfrechner schon vor; auf einem neuen Rechner kommt sein Herunterladen hinzu.');
+  z('- Hinweis: Das Basis-Image `node:24-alpine` lag auf dem Messrechner schon vor; auf einem neuen Rechner kommt sein Herunterladen hinzu.');
   z('');
 }
 
