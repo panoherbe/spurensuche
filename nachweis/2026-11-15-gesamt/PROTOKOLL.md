@@ -45,6 +45,15 @@
 - Schritte: 12 Bildschirmfotos, **0 Fehler** (browser/spiele.json)
 - axe-core 4.10.2 (WCAG 2.0/2.1 A und AA): **17 Ansichten, 0 mit Verstößen**
 
+### Betriebsseite (Knöpfe wirklich gedrückt)
+
+- Schritte: 8 Bildschirmfotos, **0 Fehler** (browser/betrieb-seite.json)
+- axe-core 4.10.2 (WCAG 2.0/2.1 A und AA): **15 Ansichten, 0 mit Verstößen**
+- Neustart über den Knopf: wieder erreichbar nach **1,0 s** (vom Klick bis zur Meldung der Seite; Docker startet den Container neu)
+- Sicherung zurückspielen über den Knopf: **1,1 s** bis zur Meldung; danach Lerngruppen ["Klasse 6a vor der Sicherung"] (vorher ["Klasse 6a vor der Sicherung","Klasse 6b nach der Sicherung"])
+- Inhalt tauschen: Paket geprüft und aktiviert (Ort heißt „Testort Nord (aus dem Paket)“), fehlerhaftes Paket abgelehnt, vorheriger Inhalt wiederhergestellt („Testort Nord“)
+- Letzte Version zurückspielen: Auftrag bis „Erledigt“ 2,0 s (Betriebsdienst in diesem Lauf nachgestellt; echter Wechsel unten im Betriebstest)
+
 ## Betriebstest: Werkzeug betrieb/spur und Betriebsdienst (simuliert, echte Container)
 
 - Einrichten (Schlüssel erzeugen, bauen, starten): 3,0 s; Docker 29.1.3 (betriebstest.json)
@@ -124,6 +133,7 @@ last400=0
 rueckspiel=0
 archiv=0
 last600=0
+protokoll=0
 ```
 
 ## Grenzen

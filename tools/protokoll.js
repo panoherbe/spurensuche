@@ -64,7 +64,7 @@ function axeZeile(datei) {
 }
 z('## Browser-Prüfläufe (Chrome ohne Oberfläche, simuliert)');
 z('');
-for (const [datei, titel] of [['browser/rauchtest.json', 'Instanz mit Testinhalten'], ['browser/vorfuehrung.json', 'Vorführung mit echten Inhalten'], ['browser/spiele.json', 'alle Spiele der echten Inhalte', ['browser/betrieb-seite.json', 'Betriebsseite (Knöpfe wirklich gedrückt)']]]) {
+for (const [datei, titel] of [['browser/rauchtest.json', 'Instanz mit Testinhalten'], ['browser/vorfuehrung.json', 'Vorführung mit echten Inhalten'], ['browser/spiele.json', 'alle Spiele der echten Inhalte'], ['browser/betrieb-seite.json', 'Betriebsseite (Knöpfe wirklich gedrückt)']]) {
   const a = axeZeile(datei);
   if (!a) continue;
   z(`### ${titel}`);
