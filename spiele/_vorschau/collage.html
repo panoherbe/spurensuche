@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: blob:; style-src 'self'; script-src 'self'; object-src 'none'; base-uri 'none'">
+  <title>Item-Collage testen – Spurensuche</title>
+  <link rel="stylesheet" href="vorschau.css">
+  <link rel="stylesheet" href="collage.css">
+  <script type="module" src="collage.js"></script>
+</head>
+<body>
+  <header class="vs-kopf">
+    <div>
+      <h1>Item-Collage testen</h1>
+      <p>Sammelstücke wählen, Regler einstellen, Bild erzeugen: PNG 2048 × 2048, Vorschau, Metadaten.</p>
+    </div>
+    <a class="vs-knopf" href="index.html">Alle Spiele</a>
+  </header>
+  <main class="vs-haupt cl-haupt">
+    <section class="cl-wahl" aria-labelledby="cl-items-titel">
+      <h2 id="cl-items-titel">Eure Sammelstücke <span id="cl-anzahl" class="cl-anzahl"></span></h2>
+      <p class="cl-hinweis">Tippt an, was ins Bild soll (1 bis 12).</p>
+      <ul id="cl-items" class="cl-items"></ul>
+      <form id="cl-regler" class="cl-regler"></form>
+    </section>
+    <section class="cl-bild" aria-labelledby="cl-bild-titel">
+      <h2 id="cl-bild-titel">Euer Bild</h2>
+      <img id="cl-vorschau" class="cl-vorschau" alt="Vorschau der Collage" width="512" height="512">
+      <p id="cl-status" class="cl-status" role="status" aria-live="polite"></p>
+      <button id="cl-erzeugen" class="vs-knopf cl-haupt-knopf" type="button">Bild erzeugen (2048 × 2048)</button>
+      <div id="cl-ergebnis" class="cl-ergebnis" hidden>
+        <p id="cl-messung"></p>
+        <p><a id="cl-png" download="item-collage.png">PNG herunterladen</a> · <a id="cl-json" download="item-collage.json">Metadaten herunterladen</a></p>
+        <pre id="cl-metadaten" tabindex="0" role="region" aria-label="Metadaten als JSON"></pre>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

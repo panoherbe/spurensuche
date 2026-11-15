@@ -49,6 +49,17 @@ def alle_aufgaben(repo):
     return liste
 
 
+def warte_bis(seite, ausdruck, timeout=10000):
+    """Wartet, bis ausdruck (JavaScript) wahr ist. Abfrage über das DevTools-Protokoll statt wait_for_function:
+    Die strenge CSP der Seite verbietet eval, das wait_for_function zum Abfragen braucht."""
+    ende = time.perf_counter() + timeout / 1000
+    while time.perf_counter() < ende:
+        if seite.evaluate(f"() => Boolean({ausdruck})"):
+            return
+        seite.wait_for_timeout(100)
+    raise TimeoutError(f"Zeitüberschreitung beim Warten auf: {ausdruck}")
+
+
 class Lauf:
     def __init__(self, seite, axe_quelle, name, bilder, fotos):
         self.seite, self.axe_quelle, self.name, self.bilder, self.fotos = seite, axe_quelle, name, bilder, fotos
@@ -269,6 +280,52 @@ def spiele_bildsuche(lauf, aufgabe):
 LOESER = {"bildpuzzle": spiele_bildpuzzle, "schaetzen": spiele_schaetzen, "dilemma": spiele_dilemma, "sortieren": spiele_sortieren, "bildsuche": spiele_bildsuche}
 
 
+COLLAGEN = [
+    ("kreis", "mittel", "sommer", "basteibruecke,felsturm,kuppel,turmkreuz,goeltzschtalbruecke,ortsschild"),
+    ("raster", "klein", "sandstein", "basteibruecke,felsturm,wanderschuh,alter-stein,kuppel,turmkreuz,dampflok,ziegel,lot"),
+    ("wirbel", "gross", "abend", "basteibruecke,felsturm,wanderschuh,alter-stein,kuppel,turmkreuz,dampflok,goeltzschtalbruecke,ziegel,ortsschild,schiefer-turm,lot"),
+    ("stapel", "mittel", "nacht", "schiefer-turm,ortsschild,lot,dampflok"),
+    ("kreis", "gross", "morgen", "kuppel"),
+]
+
+
+def collage_laeufe(browser, basis, aus, axe_quelle, wiederholungen=5):
+    """Collage im Headless-Browser: je Einstellung ein Bild in 2048 × 2048 (Dauer, Größen, Metadaten, axe)."""
+    import base64
+    ergebnisse = []
+    for nr, (anordnung, groesse, farbe, items) in enumerate(COLLAGEN):
+        kontext = browser.new_context(viewport={"width": 1280, "height": 900}, device_scale_factor=1)
+        seite = kontext.new_page()
+        lauf = Lauf(seite, axe_quelle, f"collage-{nr + 1}-{anordnung}-{farbe}", aus / "bilder", True)
+        seite.goto(f"{basis}/spiele/_vorschau/collage.html?items={items}&anordnung={anordnung}&groesse={groesse}&farbstimmung={farbe}")
+        warte_bis(seite, "document.getElementById('cl-vorschau').src.startsWith('blob:')", 20000)
+        lauf.pruefe("auswahl")
+        dauer = []
+        for i in range(wiederholungen if nr == 0 else 1):
+            seite.evaluate("window.collageTest.fertig = false")
+            lauf.taste(seite.locator("#cl-erzeugen"))
+            warte_bis(seite, "window.collageTest.fertig", 60000)
+            dauer.append(seite.evaluate("window.collageTest.dauerMs"))
+        lauf.pruefe("fertig")
+        test = seite.evaluate("window.collageTest")
+        # FileReader statt fetch: Die CSP der Seite (connect-src) erlaubt kein fetch auf blob:-Adressen.
+        daten = seite.evaluate("() => new Promise((ok) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(',')[1]); r.readAsDataURL(window.collagePng); })")
+        (aus / "collagen").mkdir(exist_ok=True)
+        (aus / "collagen" / f"collage-{nr + 1}-{anordnung}-{groesse}-{farbe}.png").write_bytes(base64.b64decode(daten))
+        m = test["metadaten"]
+        ergebnisse.append({
+            "anordnung": anordnung, "groesse": groesse, "farbstimmung": farbe, "anzahl": len(items.split(",")),
+            "dauerMs": dauer, "png": test["png"], "vorschau": test["vorschau"],
+            "metadatenFelder": sorted(m.keys()), "art": m["art"], "itemsInMetadaten": len(m["items"]),
+            "kennungIstUuid": bool(__import__("re").match(r"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", m["kennung"])),
+            "erstelltMitZeitzone": m["erstellt"].endswith("Z"),
+            "axe": lauf.axe, "axeVerstoesse": sum(len(v) for v in lauf.axe.values()),
+        })
+        print(json.dumps({k: ergebnisse[-1][k] for k in ("anordnung", "farbstimmung", "anzahl", "dauerMs", "png", "axeVerstoesse")}, ensure_ascii=False), flush=True)
+        kontext.close()
+    return ergebnisse
+
+
 def ein_lauf(browser, basis, repo, aufgabe_id, geraet, einstellung, axe_quelle, bilder, fotos, browsername):
     aufgabe = lies(repo, aufgabe_id)
     kontext = browser.new_context(**GERAETE[geraet], device_scale_factor=1, reduced_motion="reduce" if "ruhig" in einstellung else "no-preference")
@@ -293,7 +350,7 @@ def ein_lauf(browser, basis, repo, aufgabe_id, geraet, einstellung, axe_quelle, 
         seite.wait_for_selector(".sp-abschluss")
         lauf.pruefe("abschluss")
         lauf.taste(seite.get_by_role("button", name="Weiter"))
-        seite.wait_for_function("window.spielTest && window.spielTest.fertig", timeout=10000)
+        warte_bis(seite, "window.spielTest && window.spielTest.fertig", 10000)
         test = seite.evaluate("window.spielTest")
         ergebnis = test.get("ergebnis") or {}
         eintrag.update({
@@ -332,6 +389,7 @@ def main():
     arg.add_argument("--nur", default="")
     arg.add_argument("--umfang", default="voll", choices=["voll", "schnell"])
     arg.add_argument("--fotos", default="1")
+    arg.add_argument("--collage", default="1")
     a = arg.parse_args()
     aus = Path(a.aus)
     bilder = aus / "bilder"
@@ -362,6 +420,7 @@ def main():
             eintrag = ein_lauf(browser[browsername], a.basis, a.repo, aufgabe, geraet, einstellung, axe_quelle, bilder, fotos, browsername)
             laeufe.append(eintrag)
             print(json.dumps({k: eintrag.get(k) for k in ("browser", "geraet", "einstellung", "aufgabe", "geloest", "axeVerstoesse", "axeZustaende", "sekunden", "fehler")}, ensure_ascii=False), flush=True)
+        collagen = collage_laeufe(browser["chromium"], a.basis, aus, axe_quelle) if a.collage == "1" else []
         for b in browser.values():
             b.close()
     ende = datetime.now(timezone.utc)
@@ -383,6 +442,7 @@ def main():
         "umgebung": {"browser": versionen, "axe": f"axe-core {axe_quelle.split('axe v', 1)[1].split()[0] if 'axe v' in axe_quelle else '?'}", "regeln": AXE_REGELN, "python": platform.python_version()},
         "hinweis": "Alle Spielenden sind simuliert: Ein Skript bedient die Seite nur mit der Tastatur. axe-core findet einen Teil der WCAG-Verstöße automatisch; es ersetzt keine Prüfung durch Menschen.",
         "zusammenfassung": zusammen,
+        "collagen": collagen,
         "laeufe": laeufe,
     }
     (aus / "messwerte.json").write_text(json.dumps(messwerte, ensure_ascii=False, indent=2), encoding="utf-8")

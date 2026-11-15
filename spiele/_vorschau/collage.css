@@ -1,0 +1,21 @@
+.cl-haupt { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 980px) { .cl-haupt { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+.cl-wahl, .cl-bild { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius); padding: 18px; display: grid; gap: 14px; }
+.cl-wahl h2, .cl-bild h2 { margin: 0; font-size: 1.15rem; }
+.cl-anzahl { font-weight: 600; color: var(--sp-text-leise); }
+.cl-hinweis { margin: 0; color: var(--sp-text-leise); }
+.cl-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
+.cl-item { width: 100%; display: grid; justify-items: center; gap: 4px; padding: 8px; border-radius: 14px; border: 2px solid var(--sp-rand); background: var(--sp-flaeche); color: var(--sp-text); font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer; min-height: 44px; }
+.cl-item img { width: 64px; height: 64px; }
+.cl-item[aria-pressed='true'] { border-color: var(--sp-akzent); box-shadow: 0 0 0 3px var(--sp-akzent); }
+.cl-regler { display: grid; gap: 12px; }
+.cl-regler fieldset { margin: 0; border: 1px solid var(--sp-rand); border-radius: 12px; padding: 10px 12px; display: flex; flex-wrap: wrap; gap: 8px 14px; }
+.cl-regler legend { font-weight: 750; padding: 0 4px; }
+.cl-regler label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; }
+.cl-regler input { width: 22px; height: 22px; accent-color: var(--sp-akzent); }
+.cl-vorschau { width: 100%; height: auto; max-width: 512px; aspect-ratio: 1; border-radius: 12px; box-shadow: 0 6px 24px rgb(0 0 0 / 0.15); background: var(--sp-grund); justify-self: center; }
+.cl-status { margin: 0; min-height: 1.5em; font-weight: 650; }
+.cl-haupt-knopf { justify-self: start; background: var(--sp-akzent); color: var(--sp-akzent-text); border-color: var(--sp-akzent); }
+.cl-ergebnis[hidden] { display: none; }
+.cl-ergebnis { display: grid; gap: 8px; }
+.cl-ergebnis pre { margin: 0; font-size: 0.8rem; white-space: pre-wrap; word-break: break-word; background: var(--sp-grund); border-radius: 10px; padding: 10px; }
