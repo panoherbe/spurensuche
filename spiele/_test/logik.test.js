@@ -62,7 +62,8 @@ test('Protokoll: nur erlaubte Arten und Werte, Zeit in ms seit Start, Ergebnis n
   assert.equal(e.versuche, 2);
   assert.equal(e.punkte, 3);
   assert.equal(e.dauerSekunden, 3);
-  assert.deepEqual(gemeldet[0], { art: 'versuch', wert: false }, 'melde bekommt { art, wert }');
+  assert.deepEqual(gemeldet[0], { art: 'versuch', zeit: 500, wert: false }, 'melde bekommt { art, zeit, wert } (Schnittstelle 2.5)');
+  assert.deepEqual(gemeldet, p.ereignisse, 'gemeldet wird genau, was im Ergebnis steht');
   for (const ereignis of e.ereignisse) assert.equal(ereignisFehler(ereignis), null, JSON.stringify(ereignis));
   assert.deepEqual(p.abschluss({ geloest: false }), e, 'Abschluss ist endgültig');
 });

@@ -6,7 +6,7 @@
     "einfach": "Die Frauenkirche war fast 50 Jahre kaputt. Soll sie kaputt bleiben, oder soll man sie neu bauen? Ihr entscheidet. Und ihr sagt, warum."
   },
   "dauerMinuten": 10,
-  "belohnung": ["turmkreuz"],
+  "belohnung": ["turmkreuz", "abzeichen-frauenkirche"],
   "stufe": "beurteilen",
   "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
   "bild": {

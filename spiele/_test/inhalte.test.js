@@ -116,12 +116,23 @@ test('Sammelstücke nach Schnittstelle 4: Kennung, Name, Bild, Alternativtext', 
   }
 });
 
+test('Jedes Sammelstück ist erreichbar: steht in einer Belohnung; jedes Figurteil mit freiDurch hängt an so einem', () => {
+  const vergeben = new Set(aufgaben.flatMap((a) => a.daten.belohnung));
+  for (const item of lies('inhalte/items.json')) assert.ok(vergeben.has(item.id), `${item.id}: keine Aufgabe vergibt es`);
+  const teile = JSON.stringify(lies('inhalte/figur.json')).match(/"freiDurch":"[^"]+"/g) ?? [];
+  for (const t of teile) { const id = t.split(':')[1].replaceAll('"', ''); assert.ok(vergeben.has(id), `Figurteil frei durch ${id}: nie erreichbar`); }
+});
+
 test('Abläufe nach Zeit: nur vorhandene Aufgaben, Dauer passt in die Zeit', () => {
   const { ablaeufe } = lies('inhalte/ablaeufe.json');
   const nachId = new Map(aufgaben.map((a) => [a.id, a.daten]));
   for (const ablauf of ablaeufe) {
-    for (const id of ablauf.aufgaben) assert.ok(nachId.has(id), `${ablauf.id}: ${id} fehlt`);
-    const summe = ablauf.aufgaben.reduce((s, id) => s + nachId.get(id).dauerMinuten, 0);
+    // Form nach Schnittstelle 3.4: orte: [{ ort, aufgaben: ["1", …] }], Kennungen stunde, projekttag, ausflug
+    assert.ok(['stunde', 'projekttag', 'ausflug'].includes(ablauf.id), `${ablauf.id}: Kennung nach 3.4`);
+    assert.ok(Array.isArray(ablauf.orte) && ablauf.orte.length > 0, `${ablauf.id}: orte fehlt`);
+    const ids = ablauf.orte.flatMap((o) => o.aufgaben.map((nr) => `${o.ort}/${nr}`));
+    for (const id of ids) assert.ok(nachId.has(id), `${ablauf.id}: ${id} fehlt`);
+    const summe = ids.reduce((s, id) => s + nachId.get(id).dauerMinuten, 0);
     assert.ok(summe <= ablauf.minuten, `${ablauf.id}: ${summe} Minuten Spiel passen nicht in ${ablauf.minuten}`);
   }
 });

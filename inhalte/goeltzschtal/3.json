@@ -6,7 +6,7 @@
     "einfach": "Wie macht man einen Ziegel? Bringt die Schritte in die richtige Reihenfolge."
   },
   "dauerMinuten": 6,
-  "belohnung": ["ziegel"],
+  "belohnung": ["ziegel", "abzeichen-goeltzschtal"],
   "stufe": "anwenden",
   "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
   "mischen": 1846,

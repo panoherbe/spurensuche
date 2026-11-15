@@ -10,5 +10,6 @@ Oberteil, Hose, etwas in der Hand, Rucksack und ein Begleiter. 58 Teile, alle al
 - **Freischalten, transparent und nie zufällig:** Teile mit `freiDurch` werden frei, sobald die Gruppe das genannte
   Sammelstück hat. Bis dahin sind sie sichtbar, aber gesperrt, mit dem Hinweis, wofür es sie gibt (Kletterhelm mit dem
   Abzeichen Bastei, Lokführermütze mit dem Abzeichen Göltzschtal, Papierkrone mit dem Abzeichen Frauenkirche,
-  Fernrohr mit dem Abzeichen Bautzen, Uhu-Küken mit dem Felsturm).
+  Fernrohr mit dem Abzeichen Bautzen, Uhu-Küken mit dem Felsturm). Das Abzeichen eines Ortes gibt es mit dessen
+  dritter Aufgabe (`belohnung` in `inhalte/<ort>/3.json`); ein Inhaltstest prüft, dass jedes `freiDurch` erreichbar ist.
 - Die Figur trägt keinen Namen und keine Daten über Personen; sie gehört der Gruppe.

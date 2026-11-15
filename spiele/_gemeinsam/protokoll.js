@@ -58,7 +58,7 @@ export function neuesProtokoll({ melde = () => {}, aufgabe = {}, rollen: rundenL
     if (fehler) { console.warn(`Ereignis verworfen: ${fehler}`); return null; }
     const ereignis = { art, zeit: Math.max(0, Math.round(jetzt() - beginn)), wert };
     ereignisse.push(ereignis);
-    try { melde({ art, wert }); } catch (f) { console.warn('melde() ist fehlgeschlagen', f); }
+    try { melde({ ...ereignis }); } catch (f) { console.warn('melde() ist fehlgeschlagen', f); }  // { art, zeit, wert } (2.5)
     return ereignis;
   }
 
