@@ -1,6 +1,6 @@
 # Schnittstelle zwischen App und Spielen
 
-> **Version 1, Stand 15.11.2026.** Dieses Dokument ist der Vertrag zwischen der App (Karte, Ablauf, Speicher,
+> **Version 1.1, Stand 15.11.2026.** Dieses Dokument ist der Vertrag zwischen der App (Karte, Ablauf, Speicher,
 > Auswertung) und den Spielen (Minigames, Sammelstücke, Collage). Beide Seiten bauen gegen genau diese Fassung.
 > Jede Änderung erhöht die Versionsnummer und steht unten im Verlauf; eine Änderung, die bestehende Spiele bricht,
 > gibt es nur gemeinsam und mit Übergangsfrist.
@@ -83,10 +83,19 @@ positionieren, Gestalten). Die App nutzt sie für das Kompetenzraster im Dashboa
   tempo: 1,                   // 0,5 bis 1,5; 0,5 = halb so schnell
   hoherKontrast: false,       // hoher Kontrast eingeschaltet
   reduzierteBewegung: false,  // keine Animationen
-  melde(ereignis),            // meldet ein Ereignis sofort ({ art, wert }, Abschnitt 2.5)
-  signal                      // AbortSignal: ausgelöst, wenn die Gruppe die Station verlässt
+  melde(ereignis),            // meldet ein Ereignis sofort ({ art, zeit, wert }, Abschnitt 2.5)
+  signal,                     // AbortSignal: ausgelöst, wenn die Gruppe die Station verlässt
+  basisUrl,                   // URL der Wurzel (endet auf „/“); Bildpfade wie assets/spiele/… dagegen auflösen
+  ton: false,                 // Effekttöne erlaubt (Standard: aus)
+  rollen,                     // Rollenpositionen dieser Gruppe (Liste) oder false, wenn ohne Rollen gespielt wird
+  katalog                     // alle Einträge aus inhalte/items.json, z. B. für die Abschlusskarte
 }
 ```
+
+- **Pfade:** `new URL(aufgabe.bild, umgebung.basisUrl)` statt fester Pfade; so läuft dasselbe Spiel auf dem Server,
+  in der Vorführung unter einem Unterpfad und offline.
+- **Rollen:** Ist `umgebung.rollen` `false`, zeigt das Spiel keine Rollen und meldet kein `rolle`. Sonst nutzt es
+  `aufgabe.rollen` (oder `umgebung.rollen`, wenn die Aufgabe keine eigenen hat).
 
 - **Tempo:** Alles Zeitgesteuerte im Spiel (Animationen, automatisches Weiterblättern, Zeitanzeigen) dauert
   `dauer / tempo`. Die App liest mit derselben Rate vor. Kein Spiel endet wegen Zeitablauf; eine Zeitanzeige ist
@@ -118,6 +127,9 @@ positionieren, Gestalten). Die App nutzt sie für das Kompetenzraster im Dashboa
 }
 ```
 
+Spiele dürfen am Ende eine eigene kurze Abschlusskarte zeigen („Geschafft“, Sammelstück, „Wusstet ihr?“) und erst
+nach „Weiter“ zurückkehren. Die App zeigt danach nur noch den Fortschritt.
+
 So geht die App damit um:
 - `punkte` speichert und überträgt sie nicht und zeigt sie in keiner Übersicht. Es gibt keine Punktzahl, keine Note
   und keine Rangfolge zwischen Gruppen.
@@ -130,7 +142,8 @@ So geht die App damit um:
 
 ### 2.5 Ereignisse
 
-Spiele melden nur diese Arten. `wert` ist eine Zahl, `true`/`false` oder eine Kennung aus der Aufgabe
+Spiele melden nur diese Arten, jedes Ereignis als `{ art, zeit, wert }`. `zeit` ist eine Zahl: Millisekunden seit
+dem Aufruf von `starte` (kein Datumstext; den Zeitpunkt setzt die App). `wert` ist eine Zahl, `true`/`false` oder eine Kennung aus der Aufgabe
 (Kleinbuchstaben, Ziffern, Bindestrich, höchstens 40 Zeichen). Alles andere verwirft die App, und die
 Werkstatt-Seite (Abschnitt 7) meldet es als Fehler.
 
@@ -144,7 +157,8 @@ Werkstatt-Seite (Abschnitt 7) meldet es als Fehler.
 | `abstimmung` | die Gruppe nutzt die vorgesehene Abstimmung | `einig` oder `mehrheit` | Beteiligung: gemeinsame Entscheidungen |
 
 Diese Arten erzeugt nur die App, nie ein Spiel: `start`, `ende` (`abgeschlossen` oder `abgebrochen`),
-`aktiv` (aktive Sekunden), `offline`, `online`, `sync`.
+`aktiv` (aktive Sekunden), `offline`, `online`, `sync`. Beginn, Ende und aktive Zeit misst also die App um das Spiel
+herum; das Spiel meldet nur, was in ihm passiert.
 
 Rollen sind Positionen, keine Personen: Sie tragen keine Namen. Wer gerade „Navigation“ ist, weiß nur die Gruppe.
 
@@ -249,6 +263,22 @@ spielbar; die Ersatzfassung ersetzt nur das Erleben vor Ort.
 
 Eine Aufgabe mit den Feldern aus 2.2 und den Feldern ihres Formats. Kennung in der App: `<ort>/<nr>`.
 
+### 3.4 `inhalte/ablaeufe.json` (Vorschläge je Zeitrahmen)
+
+```json
+{
+  "ablaeufe": [
+    { "id": "stunde", "name": "Unterrichtsstunde", "minuten": 45,
+      "orte": [{ "ort": "bastei", "aufgaben": ["1", "2", "3"] }] },
+    { "id": "projekttag", "name": "Projekttag", "minuten": 240, "orte": [{ "ort": "…", "aufgaben": ["…"] }] },
+    { "id": "ausflug", "name": "Tagesausflug", "minuten": 360, "orte": [{ "ort": "…", "aufgaben": ["…"] }] }
+  ]
+}
+```
+
+Die Lehrkraft wählt beim Freigeben einen Vorschlag und kann Orte und Aufgaben danach ändern. Die App zeigt die Summe
+der geplanten Dauer (`dauerMinuten`) neben dem Zeitrahmen.
+
 ## 4. Sammelstücke (`inhalte/items.json`)
 
 ```json
@@ -264,6 +294,20 @@ Eine Aufgabe mit den Feldern aus 2.2 und den Feldern ihres Formats. Kennung in d
   1024 × 1024 px, quadratisch, transparenter Hintergrund.
 - `kategorie`: frei wählbare, kurze Kennung (z. B. `natur`, `bauwerk`, `brauch`); die Collage darf danach ordnen.
 - Jede Kennung in `belohnung` einer Aufgabe muss hier stehen.
+
+### 4.1 Figur (`inhalte/figur.json`, `spiele/figur/index.js`)
+
+Die Gruppe gestaltet eine Spielfigur; Teile werden mit Sammelstücken freigeschaltet. Den Katalog in
+`inhalte/figur.json` liest nur das Figur-Modul; die App speichert die Auswahl nur im Gerät, nie auf dem Server.
+
+```js
+export async function gestalte(wurzel, { figur, freigeschaltet, umgebung }) → figur  // Auswahl ändern
+export function figurElement(figur, { groesse }) → SVGSVGElement                     // Figur anzeigen
+```
+
+- `figur` ist ein kleines JSON-Objekt (höchstens 2 KB), dessen Aufbau das Modul festlegt; `null` heißt Grundfigur.
+- `freigeschaltet` sind die Kennungen der gesammelten Sammelstücke.
+- `figurElement` baut das SVG mit `createElementNS`, ohne `style`-Attribute (CSP) und ohne Text über die Gruppe.
 
 ## 5. Collage (`spiele/collage/index.js`)
 
@@ -324,3 +368,4 @@ gibt das Team selbst frei) und stellt nur freigegebene Beiträge über die Schni
 | Version | Datum | Änderung |
 |---|---|---|
 | 1 | 15.11.2026 | erste Fassung |
+| 1.1 | 15.11.2026 | `umgebung` um `basisUrl`, `ton`, `rollen`, `katalog` ergänzt; Abschlusskarte im Spiel erlaubt; `zeit` ausdrücklich als Zahl; `inhalte/ablaeufe.json` (3.4) und Figur (4.1) neu. Alles abwärtskompatibel. |
