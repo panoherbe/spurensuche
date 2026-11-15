@@ -19,3 +19,7 @@
 .cl-ergebnis[hidden] { display: none; }
 .cl-ergebnis { display: grid; gap: 8px; }
 .cl-ergebnis pre { margin: 0; font-size: 0.8rem; white-space: pre-wrap; word-break: break-word; background: var(--sp-grund); border-radius: 10px; padding: 10px; }
+.cl-ki { border: 1px dashed var(--sp-rand); border-radius: 12px; padding: 10px 14px; }
+.cl-ki summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+.cl-ki p { margin: 8px 0 0; }
+.cl-prompt { font-style: italic; }

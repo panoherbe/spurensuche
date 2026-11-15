@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "beschreibung": "Vorschau auf Option 1 (KI-Bild): Bausteine, aus denen der Prompt entsteht. Nur diese geprüften Bausteine werden verwendet; Kinder tippen keinen Freitext. Ein Bild entsteht erst mit einem angebundenen Bildmodell; bis dahin gilt die Item-Collage.",
+  "stil": {
+    "de": "Bild im Stil einer freundlichen Kinderbuch-Illustration mit klaren Umrissen und warmen Farben",
+    "en": "friendly children's book illustration, clean outlines, warm colours"
+  },
+  "ausschluss": {
+    "de": "ohne Menschen, ohne Gesichter, ohne Schrift, ohne Logos",
+    "en": "no people, no faces, no text, no logos, no weapons"
+  },
+  "items": {
+    "basteibruecke": {
+      "de": "eine Steinbrücke mit Bögen zwischen hohen Sandsteinfelsen",
+      "en": "a stone arch bridge between tall sandstone rocks"
+    },
+    "felsturm": {
+      "de": "ein schmaler Felsturm aus Sandstein mit einer Kiefer obendrauf",
+      "en": "a slender sandstone rock tower with a pine tree on top"
+    },
+    "wanderschuh": {
+      "de": "ein brauner Wanderschuh mit roten Schnürsenkeln",
+      "en": "a brown hiking boot with red laces"
+    },
+    "alter-stein": {
+      "de": "ein alter, dunkler Sandsteinblock",
+      "en": "an old dark sandstone block"
+    },
+    "kuppel": {
+      "de": "eine große glockenförmige Kirchenkuppel aus hellem Sandstein",
+      "en": "a large bell-shaped church dome made of pale sandstone"
+    },
+    "turmkreuz": {
+      "de": "ein goldenes Kreuz mit Strahlenkranz",
+      "en": "a golden cross with a halo of rays"
+    },
+    "dampflok": {
+      "de": "eine kleine schwarze Dampflok mit roten Rädern",
+      "en": "a small black steam locomotive with red wheels"
+    },
+    "goeltzschtalbruecke": {
+      "de": "eine lange Eisenbahnbrücke aus roten Ziegeln mit vielen Bögen",
+      "en": "a long red-brick railway viaduct with many arches"
+    },
+    "ziegel": {
+      "de": "ein roter Ziegelstein",
+      "en": "a red brick"
+    },
+    "ortsschild": {
+      "de": "ein gelbes Ortsschild ohne Schrift",
+      "en": "a blank yellow town sign"
+    },
+    "schiefer-turm": {
+      "de": "ein weißer runder Turm, der ein wenig schief steht",
+      "en": "a white round tower leaning slightly"
+    },
+    "lot": {
+      "de": "ein Senklot aus Messing an einer Schnur",
+      "en": "a brass plumb bob on a string"
+    },
+    "abzeichen-bastei": {
+      "de": "eine grüne Rosette",
+      "en": "a green rosette badge"
+    },
+    "abzeichen-frauenkirche": {
+      "de": "eine blaue Rosette",
+      "en": "a blue rosette badge"
+    },
+    "abzeichen-goeltzschtal": {
+      "de": "eine rote Rosette",
+      "en": "a red rosette badge"
+    },
+    "abzeichen-bautzen": {
+      "de": "eine lila Rosette",
+      "en": "a purple rosette badge"
+    }
+  },
+  "anordnung": {
+    "kreis": {
+      "de": "im Kreis angeordnet",
+      "en": "arranged in a circle"
+    },
+    "raster": {
+      "de": "ordentlich in Reihen angeordnet",
+      "en": "arranged neatly in rows"
+    },
+    "wirbel": {
+      "de": "in einem fröhlichen Wirbel",
+      "en": "in a playful swirl"
+    },
+    "stapel": {
+      "de": "wie ein Stapel bunter Sticker",
+      "en": "like a pile of colourful stickers"
+    }
+  },
+  "groesse": {
+    "klein": {
+      "de": "mit viel Platz drumherum",
+      "en": "with lots of space around"
+    },
+    "mittel": {
+      "de": "gut verteilt",
+      "en": "evenly spread"
+    },
+    "gross": {
+      "de": "groß und bildfüllend",
+      "en": "large, filling the picture"
+    }
+  },
+  "farbstimmung": {
+    "morgen": {
+      "de": "im weichen Morgenlicht mit Wolken",
+      "en": "in soft morning light with clouds"
+    },
+    "sommer": {
+      "de": "an einem hellen Sommertag mit Sonne",
+      "en": "on a bright sunny summer day"
+    },
+    "abend": {
+      "de": "im warmen Abendrot über Hügeln",
+      "en": "in a warm sunset over hills"
+    },
+    "nacht": {
+      "de": "unter einem Sternenhimmel mit Mond",
+      "en": "under a starry sky with a moon"
+    },
+    "sandstein": {
+      "de": "in warmen Sandsteinfarben",
+      "en": "in warm sandstone colours"
+    }
+  }
+}

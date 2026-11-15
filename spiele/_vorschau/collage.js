@@ -1,11 +1,13 @@
 // Testseite der Item-Collage: wählt Sammelstücke, zeichnet die Regler aus `regler`, zeigt eine schnelle Vorschau
 // (512 px) und erzeugt das Bild in 2048 × 2048 px. Messwerte für den Messlauf in window.collageTest.
 import { erzeugeCollage, regler } from '../collage/index.js';
+import { bauePrompt } from '../collage/prompt.js';
 
 const WURZEL = new URL('../../', import.meta.url);
 const el = (tag, eigenschaften = {}, ...kinder) => { const e = document.createElement(tag); for (const [k, v] of Object.entries(eigenschaften)) e.setAttribute(k, v); e.append(...kinder); return e; };
 const parameter = new URLSearchParams(location.search);
 const items = await (await fetch(new URL('inhalte/items.json', WURZEL))).json();
+const bausteine = await (await fetch(new URL('inhalte/prompt-bausteine.json', WURZEL))).json();
 const gewaehlt = new Set((parameter.get('items') ?? 'basteibruecke,felsturm,kuppel,turmkreuz,goeltzschtalbruecke,ortsschild').split(',').filter((id) => items.some((i) => i.id === id)));
 const optionen = Object.fromEntries(regler.map((r) => [r.id, parameter.get(r.id) ?? r.werte[0].id]));
 window.collageTest = { fertig: false };
@@ -43,6 +45,7 @@ const auswahl = () => items.filter((i) => gewaehlt.has(i.id));
 let laufend = 0;
 async function zeichneVorschau() {
   anzahl.textContent = `(${gewaehlt.size} gewählt)`;
+  document.getElementById('cl-prompt').textContent = bauePrompt([...gewaehlt], optionen, bausteine).de;
   if (gewaehlt.size === 0) { status.textContent = 'Wählt mindestens ein Sammelstück.'; return; }
   const nr = ++laufend;
   const { vorschau } = await erzeugeCollage(auswahl(), { ...optionen, kantenlaenge: 512 });

@@ -90,10 +90,14 @@ function aufbau(k) {
     const beide = [kacheln[lage[a]], kacheln[lage[b]]];
     lage = tausche(lage, a, b);
     gewaehlt = null;
-    await bewege(k, beide, ordne, 280);
-    fokusPlatz = b;
-    beschrifte();
-    if (document.activeElement === document.body || brett.contains(document.activeElement)) kacheln[lage[b]].focus({ preventScroll: true });
+    // Fokus sofort mit dem Umstellen setzen, nicht erst nach der Bewegung: sonst springt er zurück, wenn die Gruppe
+    // während der Bewegung schon das nächste Teil wählt.
+    await bewege(k, beide, () => {
+      ordne();
+      fokusPlatz = b;
+      beschrifte();
+      if (!durchTipp) kacheln[lage[b]].focus({ preventScroll: true });
+    }, 280);
     k.ton('klick');
     if (geloest(lage)) { loese(); return; }
     ansageLeise.textContent = `Getauscht. Auf Reihe ${stelle(b, spalten).reihe}, Platz ${stelle(b, spalten).spalte} liegt jetzt: ${teilText(lage[b])}.`;

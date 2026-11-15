@@ -110,3 +110,13 @@ test('Sammelstücke nach Schnittstelle 4: Kennung, Name, Bild, Alternativtext', 
     assert.doesNotMatch(svg, /<script|on[a-z]+=|xlink:href="http|href="http/i, `${item.id}: kein Skript, keine fremden Verweise`);
   }
 });
+
+test('Abläufe nach Zeit: nur vorhandene Aufgaben, Dauer passt in die Zeit', () => {
+  const { ablaeufe } = lies('inhalte/ablaeufe.json');
+  const nachId = new Map(aufgaben.map((a) => [a.id, a.daten]));
+  for (const ablauf of ablaeufe) {
+    for (const id of ablauf.aufgaben) assert.ok(nachId.has(id), `${ablauf.id}: ${id} fehlt`);
+    const summe = ablauf.aufgaben.reduce((s, id) => s + nachId.get(id).dauerMinuten, 0);
+    assert.ok(summe <= ablauf.minuten, `${ablauf.id}: ${summe} Minuten Spiel passen nicht in ${ablauf.minuten}`);
+  }
+});

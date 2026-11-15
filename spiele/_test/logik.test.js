@@ -13,6 +13,7 @@ import * as sortieren from '../sortieren/logik.js';
 import * as suche from '../bildsuche/logik.js';
 import { figurSvg, figurText, vollstaendig } from '../figur/index.js';
 import { anordnen, einstellungen, REGLER } from '../collage/regeln.js';
+import { bauePrompt } from '../collage/prompt.js';
 import { readFileSync } from 'node:fs';
 
 test('Zufall: gleicher Startwert, gleiche Reihenfolge; nie schon gelöst', () => {
@@ -202,4 +203,16 @@ test('Figur: jede Option zeichnet sich, Text beschreibt sie, unbekannte Werte fa
   assert.ok(anzahl >= 50);
   assert.equal(vollstaendig({ frisur: '<script>' }, katalog).frisur, katalog.standard.frisur);
   assert.match(figurText({ begleiter: 'dackel' }, katalog), /Begleiter: Dackel/);
+});
+
+test('Prompt-Baukasten (Vorschau Option 1): nur geprüfte Bausteine, kein Freitext', () => {
+  const bausteine = JSON.parse(readFileSync(new URL('../../inhalte/prompt-bausteine.json', import.meta.url), 'utf8'));
+  const p = bauePrompt(['kuppel', 'dampflok', '<script>'], { anordnung: 'wirbel', farbstimmung: 'nacht' }, bausteine);
+  assert.deepEqual(p.items, ['kuppel', 'dampflok']);
+  assert.match(p.de, /Kirchenkuppel/);
+  assert.match(p.de, /Sternenhimmel/);
+  assert.match(p.en, /no people/);
+  assert.doesNotMatch(p.de + p.en, /script/);
+  const items = JSON.parse(readFileSync(new URL('../../inhalte/items.json', import.meta.url), 'utf8'));
+  for (const item of items) assert.ok(bausteine.items[item.id], `Baustein für ${item.id} fehlt`);
 });

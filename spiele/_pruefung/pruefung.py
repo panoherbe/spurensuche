@@ -86,7 +86,7 @@ class Lauf:
         )
         self.axe[zustand] = ergebnis
         if foto and self.fotos:
-            self.seite.screenshot(path=str(self.bilder / f"{self.name}-{zustand}.png"), full_page=True)
+            self.seite.screenshot(path=str(self.bilder / f"{self.name}-{zustand}.png"), full_page=True, caret="initial")
         return ergebnis
 
     def taste(self, locator, taste="Enter"):

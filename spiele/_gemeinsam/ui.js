@@ -208,6 +208,7 @@ async function zeigeStart(k) {
     h('h3', { class: 'sp-zwischentitel' }, k.u.sprache === 'einfach' ? 'Das könnt ihr sammeln' : 'Hier könnt ihr sammeln'),
     h('div', { class: 'sp-gewinnliste' }, belohnung.map((item) => itemSticker(k, item, 'sp-item--klein'))));
   const minuten = aufgabe.dauerMinuten ?? meta.dauerMinuten[1];
+  const rollen = rollenBlock(k);
   const karte = h('section', { class: 'sp-start', 'aria-labelledby': titelId },
     h('div', { class: 'sp-start-kopf' },
       (k.startbild && bildElement(k, aufgabe.bild, 'sp-start-bild')) || ullaElement('gruesst', 'sp-start-ulla'),
@@ -216,7 +217,7 @@ async function zeigeStart(k) {
         titel,
         h('p', { class: 'sp-auftrag-text', 'data-vorlesen': '' }, t(aufgabe.text)),
         vorleseKnopf(k, () => `${aufgabe.titel}. ${t(aufgabe.text)}`))),
-    rollenBlock(k) || gewinn ? h('div', { class: 'sp-start-unten' }, rollenBlock(k), gewinn) : null,
+    rollen || gewinn ? h('div', { class: 'sp-start-unten' }, rollen, gewinn) : null,
     h('div', { class: 'sp-aktionen sp-aktionen--mitte' }, los));
   k.spiel.replaceChildren(karte);
   titel.focus();
