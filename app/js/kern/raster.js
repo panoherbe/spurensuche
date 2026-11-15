@@ -204,7 +204,10 @@ export function beobachtungen(gruppe) {
 }
 
 export function rollenName(id) {
-  const namen = { navigation: 'Navigation', protokoll: 'Protokoll', recherche: 'Recherche', sprecher: 'Sprecher', material: 'Material', zeit: 'Zeit' };
+  const namen = {
+    navigation: 'Navigation', protokoll: 'Protokoll', recherche: 'Recherche', sprecher: 'Sprecher', material: 'Material', zeit: 'Zeit',
+    vorlesen: 'Vorlesen', steuern: 'Steuern', nachschlagen: 'Nachschlagen', pruefen: 'Prüfen',
+  };
   return namen[id] ?? id.charAt(0).toUpperCase() + id.slice(1);
 }
 
