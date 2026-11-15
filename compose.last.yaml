@@ -1,0 +1,39 @@
+# Lasttest (simuliert): eine Instanz mit den echten Inhalten, begrenzt auf 2 CPU-Kerne und 2 GB Arbeitsspeicher
+# (wie eine kleine virtuelle Maschine), und ein Lasttreiber im selben Netzbereich.
+#   SITZUNGEN=400 DAUER_MIN=45 UID_GID="$(id -u):$(id -g)" docker compose -p spur-last -f compose.last.yaml up --build --abort-on-container-exit --exit-code-from last
+#   docker compose -p spur-last -f compose.last.yaml down -v
+services:
+  spur:
+    build: .
+    cpus: 2
+    mem_limit: 2g
+    environment:
+      SPUR_OEFFENTLICHE_URL: http://localhost:8080
+      SPUR_HOST: 127.0.0.1
+      SPUR_VERWALTUNG_SCHLUESSEL: TEST-VERWALTUNG
+      SPUR_MESSWERTE_TOKEN: test-messwerte
+    tmpfs:
+      - /daten:mode=1777
+
+  last:
+    image: node:24-alpine
+    network_mode: "service:spur"
+    working_dir: /app
+    user: "${UID_GID:-1000:1000}"
+    environment:
+      APP_URL: http://localhost:8080
+      SITZUNGEN: ${SITZUNGEN:-400}
+      DAUER_MIN: ${DAUER_MIN:-45}
+      RAMPE_MIN: ${RAMPE_MIN:-5}
+      DENKZEIT_S: ${DENKZEIT_S:-90-180}
+      GRUPPEN_JE_KLASSE: ${GRUPPEN_JE_KLASSE:-8}
+      VERWALTUNG: TEST-VERWALTUNG
+      AUSGABE: ${AUSGABE:-nachweis/tmp}
+      NODE_NO_WARNINGS: "1"
+      HOME: /tmp
+    volumes:
+      - .:/app
+    depends_on:
+      spur:
+        condition: service_healthy
+    command: ["node", "test/last.js"]
