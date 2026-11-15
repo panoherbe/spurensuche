@@ -7,13 +7,13 @@
 #   6 defekte neue Version: automatisch zurück                    Betriebsdienst (betrieb/spur wache)
 #   7 Hänger: der Betriebsdienst startet die Anwendung neu
 # Aufruf aus der Wurzel eines Checkouts: tools/betriebstest.sh <ausgabeordner>
-# Legt eine Kopie unter $BETRIEBSTEST_ORDNER an (Standard ~/spurensuche-betriebstest) und räumt am Ende auf.
+# Legt eine Kopie unter $BETRIEBSTEST_ORDNER an (Standard: $TMPDIR bzw. /tmp/spurensuche-betriebstest) und räumt am Ende auf.
 set -euo pipefail
 
 QUELLE="$(cd "$(dirname "$0")/.." && pwd)"
 mkdir -p "${1:-$QUELLE/nachweis/tmp}"
 AUSGABE="$(cd "${1:-$QUELLE/nachweis/tmp}" && pwd)"
-ZIEL="${BETRIEBSTEST_ORDNER:-$HOME/spurensuche-betriebstest}"
+ZIEL="${BETRIEBSTEST_ORDNER:-${TMPDIR:-/tmp}/spurensuche-betriebstest}"
 PORT="${BETRIEBSTEST_PORT:-18090}"
 BILD=spurbt
 PROJEKT="$(basename "$ZIEL")"
