@@ -1,0 +1,51 @@
+# Gegenprobe der Anmeldung gegen Keycloak (unabhängiger OpenID-Connect-Anbieter) mit Testkonten. Nur für Tests.
+#   UID_GID="$(id -u):$(id -g)" docker compose -p spur-keycloak -f compose.keycloak.yaml up --build --abort-on-container-exit --exit-code-from tester
+#   docker compose -p spur-keycloak -f compose.keycloak.yaml down -v
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:${KEYCLOAK_VERSION:-26.0}
+    command: ["start-dev", "--import-realm", "--http-port=8180", "--hostname=http://localhost:8180"]
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: nur-fuer-den-test
+      KC_HEALTH_ENABLED: "true"
+    volumes:
+      - ./test/keycloak/schule-realm.json:/opt/keycloak/data/import/schule-realm.json:ro
+
+  spur:
+    build: .
+    network_mode: "service:keycloak"
+    environment:
+      SPUR_OEFFENTLICHE_URL: http://localhost:8080
+      SPUR_HOST: 127.0.0.1
+      SPUR_INHALTE: /inhalt
+      SPUR_OIDC_AUSSTELLER: http://localhost:8180/realms/schule
+      SPUR_OIDC_CLIENT_ID: spurensuche
+      SPUR_OIDC_CLIENT_SECRET: keycloak-test-geheimnis
+      SPUR_OIDC_ROLLEN_MERKMAL: rolle
+      SPUR_OIDC_ROLLEN_LEHRKRAFT: lehrkraft
+      SPUR_OIDC_ROLLEN_LERNENDE: schueler
+    volumes:
+      - ./test/fixtures/inhalt:/inhalt:ro
+      - daten:/daten
+    depends_on: [keycloak]
+
+  tester:
+    image: node:24-alpine
+    network_mode: "service:keycloak"
+    working_dir: /app
+    user: "${UID_GID:-1000:1000}"
+    environment:
+      HOME: /tmp
+      AUSGABE: ${AUSGABE:-nachweis/tmp}
+      KEYCLOAK_VERSION: ${KEYCLOAK_VERSION:-26.0}
+    volumes:
+      - .:/app
+      - daten:/daten:ro
+    depends_on:
+      spur:
+        condition: service_healthy
+    command: ["node", "test/keycloak.js"]
+
+volumes:
+  daten:

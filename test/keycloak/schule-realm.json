@@ -1,0 +1,37 @@
+{
+  "realm": "schule",
+  "enabled": true,
+  "sslRequired": "none",
+  "roles": { "realm": [ { "name": "lehrkraft" }, { "name": "schueler" } ] },
+  "clients": [
+    {
+      "clientId": "spurensuche",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "keycloak-test-geheimnis",
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["http://localhost:8080/anmeldung/rueckkehr"],
+      "webOrigins": ["http://localhost:8080"],
+      "attributes": { "pkce.code.challenge.method": "S256", "post.logout.redirect.uris": "http://localhost:8080/*" },
+      "protocolMappers": [
+        {
+          "name": "rolle",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-usermodel-realm-role-mapper",
+          "config": { "claim.name": "rolle", "multivalued": "true", "id.token.claim": "true", "access.token.claim": "false", "userinfo.token.claim": "true", "jsonType.label": "String" }
+        }
+      ]
+    }
+  ],
+  "users": [
+    { "username": "lehrkraft.test", "enabled": true, "firstName": "Erika", "lastName": "Beispiel", "email": "erika.beispiel@schule.test", "emailVerified": true,
+      "credentials": [ { "type": "password", "value": "Test-Lehrkraft-1", "temporary": false } ], "realmRoles": ["lehrkraft", "default-roles-schule"] },
+    { "username": "schueler.test", "enabled": true, "firstName": "Kim", "lastName": "Muster", "email": "kim.muster@schule.test", "emailVerified": true,
+      "credentials": [ { "type": "password", "value": "Test-Schueler-1", "temporary": false } ], "realmRoles": ["schueler", "default-roles-schule"] },
+    { "username": "ohne.rolle", "enabled": true, "firstName": "Ohne", "lastName": "Rolle", "email": "ohne.rolle@schule.test", "emailVerified": true,
+      "credentials": [ { "type": "password", "value": "Test-Ohne-1", "temporary": false } ], "realmRoles": ["default-roles-schule"] }
+  ]
+}

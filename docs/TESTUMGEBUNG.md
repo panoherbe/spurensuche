@@ -29,6 +29,27 @@ für andere), die gebaute Vorführung unter `/spurensuche/`, Chrome und den Prü
 außen offen ist nichts. Ergebnisse: `nachweis/tmp/` (Bildschirmfotos, `rauchtest.json`, `vorfuehrung.json` mit den
 axe-Ergebnissen je Ansicht).
 
+Betriebsseite mit echtem Neustart durch Docker (Dienste getrennt starten, weil der Prüflauf die Instanz neu startet):
+
+```bash
+docker compose -p spur-bt -f compose.betrieb.yaml up -d --build --wait browser spur
+docker compose -p spur-bt -f compose.betrieb.yaml run --rm pruefer
+docker compose -p spur-bt -f compose.betrieb.yaml down -v
+```
+
+Werkzeug `betrieb/spur` und Betriebsdienst gegen echte Container (eigene Testinstanz auf Port 18090, räumt auf):
+`tools/betriebstest.sh nachweis/tmp`.
+
+## Gegenprobe der Anmeldung mit Keycloak
+
+```bash
+docker compose -p spur-keycloak -f compose.keycloak.yaml up --build --abort-on-container-exit --exit-code-from tester
+docker compose -p spur-keycloak -f compose.keycloak.yaml down -v
+```
+
+Keycloak im Entwicklungsmodus mit dem Realm `test/keycloak/schule-realm.json` (Testkonten, Rolle als Realm-Rolle im
+Merkmal `rolle`); der Prüflauf meldet sich an wie ein Browser und durchsucht danach die Datenbankdatei.
+
 ## Lasttest (simuliert)
 
 ```bash

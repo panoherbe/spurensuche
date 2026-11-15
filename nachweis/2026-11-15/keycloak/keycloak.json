@@ -1,0 +1,39 @@
+{
+  "zeitpunkt": "2026-11-15T03:54:43.207Z",
+  "anbieter": "Keycloak 26.0 (start-dev, Realm „schule“, Testkonten)",
+  "faelle": [
+    {
+      "name": "Lehrkraft meldet sich an (Rolle aus Realm-Rolle)",
+      "ok": true,
+      "pkce": "S256",
+      "ziel": "/lehrkraefte.html"
+    },
+    {
+      "name": "Abmeldung lokal und Weiterleitung zur zentralen Abmeldung von Keycloak",
+      "ok": true,
+      "weiter": "http://localhost:8180/realms/schule/protocol/openid-connect/logout",
+      "keycloakStatus": 200
+    },
+    {
+      "name": "Schülerin/Schüler: Sitzung ohne Bezug zur Person, weiter zum Beitritt",
+      "ok": true,
+      "ziel": "/#/beitritt"
+    },
+    {
+      "name": "Konto ohne passende Rolle wird mit verständlicher Meldung abgewiesen",
+      "ok": true,
+      "ziel": "/lehrkraefte.html#fehler=rolle"
+    },
+    {
+      "name": "Name, E-Mail und Pseudonym aus Keycloak stehen nicht in der Datenbank",
+      "ok": true,
+      "geprueft": [
+        "spurensuche.db",
+        "spurensuche.db-shm",
+        "spurensuche.db-wal"
+      ],
+      "woerter": 7
+    }
+  ],
+  "fehler": []
+}

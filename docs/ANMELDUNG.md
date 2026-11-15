@@ -4,8 +4,10 @@ Kurz: Die Anwendung spricht OpenID Connect (Authorization Code Flow mit PKCE), d
 Anmeldedienste anbieten. Vom Anmeldedienst nutzt sie genau zwei Merkmale: das Pseudonym (`sub`) und die Rolle. Für
 Lehrkräfte bleibt ein HMAC des Pseudonyms, für Lernende nichts. Fällt der Dienst aus, laufen begonnene Quests
 weiter. Bis zur Anbindung melden sich Lehrkräfte mit einem Zugangsschlüssel an. Getestet wird gegen eine Attrappe
-(`server/attrappe.js`), die sich wie ein echter Anbieter verhält; die konkrete Integrationsspezifikation des
-Betreibers wird im Auftrag eingearbeitet.
+(`server/attrappe.js`), die sich wie ein echter Anbieter verhält, und gegen Keycloak 26 als unabhängigen Anbieter
+(`compose.keycloak.yaml`, Prüflauf `test/keycloak.js`: Lehrkraft, Lernende, Konto ohne Rolle, zentrale Abmeldung,
+keine Namen und E-Mails in der Datenbank). Die konkrete Integrationsspezifikation des Betreibers wird im Auftrag
+eingearbeitet.
 
 ## Integrationsbeschreibung
 
