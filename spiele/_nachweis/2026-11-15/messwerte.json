@@ -1,7 +1,7 @@
 {
-  "stand": "6be9e74",
-  "beginn": "2026-11-15T04:29:36+00:00",
-  "ende": "2026-11-15T04:38:25+00:00",
+  "stand": "8d07960",
+  "beginn": "2026-11-15T15:11:09+00:00",
+  "ende": "2026-11-15T15:19:58+00:00",
   "umgebung": {
     "browser": {
       "chromium": "141.0.7390.37",
@@ -76,11 +76,11 @@
       "farbstimmung": "sommer",
       "anzahl": 6,
       "dauerMs": [
-        161,
-        154,
-        167,
-        163,
-        159
+        165,
+        152,
+        165,
+        164,
+        160
       ],
       "png": {
         "typ": "image/png",
@@ -118,7 +118,7 @@
       "farbstimmung": "sandstein",
       "anzahl": 9,
       "dauerMs": [
-        155
+        151
       ],
       "png": {
         "typ": "image/png",
@@ -156,7 +156,7 @@
       "farbstimmung": "abend",
       "anzahl": 12,
       "dauerMs": [
-        201
+        203
       ],
       "png": {
         "typ": "image/png",
@@ -194,7 +194,7 @@
       "farbstimmung": "nacht",
       "anzahl": 4,
       "dauerMs": [
-        179
+        182
       ],
       "png": {
         "typ": "image/png",
@@ -232,7 +232,7 @@
       "farbstimmung": "morgen",
       "anzahl": 1,
       "dauerMs": [
-        133
+        126
       ],
       "png": {
         "typ": "image/png",
@@ -4269,7 +4269,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.29,
+      "sekunden": 4.37,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4329,7 +4329,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.06,
+      "sekunden": 4.07,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4389,7 +4389,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.03,
+      "sekunden": 4.05,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4509,7 +4509,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.25,
+      "sekunden": 4.26,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4569,7 +4569,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.27,
+      "sekunden": 4.28,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4629,7 +4629,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.34,
+      "sekunden": 4.26,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4685,7 +4685,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.55,
+      "sekunden": 3.38,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4745,7 +4745,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.19,
+      "sekunden": 4.07,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4805,7 +4805,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.18,
+      "sekunden": 4.06,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4865,7 +4865,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.84,
+      "sekunden": 4.49,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4889,7 +4889,7 @@
       "browser": "webkit",
       "geloest": true,
       "punkte": 1,
-      "versuche": 5,
+      "versuche": 6,
       "items": [
         "basteibruecke"
       ],
@@ -4918,13 +4918,14 @@
         "versuch",
         "versuch",
         "versuch",
+        "versuch",
         "versuch"
       ],
       "schemaFehler": [],
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 6.25,
+      "sekunden": 5.84,
       "axe": {
         "start": [],
         "spiel": [],
@@ -4982,7 +4983,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 6.02,
+      "sekunden": 5.87,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5035,7 +5036,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.78,
+      "sekunden": 5.7,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5088,7 +5089,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.75,
+      "sekunden": 5.67,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5194,7 +5195,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.8,
+      "sekunden": 5.88,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5247,7 +5248,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.83,
+      "sekunden": 5.84,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5300,7 +5301,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.81,
+      "sekunden": 5.88,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5353,7 +5354,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.71,
+      "sekunden": 3.75,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5406,7 +5407,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.63,
+      "sekunden": 5.61,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5459,7 +5460,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.63,
+      "sekunden": 5.69,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5512,7 +5513,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.7,
+      "sekunden": 5.77,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5565,7 +5566,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 6.06,
+      "sekunden": 6.14,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5629,7 +5630,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.93,
+      "sekunden": 4.98,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5684,7 +5685,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.86,
+      "sekunden": 4.84,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5739,7 +5740,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.82,
+      "sekunden": 4.85,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5794,7 +5795,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.89,
+      "sekunden": 4.93,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5849,7 +5850,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.91,
+      "sekunden": 4.92,
       "axe": {
         "start": [],
         "spiel": [],
@@ -5904,7 +5905,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.95,
+      "sekunden": 4.96,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6014,7 +6015,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.69,
+      "sekunden": 3.67,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6069,7 +6070,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.83,
+      "sekunden": 4.86,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6124,7 +6125,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.86,
+      "sekunden": 4.88,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6234,7 +6235,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.08,
+      "sekunden": 5.17,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6294,7 +6295,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.98,
+      "sekunden": 4.0,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6392,7 +6393,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.81,
+      "sekunden": 3.84,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6441,7 +6442,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.09,
+      "sekunden": 4.07,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6490,7 +6491,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.96,
+      "sekunden": 3.97,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6637,7 +6638,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.18,
+      "sekunden": 3.17,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6784,7 +6785,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.91,
+      "sekunden": 3.95,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6833,7 +6834,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.7,
+      "sekunden": 4.69,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6883,7 +6884,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.3,
+      "sekunden": 3.29,
       "axe": {
         "start": [],
         "spiel": [],
@@ -6925,7 +6926,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.28,
+      "sekunden": 3.3,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7009,7 +7010,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.34,
+      "sekunden": 3.33,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7051,7 +7052,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.29,
+      "sekunden": 3.26,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7071,48 +7072,6 @@
       "format": "sortieren",
       "geraet": "desktop",
       "einstellung": "kontrast",
-      "browser": "chromium",
-      "geloest": true,
-      "punkte": 2,
-      "versuche": 2,
-      "items": [
-        "kuppel"
-      ],
-      "ereignisse": [
-        "rolle",
-        "versuch",
-        "rolle",
-        "neuer-anlauf",
-        "rolle",
-        "rolle",
-        "rolle",
-        "rolle",
-        "versuch"
-      ],
-      "schemaFehler": [],
-      "ereignisFehler": [],
-      "fehler": null,
-      "nurTastatur": true,
-      "sekunden": 3.3,
-      "axe": {
-        "start": [],
-        "spiel": [],
-        "rueckmeldung": [],
-        "geloest": [],
-        "abschluss": []
-      },
-      "axeVerstoesse": 0,
-      "axeZustaende": 5,
-      "ueberlauf": {},
-      "ueberlaufStellen": 0,
-      "tasten": 9,
-      "konsole": []
-    },
-    {
-      "aufgabe": "frauenkirche/2",
-      "format": "sortieren",
-      "geraet": "desktop",
-      "einstellung": "dunkel",
       "browser": "chromium",
       "geloest": true,
       "punkte": 2,
@@ -7154,6 +7113,48 @@
       "aufgabe": "frauenkirche/2",
       "format": "sortieren",
       "geraet": "desktop",
+      "einstellung": "dunkel",
+      "browser": "chromium",
+      "geloest": true,
+      "punkte": 2,
+      "versuche": 2,
+      "items": [
+        "kuppel"
+      ],
+      "ereignisse": [
+        "rolle",
+        "versuch",
+        "rolle",
+        "neuer-anlauf",
+        "rolle",
+        "rolle",
+        "rolle",
+        "rolle",
+        "versuch"
+      ],
+      "schemaFehler": [],
+      "ereignisFehler": [],
+      "fehler": null,
+      "nurTastatur": true,
+      "sekunden": 3.35,
+      "axe": {
+        "start": [],
+        "spiel": [],
+        "rueckmeldung": [],
+        "geloest": [],
+        "abschluss": []
+      },
+      "axeVerstoesse": 0,
+      "axeZustaende": 5,
+      "ueberlauf": {},
+      "ueberlaufStellen": 0,
+      "tasten": 9,
+      "konsole": []
+    },
+    {
+      "aufgabe": "frauenkirche/2",
+      "format": "sortieren",
+      "geraet": "desktop",
       "einstellung": "ruhig-langsam",
       "browser": "chromium",
       "geloest": true,
@@ -7177,7 +7178,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 2.57,
+      "sekunden": 2.56,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7219,7 +7220,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.22,
+      "sekunden": 3.24,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7261,7 +7262,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.25,
+      "sekunden": 3.3,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7345,7 +7346,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.66,
+      "sekunden": 3.75,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7403,7 +7404,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.94,
+      "sekunden": 5.01,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7458,7 +7459,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.85,
+      "sekunden": 4.84,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7566,7 +7567,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.88,
+      "sekunden": 5.86,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7619,7 +7620,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.63,
+      "sekunden": 5.62,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7672,7 +7673,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.61,
+      "sekunden": 5.65,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7728,7 +7729,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.0,
+      "sekunden": 4.02,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7881,7 +7882,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.29,
+      "sekunden": 3.28,
       "axe": {
         "start": [],
         "spiel": [],
@@ -7969,7 +7970,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.26,
+      "sekunden": 3.22,
       "axe": {
         "start": [],
         "spiel": [],
@@ -8068,7 +8069,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.48,
+      "sekunden": 3.5,
       "axe": {
         "start": [],
         "spiel": [],
@@ -8118,7 +8119,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.46,
+      "sekunden": 3.48,
       "axe": {
         "start": [],
         "spiel": [],
@@ -8167,7 +8168,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 4.0,
+      "sekunden": 4.05,
       "axe": {
         "start": [],
         "spiel": [],
@@ -8265,7 +8266,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 3.8,
+      "sekunden": 3.81,
       "axe": {
         "start": [],
         "spiel": [],
@@ -8317,7 +8318,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.84,
+      "sekunden": 5.8,
       "axe": {
         "start": [],
         "spiel": [],
@@ -8371,7 +8372,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.63,
+      "sekunden": 5.68,
       "axe": {
         "start": [],
         "spiel": [],
@@ -8425,7 +8426,7 @@
       "ereignisFehler": [],
       "fehler": null,
       "nurTastatur": true,
-      "sekunden": 5.65,
+      "sekunden": 5.62,
       "axe": {
         "start": [],
         "spiel": [],
