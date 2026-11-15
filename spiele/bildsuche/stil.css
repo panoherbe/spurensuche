@@ -2,7 +2,9 @@
 
 .sp-suche { display: grid; gap: calc(var(--spi-a) * 2.5); grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 900px) { .sp-suche { grid-template-columns: minmax(0, 1.5fr) minmax(240px, 1fr); align-items: start; } }
-.sp-suche-bild { display: grid; gap: var(--spi-a); min-width: 0; }
+/* Spalte minmax(0, 1fr): sonst wächst die implizite Rasterspalte auf die Breite der Zoom-Zeile (bei 320 px 19 px über
+   die Karte, waagerechter Bildlauf; gemessen 15.11., WCAG 1.4.10). */
+.sp-suche-bild { display: grid; gap: var(--spi-a); min-width: 0; grid-template-columns: minmax(0, 1fr); }
 .sp-suchbild-rahmen { overflow: auto; max-height: 80vh; border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-text); box-shadow: var(--spi-schatten); }
 .sp-suchbild {
   --sp-zoom: 1; --sp-seiten: 1.5;
@@ -30,9 +32,9 @@
 .sp-leuchten { position: absolute; transform: translate(-50%, -50%); border-radius: 50%; border: 5px solid var(--spi-hinweis); animation: sp-puls calc(1300ms / var(--sp-tempo, 1)) ease-out infinite; }
 .sp-ruhig .sp-leuchten, .sp-kontrast .sp-leuchten { box-shadow: 0 0 0 6px var(--spi-flaeche); }
 .sp-suche-unter { display: flex; flex-wrap: wrap; gap: var(--spi-a); justify-content: space-between; align-items: center; }
-.sp-zoom { display: flex; gap: var(--spi-a); align-items: center; }
+.sp-zoom { display: flex; flex-wrap: wrap; gap: var(--spi-a); align-items: center; }
 .sp-zoom-wert { min-width: 4.2ch; text-align: center; font-weight: 750; font-variant-numeric: tabular-nums; }
-.sp-bildnachweis { font-size: 0.8em; color: var(--spi-leise); }
+.sp-bildnachweis { font-size: 0.8em; color: var(--spi-leise); min-width: 0; }
 .sp-suche-seite { display: grid; gap: calc(var(--spi-a) * 1.5); align-content: start; }
 .sp-ziele { list-style: none; padding: 0; display: grid; gap: var(--spi-a); }
 .sp-ziel { display: grid; grid-template-columns: auto 1fr; gap: calc(var(--spi-a) * 1.25); align-items: start; padding: calc(var(--spi-a) * 1.5); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie); }

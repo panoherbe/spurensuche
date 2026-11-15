@@ -570,10 +570,11 @@ def main():
     plan = []
     for aufgabe in aufgaben:
         fmt = lies(a.repo, aufgabe)["format"]
-        plan += [("chromium", aufgabe, "desktop", "standard"), ("chromium", aufgabe, "telefon", "standard")]
+        # klein = 320 px: die Breite aus WCAG 1.4.10 (Umbruch ohne waagerechten Bildlauf), für jede Aufgabe
+        plan += [("chromium", aufgabe, "desktop", "standard"), ("chromium", aufgabe, "telefon", "standard"), ("chromium", aufgabe, "klein", "standard")]
         if a.umfang == "voll" and fmt not in formate_gesehen:
             formate_gesehen.add(fmt)
-            plan += [("chromium", aufgabe, "tablet", "standard"), ("chromium", aufgabe, "klein", "standard")]
+            plan += [("chromium", aufgabe, "tablet", "standard")]
             plan += [("chromium", aufgabe, "desktop", e) for e in ("einfach", "kontrast", "dunkel", "ruhig-langsam")]
             plan += [("chromium", aufgabe, "telefon", e) for e in ("einfach", "kontrast")]
             plan += [("firefox", aufgabe, "desktop", "standard"), ("webkit", aufgabe, "ipad", "standard")]
