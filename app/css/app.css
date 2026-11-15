@@ -3,7 +3,7 @@
 .kopfleiste {
   position: sticky; top: 0; z-index: 20;
   display: flex; align-items: center; gap: 8px; padding: 8px 12px;
-  background: var(--sp-grund);
+  background: var(--sp-flaeche);
   border-bottom: 1px solid var(--sp-rand);
 }
 .kopfleiste .marke-app { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--sp-text); font-weight: 800; font-size: 1.05rem; min-height: 48px; margin-right: auto; }
@@ -78,7 +78,7 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 110px; }
 .karte-marker.status-abgeschlossen .marker-punkt { background: var(--sp-akzent); color: var(--sp-akzent-text); }
 .karte-marker.finale .marker-punkt { border-color: var(--sp-zweit); color: var(--sp-zweit); }
 .karte-marker.finale.status-abgeschlossen .marker-punkt { background: var(--sp-zweit); color: var(--sp-flaeche); }
-.marker-name { position: absolute; top: calc(50% + 24px); font-size: 0.72rem; font-weight: 700; white-space: nowrap; padding: 1px 6px; border-radius: 3px;
+.marker-name { position: absolute; top: calc(50% + 24px); font-size: 0.72rem; font-weight: 700; white-space: nowrap; padding: 1px 6px; border-radius: 4px;
   background: color-mix(in srgb, var(--sp-flaeche) 88%, transparent); display: none; }
 @media (min-width: 760px) { .marker-name { display: block; } }
 .karte-marker:focus-visible { outline: none; }
