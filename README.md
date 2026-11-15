@@ -6,7 +6,7 @@ Prototyp, den Sie selbst ausprobieren und prüfen können.**
 
 ![Rundgang durch die Spurensuche: Beitritt mit Code, Karte mit freier Reihenfolge, ein Ort im Klassenzimmer, einfache Sprache, ein kurzes Spiel mit Rollen, das Bild aus Sammelstücken, die Übersicht der Lehrkraft, das Kompetenzraster und die Betriebsseite mit Ampel](medien/rundgang.gif)
 
-<sub>Rundgang, 89 Sekunden, ohne Ton, mit Untertiteln; aufgenommen am 15.11.2026 in der Vorführung (Beispielklasse,
+<sub>Rundgang, 90 Sekunden, ohne Ton, mit Untertiteln; aufgenommen am 15.11.2026 in der Vorführung (Beispielklasse,
 Gruppen simuliert). [Video herunterladen (MP4, 3,3 MB)](https://github.com/panoherbe/spurensuche/raw/main/medien/rundgang.mp4)
 · Text des Rundgangs weiter unten.</sub>
 
@@ -33,14 +33,14 @@ den Messungen sind simuliert: Ein Skript klickt im Browser oder schickt Anfragen
 |---|---|---|
 | Orte auf einer Karte, freie Reihenfolge | Sachsen-Karte aus offenen Daten, vier echte Orte, kein Ort gesperrt | – |
 | Kurze Spiele, die sich wiederverwenden lassen | fünf Spielformate, zwölf Aufgaben, ein fester Bauplan für neue Spiele | alle 12 Aufgaben laden im Browser und halten den Bauplan ein, 0 Fehler |
-| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 147 Dateien, 4,5 MB im Gerät; ohne Netz neu geladen und gespielt; danach ohne Doppelzählung übertragen |
-| Vor Ort oder im Klassenzimmer | QR-Code, Code vom Schild oder Standort; je Ort eine Fassung für die Schule | QR-Codes von einem fremden Lesegerät (zbar) gelesen: 17 von 17 |
+| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 147 Dateien, 4,5 MB im Gerät; ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
+| Vor Ort oder im Klassenzimmer | QR-Code, Code vom Schild oder Standort; je Ort eine Fassung für die Schule | QR-Codes von fremder Software (zbar) gelesen: 17 von 17 |
 | Sammeln und ein eigenes Bild | Sammelbuch zeigt, wo es was gibt (kein Zufall); Bild 2048 × 2048 aus den Sammelstücken, mit Reglern | Test: Schule wartet auf die Freigabe, die Ausstellung sieht nur Freigegebenes |
 | Auswertung für Lehrkräfte | Gruppen, Freigabe, laufende Übersicht, Beobachtungen, Kompetenzraster, PDF-Bericht, Textentwürfe, Löschen | 33 von 33 automatischen Tests bestanden |
 | Datenschutz | keine Daten über einzelne Kinder; Familien ohne Konto; Löschen nach zwölf Wochen | Test: Name und E-Mail der Schulanmeldung werden nie gespeichert |
 | Barrierefreiheit | Vorlesen, einfache Sprache, Tempo, hoher Kontrast, dunkel, große Schrift | 0 von axe-core 4.10.2 gefundene Verstöße (WCAG 2.1 AA) in 77 Ansichten |
 | Schulanmeldung | Standard OpenID Connect; fällt der Dienst aus, läuft die Stunde weiter | gegen Keycloak 26.0 geprüft: 5 von 5 Fällen ([Probelauf](nachweis/2026-11-15/keycloak/keycloak.json)); Ausfall und Schlüsselwechsel im Test |
-| Bilder für die Ausstellung | Freigabe durch die Lehrkraft, offene Schnittstelle, Archiv im offenen Format BagIt | Archiv: 99 Dateien exportiert und in eine leere Instanz übernommen, alle Prüfsummen gleich |
+| Bilder für die Ausstellung | Freigabe durch die Lehrkraft, offene Schnittstelle, Archiv im offenen Format BagIt | Archiv: 99 Dateien exportiert und in eine leere Instanz übernommen, alle Prüfsummen gleich (in diesem Lauf ohne Bildbeiträge) |
 | Viele Klassen zugleich | ein kleiner Server (2 CPU-Kerne, 2 GB) | 400 simulierte Gruppen gleichzeitig, 45 Minuten: 105.566 Anfragen, 0 Fehler; 95 % der Übertragungen in 2 ms, 99 % in 17 ms; mit 600 Gruppen: 0 Fehler |
 | Betrieb ohne uns | ein Container, Anleitung, tägliche verschlüsselte Sicherung, Export im offenen Archivformat | frischer Klon → laufende Instanz in 2,3 s (Basis-Image lag vor); Sicherung zurückgespielt: alle 19 Tabellen mit gleicher Prüfsumme |
 | Betrieb ohne Entwicklerwissen | Betriebsseite mit Ampel (jeder Punkt sagt „Was tun“) und vier Knöpfen: Neu starten, Sicherung zurückspielen, Inhalt tauschen, Letzte Version zurückspielen; Handbuch für den Telefondienst | jeder Knopf im Prüflauf gedrückt: wieder erreichbar nach 1,0 s; Sicherung zurückgespielt in 12,2 s; Version zurück in 31,1 s; defekte Version automatisch zurück nach 114 s |
@@ -83,15 +83,15 @@ Werte dort sind nachgebildet).
 | 0:10 | Die Karte zeigt die Orte. Die Reihenfolge wählt die Gruppe, kein Ort ist gesperrt. |
 | 0:15 | Vor Ort bestätigt ein QR-Code die Station. Im Klassenzimmer gibt es eine eigene Fassung. |
 | 0:21 | Alle Texte gibt es auch in einfacher Sprache. Vorlesen und Tempo stellt die Gruppe selbst ein. |
-| 0:28 | Kurze Spiele, fünf bis zehn Minuten. Jede Person hat eine Rolle, die Gruppe entscheidet gemeinsam. |
+| 0:27 | Kurze Spiele, fünf bis zehn Minuten. Jede Person hat eine Rolle, die Gruppe entscheidet gemeinsam. |
 | 0:34 | Zum Schluss gestaltet die Gruppe aus ihren Sammelstücken ein Bild für die Ausstellung. (Spielstand für den Rundgang vorbereitet.) |
 | 0:41 | Die Lehrkraft gibt das Bild frei. Erst dann geht es an die Ausstellung, ohne Gruppennamen. (Spielstand für den Rundgang vorbereitet.) |
 | 0:48 | Die Lehrkraft sieht live, an welchem Ort ihre Gruppen gerade sind. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 0:54 | Danach Beobachtungen zu Teamarbeit, Problemlösung und Beteiligung, mit Vorschlag im Kompetenzraster. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 1:02 | Keine Noten, keine Punkte, keine Rangfolge. Die Einschätzung trifft die Lehrkraft. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 1:09 | Für den Betrieb: eine Ampel, die sagt, was zu tun ist, und vier sichere Knöpfe. (In der Vorführung sind die Werte nachgebildet.) |
-| 1:16 | **Gemessen am 15.11.2026:** 33 von 33 Tests bestanden (automatische Tests, dazu Browser-Prüfläufe aller Spiele) · 400 Gruppen gleichzeitig, 0 Fehler (Lasttest, simuliert, 45 Minuten: 95 % der Übertragungen in 2 ms) · Ganz ohne Netz spielbar (alle Orte im Gerät: 147 Dateien, 4,5 MB) · 0 Verstöße (Barrierefreiheit automatisch geprüft mit axe-core, WCAG 2.1 AA, 77 Ansichten). Alle Gruppen in Lasttest und Prüfläufen sind simuliert. |
-| 1:24 | **Selbst ausprobieren:** panoherbe.com/projekte/spurensuche. Die Vorführung läuft im Browser, ohne Konto und ohne Server. Quellcode, Tests, Betriebshandbuch und Messprotokoll liegen offen: github.com/panoherbe/spurensuche. (Code AGPL-3.0 · Inhalte CC BY-SA 4.0) |
+| 0:54 | Danach Beobachtungen zu Teamleistung, Problemlösung und Beteiligung, mit Vorschlag im Kompetenzraster. (Beispielklasse der Vorführung, Gruppen simuliert.) |
+| 1:02 | In der Auswertung keine Noten, keine Punkte, keine Rangfolge. Die Einschätzung trifft die Lehrkraft. (Beispielklasse der Vorführung, Gruppen simuliert.) |
+| 1:10 | Für den Betrieb: eine Ampel, die sagt, was zu tun ist, und vier sichere Knöpfe. (In der Vorführung sind die Werte nachgebildet.) |
+| 1:17 | **Gemessen am 15.11.2026:** 33 von 33 Tests bestanden (automatische Tests, dazu Browser-Prüfläufe aller Spiele) · 400 Gruppen gleichzeitig, 0 Fehler (Lasttest, simuliert, 45 Minuten: 95 % der Übertragungen in 2 ms) · Ganz ohne Netz spielbar (alle Orte im Gerät: 147 Dateien, 4,5 MB) · 0 Verstöße (Barrierefreiheit automatisch geprüft mit axe-core, WCAG 2.1 AA, 77 Ansichten). Alle Gruppen in Lasttest und Prüfläufen sind simuliert. |
+| 1:24 | **Selbst ausprobieren:** panoherbe.com/projekte/spurensuche. Die Vorführung läuft im Browser, ohne Konto und ohne Server. Quellcode, Tests, Betriebshandbuch und Messprotokoll liegen offen: github.com/panoherbe/spurensuche. Fotos der Orte: Wikimedia Commons, Urheber und Lizenz je Bild im Repository. (Code AGPL-3.0 · Texte und Zeichnungen CC BY-SA 4.0) |
 
 </details>
 
@@ -101,8 +101,8 @@ Werte dort sind nachgebildet).
   Fachseite und werden über dasselbe Format eingespielt.
 - **Schulanmeldung:** gegen einen Testanbieter (Keycloak) geprüft. Die Vorgaben des Betreibers werden im Projekt
   eingebaut.
-- **QR-Code in der App:** nutzt die eingebaute Erkennung des Browsers (Chrome, Android, ChromeOS). Auf dem iPad liest
-  die Kamera-App den Code, oder die Gruppe tippt den Code vom Schild ein.
+- **QR-Code in der App:** nutzt die eingebaute Erkennung des Browsers (Chrome, Edge, Android, ChromeOS). Auf dem iPad
+  und in Firefox liest die Kamera-App den Code, oder die Gruppe tippt den Code vom Schild ein.
 - **Prüfungen von außen:** axe-core findet nur einen Teil der Barrierefreiheitsprobleme; ein Audit nach EN 301 549 und
   ein Penetrationstest gehören zu einem Projekt.
 - **Lasttest:** Server und Netz liefen im selben Rechner; Funknetze an Schulen und echte Endgeräte waren nicht Teil der

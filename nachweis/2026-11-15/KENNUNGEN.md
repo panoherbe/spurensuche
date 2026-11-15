@@ -10,4 +10,5 @@ Die Rohdateien dieses Ordners nennen Commit-Kennungen aus einem früheren Stand 
 | – | `nach-merge/` (Lauf nach dem Merge der Spiele) | `a5e3224` | – | `def454469f1b` |
 
 Den Baum eines Stands zeigt `git rev-parse <tag>^{tree}`. Die Logdateien (`*.log`), die `PROTOKOLL.md` aufzählt,
-bleiben außerhalb des Repositorys.
+bleiben außerhalb des Repositorys. Test 16 in `tests.tap` heißt heute „Außerhalb der Klassen 4 bis 8 oder ohne
+Einwilligung entstehen keine Datensätze“; die Rohdatei nennt noch seinen früheren Namen.
