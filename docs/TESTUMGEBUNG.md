@@ -11,7 +11,7 @@ docker run --rm -v "$PWD":/app -w /app node:24-alpine node --test test/*.test.js
 ```
 
 Prüft unter anderem: Schema der Inhalte, Bereinigung der Ereignisse, Kompetenzraster, PDF, ZIP, QR-Codes,
-Löschfristen, Übertragung ohne Doppelzählung, keine Datensätze ohne Kernzielgruppe oder Einwilligung, Anmeldung über
+Löschfristen, Übertragung ohne Doppelzählung, keine Datensätze außerhalb der Klassen 4 bis 8 oder ohne Einwilligung, Anmeldung über
 OpenID Connect (Attrappe), Ausfall und Schlüsselwechsel des Anmeldedienstes, Sicherung und Rückspielen, Archiv
 (Export → Übernahme in leere Instanz → gleiche Prüfsummen), Übereinstimmung von `docs/openapi.json` mit den Routen.
 

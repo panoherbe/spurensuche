@@ -180,7 +180,7 @@ export class VorfuehrApi {
   async lerngruppen() {
     const d = await this.daten();
     return d.lerngruppen.map((lg) => ({
-      ...lg, kernzielgruppe: lg.klassenstufe >= 4 && lg.klassenstufe <= 8, erfassung: this.erfassungFuer(lg),
+      ...lg, klassen4bis8: lg.klassenstufe >= 4 && lg.klassenstufe <= 8, erfassung: this.erfassungFuer(lg),
       freigaben: d.freigaben.filter((f) => f.lerngruppeId === lg.id).map((f) => ({ id: f.id, titel: f.titel, zeitrahmen: f.zeitrahmen, erstellt: f.erstellt, beendet: f.beendet, loeschenAm: f.loeschenAm, erfassung: f.erfassung, gruppen: d.gruppen.filter((g) => g.freigabeId === f.id).length })),
     }));
   }

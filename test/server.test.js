@@ -127,7 +127,7 @@ test('Auswertung: Beobachtungen, Raster mit Vorschlag, Einschätzung, Entwurf', 
   assert.equal((await andere.anfrage(`/api/v1/gruppen/${q.gruppe.id}/auswertung`)).status, 404);
 });
 
-test('Ohne Kernzielgruppe oder ohne Einwilligung entstehen keine Datensätze', async () => {
+test('Außerhalb der Klassen 4 bis 8 oder ohne Einwilligung entstehen keine Datensätze', async () => {
   for (const art of [{ klassenstufe: 9, einwilligung: true, gruppe: 'Luchs' }, { klassenstufe: 6, einwilligung: false, gruppe: 'Otter' }]) {
     const q = await questMitGruppe(lk, art);
     assert.equal(q.beitritt.freigabe.erfassung, false);

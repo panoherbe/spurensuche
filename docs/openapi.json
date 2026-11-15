@@ -670,7 +670,7 @@
         }
       ],
       "post": {
-        "summary": "Quest freigeben (Orte, Aufgaben, Zeitrahmen; Erfassung nach Kernzielgruppe und Einwilligung)",
+        "summary": "Quest freigeben (Orte, Aufgaben, Zeitrahmen; Erfassung nach Klassenstufe und Einwilligung)",
         "tags": [
           "Lehrkraft"
         ],
@@ -1840,7 +1840,7 @@
           },
           "erfassung": {
             "type": "boolean",
-            "description": "false: Kernzielgruppe nicht erfüllt oder Einwilligung nicht bestätigt; es entstehen keine Datensätze"
+            "description": "false: Klassenstufe außerhalb 4 bis 8 oder Einwilligung nicht bestätigt; es entstehen keine Datensätze"
           },
           "rueckmeldung": {
             "type": "boolean"

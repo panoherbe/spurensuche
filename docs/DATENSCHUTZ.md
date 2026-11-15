@@ -12,7 +12,7 @@ beschreibt den Stand des Codes; die Tests in `test/` prüfen die wichtigsten Zus
 | Keine Tabelle und kein Feld für einzelne Lernende | `server/db.js` (Schema) | Durchsicht des Schemas; Test „Übertragung: bereinigt …“ |
 | Nur Gruppenebene, Rollen sind Positionen | `app/js/kern/ereignisse.js` (erlaubte Ereignisse), `kern/raster.js` | Tests „Ereignisse: nur erlaubte Arten und Werte, kein Freitext“ |
 | Kein Freitext, keine Koordinate, keine Gerätekennung in Beobachtungen | Bereinigung im Gerät **und** auf dem Server | Test prüft, dass „Lisa“ und „51.05“ nicht in der Datenbank landen |
-| Ohne Kernzielgruppe (Klassen 4–8) oder ohne bestätigte Einwilligung entstehen keine Datensätze | `server/app.js` (`erfassungFuer`, Route `/api/v1/sync`), `app/js/spielstand.js` (`inAusgang`) | Test „Ohne Kernzielgruppe oder ohne Einwilligung entstehen keine Datensätze“ |
+| Außerhalb der Klassenstufen 4 bis 8 oder ohne bestätigte Einwilligung entstehen keine Datensätze | `server/app.js` (`erfassungFuer`, Route `/api/v1/sync`), `app/js/spielstand.js` (`inAusgang`) | Test „Außerhalb der Klassen 4 bis 8 oder ohne Einwilligung entstehen keine Datensätze“ |
 | Familienmodus ohne Konto, nichts verlässt das Gerät außer einem freigegebenen Bild | `app/js/spielstand.js`, `app/js/seiten/bild.js` | Durchsicht; Familienbild ohne Freigabe wird abgelehnt (Test „Bildbeiträge …“) |
 | Name und E-Mail des Anmeldedienstes nie gespeichert | `server/oidc.js` (nur `sub` und Rolle verlassen die Prüfung), `server/app.js` | Test durchsucht die Datenbankdatei samt WAL nach Name, E-Mail, `sub`, Schule |
 | Löschfristen | `server/db.js` (`raeumeAuf`), `app/js/kern/zeit.js` | Test „Löschfristen und vorzeitige Löschung …“ |

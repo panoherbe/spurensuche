@@ -158,10 +158,10 @@ export async function erstelleApp(cfg) {
 
   // --- Prüfen und Zusammensetzen -----------------------------------------------------------------------------------
 
-  const kernzielgruppe = (klassenstufe) => Number.isInteger(klassenstufe) && klassenstufe >= 4 && klassenstufe <= 8;
+  const klassen4bis8 = (klassenstufe) => Number.isInteger(klassenstufe) && klassenstufe >= 4 && klassenstufe <= 8;
 
   function erfassungFuer(lg) {
-    if (!kernzielgruppe(lg.klassenstufe)) return { erfassung: false, grund: 'Diese Lerngruppe gehört nicht zu den Klassenstufen 4 bis 8. Die Gruppen spielen ohne Auswertung; es entstehen keine Beobachtungsdaten.' };
+    if (!klassen4bis8(lg.klassenstufe)) return { erfassung: false, grund: 'Diese Lerngruppe gehört nicht zu den Klassenstufen 4 bis 8. Die Gruppen spielen ohne Auswertung; es entstehen keine Beobachtungsdaten.' };
     if (!lg.einwilligung_am) return { erfassung: false, grund: 'Die Einwilligungen der Erziehungsberechtigten sind noch nicht bestätigt. Bis dahin entstehen keine Beobachtungsdaten.' };
     return { erfassung: true, grund: 'Beobachtungen werden auf Gruppenebene erfasst.' };
   }
@@ -422,7 +422,7 @@ export async function erstelleApp(cfg) {
     const s = lehrkraft(req);
     return db.prepare('SELECT * FROM lerngruppe WHERE lehrkraft_id = ? ORDER BY erstellt DESC').all(s.lehrkraft_id).map((lg) => ({
       id: lg.id, bezeichnung: lg.bezeichnung, klassenstufe: lg.klassenstufe, einwilligungAm: lg.einwilligung_am, erstellt: lg.erstellt, loeschenAm: lg.loeschen_am,
-      kernzielgruppe: kernzielgruppe(lg.klassenstufe), erfassung: erfassungFuer(lg),
+      klassen4bis8: klassen4bis8(lg.klassenstufe), erfassung: erfassungFuer(lg),
       freigaben: db.prepare('SELECT f.id, f.titel, f.zeitrahmen, f.erstellt, f.beendet, f.loeschen_am, f.erfassung, (SELECT count(*) FROM gruppe g WHERE g.freigabe_id = f.id) AS gruppen FROM freigabe f WHERE f.lerngruppe_id = ? ORDER BY f.erstellt DESC').all(lg.id)
         .map((f) => ({ id: f.id, titel: f.titel, zeitrahmen: f.zeitrahmen, erstellt: f.erstellt, beendet: f.beendet, loeschenAm: f.loeschen_am, erfassung: !!f.erfassung, gruppen: f.gruppen })),
     }));
