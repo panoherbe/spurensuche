@@ -793,7 +793,11 @@ export async function erstelleApp(cfg) {
       quelle = voll;
     }
     let s;
-    try { s = await stat(quelle); } catch { return null; }
+    try { s = await stat(quelle); } catch {
+      // ohne eigene Vorschläge je Zeitrahmen: leere Liste statt 404 (die Lehrkraft wählt dann Orte selbst)
+      if (pfad === '/inhalte/ablaeufe.json') return datei(JSON.stringify({ ablaeufe: [] }), TYPEN['.json'], { 'Cache-Control': 'no-cache' });
+      return null;
+    }
     if (!s.isFile()) return null;
     const schluessel = `${quelle}:${s.mtimeMs}:${s.size}`;
     let eintrag = dateiCache.get(quelle);

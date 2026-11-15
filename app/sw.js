@@ -3,7 +3,7 @@
 
 const PRAEFIX = 'spurensuche-';
 const basis = () => self.registration.scope;
-const IMMER = ['index.html', 'lehrkraefte.html', 'konfiguration.json', 'offline-liste.json', 'manifest.webmanifest'];
+const IMMER = ['index.html', 'lehrkraefte.html', 'konfiguration.json', 'offline-liste.json', 'manifest.webmanifest', 'inhalte/ablaeufe.json'];
 
 async function aktuelleVersion() {
   const namen = (await caches.keys()).filter((n) => n.startsWith(PRAEFIX));

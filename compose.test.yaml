@@ -1,13 +1,20 @@
-# Prüfungen im Container: Instanz mit Testinhalten, Chrome ohne Oberfläche, Prüflauf. Nichts wird nach außen geöffnet.
-#   docker compose -p spur-test -f compose.test.yaml up --build --abort-on-container-exit --exit-code-from pruefer
+# Prüfungen im Container: Chrome ohne Oberfläche, die Instanz mit Testinhalten, die gebaute Vorführung und ein
+# Prüflauf. Alle teilen sich den Netzbereich des Browsers: Chrome erreicht alles über localhost (sicherer Kontext,
+# nötig für Service Worker, Standort und Kamera). Nach außen wird kein Port geöffnet.
+#   UID_GID="$(id -u):$(id -g)" docker compose -p spur-test -f compose.test.yaml up --build --abort-on-container-exit --exit-code-from pruefer
 #   docker compose -p spur-test -f compose.test.yaml down -v
 services:
-  # nicht „app“ nennen: .app ist eine HSTS-Top-Level-Domain, Chrome erzwingt dafür https
+  browser:
+    image: chromedp/headless-shell:latest
+    shm_size: 1gb
+
   spur:
     build: .
+    network_mode: "service:browser"
     environment:
       SPUR_INHALTE: ${SPUR_TEST_INHALTE:-/inhalt}
-      SPUR_OEFFENTLICHE_URL: http://spur:8080
+      SPUR_OEFFENTLICHE_URL: http://localhost:8080
+      SPUR_HOST: 127.0.0.1
       SPUR_ATTRAPPE: "1"
       SPUR_WERKSTATT: "1"
       SPUR_VERWALTUNG_SCHLUESSEL: TEST-VERWALTUNG
@@ -17,10 +24,23 @@ services:
       - ./test/fixtures/inhalt:/inhalt:ro
     tmpfs:
       - /daten:mode=1777
+    depends_on: [browser]
 
-  browser:
-    image: chromedp/headless-shell:latest
-    shm_size: 1gb
+  vorf:
+    image: node:24-alpine
+    network_mode: "service:browser"
+    working_dir: /app
+    user: "${UID_GID:-1000:1000}"
+    volumes:
+      - .:/app:ro
+    tmpfs:
+      - /tmp:mode=1777
+    command: ["sh", "-c", "node tools/statisch-bauen.js /tmp/vorf && node tools/statisch-dienen.js /tmp/vorf 8090 /spurensuche/"]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1:8090/spurensuche/konfiguration.json"]
+      interval: 3s
+      retries: 20
+    depends_on: [browser]
 
   pruefer:
     image: node:24-alpine
@@ -28,7 +48,8 @@ services:
     working_dir: /app
     user: "${UID_GID:-1000:1000}"
     environment:
-      APP_URL: http://spur:8080
+      APP_URL: http://localhost:8080
+      VORF_URL: http://localhost:8090/spurensuche
       AUSGABE: ${AUSGABE:-nachweis/tmp}
       NODE_NO_WARNINGS: "1"
       HOME: /tmp
@@ -37,6 +58,6 @@ services:
     depends_on:
       spur:
         condition: service_healthy
-      browser:
-        condition: service_started
+      vorf:
+        condition: service_healthy
     command: ["node", "${PRUEFSKRIPT:-test/e2e/rauchtest.js}"]
