@@ -1,0 +1,39 @@
+{
+  "format": "bildpuzzle",
+  "titel": "Die Brücke im Nebel",
+  "text": {
+    "standard": "Das Foto der Basteibrücke ist durcheinandergeraten. Setzt es wieder zusammen: Tippt auf zwei Teile, dann tauschen sie die Plätze.",
+    "einfach": "Das Foto ist durcheinander. Macht es wieder richtig. Tippt auf zwei Teile. Dann tauschen die Teile den Platz."
+  },
+  "dauerMinuten": 6,
+  "belohnung": ["basteibruecke"],
+  "stufe": "einblick",
+  "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
+  "mischen": 1851,
+  "bild": {
+    "datei": "assets/spiele/orte/bastei/bruecke-nebel.webp",
+    "breite": 1600,
+    "hoehe": 1067,
+    "alt": {
+      "standard": "Die Basteibrücke am Morgen: Eine Steinbrücke mit Bögen führt zwischen hohen, grauen Sandsteinfelsen hindurch. Dahinter liegt Nebel im Tal, darüber ragt ein flacher Tafelberg auf.",
+      "einfach": "Eine Brücke aus Stein zwischen hohen Felsen. Dahinter ist Nebel. Ganz hinten ist ein flacher Berg."
+    },
+    "quelle": "Foto: A. Savin, Freie-Kunst-Lizenz (FAL 1.3), Wikimedia Commons (verkleinert)"
+  },
+  "raster": { "spalten": 3, "zeilen": 3 },
+  "teile": [
+    { "standard": "Himmel, ferne Hügel und Nebel, unten Baumkronen und Felsspitzen", "einfach": "Himmel, Hügel und Nebel" },
+    { "standard": "ein flacher Tafelberg über dem Nebel, rechts die Spitze eines großen Felsens", "einfach": "ein flacher Berg und eine Felsspitze" },
+    { "standard": "Nebel, links ein Felsturm, rechts eine Birke mit dünnen Zweigen", "einfach": "Nebel, ein Felsen und ein Baum" },
+    { "standard": "graue Felswände mit Kiefern", "einfach": "graue Felsen und Bäume" },
+    { "standard": "die Brücke mit ihren Bögen, darunter Felsen und Bäume", "einfach": "die Brücke mit Bögen" },
+    { "standard": "der große Bogen der Brücke, rechts gelbe und grüne Blätter", "einfach": "ein großer Bogen und gelbe Blätter" },
+    { "standard": "dunkelgrüner Wald", "einfach": "dunkler Wald" },
+    { "standard": "hohe graue Felssäulen", "einfach": "hohe graue Felsen" },
+    { "standard": "Felsen und eine Birke mit gelben Blättern", "einfach": "Felsen und gelbe Blätter" }
+  ],
+  "wusstetIhr": {
+    "standard": "Die erste Basteibrücke war aus Holz. 1851 wurde sie durch die Steinbrücke ersetzt, die ihr eben zusammengesetzt habt: 76,5 Meter lang, mit sieben Bögen über einer bis zu 40 Meter tiefen Schlucht.",
+    "einfach": "Früher war die Brücke aus Holz. Seit 1851 ist sie aus Stein. Sie hat sieben Bögen."
+  }
+}

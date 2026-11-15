@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Basteibrücke</title>
+  <desc>Sammelstück: eine Steinbrücke mit Bögen zwischen zwei zerklüfteten Sandsteinfelsen, dahinter ein Tafelberg im Nebel. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs>
+    <clipPath id="basteibruecke-k"><circle cx="256" cy="248" r="212"/></clipPath>
+    <clipPath id="basteibruecke-fl"><path d="M44 480 L48 330 L38 300 L52 266 L44 238 L62 212 L60 194 L86 180 L116 186 L132 174 L152 194 L146 222 L164 238 L158 270 L172 302 L164 342 L178 480 Z"/></clipPath>
+    <clipPath id="basteibruecke-fr"><path d="M336 480 L346 382 L334 340 L350 300 L340 262 L356 236 L350 206 L372 180 L398 170 L414 148 L440 160 L454 184 L448 208 L468 228 L460 264 L474 302 L464 342 L478 480 Z"/></clipPath>
+    <linearGradient id="basteibruecke-h" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7DB8E2"/>
+      <stop offset="0.75" stop-color="#C9E3F4"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#basteibruecke-h)"/>
+  <g clip-path="url(#basteibruecke-k)" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Tafelberg im Nebel -->
+    <path d="M190 268 L208 234 L218 228 L294 226 L306 234 L322 268 Z" fill="#7F9DB3"/>
+    <path d="M218 236 H296" stroke="#6E8CA2" stroke-width="4"/>
+    <path d="M20 270 C90 254 150 280 226 266 C300 252 380 282 500 262 L500 300 C380 312 300 290 226 300 C150 310 90 292 20 304 Z" fill="#FFFFFF" opacity=".92"/>
+    <!-- Schlucht hinter der Brücke -->
+    <path d="M150 312 H362 V480 H150 Z" fill="#3D5A48"/>
+    <path d="M150 312 C200 330 300 330 362 312 V350 C300 366 210 366 150 350 Z" fill="#567A62"/>
+    <!-- Felsen links: Sandstein in Schichten, Schattenseite rechts -->
+    <g clip-path="url(#basteibruecke-fl)">
+      <path d="M0 0 H200 V480 H0 Z" fill="#D2C2A6"/>
+      <path d="M118 150 L160 150 L200 480 L132 480 L140 360 L126 300 L136 240 Z" fill="#AE9A7D"/>
+      <path d="M30 228 C70 222 110 232 170 226 M30 268 C80 262 120 272 170 266 M30 312 C70 306 120 316 176 310 M30 356 C80 350 120 360 180 354 M30 404 C70 398 120 408 180 402" stroke="#8C785E" stroke-width="5" fill="none"/>
+      <path d="M78 228 V262 M104 272 V306 M70 316 V352 M120 360 V396 M92 410 V450" stroke="#8C785E" stroke-width="4"/>
+    </g>
+    <path d="M44 480 L48 330 L38 300 L52 266 L44 238 L62 212 L60 194 L86 180 L116 186 L132 174 L152 194 L146 222 L164 238 L158 270 L172 302 L164 342 L178 480 Z" fill="none" stroke="#263238" stroke-width="6"/>
+    <!-- Felsen rechts -->
+    <g clip-path="url(#basteibruecke-fr)">
+      <path d="M320 0 H512 V480 H320 Z" fill="#D2C2A6"/>
+      <path d="M424 140 L480 140 L500 480 L428 480 L436 380 L420 300 L432 230 Z" fill="#AE9A7D"/>
+      <path d="M330 214 C380 208 420 218 470 212 M330 258 C380 252 420 262 476 256 M330 304 C380 298 420 308 480 302 M330 350 C380 344 430 354 480 348 M330 400 C380 394 430 404 480 398" stroke="#8C785E" stroke-width="5" fill="none"/>
+      <path d="M380 218 V250 M408 262 V296 M372 308 V342 M418 352 V388 M390 404 V444" stroke="#8C785E" stroke-width="4"/>
+    </g>
+    <path d="M336 480 L346 382 L334 340 L350 300 L340 262 L356 236 L350 206 L372 180 L398 170 L414 148 L440 160 L454 184 L448 208 L468 228 L460 264 L474 302 L464 342 L478 480 Z" fill="none" stroke="#263238" stroke-width="6"/>
+    <!-- Kiefern auf den Felsen -->
+    <path d="M90 186 L104 148 L118 186 Z M70 196 L82 170 L94 196 Z" fill="#2E7D5B" stroke="#263238" stroke-width="5"/>
+    <path d="M384 176 L402 126 L420 176 Z M426 164 L440 132 L454 164 Z" fill="#2E7D5B" stroke="#263238" stroke-width="5"/>
+    <!-- Brücke mit Bögen -->
+    <path d="M160 296 H350 V392 H334 C334 356 318 334 294 334 C270 334 256 356 256 392 H244 C244 356 228 334 204 334 C182 334 168 352 166 380 L160 392 Z" fill="#E6D9BF" stroke="#263238" stroke-width="6"/>
+    <path d="M160 296 H350 V314 H160 Z" fill="#CFBF9F" stroke="#263238" stroke-width="6"/>
+    <path d="M168 296 V278 H184 V296 M204 296 V278 H220 V296 M240 296 V278 H256 V296 M276 296 V278 H292 V296 M312 296 V278 H328 V296" fill="#E6D9BF" stroke="#263238" stroke-width="5"/>
+    <path d="M176 285 H320" stroke="#263238" stroke-width="5"/>
+    <path d="M182 322 H206 M222 322 H246 M262 322 H286 M302 322 H326" stroke="#BFAE8D" stroke-width="4"/>
+    <!-- Wald in der Schlucht -->
+    <path d="M150 480 C168 430 196 410 226 420 C246 392 286 392 306 414 C328 402 352 420 362 480 Z" fill="#2F5A40" stroke="#263238" stroke-width="6"/>
+    <path d="M190 440 L206 404 L222 440 Z M256 428 L274 388 L292 428 Z M304 446 L318 416 L332 446 Z" fill="#3E8A62" stroke="#263238" stroke-width="5"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

@@ -1,0 +1,12 @@
+{
+  "name": "spurensuche-spiele",
+  "private": true,
+  "type": "module",
+  "license": "AGPL-3.0-only",
+  "description": "Minispiele, Item-Collage und Figur der Spurensuche: ES-Module ohne Build-Schritt und ohne Laufzeit-Abhängigkeiten",
+  "scripts": {
+    "test": "node --test --test-reporter=spec _test/",
+    "pruefe-inhalte": "node _werkzeuge/pruefe-inhalte.js",
+    "dateiliste": "node _werkzeuge/dateiliste.js"
+  }
+}

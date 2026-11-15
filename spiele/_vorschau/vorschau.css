@@ -1,0 +1,105 @@
+/* Testseite der Spiele: setzt die Variablen, die sonst die App setzt (Schnittstelle 2.6), hell, dunkel und
+   kontrastreich, damit jedes Format allein geprüft werden kann (Tastatur, Bildschirmleser, axe). */
+
+@font-face {
+  font-family: 'Atkinson Hyperlegible Next';
+  src: url('../../assets/spiele/schrift/AtkinsonHyperlegibleNext-Variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+:root {
+  --sp-grund: #f6f1e7;
+  --sp-flaeche: #ffffff;
+  --sp-text: #1f2a30;
+  --sp-text-leise: #45545d;
+  --sp-rand: #857865;
+  --sp-akzent: #1e7a4c;
+  --sp-akzent-text: #ffffff;
+  --sp-erfolg: #1e7a4c;
+  --sp-hinweis: #8a5a00;
+  --sp-fehler: #b3261e;
+  --sp-fokus: #0b57d0;
+  --sp-radius: 16px;
+  --sp-abstand: 8px;
+  --sp-schrift: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+  color-scheme: light;
+}
+:root[data-thema='dunkel'] {
+  --sp-grund: #141a1e;
+  --sp-flaeche: #1f272c;
+  --sp-text: #f1ede6;
+  --sp-text-leise: #c4ccd1;
+  --sp-rand: #8d9ba3;
+  --sp-akzent: #5cc795;
+  --sp-akzent-text: #0c1a12;
+  --sp-erfolg: #5cc795;
+  --sp-hinweis: #f2b84b;
+  --sp-fehler: #ff8a80;
+  --sp-fokus: #8ab4ff;
+  color-scheme: dark;
+}
+:root[data-kontrast='hoch'] {
+  --sp-grund: #ffffff;
+  --sp-flaeche: #ffffff;
+  --sp-text: #000000;
+  --sp-text-leise: #000000;
+  --sp-rand: #000000;
+  --sp-akzent: #0b4a2c;
+  --sp-akzent-text: #ffffff;
+  --sp-erfolg: #0b4a2c;
+  --sp-hinweis: #6b3d00;
+  --sp-fehler: #8c0000;
+  --sp-fokus: #000000;
+}
+:root[data-thema='dunkel'][data-kontrast='hoch'] {
+  --sp-grund: #000000;
+  --sp-flaeche: #000000;
+  --sp-text: #ffffff;
+  --sp-text-leise: #ffffff;
+  --sp-rand: #ffffff;
+  --sp-akzent: #ffd54a;
+  --sp-akzent-text: #000000;
+  --sp-erfolg: #7dffb0;
+  --sp-hinweis: #ffd54a;
+  --sp-fehler: #ff9e9e;
+  --sp-fokus: #ffffff;
+}
+
+* { box-sizing: border-box; }
+html { font-size: 18px; }
+body {
+  margin: 0; background: var(--sp-grund); color: var(--sp-text); font-family: var(--sp-schrift); line-height: 1.5;
+}
+a { color: var(--sp-akzent); }
+:root[data-thema='dunkel'] a { color: var(--sp-fokus); }
+a:focus-visible, button:focus-visible, select:focus-visible, input:focus-visible { outline: 3px solid var(--sp-fokus); outline-offset: 3px; }
+
+.vs-kopf {
+  display: flex; flex-wrap: wrap; gap: 12px 24px; align-items: center; justify-content: space-between;
+  padding: 12px clamp(12px, 3vw, 28px); background: var(--sp-flaeche); border-bottom: 1px solid var(--sp-rand);
+}
+.vs-kopf h1 { margin: 0; font-size: 1.15rem; }
+.vs-kopf p { margin: 0; color: var(--sp-text-leise); font-size: 0.85rem; }
+.vs-regler { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin: 0; padding: 0; border: 0; }
+.vs-regler legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.vs-regler label { display: inline-flex; gap: 6px; align-items: center; font-size: 0.9rem; font-weight: 650; }
+.vs-regler select, .vs-regler input[type='range'] { font: inherit; font-size: 0.9rem; min-height: 40px; }
+.vs-regler select { padding: 4px 8px; border-radius: 8px; border: 2px solid var(--sp-rand); background: var(--sp-flaeche); color: var(--sp-text); }
+.vs-regler input[type='checkbox'] { width: 22px; height: 22px; accent-color: var(--sp-akzent); }
+.vs-knopf {
+  min-height: 44px; padding: 6px 14px; border-radius: 999px; border: 2px solid var(--sp-rand); background: var(--sp-flaeche);
+  color: var(--sp-text); font: inherit; font-weight: 700; font-size: 0.9rem; cursor: pointer;
+}
+.vs-haupt { display: grid; gap: 24px; padding: clamp(12px, 3vw, 28px); max-width: 1200px; margin: 0 auto; }
+.vs-buehne { min-height: 60vh; }
+.vs-protokoll { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius); padding: 14px 18px; font-size: 0.88rem; }
+.vs-protokoll h2 { margin: 0 0 8px; font-size: 1rem; }
+.vs-protokoll pre { margin: 0; white-space: pre-wrap; word-break: break-word; font-size: 0.82rem; max-height: 320px; overflow: auto; }
+.vs-fehler { color: var(--sp-fehler); font-weight: 700; }
+.vs-liste { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.vs-ort { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius); padding: 16px; display: grid; gap: 8px; align-content: start; }
+.vs-ort img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 10px; }
+.vs-ort h2 { margin: 0; font-size: 1.1rem; }
+.vs-ort ol { margin: 0; padding-left: 1.3em; display: grid; gap: 4px; }
+.vs-unsichtbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
