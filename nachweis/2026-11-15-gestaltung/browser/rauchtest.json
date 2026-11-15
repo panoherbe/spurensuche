@@ -1,5 +1,5 @@
 {
-  "zeitpunkt": "2026-11-15T18:54:47.669Z",
+  "zeitpunkt": "2026-11-15T19:55:21.526Z",
   "axe": "4.10.2",
   "schritte": [
     "01-start",
@@ -187,15 +187,15 @@
   },
   "messung": {
     "offlinePaket": {
-      "dateien": 70,
-      "bytes": 392681,
-      "vorhanden": 70,
+      "dateien": 73,
+      "bytes": 451585,
+      "vorhanden": 73,
       "cache": [
-        "spurensuche-184bf7f5affb6b37"
+        "spurensuche-710621ef4e83bfe2"
       ]
     },
     "offlineGeladen": true,
-    "ausgangOffline": "Offline · 4 warten",
+    "ausgangOffline": "Offline · 5 warten",
     "nachOnline": "Alles übertragen",
     "uebersichtBiber": "Biber Fertig Fertig gerade eben",
     "auswertungSaetze": [

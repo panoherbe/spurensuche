@@ -1,20 +1,22 @@
-# Nachmessung nach der schlichteren Gestaltung, 15.11.2026
+# Nachmessung nach der neuen Gestaltung, 15.11.2026
 
-Am Abend des 15.11.2026 wurde nur die Gestaltung der App geändert, im Commit `c7d0532`:
+Am Abend des 15.11.2026 wurde die Gestaltung der App in zwei Schritten geändert.
 
-- kleinere Ecken: 6 statt 14 px, klein 4 statt 10 px
-- keine weichen Schatten
-- Knöpfe ohne Pillenform
-- Startseite ohne Farbverlauf
-- Kopfleiste deckend statt mit Glaseffekt
-- Hinweise und Prüfpunkte mit Rahmen rundum statt einem farbigen Rand links
+1. `c7d0532`, schlichter:
+   - keine weichen Schatten, keine Pillenknöpfe, kein Farbverlauf, keine gläserne Kopfleiste
+   - Hinweise und Prüfpunkte mit Rahmen rundum statt einem farbigen Rand links
+2. `b34b4bd`, eigene Schrift und weichere Formen:
+   - **Schrift:** Atkinson Hyperlegible Next in der App (`app/schrift/`, SIL OFL 1.1, Lizenztext daneben). Sie ist
+     gut lesbar, auch bei Sehschwäche, und hat die sorbischen Buchstaben. Vorher stand die Schrift des Systems.
+   - **Formen:** Ecken 12 px, klein 8 px; feine Schatten in zwei Ebenen; Kopfleiste auf der Fläche.
+   - Pillen, Verläufe, Glas und farbige Ränder links bleiben weg.
 
 Farben, Texte und Abläufe sind unverändert. Die Dateien in `spiele/` sind ebenfalls unverändert; die Spiele übernehmen
-über `--sp-radius` aber die kleineren Ecken.
+über die Variablen der App aber Schrift und Ecken.
 
 ## Messung
 
-Auf diesem Stand liefen am 15.11.2026 von 19:54 bis 19:57 Uhr alle Prüfungen des Messlaufs, die die Oberfläche betreffen.
+Auf dem Stand `b34b4bd` liefen am 15.11.2026 von 20:54 bis 20:58 Uhr alle Prüfungen des Messlaufs, die die Oberfläche betreffen.
 
 - Rechner, Container-Aufbau (`compose.test.yaml`, `compose.betrieb.yaml`) und Aufrufe waren dieselben wie im offiziellen
   Messlauf (`../2026-11-15-gesamt/`, `tools/messlauf.sh`).
@@ -30,7 +32,9 @@ Auf diesem Stand liefen am 15.11.2026 von 19:54 bis 19:57 Uhr alle Prüfungen de
 | Betriebsseite im Browser | 8 Schritte, keiner mit Fehler; 15 Ansichten, 0 Verstöße | `browser/betrieb-seite.json` |
 | Bilder für das README | fünf Bilder in `browser/konzept/`; `konzeptbilder.json` meldet keine Fehler (Schritte führt es nicht auf) | `browser/konzept/`, `browser/konzeptbilder.json` |
 
-Zusammen sind das 77 Ansichten mit 0 Verstößen, so viele wie im offiziellen Messlauf.
+Zusammen sind das 77 Ansichten mit 0 Verstößen, so viele wie im offiziellen Messlauf. Das Offline-Paket der
+Vorführung hat jetzt 150 Dateien mit 4.780.307 Bytes (4,6 MB, `browser/vorfuehrung.json`, `messung.offlinePaket`); im
+offiziellen Messlauf waren es 147 Dateien mit 4.721.242 Bytes. Dazugekommen sind die zwei Schriftdateien und ihr Lizenztext.
 
 Die Bilder `medien/1-karte.png` bis `medien/4-kompetenzraster.png` sind `browser/konzept/` in halber Größe
 (820 × 1180), ohne Metadaten.

@@ -7,7 +7,7 @@ Prototyp, den Sie selbst ausprobieren und prüfen können.**
 ![Rundgang durch die Spurensuche: Beitritt mit Code, Karte mit freier Reihenfolge, ein Ort im Klassenzimmer, ein kurzes Spiel in einfacher Sprache mit Rollen, das Bild aus Sammelstücken, die Übersicht der Lehrkraft, das Kompetenzraster und die Betriebsseite mit Ampel](medien/rundgang.gif)
 
 <sub>Rundgang, 90 Sekunden, ohne Ton, mit Untertiteln; aufgenommen am 15.11.2026 in der Vorführung (Beispielklasse,
-Gruppen simuliert). [Video herunterladen (MP4, 3,3 MB)](https://github.com/panoherbe/spurensuche/raw/main/medien/rundgang.mp4)
+Gruppen simuliert). [Video herunterladen (MP4, 2,9 MB)](https://github.com/panoherbe/spurensuche/raw/main/medien/rundgang.mp4)
 · Text des Rundgangs weiter unten.</sub>
 
 **Selbst ausprobieren:** die [Vorführung](https://panoherbe.com/projekte/spurensuche/vorfuehrung/index.html) öffnen,
@@ -26,19 +26,20 @@ Gruppen simuliert). [Video herunterladen (MP4, 3,3 MB)](https://github.com/panoh
 ## Was Sie brauchen, läuft hier schon
 
 Kurz: Jede Zeile ist im Prototyp umgesetzt. Jede Zahl steht mit Datum im Messprotokoll
-[`nachweis/2026-11-15-gesamt/PROTOKOLL.md`](nachweis/2026-11-15-gesamt/PROTOKOLL.md). Alle Nutzerinnen und Nutzer in
+[`nachweis/2026-11-15-gesamt/PROTOKOLL.md`](nachweis/2026-11-15-gesamt/PROTOKOLL.md), die Nachmessung nach der neuen
+Gestaltung in [`nachweis/2026-11-15-gestaltung/`](nachweis/2026-11-15-gestaltung/). Alle Nutzerinnen und Nutzer in
 den Messungen sind simuliert: Ein Skript klickt im Browser oder schickt Anfragen.
 
 | Sie brauchen | Läuft hier schon | Gemessen am 15.11.2026 |
 |---|---|---|
 | Orte auf einer Karte, freie Reihenfolge | Sachsen-Karte aus offenen Daten, vier echte Orte, kein Ort gesperrt | – |
 | Kurze Spiele, die sich wiederverwenden lassen | fünf Spielformate, zwölf Aufgaben, ein fester Bauplan für neue Spiele | alle 12 Aufgaben laden im Browser und halten den Bauplan ein, 0 Fehler |
-| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 147 Dateien, 4,5 MB im Gerät; ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
+| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 150 Dateien, 4,6 MB im Gerät (nach der Gestaltung vom 15.11. abends neu gemessen; im Messlauf 147 Dateien, 4,5 MB); ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
 | Vor Ort oder im Klassenzimmer | QR-Code, Code vom Schild oder Standort; je Ort eine Fassung für die Schule | QR-Codes von fremder Software (zbar) gelesen: 17 von 17 |
 | Sammeln und ein eigenes Bild | Sammelbuch zeigt, wo es was gibt (kein Zufall); Bild 2048 × 2048 aus den Sammelstücken, mit Reglern | Test: Schule wartet auf die Freigabe, die Ausstellung sieht nur Freigegebenes |
 | Auswertung für Lehrkräfte | Gruppen, Freigabe, laufende Übersicht, Beobachtungen, Kompetenzraster, PDF-Bericht, Textentwürfe, Löschen | 33 von 33 automatischen Tests bestanden |
 | Datenschutz | keine Daten über einzelne Kinder; Familien ohne Konto; Gruppendaten nach zwölf Wochen gelöscht | Test: Name und E-Mail der Schulanmeldung werden nie gespeichert |
-| Barrierefreiheit | Vorlesen, einfache Sprache, Tempo, hoher Kontrast, dunkel, große Schrift | 0 von axe-core 4.10.2 gefundene Verstöße (WCAG 2.1 AA) in 77 Ansichten; nach der schlichteren Gestaltung vom selben Abend erneut 77 Ansichten, 0 Verstöße |
+| Barrierefreiheit | Vorlesen, einfache Sprache, Tempo, hoher Kontrast, dunkel, große Schrift | 0 von axe-core 4.10.2 gefundene Verstöße (WCAG 2.1 AA) in 77 Ansichten; nach der neuen Gestaltung vom selben Abend erneut 77 Ansichten, 0 Verstöße |
 | Schulanmeldung | Standard OpenID Connect; fällt der Dienst aus, läuft die Stunde weiter | gegen Keycloak 26.0 geprüft: 5 von 5 Fällen ([Probelauf](nachweis/2026-11-15/keycloak/keycloak.json)); Ausfall und Schlüsselwechsel im Test |
 | Bilder für die Ausstellung | Freigabe durch die Lehrkraft, offene Schnittstelle, Archiv im offenen Format BagIt | Archiv: 99 Dateien exportiert, in eine leere Instanz übernommen und wieder exportiert, alle 99 Prüfsummen gleich (in diesem Lauf ohne Bildbeiträge) |
 | Viele Klassen zugleich | ein kleiner Server (2 CPU-Kerne, 2 GB) | 400 simulierte Gruppen gleichzeitig, 45 Minuten: 105.566 Anfragen, 0 Fehler; 95 % der Übertragungen in 2 ms, 99 % in 17 ms; mit 600 Gruppen: 0 Fehler |
@@ -88,7 +89,7 @@ Werte dort sind nachgebildet).
 | 0:53 | Danach Beobachtungen im Kompetenzraster, mit Vorschlag und Belegen. (Beispielklasse der Vorführung, Gruppen simuliert.) |
 | 0:59 | Keine Noten, keine Rangfolge. Die Einschätzung trifft die Lehrkraft. (Beispielklasse der Vorführung, Gruppen simuliert.) |
 | 1:05 | Für den Betrieb: eine Ampel, die sagt, was zu tun ist, und vier sichere Knöpfe. (In der Vorführung sind die Werte nachgebildet.) |
-| 1:13 | **Gemessen am 15.11.2026:** 33 von 33 Tests bestanden · 400 Gruppen gleichzeitig, 0 Fehler (simuliert) · 4,5 MB: alle Orte im Gerät, ohne Netz · 0 Verstöße: Barrierefreiheit, WCAG 2.1 AA. Alle Gruppen in Lasttest und Prüfläufen sind simuliert. |
+| 1:13 | **Gemessen am 15.11.2026:** 33 von 33 Tests bestanden · 400 Gruppen gleichzeitig, 0 Fehler (simuliert) · 4,6 MB: alle Orte im Gerät, ohne Netz · 0 Verstöße: Barrierefreiheit, WCAG 2.1 AA. Alle Gruppen in Lasttest und Prüfläufen sind simuliert. |
 | 1:22 | **Selbst ausprobieren:** panoherbe.com/projekte/spurensuche. Im Browser, ohne Konto. (Code AGPL-3.0: github.com/panoherbe/spurensuche · Texte und Zeichnungen CC BY-SA 4.0 · Fotos der Orte: Wikimedia Commons, Urheber und Lizenz je Bild im Repository) |
 
 </details>
@@ -132,12 +133,13 @@ npm-Pakete zur Laufzeit); ein Container; alle Daten exportierbar.
 - Nachweise: [`nachweis/2026-11-15-gesamt/`](nachweis/2026-11-15-gesamt/) (offizieller Messlauf, Code-Stand: Tag
   `messlauf-2026-11-15`; spätere Commits änderten Texte, Lizenzangaben und die Bremse gegen das Durchprobieren von
   Codes, die Tests liefen danach erneut mit 33 von 33), [`nachweis/2026-11-15-gestaltung/`](nachweis/2026-11-15-gestaltung/)
-  (schlichtere Gestaltung, `c7d0532`: Tests und alle Browser-Prüfläufe des Messlaufs erneut, 33 von 33, 77 Ansichten ohne Verstoß,
-  Bilder neu),
+  (neue Gestaltung mit eigener Schrift, `b34b4bd`: Tests und alle Browser-Prüfläufe des Messlaufs erneut, 33 von 33,
+  77 Ansichten ohne Verstoß, Paket 150 Dateien, Bilder neu),
   [`nachweis/2026-11-15-konzeptbilder/`](nachweis/2026-11-15-konzeptbilder/) (Nachlauf zweier Bilder),
   [`nachweis/2026-11-15/`](nachweis/2026-11-15/) (Probeläufe)
 
 **Lizenz:** Programmcode GNU AGPL-3.0-only seit dem ersten Commit ([`LICENSE`](LICENSE)); Texte, Aufgaben und eigene
 Zeichnungen CC BY-SA 4.0; Fotos der Orte aus Wikimedia Commons unter freien Lizenzen, je Bild in
-[`inhalte/BILDNACHWEIS.md`](inhalte/BILDNACHWEIS.md); Karte nach Natural Earth (gemeinfrei). Auftraggeber erhalten im
+[`inhalte/BILDNACHWEIS.md`](inhalte/BILDNACHWEIS.md); Karte nach Natural Earth (gemeinfrei); Schrift Atkinson
+Hyperlegible Next (SIL Open Font License 1.1). Auftraggeber erhalten im
 Auftrag die vertraglich vereinbarten Rechte.

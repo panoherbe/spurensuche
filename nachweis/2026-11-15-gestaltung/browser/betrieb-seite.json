@@ -1,5 +1,5 @@
 {
-  "zeitpunkt": "2026-11-15T18:57:38.461Z",
+  "zeitpunkt": "2026-11-15T19:58:18.588Z",
   "axe": "4.10.2",
   "schritte": [
     "b01-status",
@@ -93,14 +93,14 @@
     "punkte": 11,
     "ampel": "Alles in Ordnung",
     "telefonBreite": 390,
-    "neustartMs": 1024,
-    "neustartSeite": "Die Anwendung ist wieder erreichbar (nach 1,0 Sekunden).",
+    "neustartMs": 6086,
+    "neustartSeite": "Die Anwendung ist wieder erreichbar (nach 6,0 Sekunden).",
     "vorDemZurueckspielen": [
       "Klasse 6a vor der Sicherung",
       "Klasse 6b nach der Sicherung"
     ],
-    "sicherungAuswahl": "15.11.2026, 19:57 Uhr, von Hand angelegt",
-    "zurueckspielenMs": 1081,
+    "sicherungAuswahl": "15.11.2026, 20:58 Uhr, von Hand angelegt",
+    "zurueckspielenMs": 1079,
     "nachDemZurueckspielen": [
       "Klasse 6a vor der Sicherung"
     ],
@@ -111,7 +111,7 @@
     "ablehnung": "Nicht übernommen: 2 Fehler in mit Programmcode.zip. Es wurde nichts verändert.\ninhalte/zusatz.js: Dateityp .js ist in Inhaltspaketen nicht erlaubt. Programmcode (zum Beispiel .js oder .html) kommt nur mit einer neuen Version der Anwendung.\nspiele/neu/index.js: Liegt außerhalb der Ordner inhalte/ und assets/spiele/. Ein Inhaltspaket enthält nur diese beiden Ordner.\n\nBitte diese Liste an das Redakti",
     "ortZurueck": "Testort Nord",
     "ohneDienst": true,
-    "versionAuftragMs": 2033,
+    "versionAuftragMs": 2019,
     "protokoll": [
       "Auftrag erledigt",
       "Letzte Version zurückspielen beauftragt",

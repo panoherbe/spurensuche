@@ -1,5 +1,5 @@
 {
-  "zeitpunkt": "2026-11-15T18:56:22.711Z",
+  "zeitpunkt": "2026-11-15T19:56:57.084Z",
   "axe": "4.10.2",
   "schritte": [
     "spiel-bastei-1",
@@ -120,13 +120,13 @@
       },
       "bastei/3": {
         "format": "dilemma",
-        "abbruchMs": 2,
+        "abbruchMs": 3,
         "vertrag": true,
         "abweichungen": []
       },
       "frauenkirche/1": {
         "format": "bildsuche",
-        "abbruchMs": 2,
+        "abbruchMs": 4,
         "vertrag": true,
         "abweichungen": []
       },
@@ -138,43 +138,43 @@
       },
       "frauenkirche/3": {
         "format": "dilemma",
-        "abbruchMs": 3,
+        "abbruchMs": 2,
         "vertrag": true,
         "abweichungen": []
       },
       "goeltzschtal/1": {
         "format": "schaetzen",
-        "abbruchMs": 9,
+        "abbruchMs": 3,
         "vertrag": true,
         "abweichungen": []
       },
       "goeltzschtal/2": {
         "format": "bildpuzzle",
-        "abbruchMs": 3,
+        "abbruchMs": 2,
         "vertrag": true,
         "abweichungen": []
       },
       "goeltzschtal/3": {
         "format": "sortieren",
-        "abbruchMs": 2,
+        "abbruchMs": 3,
         "vertrag": true,
         "abweichungen": []
       },
       "bautzen/1": {
         "format": "sortieren",
-        "abbruchMs": 4,
+        "abbruchMs": 3,
         "vertrag": true,
         "abweichungen": []
       },
       "bautzen/2": {
         "format": "bildsuche",
-        "abbruchMs": 2,
+        "abbruchMs": 3,
         "vertrag": true,
         "abweichungen": []
       },
       "bautzen/3": {
         "format": "schaetzen",
-        "abbruchMs": 6,
+        "abbruchMs": 3,
         "vertrag": true,
         "abweichungen": []
       }

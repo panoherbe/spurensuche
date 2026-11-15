@@ -1,5 +1,5 @@
 {
-  "zeitpunkt": "2026-11-15T18:55:31.412Z",
+  "zeitpunkt": "2026-11-15T19:56:06.125Z",
   "axe": "4.10.2",
   "schritte": [
     "v01-lk-uebersicht",
@@ -31,7 +31,7 @@
     },
     "v-lk-laufend": {
       "verstoesse": [],
-      "bestanden": 25,
+      "bestanden": 24,
       "unvollstaendig": 0
     },
     "v-lk-auswertung": {
@@ -99,11 +99,11 @@
     "orte": 4,
     "spielText": "BILDPUZZLE · ETWA 6 MINUTEN Die Brücke im Nebel Das Foto der Basteibrücke ist durcheinandergeraten. Setzt es wieder zusammen: Tippt auf zwei Teile, dann tauschen sie die Plätze. Vorlesen So teilt i",
     "offlinePaket": {
-      "dateien": 147,
-      "bytes": 4721403,
-      "vorhanden": 147,
+      "dateien": 150,
+      "bytes": 4780307,
+      "vorhanden": 150,
       "cache": [
-        "spurensuche-c4550a4338e200a5"
+        "spurensuche-e62918939c6cedb5"
       ]
     },
     "offlineGeladen": true,
