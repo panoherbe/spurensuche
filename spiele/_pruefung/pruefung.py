@@ -326,6 +326,95 @@ def collage_laeufe(browser, basis, aus, axe_quelle, wiederholungen=5):
     return ergebnisse
 
 
+def figur_laeufe(browser, basis, aus, axe_quelle):
+    """Figur-Baukasten: axe auf Desktop und Telefon, Bedienung nur mit der Tastatur, gesperrte Teile bleiben gesperrt."""
+    ergebnisse = []
+    for geraet in ("desktop", "telefon"):
+        kontext = browser.new_context(**GERAETE[geraet], device_scale_factor=1)
+        seite = kontext.new_page()
+        lauf = Lauf(seite, axe_quelle, f"figur-{geraet}", aus / "bilder", True)
+        seite.goto(f"{basis}/spiele/_vorschau/figur.html")
+        seite.wait_for_selector(".sp-figur-baukasten svg")
+        lauf.pruefe("baukasten")
+        seite.locator("input[name='frisur']:checked").focus()
+        seite.keyboard.press("ArrowRight")            # kurz → Locken
+        seite.locator("input[name='kopfbedeckung']:checked").focus()
+        for _ in range(4):
+            seite.keyboard.press("ArrowRight")        # … → Kletterhelm (frei durch Abzeichen Bastei)
+        seite.locator("input[name='begleiter']:checked").focus()
+        seite.keyboard.press("ArrowLeft")             # rückwärts auf das letzte freie Teil: Uhu-Küken (frei durch Felsturm)
+        gesperrt = seite.evaluate("() => [...document.querySelectorAll('.sp-figur-radio:disabled')].map((e) => e.value)")
+        lauf.pruefe("gewaehlt")
+        lauf.taste(seite.get_by_role("button", name="Fertig"))
+        warte_bis(seite, "window.figurTest && window.figurTest.fertig", 10000)
+        auswahl = seite.evaluate("window.figurTest.auswahl")
+        ergebnisse.append({"geraet": geraet, "auswahl": auswahl, "gesperrt": gesperrt, "axe": lauf.axe, "axeVerstoesse": sum(len(v) for v in lauf.axe.values())})
+        print(json.dumps({"figur": geraet, "auswahl": {k: auswahl.get(k) for k in ("frisur", "kopfbedeckung", "begleiter")}, "gesperrt": gesperrt, "axeVerstoesse": ergebnisse[-1]["axeVerstoesse"]}, ensure_ascii=False), flush=True)
+        kontext.close()
+    return ergebnisse
+
+
+def konzeptbilder(browser, basis, aus):
+    """Bilder für Konzept und README: 1280 × 800 bei doppelter Pixeldichte (2560 × 1600 px), nach allen Animationen."""
+    ziel = aus / "konzept"
+    ziel.mkdir(exist_ok=True)
+    def seite_neu(groesse=(1280, 800)):
+        k = browser.new_context(viewport={"width": groesse[0], "height": groesse[1]}, device_scale_factor=2)
+        return k, k.new_page()
+    def ruhig(s):
+        for _ in range(2):
+            s.wait_for_timeout(200)
+            s.evaluate("() => Promise.all(document.getAnimations().filter((a) => a.effect?.getComputedTiming().iterations !== Infinity).map((a) => a.finished.catch(() => null)))")
+    def nur_spiel(s):
+        # Nur das Spiel zeigen: Kopf und Protokoll der Testseite ausblenden (über das DevTools-Protokoll, nicht per Stil-Element)
+        s.evaluate("() => { for (const e of document.querySelectorAll('.vs-kopf, .vs-protokoll')) e.style.setProperty('display', 'none'); }")
+    bilder = []
+    # 1 Schätzfrage in einfacher Sprache
+    k, s = seite_neu()
+    s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=bastei/2&sprache=einfach")
+    s.get_by_role("button", name="Los geht’s").click(); s.wait_for_selector(".sp-wahl")
+    s.locator("[data-weg='gemeinsam']").click(); s.wait_for_selector(".sp-einigen")
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "1-schaetzfrage-einfache-sprache.png")); bilder.append("1-schaetzfrage-einfache-sprache.png"); k.close()
+    # 2 Dilemma: Begründen
+    k, s = seite_neu()
+    s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=frauenkirche/3")
+    s.get_by_role("button", name="Los geht’s").click()
+    for _ in range(2): s.locator(".sp-aktionen .sp-knopf--haupt").last.click()
+    s.get_by_role("button", name="eine Stimme mehr für B").click(); s.get_by_role("button", name="eine Stimme mehr für B").click(); s.get_by_role("button", name="eine Stimme mehr für A").click()
+    s.locator(".sp-aktionen .sp-knopf--haupt").last.click(); s.wait_for_selector(".sp-argumente")
+    s.locator("[data-argument='steinmetzin']").click(); s.locator("[data-argument='pfarrerin']").click()
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "2-dilemma-begruenden.png")); bilder.append("2-dilemma-begruenden.png"); k.close()
+    # 3 Bildsuche mit Tipp
+    k, s = seite_neu()
+    s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=bautzen/2")
+    s.get_by_role("button", name="Los geht’s").click(); s.wait_for_selector(".sp-suche")
+    s.locator(".sp-knopf--tipp").click(); s.locator(".sp-knopf--tipp").click()
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "3-bildsuche-tipp.png")); bilder.append("3-bildsuche-tipp.png"); k.close()
+    # 4 Abschluss mit Sammelstück
+    k, s = seite_neu()
+    s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=goeltzschtal/3")
+    s.get_by_role("button", name="Los geht’s").click(); s.wait_for_selector(".sp-liste")
+    for _ in range(3): s.locator(".sp-knopf--tipp").click(); s.wait_for_timeout(300)
+    for _ in range(6):
+        if s.locator(".sp-ansage--gut").count(): break
+        s.locator(".sp-knopf--tipp").click(); s.wait_for_timeout(300)
+    s.get_by_role("button", name="Weiter").click(); s.wait_for_selector(".sp-abschluss")
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "4-abschluss-sammelstueck.png")); bilder.append("4-abschluss-sammelstueck.png"); k.close()
+    # 5 Collage mit Reglern
+    k, s = seite_neu((1280, 900))
+    s.goto(f"{basis}/spiele/_vorschau/collage.html?anordnung=wirbel&groesse=mittel&farbstimmung=abend&items=basteibruecke,felsturm,wanderschuh,alter-stein,kuppel,turmkreuz,dampflok,goeltzschtalbruecke,ziegel,ortsschild")
+    warte_bis(s, "document.getElementById('cl-vorschau').src.startsWith('blob:')", 20000)
+    s.evaluate("() => document.querySelector('.vs-kopf').style.setProperty('display', 'none')")
+    ruhig(s); s.screenshot(path=str(ziel / "5-collage-regler.png")); bilder.append("5-collage-regler.png"); k.close()
+    # 6 Figur
+    k, s = seite_neu((1280, 900))
+    s.goto(f"{basis}/spiele/_vorschau/figur.html")
+    s.wait_for_selector(".sp-figur-baukasten svg")
+    s.evaluate("() => { for (const e of document.querySelectorAll('.vs-kopf, .vs-protokoll')) e.style.setProperty('display', 'none'); }")
+    ruhig(s); s.screenshot(path=str(ziel / "6-figur-baukasten.png")); bilder.append("6-figur-baukasten.png"); k.close()
+    return bilder
+
+
 def ein_lauf(browser, basis, repo, aufgabe_id, geraet, einstellung, axe_quelle, bilder, fotos, browsername):
     aufgabe = lies(repo, aufgabe_id)
     kontext = browser.new_context(**GERAETE[geraet], device_scale_factor=1, reduced_motion="reduce" if "ruhig" in einstellung else "no-preference")
@@ -390,6 +479,8 @@ def main():
     arg.add_argument("--umfang", default="voll", choices=["voll", "schnell"])
     arg.add_argument("--fotos", default="1")
     arg.add_argument("--collage", default="1")
+    arg.add_argument("--konzept", default="0")
+    arg.add_argument("--stand", default="")
     a = arg.parse_args()
     aus = Path(a.aus)
     bilder = aus / "bilder"
@@ -421,6 +512,8 @@ def main():
             laeufe.append(eintrag)
             print(json.dumps({k: eintrag.get(k) for k in ("browser", "geraet", "einstellung", "aufgabe", "geloest", "axeVerstoesse", "axeZustaende", "sekunden", "fehler")}, ensure_ascii=False), flush=True)
         collagen = collage_laeufe(browser["chromium"], a.basis, aus, axe_quelle) if a.collage == "1" else []
+        figuren = figur_laeufe(browser["chromium"], a.basis, aus, axe_quelle) if a.collage == "1" else []
+        konzept = konzeptbilder(browser["chromium"], a.basis, aus) if a.konzept == "1" else []
         for b in browser.values():
             b.close()
     ende = datetime.now(timezone.utc)
@@ -437,12 +530,15 @@ def main():
         "aufgaben": sorted({l["aufgabe"] for l in laeufe}),
     }
     messwerte = {
+        "stand": a.stand,
         "beginn": start.isoformat(timespec="seconds"),
         "ende": ende.isoformat(timespec="seconds"),
         "umgebung": {"browser": versionen, "axe": f"axe-core {axe_quelle.split('axe v', 1)[1].split()[0] if 'axe v' in axe_quelle else '?'}", "regeln": AXE_REGELN, "python": platform.python_version()},
         "hinweis": "Alle Spielenden sind simuliert: Ein Skript bedient die Seite nur mit der Tastatur. axe-core findet einen Teil der WCAG-Verstöße automatisch; es ersetzt keine Prüfung durch Menschen.",
         "zusammenfassung": zusammen,
         "collagen": collagen,
+        "figur": figuren,
+        "konzeptbilder": konzept,
         "laeufe": laeufe,
     }
     (aus / "messwerte.json").write_text(json.dumps(messwerte, ensure_ascii=False, indent=2), encoding="utf-8")
