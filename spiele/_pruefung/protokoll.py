@@ -46,6 +46,8 @@ a(f"**{z['axeVerstoesse']} Verstöße** gegen WCAG 2.0/2.1/2.2 A und AA. Schemaf
 a(f"Ereignisse außerhalb der Schnittstelle {z['ereignisFehler']}, Konsolenmeldungen {z['konsolenmeldungen']}.")
 if "ueberlauf" in z:
     a(f"Text über den Kartenrand oder abgeschnitten (in jedem geprüften Zustand gemessen): **{z['ueberlauf']} Stellen**.")
+    if "ueberlaufCollageFigur" in z:
+        a(f"Auf den Testseiten von Collage und Figur: {z['ueberlaufCollageFigur']} Stellen.")
 if z.get("breitenProben"):
     breiten = ", ".join(str(b) for b in z["breiten"])
     a("")

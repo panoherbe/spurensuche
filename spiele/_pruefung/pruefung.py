@@ -42,6 +42,14 @@ AXE_REGELN = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]
 UEBERLAUF_JS = """() => {
   const wurzel = document.querySelector('.sp-spiel') || document.body;
   const name = (e) => e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/).join('.') : '');
+  // absichtlich unsichtbar (Muster „nur für Bildschirmleser“: Kasten höchstens 1 px, abgeschnitten)
+  const versteckt = (e) => {
+    for (let a = e; a && a !== document.documentElement; a = a.parentElement) {
+      const st = getComputedStyle(a); const r = a.getBoundingClientRect();
+      if ((st.overflow !== 'visible' || st.clip !== 'auto' || st.clipPath !== 'none') && (r.width <= 1 || r.height <= 1)) return true;
+    }
+    return false;
+  };
   const funde = [];
   const bereich = document.createRange();
   const gang = document.createTreeWalker(wurzel, NodeFilter.SHOW_TEXT);
@@ -50,6 +58,7 @@ UEBERLAUF_JS = """() => {
     const el = n.parentElement;
     if (!text || !el || el.closest('svg, .sp-unsichtbar, [hidden]')) continue;
     if (typeof el.checkVisibility === 'function' && !el.checkVisibility({ visibilityProperty: true })) continue;
+    if (versteckt(el)) continue;
     bereich.selectNodeContents(n);
     let fund = null;
     for (const r of bereich.getClientRects()) {
@@ -57,10 +66,10 @@ UEBERLAUF_JS = """() => {
       for (let a = el; a && a !== document.documentElement; a = a.parentElement) {
         const st = getComputedStyle(a);
         if (st.display === 'inline' || st.display === 'contents') continue;
+        if (st.overflowX === 'auto' || st.overflowX === 'scroll') break;  // scrollbarer Kasten: Text darf darüber hinaus
         const b = a.getBoundingClientRect();
         const ueber = Math.max(r.right - b.right, b.left - r.left);
         if (ueber > 1) { fund = { text: text.slice(0, 40), kasten: name(a), px: Math.round(ueber) }; break; }
-        if (st.overflowX === 'auto' || st.overflowX === 'scroll') break;
       }
       if (fund) break;
     }
@@ -364,6 +373,7 @@ def collage_laeufe(browser, basis, aus, axe_quelle, wiederholungen=5):
             "erstelltMitZeitzone": m["erstellt"].endswith("Z"),
             "axe": lauf.axe, "axeVerstoesse": sum(len(v) for v in lauf.axe.values()),
             "ueberlaufStellen": sum(w["anzahl"] for w in lauf.ueberlauf.values()),
+            "ueberlauf": {z: w for z, w in lauf.ueberlauf.items() if w["anzahl"]},
         })
         print(json.dumps({k: ergebnisse[-1][k] for k in ("anordnung", "farbstimmung", "anzahl", "dauerMs", "png", "axeVerstoesse")}, ensure_ascii=False), flush=True)
         kontext.close()
@@ -393,7 +403,8 @@ def figur_laeufe(browser, basis, aus, axe_quelle):
         warte_bis(seite, "window.figurTest && window.figurTest.fertig", 10000)
         auswahl = seite.evaluate("window.figurTest.auswahl")
         ergebnisse.append({"geraet": geraet, "auswahl": auswahl, "gesperrt": gesperrt, "axe": lauf.axe, "axeVerstoesse": sum(len(v) for v in lauf.axe.values()),
-                           "ueberlaufStellen": sum(w["anzahl"] for w in lauf.ueberlauf.values())})
+                           "ueberlaufStellen": sum(w["anzahl"] for w in lauf.ueberlauf.values()),
+                           "ueberlauf": {z: w for z, w in lauf.ueberlauf.items() if w["anzahl"]}})
         print(json.dumps({"figur": geraet, "auswahl": {k: auswahl.get(k) for k in ("frisur", "kopfbedeckung", "begleiter")}, "gesperrt": gesperrt, "axeVerstoesse": ergebnisse[-1]["axeVerstoesse"]}, ensure_ascii=False), flush=True)
         kontext.close()
     return ergebnisse
@@ -613,6 +624,7 @@ def main():
         "ereignisFehler": sum(len(l.get("ereignisFehler") or []) for l in laeufe),
         "konsolenmeldungen": sum(len(l["konsole"]) for l in laeufe),
         "ueberlauf": sum(l.get("ueberlaufStellen", 0) for l in laeufe),
+        "ueberlaufCollageFigur": sum(c.get("ueberlaufStellen", 0) for c in collagen) + sum(f.get("ueberlaufStellen", 0) for f in figuren),
         "breitenProben": len(breiten),
         "breitenMitUeberlauf": sum(1 for b in breiten if b["anzahl"]),
         "breiten": sorted({b["breite"] for b in breiten}),
