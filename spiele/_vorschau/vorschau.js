@@ -85,6 +85,13 @@ async function spiel() {
     });
     test.ergebnis = ergebnis;
     test.ereignisFehler = ergebnis.ereignisse.map(ereignisFehler).filter(Boolean);
+    // Strom über melde(): jedes Ereignis { art, zeit, wert } mit zeit als Zahl, und genau die Ereignisse des Ergebnisses
+    for (const e of gemeldet) {
+      if (typeof e.zeit !== 'number' || !Number.isFinite(e.zeit)) test.ereignisFehler.push(`melde() ohne zeit: ${e.art}`);
+      const f = ereignisFehler(e);
+      if (f) test.ereignisFehler.push(`melde(): ${f}`);
+    }
+    if (JSON.stringify(gemeldet) !== JSON.stringify(ergebnis.ereignisse)) test.ereignisFehler.push('melde() und ergebnis.ereignisse weichen ab');
     const unbekannt = ergebnis.items.filter((id) => !aufgabe.belohnung.includes(id));
     if (unbekannt.length) test.ereignisFehler.push(`items außerhalb der Belohnung: ${unbekannt.join(', ')}`);
     pruefung.textContent += test.ereignisFehler.length ? ` · Ergebnis: ${test.ereignisFehler.join('; ')}` : ' · Ergebnis: passt zur Schnittstelle';

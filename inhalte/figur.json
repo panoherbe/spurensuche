@@ -1,0 +1,354 @@
+{
+  "version": 1,
+  "beschreibung": "Teile der Spielfigur. Optionen mit freiDurch werden frei, sobald die Gruppe dieses Sammelstück hat (transparent, nie zufällig). Zeichnungen: spiele/figur/teile.js, CC BY-SA 4.0.",
+  "standard": {
+    "haut": "haut-3",
+    "frisur": "kurz",
+    "haare": "dunkelbraun",
+    "gesicht": "froh",
+    "brille": "keine",
+    "kopfbedeckung": "keine",
+    "oberteil": "shirt",
+    "oberteilFarbe": "gruen",
+    "hose": "jeans",
+    "zubehoer": "karte",
+    "rucksack": "rucksack",
+    "begleiter": "keiner"
+  },
+  "gruppen": [
+    {
+      "id": "haut",
+      "name": "Hautfarbe",
+      "art": "farbe",
+      "optionen": [
+        {
+          "id": "haut-1",
+          "name": "sehr hell",
+          "farbe": "#F6D3B3"
+        },
+        {
+          "id": "haut-2",
+          "name": "hell",
+          "farbe": "#EBBE98"
+        },
+        {
+          "id": "haut-3",
+          "name": "mittel",
+          "farbe": "#D9A27A"
+        },
+        {
+          "id": "haut-4",
+          "name": "dunkel",
+          "farbe": "#9C6644"
+        },
+        {
+          "id": "haut-5",
+          "name": "sehr dunkel",
+          "farbe": "#6B4430"
+        }
+      ]
+    },
+    {
+      "id": "frisur",
+      "name": "Frisur",
+      "optionen": [
+        {
+          "id": "kurz",
+          "name": "kurz"
+        },
+        {
+          "id": "locken",
+          "name": "Locken"
+        },
+        {
+          "id": "zoepfe",
+          "name": "Zöpfe"
+        },
+        {
+          "id": "pferdeschwanz",
+          "name": "Pferdeschwanz"
+        },
+        {
+          "id": "dutt",
+          "name": "Dutt"
+        },
+        {
+          "id": "lang",
+          "name": "lang"
+        },
+        {
+          "id": "glatt",
+          "name": "ohne Haare"
+        }
+      ]
+    },
+    {
+      "id": "haare",
+      "name": "Haarfarbe",
+      "art": "farbe",
+      "optionen": [
+        {
+          "id": "schwarz",
+          "name": "schwarz",
+          "farbe": "#2B2A2E"
+        },
+        {
+          "id": "dunkelbraun",
+          "name": "dunkelbraun",
+          "farbe": "#5A3825"
+        },
+        {
+          "id": "braun",
+          "name": "braun",
+          "farbe": "#8A5A33"
+        },
+        {
+          "id": "blond",
+          "name": "blond",
+          "farbe": "#E5C07B"
+        },
+        {
+          "id": "rot",
+          "name": "rot",
+          "farbe": "#C4562E"
+        },
+        {
+          "id": "lila",
+          "name": "lila",
+          "farbe": "#8E6BC9"
+        }
+      ]
+    },
+    {
+      "id": "gesicht",
+      "name": "Gesicht",
+      "optionen": [
+        {
+          "id": "froh",
+          "name": "fröhlich"
+        },
+        {
+          "id": "lacht",
+          "name": "lacht"
+        },
+        {
+          "id": "staunt",
+          "name": "staunt"
+        },
+        {
+          "id": "zwinkert",
+          "name": "zwinkert"
+        }
+      ]
+    },
+    {
+      "id": "brille",
+      "name": "Brille",
+      "optionen": [
+        {
+          "id": "keine",
+          "name": "keine"
+        },
+        {
+          "id": "rund",
+          "name": "runde Brille"
+        },
+        {
+          "id": "sonne",
+          "name": "Sonnenbrille"
+        }
+      ]
+    },
+    {
+      "id": "kopfbedeckung",
+      "name": "Auf dem Kopf",
+      "optionen": [
+        {
+          "id": "keine",
+          "name": "nichts"
+        },
+        {
+          "id": "schirmmuetze",
+          "name": "Schirmmütze"
+        },
+        {
+          "id": "pudelmuetze",
+          "name": "Pudelmütze"
+        },
+        {
+          "id": "kopftuch",
+          "name": "Kopftuch"
+        },
+        {
+          "id": "kletterhelm",
+          "name": "Kletterhelm",
+          "freiDurch": "abzeichen-bastei"
+        },
+        {
+          "id": "lokmuetze",
+          "name": "Lokführermütze",
+          "freiDurch": "abzeichen-goeltzschtal"
+        },
+        {
+          "id": "krone",
+          "name": "Papierkrone",
+          "freiDurch": "abzeichen-frauenkirche"
+        }
+      ]
+    },
+    {
+      "id": "oberteil",
+      "name": "Oberteil",
+      "optionen": [
+        {
+          "id": "shirt",
+          "name": "T-Shirt"
+        },
+        {
+          "id": "pulli",
+          "name": "Kapuzenpulli"
+        },
+        {
+          "id": "weste",
+          "name": "Weste"
+        }
+      ]
+    },
+    {
+      "id": "oberteilFarbe",
+      "name": "Farbe des Oberteils",
+      "art": "farbe",
+      "optionen": [
+        {
+          "id": "gruen",
+          "name": "grün",
+          "farbe": "#2E8B57"
+        },
+        {
+          "id": "blau",
+          "name": "blau",
+          "farbe": "#2A6FA8"
+        },
+        {
+          "id": "rot",
+          "name": "rot",
+          "farbe": "#D64545"
+        },
+        {
+          "id": "gelb",
+          "name": "gelb",
+          "farbe": "#F2B233"
+        },
+        {
+          "id": "lila",
+          "name": "lila",
+          "farbe": "#7E57C2"
+        },
+        {
+          "id": "grau",
+          "name": "grau",
+          "farbe": "#6B7A86"
+        }
+      ]
+    },
+    {
+      "id": "hose",
+      "name": "Hose",
+      "art": "farbe",
+      "optionen": [
+        {
+          "id": "jeans",
+          "name": "Jeans",
+          "farbe": "#3E5C80"
+        },
+        {
+          "id": "schwarz",
+          "name": "schwarz",
+          "farbe": "#2F3438"
+        },
+        {
+          "id": "braun",
+          "name": "braun",
+          "farbe": "#7A5536"
+        },
+        {
+          "id": "gruen",
+          "name": "grün",
+          "farbe": "#4E6B3A"
+        }
+      ]
+    },
+    {
+      "id": "zubehoer",
+      "name": "In der Hand",
+      "optionen": [
+        {
+          "id": "keins",
+          "name": "nichts"
+        },
+        {
+          "id": "karte",
+          "name": "Landkarte"
+        },
+        {
+          "id": "lupe",
+          "name": "Lupe"
+        },
+        {
+          "id": "laterne",
+          "name": "Laterne"
+        },
+        {
+          "id": "fahne",
+          "name": "Sachsenfahne"
+        },
+        {
+          "id": "fernrohr",
+          "name": "Fernrohr",
+          "freiDurch": "abzeichen-bautzen"
+        }
+      ]
+    },
+    {
+      "id": "rucksack",
+      "name": "Rucksack",
+      "optionen": [
+        {
+          "id": "rucksack",
+          "name": "mit Rucksack"
+        },
+        {
+          "id": "keiner",
+          "name": "ohne Rucksack"
+        }
+      ]
+    },
+    {
+      "id": "begleiter",
+      "name": "Begleiter",
+      "optionen": [
+        {
+          "id": "keiner",
+          "name": "keiner"
+        },
+        {
+          "id": "dackel",
+          "name": "Dackel"
+        },
+        {
+          "id": "katze",
+          "name": "Katze"
+        },
+        {
+          "id": "eichhoernchen",
+          "name": "Eichhörnchen"
+        },
+        {
+          "id": "uhu",
+          "name": "Uhu-Küken",
+          "freiDurch": "felsturm"
+        }
+      ]
+    }
+  ]
+}

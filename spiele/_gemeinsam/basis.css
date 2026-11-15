@@ -82,23 +82,32 @@
 .sp-flaeche { display: grid; gap: calc(var(--spi-a) * 2.5); }
 .sp-buehne { min-width: 0; }
 
-/* Startkarte */
-.sp-start { display: grid; gap: calc(var(--spi-a) * 3); }
+/* Startkarte. Die Spalten richten sich nach der Breite der Karte selbst (Container-Abfrage), nicht nach dem Fenster:
+   In der App liegt das Spiel in einem Rahmen, auf dem iPad hochkant (820 px) bleiben der Karte nur gut 700 px. */
+.sp-start { display: grid; gap: calc(var(--spi-a) * 3); container: sp-start / inline-size; }
 .sp-start-kopf { display: grid; gap: calc(var(--spi-a) * 3); grid-template-columns: minmax(0, 1fr); align-items: center; }
-@media (min-width: 760px) { .sp-start-kopf:has(.sp-start-bild) { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } }
+@container sp-start (min-width: 680px) { .sp-start-kopf:has(.sp-start-bild) { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } }
 .sp-start-ulla { width: min(220px, 60%); justify-self: center; }
 .sp-start-bild { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: calc(var(--spi-radius) * 0.75); box-shadow: var(--spi-schatten); background: var(--spi-flaeche-2); }
 .sp-start-text { display: grid; gap: calc(var(--spi-a) * 1.25); justify-items: start; }
 .sp-start-unten { display: grid; gap: calc(var(--spi-a) * 3); }
-@media (min-width: 760px) { .sp-start-unten:has(.sp-gewinnvorschau):has(.sp-rollen) { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
-.sp-rollenliste { list-style: none; padding: 0; display: grid; gap: var(--spi-a); grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+@container sp-start (min-width: 920px) { .sp-start-unten:has(.sp-gewinnvorschau):has(.sp-rollen) { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+/* Rollen: eine Spalte, ab 27em Platz zwei Spalten (bei vier Rollen 2 × 2, nie 3 + 1). em statt px: Bei großer
+   Schrift bleibt es länger einspaltig. minmax(0, 1fr) und Umbruch im Wort verhindern, dass ein langes Wort
+   („Nachschlagen“, „einverstanden“) über den Kartenrand läuft. */
+.sp-rollen { container: sp-rollen / inline-size; }
+.sp-rollenliste { list-style: none; padding: 0; display: grid; gap: var(--spi-a); grid-template-columns: minmax(0, 1fr); }
+@container sp-rollen (min-width: 27em) { .sp-rollenliste { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 .sp-rolle {
-  display: grid; grid-template-columns: auto 1fr; column-gap: calc(var(--spi-a) * 1.25); align-items: start; align-content: start;
+  display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: calc(var(--spi-a) * 1.25); align-items: start; align-content: start;
   padding: calc(var(--spi-a) * 1.5); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie);
 }
 .sp-rolle-symbol { grid-row: span 2; width: 2.1em; height: 2.1em; padding: 0.38em; border-radius: 50%; background: var(--spi-akzent-hell); color: var(--spi-akzent); }
+.sp-rolle-name, .sp-rolle-aufgabe { min-width: 0; overflow-wrap: break-word; }
 .sp-rolle-name { font-weight: 750; }
 .sp-rolle-aufgabe { color: var(--spi-leise); font-size: 0.9em; line-height: 1.35; }
+/* Keine automatische Silbentrennung: Kinder lesen ganze Wörter leichter, einfache Sprache trennt nicht am Zeilenende.
+   Der Platz kommt aus der Spaltenwahl oben; break-word greift nur, wenn ein Wort allein nicht mehr in die Zeile passt. */
 .sp-gewinnvorschau { align-self: start; padding: calc(var(--spi-a) * 1.75); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-hinweis-hell); border: 2px dashed var(--spi-hinweis); }
 .sp-gewinnliste { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 2); justify-content: center; }
 

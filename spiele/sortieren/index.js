@@ -89,12 +89,16 @@ function reihenfolge(k) {
     falschBeimPruefen = null;
     const betroffen = [...elemente.values()].map((e) => e.li);
     reihe = neu;
-    await bewege(k, betroffen, zeichne, 240);
+    // Fokus sofort mit dem Umstellen setzen (nicht nach der Bewegung), damit schnelle Eingaben nicht verrutschen.
+    await bewege(k, betroffen, () => {
+      zeichne();
+      if (durchTipp) return;
+      const ziel = elemente.get(id)[knopfName];
+      if (ziel && ziel.getAttribute('aria-disabled') !== 'true') ziel.focus({ preventScroll: true });
+      else elemente.get(id)[knopfName === 'hoch' ? 'runter' : 'hoch']?.focus({ preventScroll: true });
+    }, 240);
     const platz = reihe.indexOf(id);
     ansageLeise.textContent = `${t(nachId.get(id).text)}: jetzt Platz ${platz + 1} von ${reihe.length}.`;
-    const ziel = elemente.get(id)[knopfName];
-    if (ziel && ziel.getAttribute('aria-disabled') !== 'true') ziel.focus();
-    else elemente.get(id)[knopfName === 'hoch' ? 'runter' : 'hoch']?.focus();
     k.ton('klick');
   }
 

@@ -58,6 +58,11 @@ test('Gemeinsame Felder (Schnittstelle 2.2), Belohnungen, Bilder und Zählungen 
     for (const b of a.belohnung) assert.ok(itemIds.has(b), `${id}: Sammelstück ${b} fehlt in items.json`);
     const bilder = [a.bild?.datei, ...(a.karten ?? []).map((k) => k.bild?.datei), a.vergleich?.bild].filter(Boolean);
     for (const b of bilder) assert.ok(existsSync(WURZEL + b), `${id}: Datei fehlt: ${b}`);
+    // wie die Inhaltsprüfung der App (Schnittstelle 1.2): jeder Pfad assets/spiele/… irgendwo in der Aufgabe existiert
+    const pfade = [];
+    const sammle = (w) => { if (typeof w === 'string') { if (w.startsWith('assets/spiele/')) pfade.push(w); } else if (w && typeof w === 'object') Object.values(w).forEach(sammle); };
+    sammle(a);
+    for (const b of pfade) assert.ok(existsSync(WURZEL + b), `${id}: Datei ${b} fehlt`);
     if (a.format === 'bildpuzzle') assert.equal(a.teile.length, a.raster.spalten * a.raster.zeilen, `${id}: teile`);
     if (a.format === 'bildsuche') {
       if (a.felder) assert.equal(a.felder.length, a.raster.spalten * a.raster.zeilen, `${id}: felder`);
@@ -108,5 +113,26 @@ test('Sammelstücke nach Schnittstelle 4: Kennung, Name, Bild, Alternativtext', 
     assert.match(svg, /<svg[^>]+width="512"[^>]+height="512"/, `${item.id}: Breite und Höhe für das Zeichnen auf Canvas`);
     assert.match(svg, /<title>[^<]+<\/title>/, `${item.id}: <title>`);
     assert.doesNotMatch(svg, /<script|on[a-z]+=|xlink:href="http|href="http/i, `${item.id}: kein Skript, keine fremden Verweise`);
+  }
+});
+
+test('Jedes Sammelstück ist erreichbar: steht in einer Belohnung; jedes Figurteil mit freiDurch hängt an so einem', () => {
+  const vergeben = new Set(aufgaben.flatMap((a) => a.daten.belohnung));
+  for (const item of lies('inhalte/items.json')) assert.ok(vergeben.has(item.id), `${item.id}: keine Aufgabe vergibt es`);
+  const teile = JSON.stringify(lies('inhalte/figur.json')).match(/"freiDurch":"[^"]+"/g) ?? [];
+  for (const t of teile) { const id = t.split(':')[1].replaceAll('"', ''); assert.ok(vergeben.has(id), `Figurteil frei durch ${id}: nie erreichbar`); }
+});
+
+test('Abläufe nach Zeit: nur vorhandene Aufgaben, Dauer passt in die Zeit', () => {
+  const { ablaeufe } = lies('inhalte/ablaeufe.json');
+  const nachId = new Map(aufgaben.map((a) => [a.id, a.daten]));
+  for (const ablauf of ablaeufe) {
+    // Form nach Schnittstelle 3.4: orte: [{ ort, aufgaben: ["1", …] }], Kennungen stunde, projekttag, ausflug
+    assert.ok(['stunde', 'projekttag', 'ausflug'].includes(ablauf.id), `${ablauf.id}: Kennung nach 3.4`);
+    assert.ok(Array.isArray(ablauf.orte) && ablauf.orte.length > 0, `${ablauf.id}: orte fehlt`);
+    const ids = ablauf.orte.flatMap((o) => o.aufgaben.map((nr) => `${o.ort}/${nr}`));
+    for (const id of ids) assert.ok(nachId.has(id), `${ablauf.id}: ${id} fehlt`);
+    const summe = ids.reduce((s, id) => s + nachId.get(id).dauerMinuten, 0);
+    assert.ok(summe <= ablauf.minuten, `${ablauf.id}: ${summe} Minuten Spiel passen nicht in ${ablauf.minuten}`);
   }
 });

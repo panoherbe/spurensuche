@@ -6,7 +6,7 @@
     "einfach": "Früher wollten Menschen eine Bahn auf die Bastei bauen. Ihr entscheidet: Soll die Bahn kommen? Und warum?"
   },
   "dauerMinuten": 9,
-  "belohnung": ["wanderschuh"],
+  "belohnung": ["wanderschuh", "abzeichen-bastei"],
   "stufe": "beurteilen",
   "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
   "bild": {

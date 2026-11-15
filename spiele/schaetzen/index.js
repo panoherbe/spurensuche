@@ -149,7 +149,7 @@ function aufbau(k) {
         h('label', { class: 'sp-unsichtbar', for: reglerId }, `Schätzung in ${einheitWort}`),
         regler,
         h('div', { class: 'sp-skala', 'aria-hidden': 'true' }, h('span', {}, grosseZahl(bereich.min, u.sprache)), h('span', {}, grosseZahl(bereich.max, u.sprache))),
-        h('div', { class: 'sp-zahlfeld' }, weniger, h('label', { for: feldId }, 'genau:'), feld, h('span', {}, einheitWort), mehr)),
+        h('div', { class: 'sp-zahlfeld' }, weniger, h('label', { for: feldId }, 'Zahl eintippen:'), feld, h('span', {}, einheitWort), mehr)),
       h('p', { class: 'sp-hilfetext' }, u.sprache === 'einfach' ? 'Seid ihr euch einig? Dann drückt einen grünen Knopf.' : 'Wenn alle einverstanden sind oder die Mehrheit dafür ist, gebt ihr ab.'),
       h('div', { class: 'sp-aktionen sp-aktionen--start' }, einig, mehrheit)));
     regler.focus();

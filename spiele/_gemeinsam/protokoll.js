@@ -35,10 +35,18 @@ export function rollenZuordnung(rollen = []) {
   return zuordnung;
 }
 
-export function neuesProtokoll({ melde = () => {}, aufgabe = {}, jetzt = () => Date.now() } = {}) {
+/** Rollen dieser Runde (Vertrag 2.3): umgebung.rollen false = ohne Rollen; sonst aufgabe.rollen, ersatzweise
+ * umgebung.rollen, wenn die Aufgabe keine eigenen hat. */
+export function rundenRollen(aufgabe = {}, umgebungRollen = null) {
+  if (umgebungRollen === false) return [];
+  if (Array.isArray(aufgabe.rollen) && aufgabe.rollen.length > 0) return aufgabe.rollen;
+  return Array.isArray(umgebungRollen) ? umgebungRollen : [];
+}
+
+export function neuesProtokoll({ melde = () => {}, aufgabe = {}, rollen: rundenListe, jetzt = () => Date.now() } = {}) {
   const beginn = jetzt();
   const ereignisse = [];
-  const rollen = rollenZuordnung(aufgabe.rollen ?? []);
+  const rollen = rollenZuordnung(rundenListe ?? aufgabe.rollen ?? []);
   let versuche = 0;
   let hilfen = 0;
   let anlaufOffen = false;
@@ -50,7 +58,7 @@ export function neuesProtokoll({ melde = () => {}, aufgabe = {}, jetzt = () => D
     if (fehler) { console.warn(`Ereignis verworfen: ${fehler}`); return null; }
     const ereignis = { art, zeit: Math.max(0, Math.round(jetzt() - beginn)), wert };
     ereignisse.push(ereignis);
-    try { melde({ art, wert }); } catch (f) { console.warn('melde() ist fehlgeschlagen', f); }
+    try { melde({ ...ereignis }); } catch (f) { console.warn('melde() ist fehlgeschlagen', f); }  // { art, zeit, wert } (2.5)
     return ereignis;
   }
 
@@ -81,7 +89,7 @@ export function neuesProtokoll({ melde = () => {}, aufgabe = {}, jetzt = () => D
     },
     weg(kennung) { return eintragen('weg', kennung); },
     abstimmung(art) { return eintragen('abstimmung', art); },
-    /** Eingabe auf einer Knopf-Rolle; meldet die Kennung aus aufgabe.rollen, falls die Aufgabe Rollen hat. */
+    /** Eingabe auf einer Knopf-Rolle; meldet die Kennung aus den Rollen der Runde, falls sie welche hat. */
     rolle(knopfRolle) {
       const kennung = rollen.get(knopfRolle);
       return kennung ? eintragen('rolle', kennung) : null;

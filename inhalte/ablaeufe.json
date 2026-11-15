@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "beschreibung": "Vorschläge, wie Lehrkräfte die Minispiele nach der verfügbaren Zeit kombinieren. Jedes Minispiel dauert 5 bis 10 Minuten; die Reihenfolge der Orte ist frei, kein Ort ist gesperrt. Jeder Ort ist auch ohne Besuch spielbar (ersatz in ort.json).",
+  "ablaeufe": [
+    {
+      "id": "stunde",
+      "name": "Unterrichtsstunde",
+      "minuten": 45,
+      "text": {
+        "standard": "Ein Ort im Klassenzimmer: drei Minispiele zur Frauenkirche, danach zehn Minuten Gespräch über die Abstimmung im Dilemma.",
+        "einfach": "Ein Ort, drei Spiele, danach reden alle über die Abstimmung."
+      },
+      "orte": [
+        {
+          "ort": "frauenkirche",
+          "aufgaben": [
+            "2",
+            "1",
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "projekttag",
+      "name": "Projekttag",
+      "minuten": 240,
+      "text": {
+        "standard": "Alle vier Orte nacheinander in der Schule, je Ort drei Minispiele, Pausen dazwischen; zum Schluss gestaltet jede Gruppe ihre Figur und ihre Collage.",
+        "einfach": "Alle vier Orte in der Schule. Zum Schluss macht jede Gruppe ihr Bild."
+      },
+      "orte": [
+        {
+          "ort": "bastei",
+          "aufgaben": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "ort": "goeltzschtal",
+          "aufgaben": [
+            "2",
+            "1",
+            "3"
+          ]
+        },
+        {
+          "ort": "bautzen",
+          "aufgaben": [
+            "1",
+            "2",
+            "3"
+          ]
+        },
+        {
+          "ort": "frauenkirche",
+          "aufgaben": [
+            "2",
+            "1",
+            "3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ausflug",
+      "name": "Tagesausflug",
+      "minuten": 300,
+      "text": {
+        "standard": "Vor Ort in Dresden: an der Frauenkirche per QR-Code die drei Minispiele, danach die Collage als Bildbeitrag. Auf der Hin- oder Rückfahrt im Bus ein zweiter Ort ohne Besuch.",
+        "einfach": "In Dresden an der Frauenkirche spielen. Dann das Bild machen. Im Bus noch ein zweiter Ort."
+      },
+      "orte": [
+        {
+          "ort": "frauenkirche",
+          "aufgaben": [
+            "2",
+            "1",
+            "3"
+          ]
+        },
+        {
+          "ort": "bautzen",
+          "aufgaben": [
+            "1",
+            "2",
+            "3"
+          ]
+        }
+      ]
+    }
+  ]
+}

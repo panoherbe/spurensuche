@@ -7,7 +7,8 @@
   },
   "dauerMinuten": 6,
   "belohnung": [
-    "lot"
+    "lot",
+    "abzeichen-bautzen"
   ],
   "stufe": "anwenden",
   "rollen": [

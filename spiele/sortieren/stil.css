@@ -6,7 +6,7 @@
 .sp-sortier-bild img { width: 100%; border-radius: calc(var(--spi-radius) * 0.75); box-shadow: var(--spi-schatten); }
 .sp-sortier-bild--klein img { max-width: 420px; }
 .sp-bildnachweis { font-size: 0.8em; color: var(--spi-leise); }
-.sp-sortier-spalte { display: grid; gap: calc(var(--spi-a) * 1.5); }
+.sp-sortier-spalte { display: grid; gap: calc(var(--spi-a) * 1.5); container: sp-sortspalte / inline-size; }
 .sp-hilfetext { color: var(--spi-leise); }
 .sp-ende { display: flex; align-items: center; gap: 0.4em; font-weight: 750; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.04em; color: var(--spi-leise); }
 .sp-ende .sp-symbol { color: var(--spi-akzent); }
@@ -25,7 +25,15 @@
 .sp-sortkarte--ziel { box-shadow: 0 0 0 3px var(--spi-hinweis); }
 .sp-griff { display: grid; place-items: center; width: 32px; min-height: 44px; color: var(--spi-leise); cursor: grab; touch-action: none; }
 .sp-platz { display: grid; place-items: center; width: 2.1em; height: 2.1em; border-radius: 50%; background: var(--spi-akzent); color: var(--spi-akzent-text); font-weight: 800; }
-.sp-sorttext { font-weight: 650; display: grid; gap: 2px; }
+.sp-sorttext { font-weight: 650; display: grid; gap: 2px; grid-template-columns: minmax(0, 1fr); min-width: 0; }
+/* Schmale Spalte (Telefon): Pfeile unter den Satz, damit er Platz hat; Griff und Platz reichen über beide Zeilen.
+   Gemessen am 15.11.: bei 390 px lief der Satz sonst 6–22 px über die Karte (frauenkirche/2). */
+@container sp-sortspalte (max-width: 440px) {
+  .sp-sortkarte { grid-template-columns: auto auto minmax(0, 1fr); row-gap: calc(var(--spi-a) * 0.75); }
+  .sp-sortkarte:has(img) { grid-template-columns: auto auto auto minmax(0, 1fr); }
+  .sp-sortkarte > .sp-griff, .sp-sortkarte > .sp-platz, .sp-sortkarte > img { grid-row: span 2; }
+  .sp-sortkarte > .sp-pfeile { grid-column: -2 / -1; justify-self: start; }
+}
 .sp-zusatz { justify-self: start; padding: 0 0.5em; border-radius: 999px; font-weight: 800; font-size: 0.95em; color: var(--spi-text); background: var(--spi-flaeche); border: 1px solid var(--spi-rand); }
 .sp-markierung { display: inline-flex; align-items: center; gap: 4px; font-weight: 750; font-size: 0.85em; }
 .sp-sortkarte--richtig .sp-markierung .sp-symbol { color: var(--spi-erfolg); }
