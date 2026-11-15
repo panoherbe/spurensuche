@@ -54,14 +54,14 @@ async function zeige() {
           melde(`Neuer Schlüssel: ${r.schluessel}`, { dauer: 30000 });
         } catch (e) { melde(e.message); }
       } }, h('div', { class: 'feld' }, h('label', { for: 'v-bez' }, 'Bezeichnung'), neu), knopf('Schlüssel anlegen', null, { typ: 'submit' })),
-      schluessel.length ? h('div', { class: 'tabelle-rahmen', stil: { 'margin-top': '12px' } }, h('table', {},
+      schluessel.length ? h('div', { class: 'tabelle-rahmen', stil: { 'margin-top': '12px' }, tabindex: '0', role: 'region', 'aria-label': 'Zugangsschlüssel' }, h('table', {},
         h('thead', {}, h('tr', {}, ['Bezeichnung', 'Angelegt', 'Zustand', ''].map((x) => h('th', { scope: 'col' }, x)))),
         h('tbody', {}, schluessel.map((z) => h('tr', {}, h('th', { scope: 'row' }, z.bezeichnung), h('td', {}, datumZeit(z.erstellt)), h('td', {}, z.gesperrt ? 'gesperrt' : 'aktiv'),
           h('td', {}, knopf(z.gesperrt ? 'Entsperren' : 'Sperren', async () => { await api.zugangsschluesselSperren(z.id, !z.gesperrt); zeige(); }, { art: 'leise' }))))))) : null),
     h('section', { class: 'karte' }, h('h2', {}, 'Inhalte'),
       knopf('Inhalte neu laden und prüfen', async () => { const r = await api.inhalteNeuLaden(); melde(`Inhalte ${r.inhaltVersion}: ${r.fehler.length} Fehler`); zeige(); }, { art: 'leise' })),
     h('section', { class: 'karte' }, h('h2', {}, 'Protokoll (ohne Personendaten)'),
-      h('div', { class: 'tabelle-rahmen' }, h('table', {}, h('thead', {}, h('tr', {}, ['Zeit', 'Rolle', 'Aktion', 'Ziel'].map((x) => h('th', { scope: 'col' }, x)))),
+      h('div', { class: 'tabelle-rahmen', tabindex: '0', role: 'region', 'aria-label': 'Protokoll' }, h('table', {}, h('thead', {}, h('tr', {}, ['Zeit', 'Rolle', 'Aktion', 'Ziel'].map((x) => h('th', { scope: 'col' }, x)))),
         h('tbody', {}, protokoll.slice(0, 50).map((p) => h('tr', {}, h('td', {}, datumZeit(p.zeit)), h('td', {}, p.rolle), h('td', {}, p.aktion), h('td', {}, p.ziel ?? '')))))))
   );
   seitenwechsel('Verwaltung – Spurensuche', haupt);

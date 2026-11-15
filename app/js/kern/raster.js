@@ -142,13 +142,13 @@ export function beobachtungen(gruppe) {
   };
   if (!stationen.length) teamleistung.saetze.push('Die Gruppe hat noch keine Station begonnen.');
   else {
-    teamleistung.saetze.push(`${zaehle(abgeschlossen.length, 'Station', 'Stationen')} abgeschlossen`
+    teamleistung.saetze.push(`${abgeschlossen.length ? zaehle(abgeschlossen.length, 'Station', 'Stationen') : 'Noch keine Station'} abgeschlossen`
       + (abgebrochen.length ? `, ${zaehle(abgebrochen.length, 'Station', 'Stationen')} abgebrochen` : '')
       + (laufend.length ? `, ${zaehle(laufend.length, 'Station', 'Stationen')} in Arbeit` : '') + '.');
     teamleistung.saetze.push(`${zaehle(geloest.length, 'Aufgabe', 'Aufgaben')} gelöst bzw. entschieden, ${zaehle(laeufe.length, 'Aufgabe', 'Aufgaben')} bearbeitet.`);
     const vorOrt = stationen.filter((s) => ['qr', 'code', 'gps'].includes(s.verifikation)).length;
     const ersatz = stationen.filter((s) => s.verifikation === 'ersatz').length;
-    if (vorOrt || ersatz) teamleistung.saetze.push(`${zaehle(vorOrt, 'Station', 'Stationen')} vor Ort, ${zaehle(ersatz, 'Station', 'Stationen')} ortsunabhängig gespielt.`);
+    if (vorOrt || ersatz) teamleistung.saetze.push([vorOrt ? `${zaehle(vorOrt, 'Station', 'Stationen')} vor Ort` : null, ersatz ? `${zaehle(ersatz, 'Station', 'Stationen')} ortsunabhängig` : null].filter(Boolean).join(', ') + ' gespielt.');
   }
   if (gruppe.bildbeitrag) teamleistung.saetze.push('Die Gruppe hat einen Bildbeitrag gestaltet.');
 
@@ -167,7 +167,9 @@ export function beobachtungen(gruppe) {
     const hilfen = proAufgabe.reduce((s, a) => s + a.hilfen.length, 0);
     const ja = proAufgabe.reduce((s, a) => s + a.neuerAnlauf.ja, 0);
     const nein = proAufgabe.reduce((s, a) => s + a.neuerAnlauf.nein, 0);
-    problemloesung.saetze.push(`${zaehle(ersterVersuch, 'Aufgabe', 'Aufgaben')} im ersten Versuch gelöst; in ${zaehle(mitFehler.length, 'Aufgabe', 'Aufgaben')} gab es Fehlversuche.`);
+    problemloesung.saetze.push(mitFehler.length
+      ? `${zaehle(ersterVersuch, 'Aufgabe', 'Aufgaben')} im ersten Versuch gelöst; in ${zaehle(mitFehler.length, 'Aufgabe', 'Aufgaben')} gab es Fehlversuche.`
+      : `${zaehle(ersterVersuch, 'Aufgabe', 'Aufgaben')} im ersten Versuch gelöst, keine Fehlversuche.`);
     if (ja + nein) problemloesung.saetze.push(`Nach einem Fehlversuch hat die Gruppe ${ja}-mal ihr Vorgehen gewechselt und ${nein}-mal dasselbe noch einmal versucht.`);
     problemloesung.saetze.push(hilfen ? `${zaehle(hilfen, 'Hilfe', 'Hilfen')} genutzt.` : 'Keine Hilfe genutzt.');
     const mitWegen = proAufgabe.filter((a) => a.wege.length > 0);

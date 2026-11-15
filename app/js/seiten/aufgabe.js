@@ -28,7 +28,8 @@ export async function zeige(ctx) {
   const wurzel = h('section', { class: 'spiel-wurzel', 'aria-label': `Spiel: ${aufgabe.titel}` });
   const rahmen = h('div', { class: 'aufgabe-rahmen' },
     h('div', { class: 'aufgabe-kopf' },
-      h('div', {}, h('p', { class: 'wo' }, `Aufgabe ${position} von ${alle.length} · ${ort.name}`), h('h1', { 'data-vorlesen': '' }, aufgabe.titel)),
+      // Die Spiele zeigen den Titel groß auf ihrer Startkarte; die Seitenüberschrift bleibt für Bildschirmleser da.
+      h('div', {}, h('p', { class: 'wo' }, `Aufgabe ${position} von ${alle.length} · ${ort.name}`), h('h1', { class: 'nur-vorlesbar' }, aufgabe.titel)),
       knopf('Station verlassen', async () => {
         if (await frage('Aufgabe verlassen?', 'Der Stand dieser Aufgabe geht verloren; begonnene Sammelstücke bekommt ihr beim nächsten Mal.', { ja: 'Verlassen' })) navigiere(`/ort/${ort.id}`);
       }, { art: 'leise' })),

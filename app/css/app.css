@@ -110,8 +110,11 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 110px; }
 .aufgabe-zeile .leise { font-size: 0.9rem; }
 
 /* Aufgabenrahmen */
-.aufgabe-rahmen { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: 20px; padding: 16px; box-shadow: var(--sp-schatten); min-height: 50vh; }
+.aufgabe-rahmen { min-height: 50vh; }
 .aufgabe-kopf { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; }
+.aufgabe-kopf .wo { margin: 0; font-size: 1.05rem; }
+/* Rückmeldungen der App um das Spiel (Abschluss, Fehler, Workshop-Fragen) als eigene Fläche */
+.aufgabe-rahmen .feier, .aufgabe-rahmen .spiel-fehler, .aufgabe-rahmen .rueckmeldung { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: 20px; box-shadow: var(--sp-schatten); padding: 20px; }
 .aufgabe-kopf .wo { color: var(--sp-text-leise); font-weight: 600; }
 .spiel-wurzel { outline: none; }
 .spiel-fehler { text-align: center; padding: 30px 10px; }
