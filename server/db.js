@@ -24,6 +24,7 @@ export const SCHEMA = [
      rolle TEXT NOT NULL CHECK (rolle IN ('lehrkraft', 'lernende', 'verwaltung')),
      lehrkraft_id INTEGER REFERENCES lehrkraft(id) ON DELETE CASCADE,
      ueber_anmeldedienst INTEGER NOT NULL DEFAULT 0,
+     zugang_id INTEGER REFERENCES zugangsschluessel(id) ON DELETE CASCADE,
      ablauf TEXT NOT NULL);
    CREATE TABLE anmeldevorgang (
      zustand_hash TEXT PRIMARY KEY, nonce TEXT NOT NULL, pruefcode TEXT NOT NULL, ziel TEXT NOT NULL, ablauf TEXT NOT NULL);

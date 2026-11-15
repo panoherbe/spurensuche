@@ -1,0 +1,2321 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Spurensuche",
+    "version": "0.1.0",
+    "description": "Schnittstelle der Spurensuche: Geräte der Gruppen, Lehrkräfte, Ausstellung, Verwaltung, Betrieb. Versioniert über den Pfad /api/v1. Fehler: docs/FEHLERKATALOG.md.",
+    "license": {
+      "name": "AGPL-3.0-only",
+      "identifier": "AGPL-3.0-only"
+    }
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Gerät"
+    },
+    {
+      "name": "Anmeldung"
+    },
+    {
+      "name": "Lehrkraft"
+    },
+    {
+      "name": "Ausstellung"
+    },
+    {
+      "name": "Verwaltung"
+    },
+    {
+      "name": "Betrieb"
+    }
+  ],
+  "paths": {
+    "/api/v1/status": {
+      "get": {
+        "summary": "Zustand der Instanz",
+        "tags": [
+          "Betrieb"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "type": "boolean"
+                    },
+                    "version": {
+                      "type": "string"
+                    },
+                    "schema": {
+                      "type": "integer"
+                    },
+                    "inhaltVersion": {
+                      "type": "string"
+                    },
+                    "inhaltFehler": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/beitritt": {
+      "post": {
+        "summary": "Gerät tritt mit dem Code der Lehrkraft einer Gruppe bei",
+        "tags": [
+          "Gerät"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "code"
+                ],
+                "properties": {
+                  "code": {
+                    "type": "string",
+                    "example": "K7QH-M3PZ"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "token": {
+                      "type": "string",
+                      "description": "Gerätetoken (Bearer)"
+                    },
+                    "gruppe": {
+                      "type": "object",
+                      "properties": {
+                        "bezeichnung": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "freigabe": {
+                      "$ref": "#/components/schemas/Freigabe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          },
+          "429": {
+            "$ref": "#/components/responses/F429"
+          }
+        }
+      }
+    },
+    "/api/v1/geraet": {
+      "get": {
+        "summary": "aktueller Stand der Freigabe für das Gerät",
+        "tags": [
+          "Gerät"
+        ],
+        "security": [
+          {
+            "geraet": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "gruppe": {
+                      "type": "object"
+                    },
+                    "freigabe": {
+                      "$ref": "#/components/schemas/Freigabe"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "410": {
+            "$ref": "#/components/responses/F410"
+          }
+        }
+      }
+    },
+    "/api/v1/sync": {
+      "post": {
+        "summary": "Stationen, Aufgabenläufe und Netzwechsel übertragen (wiederholungssicher)",
+        "tags": [
+          "Gerät"
+        ],
+        "security": [
+          {
+            "geraet": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Sync"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SyncAntwort"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "410": {
+            "$ref": "#/components/responses/F410"
+          },
+          "413": {
+            "$ref": "#/components/responses/F413"
+          }
+        }
+      }
+    },
+    "/api/v1/bildbeitraege": {
+      "post": {
+        "summary": "Bildbeitrag hochladen (Schulgruppe: wartet auf Freigabe; Familie: nur selbst freigegeben)",
+        "tags": [
+          "Gerät"
+        ],
+        "security": [
+          {
+            "geraet": []
+          },
+          {}
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BildUpload"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "schon vorhanden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "angelegt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "kennung": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "enum": [
+                        "wartet",
+                        "freigegeben"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "410": {
+            "$ref": "#/components/responses/F410"
+          },
+          "413": {
+            "$ref": "#/components/responses/F413"
+          },
+          "429": {
+            "$ref": "#/components/responses/F429"
+          }
+        }
+      }
+    },
+    "/anmeldung/start": {
+      "get": {
+        "summary": "Anmeldung beim Anmeldedienst beginnen (Weiterleitung)",
+        "tags": [
+          "Anmeldung"
+        ],
+        "parameters": [
+          {
+            "name": "ziel",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "lehrkraft",
+                "lernende"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "zum Anmeldedienst oder mit #fehler=… zurück"
+          }
+        }
+      }
+    },
+    "/anmeldung/rueckkehr": {
+      "get": {
+        "summary": "Rückkehr vom Anmeldedienst (Code gegen Token, Prüfung, Sitzung)",
+        "tags": [
+          "Anmeldung"
+        ],
+        "parameters": [
+          {
+            "name": "code",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "state",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "302": {
+            "description": "zur Oberfläche, mit Sitzungs-Cookie oder #fehler=…"
+          }
+        }
+      }
+    },
+    "/api/v1/anmeldung/schluessel": {
+      "post": {
+        "summary": "Anmeldung einer Lehrkraft mit Zugangsschlüssel",
+        "tags": [
+          "Anmeldung"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "schluessel"
+                ],
+                "properties": {
+                  "schluessel": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "angemeldet (Set-Cookie)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "429": {
+            "$ref": "#/components/responses/F429"
+          }
+        }
+      }
+    },
+    "/api/v1/anmeldung/verwaltung": {
+      "post": {
+        "summary": "Anmeldung der Verwaltung",
+        "tags": [
+          "Anmeldung"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "schluessel"
+                ],
+                "properties": {
+                  "schluessel": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "angemeldet (Set-Cookie)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "429": {
+            "$ref": "#/components/responses/F429"
+          }
+        }
+      }
+    },
+    "/api/v1/abmeldung": {
+      "post": {
+        "summary": "Abmelden; liefert die Adresse der zentralen Abmeldung, falls vorhanden",
+        "tags": [
+          "Anmeldung"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "abgemeldet": {
+                      "type": "boolean"
+                    },
+                    "weiter": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/ich": {
+      "get": {
+        "summary": "Rolle der aktuellen Sitzung (null ohne Sitzung)",
+        "tags": [
+          "Anmeldung"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "rolle": {
+                      "enum": [
+                        "lehrkraft",
+                        "lernende",
+                        "verwaltung",
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/lerngruppen": {
+      "get": {
+        "summary": "eigene Lerngruppen mit Quests",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      },
+      "post": {
+        "summary": "Lerngruppe anlegen",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lerngruppe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "angelegt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/lerngruppen/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "patch": {
+        "summary": "Lerngruppe ändern, Einwilligung bestätigen oder zurücknehmen",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Lerngruppe"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Lerngruppe mit allen Quests und Gruppen löschen",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/lerngruppen/{id}/freigaben": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "post": {
+        "summary": "Quest freigeben (Orte, Aufgaben, Zeitrahmen; Erfassung nach Kernzielgruppe und Einwilligung)",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "titel",
+                  "orte"
+                ],
+                "properties": {
+                  "titel": {
+                    "type": "string"
+                  },
+                  "zeitrahmen": {
+                    "enum": [
+                      "stunde",
+                      "projekttag",
+                      "ausflug",
+                      "eigen"
+                    ]
+                  },
+                  "orte": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/QuestOrt"
+                    }
+                  },
+                  "rueckmeldung": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "freigegeben",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/freigaben/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "get": {
+        "summary": "Quest mit laufender Übersicht aller Gruppen (Station, Stand; ohne Stufen)",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Quest mit allen Gruppen und Beobachtungen löschen",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/freigaben/{id}/beenden": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "post": {
+        "summary": "Quest beenden; die Löschfrist beginnt",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/freigaben/{id}/gruppen": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "post": {
+        "summary": "Gruppe anlegen (neutrale Bezeichnung; freie Bezeichnung nur mit Bestätigung)",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "bezeichnung"
+                ],
+                "properties": {
+                  "bezeichnung": {
+                    "type": "string",
+                    "maxLength": 24
+                  },
+                  "bestaetigt": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "angelegt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "bezeichnung": {
+                      "type": "string"
+                    },
+                    "code": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          },
+          "409": {
+            "$ref": "#/components/responses/F409"
+          }
+        }
+      }
+    },
+    "/api/v1/freigaben/{id}/bildbeitraege": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "get": {
+        "summary": "Bildbeiträge der Gruppen dieser Quest",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/freigaben/{id}/rueckmeldungen.csv": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "get": {
+        "summary": "Rückmeldungen der Workshops als CSV",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "CSV",
+            "content": {
+              "text/csv": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/gruppen/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "patch": {
+        "summary": "Gruppe umbenennen oder Einschätzung (Stufe je Bereich) setzen",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "bezeichnung": {
+                    "type": "string"
+                  },
+                  "bestaetigt": {
+                    "type": "boolean"
+                  },
+                  "einschaetzung": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "enum": [
+                        "einblick",
+                        "kennen",
+                        "anwenden",
+                        "beurteilen",
+                        "gestalten",
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          },
+          "409": {
+            "$ref": "#/components/responses/F409"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Gruppendaten sofort löschen",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/gruppen/{id}/auswertung": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Kennung"
+        }
+      ],
+      "get": {
+        "summary": "Beobachtungen, Kompetenzraster, Formulierungsentwurf",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Auswertung"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/bildbeitraege/entscheidung": {
+      "post": {
+        "summary": "Bildbeiträge einzeln oder gesammelt freigeben oder ablehnen",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "kennungen",
+                  "freigeben"
+                ],
+                "properties": {
+                  "kennungen": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "uuid"
+                    }
+                  },
+                  "freigeben": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "geaendert": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/bildbeitraege/{kennung}/vorschau": {
+      "parameters": [
+        {
+          "name": "kennung",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "UUID des Bildbeitrags"
+        }
+      ],
+      "get": {
+        "summary": "Vorschau für die Lehrkraft (auch vor der Freigabe)",
+        "tags": [
+          "Lehrkraft"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bild",
+            "content": {
+              "image/webp": {},
+              "image/jpeg": {}
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/ausstellung/bildbeitraege": {
+      "get": {
+        "summary": "freigegebene Bildbeiträge, nach Freigabezeit, seitenweise",
+        "tags": [
+          "Ausstellung"
+        ],
+        "security": [
+          {
+            "ausstellung": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "seit",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "description": "nur danach freigegebene (für fortlaufenden Abruf: naechsteSeit der letzten Antwort)"
+          },
+          {
+            "name": "grenze",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 100
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "eintraege": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Ausstellungseintrag"
+                      }
+                    },
+                    "weitere": {
+                      "type": "boolean"
+                    },
+                    "naechsteSeit": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/ausstellung/bildbeitraege/{kennung}": {
+      "parameters": [
+        {
+          "name": "kennung",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "UUID"
+        }
+      ],
+      "get": {
+        "summary": "Metadaten eines freigegebenen Bildbeitrags (ohne Gruppenbezeichnung)",
+        "tags": [
+          "Ausstellung"
+        ],
+        "security": [
+          {
+            "ausstellung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ausstellungseintrag"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/ausstellung/bildbeitraege/{kennung}/bild.png": {
+      "parameters": [
+        {
+          "name": "kennung",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "UUID"
+        }
+      ],
+      "get": {
+        "summary": "Bilddatei (PNG, 2048 × 2048)",
+        "tags": [
+          "Ausstellung"
+        ],
+        "security": [
+          {
+            "ausstellung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "PNG",
+            "content": {
+              "image/png": {}
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/ausstellung/bildbeitraege/{kennung}/vorschau": {
+      "parameters": [
+        {
+          "name": "kennung",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "UUID"
+        }
+      ],
+      "get": {
+        "summary": "Vorschau (WebP oder JPEG, höchstens 512 × 512)",
+        "tags": [
+          "Ausstellung"
+        ],
+        "security": [
+          {
+            "ausstellung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bild",
+            "content": {
+              "image/webp": {},
+              "image/jpeg": {}
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/ausstellung/archiv.zip": {
+      "get": {
+        "summary": "alle freigegebenen Bildbeiträge als Archiv (BagIt in ZIP, SHA-256 je Datei)",
+        "tags": [
+          "Ausstellung"
+        ],
+        "security": [
+          {
+            "ausstellung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ZIP",
+            "content": {
+              "application/zip": {}
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/verwaltung/uebersicht": {
+      "get": {
+        "summary": "Zustand: Version, Inhalte, Offline-Paket, Anzahlen, letzte Sicherung",
+        "tags": [
+          "Verwaltung"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/verwaltung/zugangsschluessel": {
+      "get": {
+        "summary": "Zugangsschlüssel (ohne Schlüssel)",
+        "tags": [
+          "Verwaltung"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      },
+      "post": {
+        "summary": "Zugangsschlüssel anlegen (wird nur einmal angezeigt)",
+        "tags": [
+          "Verwaltung"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "bezeichnung"
+                ],
+                "properties": {
+                  "bezeichnung": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "angelegt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "schluessel": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/verwaltung/zugangsschluessel/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Nummer"
+        }
+      ],
+      "patch": {
+        "summary": "sperren (meldet sofort ab) oder entsperren",
+        "tags": [
+          "Verwaltung"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "gesperrt": {
+                    "type": "boolean"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/verwaltung/archiv.zip": {
+      "get": {
+        "summary": "Archiv (Inhalte, Konfiguration, freigegebene Bildbeiträge) oder vollständiger Export (zusätzlich Gruppendaten); BagIt in ZIP",
+        "tags": [
+          "Verwaltung"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "umfang",
+            "in": "query",
+            "schema": {
+              "enum": [
+                "archiv",
+                "vollstaendig"
+              ],
+              "default": "archiv"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ZIP",
+            "content": {
+              "application/zip": {}
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/verwaltung/protokoll": {
+      "get": {
+        "summary": "letzte 500 Verwaltungsaktionen (Zeit, Rolle, Aktion, Ziel; ohne Personendaten)",
+        "tags": [
+          "Verwaltung"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/verwaltung/inhalte-neu-laden": {
+      "post": {
+        "summary": "Inhalte neu laden und prüfen",
+        "tags": [
+          "Verwaltung"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/messwerte": {
+      "get": {
+        "summary": "Messwerte für das Monitoring (Prometheus-Textformat)",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "messwerte": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Text",
+            "content": {
+              "text/plain": {}
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Fehler": {
+        "type": "object",
+        "required": [
+          "fehler"
+        ],
+        "properties": {
+          "fehler": {
+            "type": "string"
+          },
+          "hinweis": {
+            "type": "string"
+          },
+          "bestaetigen": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Zweitext": {
+        "type": "object",
+        "required": [
+          "standard",
+          "einfach"
+        ],
+        "properties": {
+          "standard": {
+            "type": "string"
+          },
+          "einfach": {
+            "type": "string"
+          }
+        }
+      },
+      "QuestOrt": {
+        "type": "object",
+        "required": [
+          "ort",
+          "aufgaben"
+        ],
+        "properties": {
+          "ort": {
+            "type": "string"
+          },
+          "aufgaben": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Freigabe": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "titel": {
+            "type": "string"
+          },
+          "orte": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestOrt"
+            }
+          },
+          "erfassung": {
+            "type": "boolean",
+            "description": "false: Kernzielgruppe nicht erfüllt oder Einwilligung nicht bestätigt; es entstehen keine Datensätze"
+          },
+          "rueckmeldung": {
+            "type": "boolean"
+          },
+          "beendet": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "Ereignis": {
+        "type": "object",
+        "required": [
+          "art",
+          "zeit"
+        ],
+        "properties": {
+          "art": {
+            "enum": [
+              "versuch",
+              "weg",
+              "hilfe",
+              "neuer-anlauf",
+              "rolle",
+              "abstimmung"
+            ]
+          },
+          "zeit": {
+            "type": "number",
+            "description": "Millisekunden seit Beginn der Aufgabe"
+          },
+          "wert": {
+            "description": "Zahl, true/false oder Kennung ^[a-z0-9-]{1,40}$; alles andere wird verworfen"
+          }
+        }
+      },
+      "Station": {
+        "type": "object",
+        "required": [
+          "ort",
+          "status",
+          "begonnen"
+        ],
+        "properties": {
+          "ort": {
+            "type": "string"
+          },
+          "status": {
+            "enum": [
+              "begonnen",
+              "abgeschlossen",
+              "abgebrochen"
+            ]
+          },
+          "verifikation": {
+            "enum": [
+              "qr",
+              "code",
+              "gps",
+              "ersatz",
+              null
+            ]
+          },
+          "begonnen": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "beendet": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "aktivSekunden": {
+            "type": "number"
+          }
+        }
+      },
+      "Lauf": {
+        "type": "object",
+        "required": [
+          "id",
+          "aufgabe",
+          "geloest",
+          "beendet"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "description": "vom Gerät vergeben; derselbe Lauf wird nie doppelt gezählt"
+          },
+          "aufgabe": {
+            "type": "string",
+            "example": "bastei/1"
+          },
+          "geloest": {
+            "type": "boolean"
+          },
+          "dauerSekunden": {
+            "type": "number"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ereignisse": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Ereignis"
+            }
+          },
+          "beendet": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "Sync": {
+        "type": "object",
+        "required": [
+          "schluessel"
+        ],
+        "properties": {
+          "schluessel": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Wiederholungsschlüssel: dieselbe Übertragung wird nur einmal verarbeitet"
+          },
+          "stationen": {
+            "type": "array",
+            "maxItems": 50,
+            "items": {
+              "$ref": "#/components/schemas/Station"
+            }
+          },
+          "laeufe": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/Lauf"
+            }
+          },
+          "technik": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "schluessel": {
+                  "type": "string"
+                },
+                "art": {
+                  "enum": [
+                    "offline",
+                    "online"
+                  ]
+                },
+                "zeit": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          "rueckmeldungen": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid"
+                },
+                "aufgabe": {
+                  "type": "string"
+                },
+                "verstaendlich": {
+                  "enum": [
+                    "ja",
+                    "teils",
+                    "nein"
+                  ]
+                },
+                "spass": {
+                  "enum": [
+                    "ja",
+                    "teils",
+                    "nein"
+                  ]
+                },
+                "schwierigkeit": {
+                  "enum": [
+                    "zu-leicht",
+                    "passend",
+                    "zu-schwer"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "SyncAntwort": {
+        "type": "object",
+        "properties": {
+          "erfasst": {
+            "type": "boolean"
+          },
+          "erfassung": {
+            "type": "boolean"
+          },
+          "doppelt": {
+            "type": "boolean"
+          },
+          "angenommen": {
+            "type": "object"
+          },
+          "abgelehnt": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "BildMetadaten": {
+        "type": "object",
+        "required": [
+          "kennung",
+          "erstellt",
+          "art",
+          "items"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "kennung": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "erstellt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "art": {
+            "enum": [
+              "item-collage"
+            ]
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 12,
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "BildUpload": {
+        "type": "object",
+        "required": [
+          "metadaten",
+          "png",
+          "vorschau"
+        ],
+        "properties": {
+          "metadaten": {
+            "$ref": "#/components/schemas/BildMetadaten"
+          },
+          "png": {
+            "type": "string",
+            "contentEncoding": "base64",
+            "description": "PNG, genau 2048 × 2048"
+          },
+          "vorschau": {
+            "type": "string",
+            "contentEncoding": "base64",
+            "description": "WebP oder JPEG, höchstens 512 × 512"
+          },
+          "freigabe": {
+            "type": "boolean",
+            "description": "Pflicht (true) ohne Gerätetoken: Familien geben selbst frei"
+          }
+        }
+      },
+      "Ausstellungseintrag": {
+        "type": "object",
+        "properties": {
+          "kennung": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "erstellt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "freigegeben": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "art": {
+            "enum": [
+              "item-collage",
+              "ki-generiert"
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "bild": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "vorschau": {
+            "type": "string",
+            "format": "uri-reference"
+          },
+          "sha256": {
+            "type": "string"
+          }
+        }
+      },
+      "Lerngruppe": {
+        "type": "object",
+        "properties": {
+          "bezeichnung": {
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 40
+          },
+          "klassenstufe": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1,
+            "maximum": 13
+          },
+          "einwilligung": {
+            "type": "boolean"
+          }
+        }
+      },
+      "Auswertung": {
+        "type": "object",
+        "description": "Beobachtungen, Kompetenzraster und Formulierungsentwurf einer Gruppe (Regeln: docs/AUSWERTUNG.md)",
+        "properties": {
+          "gruppe": {
+            "type": "object"
+          },
+          "quest": {
+            "type": "string"
+          },
+          "beobachtungen": {
+            "type": "object"
+          },
+          "raster": {
+            "type": "object"
+          },
+          "einschaetzung": {
+            "type": "object"
+          },
+          "entwurf": {
+            "type": "string"
+          },
+          "loeschenAm": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "responses": {
+      "F400": {
+        "description": "Eingabe ungültig",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Fehler"
+            }
+          }
+        }
+      },
+      "F401": {
+        "description": "nicht angemeldet",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Fehler"
+            }
+          }
+        }
+      },
+      "F404": {
+        "description": "nicht gefunden",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Fehler"
+            }
+          }
+        }
+      },
+      "F409": {
+        "description": "Konflikt oder Bestätigung nötig",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Fehler"
+            }
+          }
+        }
+      },
+      "F410": {
+        "description": "Gruppe gelöscht",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Fehler"
+            }
+          }
+        }
+      },
+      "F413": {
+        "description": "zu groß",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Fehler"
+            }
+          }
+        }
+      },
+      "F429": {
+        "description": "zu viele Versuche",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Fehler"
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "sitzung": {
+        "type": "apiKey",
+        "in": "cookie",
+        "name": "spur_sitzung",
+        "description": "HttpOnly, SameSite=Strict"
+      },
+      "geraet": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Gerätetoken aus /api/v1/beitritt"
+      },
+      "ausstellung": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "SPUR_AUSSTELLUNG_TOKEN"
+      },
+      "messwerte": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "SPUR_MESSWERTE_TOKEN"
+      }
+    }
+  }
+}

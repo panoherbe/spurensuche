@@ -296,4 +296,12 @@ test('Messwerte nur mit Schlüssel; Verwaltung sieht Übersicht ohne Personendat
   assert.ok(u.daten.anzahl.gruppen > 0);
   assert.equal((await v.anfrage('/api/v1/lerngruppen')).status, 401, 'Verwaltung sieht keine Lerngruppen');
   assert.equal((await klient(inst.url).anfrage('/api/v1/anmeldung/verwaltung', { methode: 'POST', json: { schluessel: 'falsch' } })).status, 401);
+  // gesperrter Zugangsschlüssel meldet sofort ab
+  const s = await v.anfrage('/api/v1/verwaltung/zugangsschluessel', { methode: 'POST', json: { bezeichnung: 'Wird gesperrt' } });
+  const l = klient(inst.url);
+  await l.anfrage('/api/v1/anmeldung/schluessel', { methode: 'POST', json: { schluessel: s.daten.schluessel } });
+  assert.equal((await l.anfrage('/api/v1/lerngruppen')).status, 200);
+  await v.anfrage(`/api/v1/verwaltung/zugangsschluessel/${s.daten.id}`, { methode: 'PATCH', json: { gesperrt: true } });
+  assert.equal((await l.anfrage('/api/v1/lerngruppen')).status, 401);
+  assert.equal((await klient(inst.url).anfrage('/api/v1/anmeldung/schluessel', { methode: 'POST', json: { schluessel: s.daten.schluessel } })).status, 401);
 });

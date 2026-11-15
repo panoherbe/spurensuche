@@ -139,11 +139,11 @@ export async function erstelleApp(cfg) {
     if (!cfg.ausstellungToken || !t || !gleich(t, cfg.ausstellungToken)) throw new HttpFehler(401, 'Schlüssel der Ausstellung fehlt oder ist falsch');
   }
 
-  function neueSitzung(rolle, lehrkraftId = null, ueberAnmeldedienst = false) {
+  function neueSitzung(rolle, lehrkraftId = null, ueberAnmeldedienst = false, zugangId = null) {
     const t = token();
     const stunden = SITZUNG_STUNDEN[rolle];
-    db.prepare('INSERT INTO sitzung (token_hash, rolle, lehrkraft_id, ueber_anmeldedienst, ablauf) VALUES (?, ?, ?, ?, ?)')
-      .run(hash(t), rolle, lehrkraftId, ueberAnmeldedienst ? 1 : 0, new Date(Date.now() + stunden * 3600_000).toISOString());
+    db.prepare('INSERT INTO sitzung (token_hash, rolle, lehrkraft_id, ueber_anmeldedienst, zugang_id, ablauf) VALUES (?, ?, ?, ?, ?, ?)')
+      .run(hash(t), rolle, lehrkraftId, ueberAnmeldedienst ? 1 : 0, zugangId, new Date(Date.now() + stunden * 3600_000).toISOString());
     return cookieKopf(t, stunden * 3600, cfg.sichereCookies);
   }
 
@@ -390,7 +390,7 @@ export async function erstelleApp(cfg) {
     if (!z || z.gesperrt) { fehlversuche.fehlschlag(absender(req)); throw new HttpFehler(401, 'Schlüssel unbekannt oder gesperrt'); }
     const id = lehrkraftFuer(hmac(pfeffer, `schluessel|${z.id}`), 'zugangsschluessel');
     protokolliere('lehrkraft', 'anmeldung', 'zugangsschluessel');
-    return mit(200, { rolle: 'lehrkraft' }, { 'Set-Cookie': neueSitzung('lehrkraft', id) });
+    return mit(200, { rolle: 'lehrkraft' }, { 'Set-Cookie': neueSitzung('lehrkraft', id, false, z.id) });
   });
 
   route('POST', '/api/v1/anmeldung/verwaltung', async (req) => {
@@ -727,6 +727,7 @@ export async function erstelleApp(cfg) {
     verwaltung(req);
     const k = await koerper(req);
     db.prepare('UPDATE zugangsschluessel SET gesperrt = ? WHERE id = ?').run(k.gesperrt ? 1 : 0, Number(id));
+    if (k.gesperrt) db.prepare('DELETE FROM sitzung WHERE zugang_id = ?').run(Number(id)); // gesperrt: sofort abgemeldet
     protokolliere('verwaltung', k.gesperrt ? 'zugangsschluessel-gesperrt' : 'zugangsschluessel-entsperrt', id);
     return { ok: true };
   });
