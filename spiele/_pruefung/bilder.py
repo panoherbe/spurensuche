@@ -1,4 +1,4 @@
-"""Bildschirmfotos einzelner Spielzustände (für die Gestaltung). Läuft im Playwright-Container auf dem Messrechner.
+"""Bildschirmfotos einzelner Spielzustände (für die Gestaltung). Läuft im Playwright-Container.
 
 Aufruf:  python3 bilder.py <basis-url> <ausgabe-ordner> <aufgabe> [<aufgabe> …]
 Je Aufgabe: Startkarte, Spielfläche, nach einem Tipp; Desktop 1280 × 800 und Telefon 390 × 844.

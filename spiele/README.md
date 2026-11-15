@@ -21,7 +21,8 @@ Spielfigur. Alles sind ES-Module ohne Build-Schritt und ohne Laufzeit-Abhängigk
 - **Spielfläche:** Auftrag mit `data-vorlesen`, eigener Vorlese-Knopf, Tipps in drei Stufen mit Ulla Uhu, Rückmeldung in
   einem Element mit `role="status"` (immer Wort und Symbol, nie nur Farbe).
 - **Abschlusskarte:** Sterne (nur Rückmeldung im Spiel, gehen nicht ins Dashboard), Sammelstück, „Wusstet ihr?“.
-- **Barrierefreiheit (Ziel, automatisch geprüft mit axe-core):** alles per Tastatur, sichtbarer Fokus, Bedienflächen ab 48 × 48 px, kein Zeitdruck, Tempo 0,5–1,5,
+- **Barrierearm (Ziel, automatisch geprüft mit axe-core):** alles per Tastatur, sichtbarer Fokus, Knöpfe mindestens 44 px
+  hoch (die meisten 48 × 48 px), Felder der Spurensuche im Bild mindestens 24 px, kein Zeitdruck, Tempo 0,5–1,5,
   reduzierte Bewegung, einfache Sprache, Farben nur aus den Variablen der App (hell, dunkel, kontrastreich).
 - **Sicher:** Texte nur über `textContent`, keine `innerHTML`, kein `eval`, Stil per `<link>` (strenge CSP).
 - **Ereignisse** nur nach Schnittstelle 2.5: `versuch`, `weg`, `hilfe`, `neuer-anlauf`, `rolle`, `abstimmung`; `zeit` in

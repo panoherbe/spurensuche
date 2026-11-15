@@ -1,8 +1,15 @@
 # Bildnachweis
 
-Alle Fotos der Orte stammen aus Wikimedia Commons und stehen unter freien Lizenzen, die eine Weitergabe unter
-CC BY-SA 4.0 erlauben. Sie wurden verkleinert, teils zugeschnitten und ohne Kamera-Metadaten als WebP gespeichert.
-Sammelstücke, Figurenteile und Ulla Uhu sind eigene Zeichnungen (CC BY-SA 4.0, Panagiotis Herbe).
+Alle Fotos der Orte stammen aus Wikimedia Commons. Jedes Foto behält seine eigene Lizenz (Spalte „Lizenz“), mit
+Urheber, Werk und Quelle in der Tabelle. Die Fotos wurden verkleinert, teils zugeschnitten (in der Tabelle genannt) und
+ohne Kamera-Metadaten als WebP gespeichert.
+
+Eigene Werke, ohne Bildgenerator gezeichnet (Panagiotis Herbe):
+
+- Sammelstücke und die Vergleichsbilder in `assets/spiele/vergleich/` (Frauenkirche, Kind, Ziegel): CC BY-SA 4.0.
+- Spielfigur und Ulla Uhu sind Programmcode (AGPL-3.0-only); die Zeichnungen stehen zusätzlich unter CC BY-SA 4.0.
+
+Schrift: Atkinson Hyperlegible Next, SIL Open Font License 1.1 (`assets/spiele/schrift/OFL.txt`, `app/schrift/OFL.txt`).
 Stand der Lizenzangaben: 15.11.2026.
 
 | Datei | Werk | Urheber | Lizenz | Quelle |
