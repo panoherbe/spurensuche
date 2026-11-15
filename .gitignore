@@ -1,0 +1,7 @@
+daten/
+export/
+node_modules/
+nachweis/tmp/
+.DS_Store
+._*
+*.log
