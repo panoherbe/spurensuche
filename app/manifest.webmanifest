@@ -1,0 +1,18 @@
+{
+  "name": "Spurensuche Sachsen",
+  "short_name": "Spurensuche",
+  "description": "Digitale Entdeckungsreise durch Sachsen für Schulklassen und Familien, auch ohne Netz.",
+  "lang": "de",
+  "start_url": "./index.html#/",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f5f2ea",
+  "theme_color": "#1d6b47",
+  "icons": [
+    { "src": "app/bilder/symbol.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "app/bilder/symbol-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "app/bilder/symbol-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "app/bilder/symbol-maskierbar-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

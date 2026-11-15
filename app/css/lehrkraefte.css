@@ -1,0 +1,83 @@
+/* Lehrkräfte und Verwaltung: ruhige Arbeitsansicht mit Tabellen, Raster und Reitern */
+
+.lk-kopf { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 16px; border-bottom: 1px solid var(--sp-rand); background: var(--sp-flaeche); }
+.lk-kopf .marke-app { display: flex; align-items: center; gap: 10px; font-weight: 800; color: var(--sp-text); text-decoration: none; margin-right: auto; min-height: 48px; }
+.lk-kopf .marke-app .logo { width: 30px; height: 30px; color: var(--sp-akzent); }
+.lk-grundsatz { margin: 0; padding: 10px 16px; background: var(--sp-zweit-weich); border-bottom: 1px solid var(--sp-rand); font-size: 0.95rem; }
+.lk-grundsatz strong { color: var(--sp-zweit); }
+.lk-haupt { max-width: 72rem; margin: 0 auto; padding: 20px 16px 60px; }
+.brotkrumen { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 0 0 10px; font-size: 0.95rem; }
+.brotkrumen li + li::before { content: '›'; margin-right: 6px; color: var(--sp-text-leise); }
+
+.raster-karten { display: grid; grid-template-columns: repeat(auto-fill, minmax(19rem, 1fr)); gap: 14px; }
+.lerngruppe-karte h2 { margin-bottom: 4px; }
+.kennzahlen { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 12px; }
+
+.reiter { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 16px; border-bottom: 2px solid var(--sp-rand); }
+.reiter a { padding: 10px 14px; min-height: 48px; display: inline-flex; align-items: center; gap: 6px; text-decoration: none; color: var(--sp-text); font-weight: 700; border-bottom: 4px solid transparent; margin-bottom: -2px; }
+.reiter a[aria-current="page"] { border-bottom-color: var(--sp-akzent); color: var(--sp-akzent); }
+.reiter .symbol { width: 20px; height: 20px; }
+
+.tabelle-rahmen { overflow-x: auto; border: 1px solid var(--sp-rand); border-radius: var(--sp-radius); background: var(--sp-flaeche); }
+table { border-collapse: collapse; width: 100%; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--sp-rand); vertical-align: top; }
+thead th { background: var(--sp-flaeche-2); font-size: 0.9rem; }
+tbody tr:last-child td, tbody tr:last-child th { border-bottom: none; }
+.zelle-status { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; white-space: nowrap; }
+.zelle-status .symbol { width: 18px; height: 18px; }
+.zelle-status.abgeschlossen { color: var(--sp-erfolg); }
+.zelle-status.begonnen { color: var(--sp-hinweis); }
+.zelle-status.abgebrochen { color: var(--sp-fehler); }
+.zelle-status.offen { color: var(--sp-text-leise); }
+
+.code-gross { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 1.35rem; font-weight: 800; letter-spacing: 0.06em; }
+.qr-klein svg { width: 120px; height: 120px; }
+.gruppenliste { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); gap: 12px; }
+.gruppenkarte { display: flex; gap: 12px; align-items: center; }
+.gruppenkarte .text { flex: 1; min-width: 0; }
+
+/* Kompetenzraster */
+.raster { width: 100%; border-collapse: separate; border-spacing: 6px; table-layout: fixed; }
+.raster th, .raster td { border: none; padding: 0; }
+.raster thead th { background: none; font-size: 0.85rem; color: var(--sp-text-leise); padding: 4px 6px; }
+.raster tbody th { font-size: 1rem; padding: 8px 6px; width: 9rem; vertical-align: middle; }
+.raster-zelle { position: relative; height: 100%; min-height: 9.5rem; padding: 10px; border-radius: 12px; border: 2px solid var(--sp-rand); background: var(--sp-flaeche); font-size: 0.88rem; display: flex; flex-direction: column; gap: 6px; }
+.raster-zelle.beobachtet { border-color: var(--sp-zweit); background: var(--sp-zweit-weich); }
+.raster-zelle.gewaehlt { border-color: var(--sp-akzent); box-shadow: inset 0 0 0 2px var(--sp-akzent); }
+.raster-zelle .zelle-kopf { display: flex; justify-content: space-between; align-items: center; gap: 6px; }
+.raster-zelle details summary { cursor: pointer; font-weight: 700; color: var(--sp-zweit); min-height: 32px; display: flex; align-items: center; }
+.raster-zelle ul { margin: 4px 0 0; padding-left: 1.1em; }
+.raster-wahl { display: flex; align-items: center; gap: 8px; font-weight: 700; margin-top: auto; min-height: 40px; cursor: pointer; }
+.raster-wahl input { width: 24px; height: 24px; accent-color: var(--sp-akzent); }
+@media (max-width: 860px) {
+  .raster, .raster thead, .raster tbody, .raster tr, .raster th, .raster td { display: block; width: 100%; }
+  .raster thead { display: none; }
+  .raster tbody tr { margin-bottom: 16px; }
+  .raster tbody th { padding: 6px 0; }
+  .raster td { margin-bottom: 6px; }
+  .raster-zelle { min-height: 0; }
+}
+
+.beobachtungen { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); }
+.beobachtungen ul { margin: 0; padding-left: 1.1em; }
+.entwurf-rahmen { position: relative; }
+.entwurf-rahmen .marke { position: absolute; top: -12px; right: 12px; background: var(--sp-hinweis-weich); border-color: var(--sp-hinweis); }
+
+.bildraster { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 12px; }
+.bildraster li { background: var(--sp-flaeche); border: 2px solid var(--sp-rand); border-radius: var(--sp-radius); padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+.bildraster img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 10px; background: var(--sp-flaeche-2); }
+
+.kacheln { display: grid; grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); gap: 12px; }
+.kachel { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius); padding: 14px; }
+.kachel .wert { font-size: 1.6rem; font-weight: 800; display: block; }
+
+/* Einwilligungsbrief zum Drucken */
+.brief { background: #fff; color: #000; max-width: 46rem; margin: 0 auto; padding: 32px; border: 1px solid var(--sp-rand); border-radius: 8px; }
+.brief h1 { font-size: 1.5rem; }
+.brief .unterschrift { margin-top: 36px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.brief .linie { border-top: 1px solid #000; padding-top: 4px; font-size: 0.85rem; }
+@media print {
+  .lk-kopf, .lk-grundsatz, .brotkrumen, .nicht-drucken { display: none !important; }
+  .lk-haupt { padding: 0; max-width: none; }
+  .brief { border: none; padding: 0; }
+}

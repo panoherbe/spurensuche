@@ -1,0 +1,5 @@
+.probe-antworten { display: grid; gap: 10px; margin: 14px 0; }
+.probe-antworten button { min-height: 56px; font: inherit; font-weight: 700; border-radius: 14px; border: 2px solid var(--sp-rand); background: var(--sp-flaeche); color: var(--sp-text); cursor: pointer; }
+.probe-antworten button[aria-pressed="true"] { border-color: var(--sp-akzent); background: var(--sp-akzent-weich); }
+.probe-rollen { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px 0; }
+.probe-status { min-height: 1.5em; font-weight: 700; }

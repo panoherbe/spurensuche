@@ -1,0 +1,6 @@
+[
+  { "id": "test-stein", "name": "Teststein", "bild": "assets/spiele/items/stein.svg", "alt": "Ein grauer Stein", "kategorie": "natur" },
+  { "id": "test-blatt", "name": "Testblatt", "bild": "assets/spiele/items/blatt.svg", "alt": "Ein grünes Blatt", "kategorie": "natur" },
+  { "id": "test-krone", "name": "Testkrone", "bild": "assets/spiele/items/krone.svg", "alt": "Eine goldene Krone", "kategorie": "bauwerk" },
+  { "id": "test-schluessel", "name": "Testschlüssel", "bild": "assets/spiele/items/schluessel.svg", "alt": "Ein alter Schlüssel", "kategorie": "brauch" }
+]

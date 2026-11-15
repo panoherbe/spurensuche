@@ -1,0 +1,9 @@
+{
+  "format": "probe", "titel": "Probefrage Nord", "dauerMinuten": 5, "stufe": "kennen",
+  "text": { "standard": "Welche Farbe hat die Testfläche?", "einfach": "Welche Farbe hat die Fläche?" },
+  "antworten": [{ "id": "rot", "text": { "standard": "Rot", "einfach": "Rot" } }, { "id": "gruen", "text": { "standard": "Grün", "einfach": "Grün" } }, { "id": "blau", "text": { "standard": "Blau", "einfach": "Blau" } }],
+  "richtig": "gruen",
+  "hinweis": { "standard": "Schaut auf das Bild des Orts.", "einfach": "Schaut auf das Bild." },
+  "rollen": ["navigation", "protokoll"],
+  "belohnung": ["test-stein"]
+}

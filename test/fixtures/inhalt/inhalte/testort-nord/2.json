@@ -1,0 +1,8 @@
+{
+  "format": "probe", "titel": "Probeentscheidung", "dauerMinuten": 6, "stufe": "beurteilen",
+  "text": { "standard": "Was würdet ihr zuerst schützen?", "einfach": "Was schützt ihr zuerst?" },
+  "antworten": [{ "id": "wald", "text": { "standard": "Den Wald", "einfach": "Den Wald" } }, { "id": "fluss", "text": { "standard": "Den Fluss", "einfach": "Den Fluss" } }],
+  "richtig": null,
+  "abstimmung": true,
+  "belohnung": ["test-blatt"]
+}

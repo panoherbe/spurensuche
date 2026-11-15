@@ -1,0 +1,236 @@
+/* Gestaltung für alle Seiten: Farbvariablen (hell, dunkel, kontrastreich), Schrift, Bedienelemente.
+   Spiele nutzen dieselben Variablen (docs/SCHNITTSTELLE.md 2.6). Kontrast: Text ≥ 4,5 : 1 auf Grund und Fläche. */
+
+:root {
+  color-scheme: light;
+  --sp-grund: #f5f2ea;
+  --sp-flaeche: #ffffff;
+  --sp-flaeche-2: #ece7db;
+  --sp-text: #1c2420;
+  --sp-text-leise: #4b5651;
+  --sp-rand: #cfc7b6;
+  --sp-akzent: #1d6b47;
+  --sp-akzent-text: #ffffff;
+  --sp-akzent-weich: #dcefe3;
+  --sp-zweit: #24527a;
+  --sp-zweit-weich: #dde8f3;
+  --sp-erfolg: #1d6b47;
+  --sp-hinweis: #8a5300;
+  --sp-hinweis-weich: #fbeed5;
+  --sp-fehler: #b3261e;
+  --sp-fehler-weich: #fbe3e0;
+  --sp-fokus: #0b57d0;
+  --sp-karte-land: #e4eedf;
+  --sp-karte-rand: #8aa384;
+  --sp-karte-kreis: #c8d8c3;
+  --sp-karte-wasser: #78a9cf;
+  --sp-schatten: 0 1px 2px rgb(30 35 30 / 0.08), 0 4px 16px rgb(30 35 30 / 0.07);
+  --sp-radius: 14px;
+  --sp-radius-klein: 10px;
+  --sp-abstand: 16px;
+  --sp-schrift: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
+  --sp-schriftgroesse: 18px;
+  --sp-tempo: 1;
+  --sp-dauer: 200ms;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-darstellung="hell"]) {
+    color-scheme: dark;
+    --sp-grund: #121614;
+    --sp-flaeche: #1b2220;
+    --sp-flaeche-2: #232c29;
+    --sp-text: #eef3ef;
+    --sp-text-leise: #b6c1bb;
+    --sp-rand: #3a4642;
+    --sp-akzent: #6fcf9a;
+    --sp-akzent-text: #0b1f14;
+    --sp-akzent-weich: #1d3a2b;
+    --sp-zweit: #9cc3ea;
+    --sp-zweit-weich: #1f3245;
+    --sp-erfolg: #7ad8a5;
+    --sp-hinweis: #f1c26b;
+    --sp-hinweis-weich: #3a2e14;
+    --sp-fehler: #ff9a8f;
+    --sp-fehler-weich: #43201c;
+    --sp-fokus: #8ab4ff;
+    --sp-karte-land: #22302a;
+    --sp-karte-rand: #6f8f7a;
+    --sp-karte-kreis: #34453c;
+    --sp-karte-wasser: #4f7fa6;
+    --sp-schatten: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
+  }
+}
+
+:root[data-darstellung="dunkel"] {
+  color-scheme: dark;
+  --sp-grund: #121614;
+  --sp-flaeche: #1b2220;
+  --sp-flaeche-2: #232c29;
+  --sp-text: #eef3ef;
+  --sp-text-leise: #b6c1bb;
+  --sp-rand: #3a4642;
+  --sp-akzent: #6fcf9a;
+  --sp-akzent-text: #0b1f14;
+  --sp-akzent-weich: #1d3a2b;
+  --sp-zweit: #9cc3ea;
+  --sp-zweit-weich: #1f3245;
+  --sp-erfolg: #7ad8a5;
+  --sp-hinweis: #f1c26b;
+  --sp-hinweis-weich: #3a2e14;
+  --sp-fehler: #ff9a8f;
+  --sp-fehler-weich: #43201c;
+  --sp-fokus: #8ab4ff;
+  --sp-karte-land: #22302a;
+  --sp-karte-rand: #6f8f7a;
+  --sp-karte-kreis: #34453c;
+  --sp-karte-wasser: #4f7fa6;
+  --sp-schatten: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
+}
+
+/* Hoher Kontrast: Schwarz auf Weiß (bzw. Weiß auf Schwarz bei dunkler Darstellung), keine Zwischentöne */
+:root[data-kontrast="hoch"] {
+  --sp-grund: #ffffff; --sp-flaeche: #ffffff; --sp-flaeche-2: #ffffff; --sp-text: #000000; --sp-text-leise: #000000;
+  --sp-rand: #000000; --sp-akzent: #00502f; --sp-akzent-text: #ffffff; --sp-akzent-weich: #ffffff; --sp-zweit: #00336b;
+  --sp-zweit-weich: #ffffff; --sp-erfolg: #00502f; --sp-hinweis: #5c3700; --sp-hinweis-weich: #ffffff; --sp-fehler: #8c0000;
+  --sp-fehler-weich: #ffffff; --sp-fokus: #c00000; --sp-karte-land: #ffffff; --sp-karte-rand: #000000; --sp-karte-kreis: #555555;
+  --sp-karte-wasser: #00336b; --sp-schatten: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root[data-kontrast="hoch"]:not([data-darstellung="hell"]) {
+    --sp-grund: #000000; --sp-flaeche: #000000; --sp-flaeche-2: #000000; --sp-text: #ffffff; --sp-text-leise: #ffffff;
+    --sp-rand: #ffffff; --sp-akzent: #ffe14d; --sp-akzent-text: #000000; --sp-akzent-weich: #000000; --sp-zweit: #9fd3ff;
+    --sp-zweit-weich: #000000; --sp-erfolg: #8dffb4; --sp-hinweis: #ffe14d; --sp-hinweis-weich: #000000; --sp-fehler: #ff9e9e;
+    --sp-fehler-weich: #000000; --sp-fokus: #ffe14d; --sp-karte-land: #000000; --sp-karte-rand: #ffffff; --sp-karte-kreis: #aaaaaa;
+    --sp-karte-wasser: #9fd3ff;
+  }
+}
+:root[data-kontrast="hoch"][data-darstellung="dunkel"] {
+  --sp-grund: #000000; --sp-flaeche: #000000; --sp-flaeche-2: #000000; --sp-text: #ffffff; --sp-text-leise: #ffffff;
+  --sp-rand: #ffffff; --sp-akzent: #ffe14d; --sp-akzent-text: #000000; --sp-akzent-weich: #000000; --sp-zweit: #9fd3ff;
+  --sp-zweit-weich: #000000; --sp-erfolg: #8dffb4; --sp-hinweis: #ffe14d; --sp-hinweis-weich: #000000; --sp-fehler: #ff9e9e;
+  --sp-fehler-weich: #000000; --sp-fokus: #ffe14d; --sp-karte-land: #000000; --sp-karte-rand: #ffffff; --sp-karte-kreis: #aaaaaa;
+  --sp-karte-wasser: #9fd3ff;
+}
+
+:root[data-schrift="gross"] { --sp-schriftgroesse: 21px; }
+:root[data-schrift="sehr-gross"] { --sp-schriftgroesse: 24px; }
+
+*, *::before, *::after { box-sizing: border-box; }
+html { font-size: var(--sp-schriftgroesse); -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: var(--sp-schrift);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--sp-text);
+  background: var(--sp-grund);
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+img, svg { max-width: 100%; display: block; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 0.5em; letter-spacing: -0.01em; }
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; }
+p { margin: 0 0 0.8em; }
+a { color: var(--sp-zweit); text-underline-offset: 0.18em; }
+small, .leise { color: var(--sp-text-leise); }
+[hidden] { display: none !important; }
+
+:focus-visible { outline: 3px solid var(--sp-fokus); outline-offset: 3px; border-radius: 6px; }
+.nur-vorlesbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+.sprung { position: absolute; left: 8px; top: -60px; background: var(--sp-flaeche); color: var(--sp-text); padding: 10px 14px; z-index: 100; border-radius: var(--sp-radius-klein); border: 2px solid var(--sp-fokus); }
+.sprung:focus { top: 8px; }
+
+/* Knöpfe */
+.knopf {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
+  min-height: 48px; min-width: 48px; padding: 0.6em 1.2em;
+  font: inherit; font-weight: 600; line-height: 1.2; text-decoration: none; text-align: center;
+  border: 2px solid var(--sp-akzent); border-radius: 999px;
+  background: var(--sp-akzent); color: var(--sp-akzent-text); cursor: pointer;
+  transition: transform calc(var(--sp-dauer) / var(--sp-tempo)) ease, background-color calc(var(--sp-dauer) / var(--sp-tempo));
+}
+.knopf:hover { filter: brightness(1.05); }
+.knopf:active { transform: scale(0.98); }
+.knopf.zweit { background: var(--sp-flaeche); color: var(--sp-akzent); }
+.knopf.leise { background: transparent; color: var(--sp-text); border-color: var(--sp-rand); }
+.knopf.warnung { background: var(--sp-flaeche); color: var(--sp-fehler); border-color: var(--sp-fehler); }
+.knopf.gross { min-height: 60px; font-size: 1.1rem; padding: 0.8em 1.6em; }
+.knopf.breit { width: 100%; }
+.knopf[disabled], .knopf[aria-disabled="true"] { opacity: 0.55; cursor: not-allowed; }
+.knopf .symbol { width: 1.3em; height: 1.3em; flex: none; }
+.symbolknopf { min-width: 48px; min-height: 48px; padding: 0.5em; border-radius: 999px; }
+
+.knopfreihe { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+/* Flächen */
+.karte {
+  background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius);
+  padding: var(--sp-abstand); box-shadow: var(--sp-schatten);
+}
+.karte + .karte { margin-top: 14px; }
+.hinweisfeld { border-radius: var(--sp-radius-klein); padding: 12px 14px; background: var(--sp-hinweis-weich); color: var(--sp-text); border-left: 5px solid var(--sp-hinweis); }
+.hinweisfeld.gut { background: var(--sp-akzent-weich); border-left-color: var(--sp-erfolg); }
+.hinweisfeld.fehler { background: var(--sp-fehler-weich); border-left-color: var(--sp-fehler); }
+.marke { display: inline-flex; align-items: center; gap: 0.35em; font-size: 0.85rem; font-weight: 600; padding: 0.15em 0.6em; border-radius: 999px; background: var(--sp-flaeche-2); color: var(--sp-text); border: 1px solid var(--sp-rand); }
+.marke.gut { background: var(--sp-akzent-weich); border-color: var(--sp-erfolg); }
+.marke.warten { background: var(--sp-hinweis-weich); border-color: var(--sp-hinweis); }
+
+/* Formulare */
+label { font-weight: 600; display: block; margin-bottom: 0.3em; }
+input[type="text"], input[type="search"], input[type="number"], select, textarea {
+  font: inherit; color: var(--sp-text); background: var(--sp-flaeche);
+  border: 2px solid var(--sp-rand); border-radius: var(--sp-radius-klein);
+  padding: 0.6em 0.8em; min-height: 48px; width: 100%;
+}
+textarea { min-height: 10em; line-height: 1.5; }
+input:focus-visible, select:focus-visible, textarea:focus-visible { border-color: var(--sp-fokus); }
+.feld { margin-bottom: 16px; }
+.feld .erklaerung { font-size: 0.9rem; color: var(--sp-text-leise); margin-top: 0.3em; }
+fieldset { border: 1px solid var(--sp-rand); border-radius: var(--sp-radius-klein); padding: 12px 14px; margin: 0 0 16px; }
+legend { font-weight: 700; padding: 0 0.3em; }
+.wahl { display: flex; flex-wrap: wrap; gap: 8px; }
+.wahl input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.wahl label {
+  display: inline-flex; align-items: center; min-height: 48px; padding: 0.5em 1em; margin: 0; font-weight: 600;
+  border: 2px solid var(--sp-rand); border-radius: 999px; background: var(--sp-flaeche); cursor: pointer;
+}
+.wahl input:checked + label { background: var(--sp-akzent); color: var(--sp-akzent-text); border-color: var(--sp-akzent); }
+.wahl input:focus-visible + label { outline: 3px solid var(--sp-fokus); outline-offset: 3px; }
+.schalter { display: flex; align-items: center; gap: 12px; min-height: 48px; font-weight: 600; cursor: pointer; }
+.schalter input { width: 26px; height: 26px; accent-color: var(--sp-akzent); }
+input[type="range"] { width: 100%; min-height: 48px; accent-color: var(--sp-akzent); }
+
+/* Dialoge */
+dialog {
+  border: none; border-radius: 20px; padding: 0; max-width: min(36rem, calc(100vw - 24px)); width: 100%;
+  background: var(--sp-flaeche); color: var(--sp-text); box-shadow: 0 10px 40px rgb(0 0 0 / 0.35);
+}
+dialog::backdrop { background: rgb(10 16 13 / 0.55); }
+dialog .kopf { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px 0; }
+dialog .inhalt { padding: 12px 18px 18px; max-height: 75vh; overflow: auto; }
+dialog h2 { margin: 0; }
+
+/* Meldungen */
+.meldung {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 50; max-width: calc(100vw - 24px);
+  background: var(--sp-text); color: var(--sp-grund); padding: 12px 18px; border-radius: 999px; font-weight: 600;
+  box-shadow: var(--sp-schatten);
+}
+
+/* Vorlesen: gerade gelesenes Element */
+.wird-gelesen { outline: 3px dashed var(--sp-zweit); outline-offset: 4px; border-radius: 6px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+:root[data-bewegung="reduziert"] *, :root[data-bewegung="reduziert"] *::before, :root[data-bewegung="reduziert"] *::after {
+  animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important;
+}
+
+@media print {
+  body { background: #fff; color: #000; }
+  .nicht-drucken { display: none !important; }
+}

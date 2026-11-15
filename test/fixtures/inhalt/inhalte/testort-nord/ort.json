@@ -1,0 +1,13 @@
+{
+  "id": "testort-nord",
+  "name": "Testort Nord",
+  "region": "Testregion",
+  "lage": { "lat": 51.34, "lon": 12.37, "radius": 150 },
+  "qr": "NORD-1234",
+  "text": { "standard": "Ein Ort nur für Tests der App.", "einfach": "Ein Test-Ort." },
+  "bild": "assets/spiele/orte/nord.svg",
+  "alt": "Grüne Fläche mit dem Wort Nord",
+  "bildQuelle": "eigene Testgrafik, CC BY-SA 4.0",
+  "aufgaben": ["1", "2"],
+  "ersatz": { "text": { "standard": "So sieht der Testort aus.", "einfach": "So sieht es dort aus." }, "bild": "assets/spiele/orte/nord.svg", "alt": "Grüne Fläche" }
+}

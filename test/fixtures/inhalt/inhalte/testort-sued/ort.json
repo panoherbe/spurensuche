@@ -1,0 +1,13 @@
+{
+  "id": "testort-sued",
+  "name": "Testort Süd",
+  "region": "Testregion",
+  "lage": { "lat": 50.83, "lon": 12.92, "radius": 150 },
+  "qr": "SUED-5678",
+  "text": { "standard": "Der Abschluss der Testreise.", "einfach": "Hier endet die Test-Reise." },
+  "bild": "assets/spiele/orte/sued.svg",
+  "alt": "Blaue Fläche mit dem Wort Süd",
+  "bildQuelle": "eigene Testgrafik, CC BY-SA 4.0",
+  "aufgaben": ["1"],
+  "ersatz": { "text": { "standard": "So sieht der Abschluss aus.", "einfach": "So sieht es dort aus." } }
+}

@@ -1,0 +1,4 @@
+{ "ablaeufe": [
+  { "id": "stunde", "name": "Unterrichtsstunde", "minuten": 45, "orte": [{ "ort": "testort-nord", "aufgaben": ["1", "2"] }] },
+  { "id": "projekttag", "name": "Projekttag", "minuten": 240, "orte": [{ "ort": "testort-nord", "aufgaben": ["1", "2"] }, { "ort": "testort-sued", "aufgaben": ["1"] }] }
+] }

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Probe-Format (nur für Tests): eine Frage mit Antworten, optional Hinweis, Rollen und Abstimmung",
+  "type": "object",
+  "required": ["format", "antworten", "richtig"],
+  "properties": {
+    "format": { "const": "probe" },
+    "antworten": { "type": "array", "minItems": 2, "maxItems": 4, "items": { "type": "object", "required": ["id", "text"], "additionalProperties": false,
+      "properties": { "id": { "type": "string", "pattern": "^[a-z0-9-]{1,40}$" }, "text": { "$ref": "#/$defs/zweitext" } } } },
+    "richtig": { "type": ["string", "null"] },
+    "hinweis": { "$ref": "#/$defs/zweitext" },
+    "abstimmung": { "type": "boolean" }
+  },
+  "$defs": {
+    "zweitext": { "type": "object", "required": ["standard", "einfach"], "additionalProperties": false,
+      "properties": { "standard": { "type": "string", "minLength": 1 }, "einfach": { "type": "string", "minLength": 1 } } }
+  }
+}

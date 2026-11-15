@@ -1,0 +1,7 @@
+{
+  "format": "probe", "titel": "Abschlussfrage", "dauerMinuten": 5, "stufe": "anwenden",
+  "text": { "standard": "Wie viele Testorte gibt es?", "einfach": "Wie viele Orte gibt es?" },
+  "antworten": [{ "id": "eins", "text": { "standard": "Einen", "einfach": "Einen" } }, { "id": "zwei", "text": { "standard": "Zwei", "einfach": "Zwei" } }],
+  "richtig": "zwei",
+  "belohnung": ["test-krone", "test-schluessel"]
+}
