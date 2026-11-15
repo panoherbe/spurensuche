@@ -9,14 +9,14 @@ export async function zeige({ haupt, navigiere, inhalte, api }) {
   const team = aktuellesTeam();
   const anzahl = inhalte.orte.length;
   leere(haupt,
-    h('section', { class: 'start-buehne' }, himmel(),
-      h('div', { class: 'start-text' },
+    h('section', { class: 'start-buehne' },
+      h('div', { class: 'start-oben' }, h('div', { class: 'start-text' },
         h('h1', { 'data-vorlesen': '' }, 'Spurensuche Sachsen'),
         h('p', { class: 'start-satz', 'data-vorlesen': '' }, t({
           standard: `Entdeckt ${anzahl} Orte, löst Rätsel im Team und findet Sammelstücke für euer eigenes Bild.`,
           einfach: `Ihr entdeckt ${anzahl} Orte. Ihr löst Rätsel im Team. Ihr sammelt Dinge für ein Bild.`,
         })),
-        h('p', { class: 'start-marken', 'data-vorlesen': '' }, h('span', { class: 'marke' }, 'vor Ort oder in der Schule'), ' ', h('span', { class: 'marke' }, 'auch ohne Netz'))),
+        h('p', { class: 'start-marken', 'data-vorlesen': '' }, h('span', { class: 'marke' }, 'vor Ort oder in der Schule'), ' ', h('span', { class: 'marke' }, 'auch ohne Netz'))), himmel()),
       h('div', { class: 'start-wiese', 'aria-hidden': 'true' }, BEISPIEL_TIERE.map((tier) => wappen(tier)))),
     team ? h('div', { class: 'karte', stil: { 'margin-bottom': '18px' } },
       h('p', { 'data-vorlesen': '' }, `Auf diesem Gerät spielt gerade ${team.modus === 'schule' ? 'die Gruppe' : 'das Team'} „${team.name}“.`),

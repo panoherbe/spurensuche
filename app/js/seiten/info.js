@@ -24,7 +24,7 @@ export async function zeige({ haupt, konfig, api }) {
         h('li', {}, 'Programmcode: GNU Affero General Public License 3.0 (AGPL-3.0-only), frei nutzbar und veränderbar.'),
         h('li', {}, 'Texte, Aufgaben und Zeichnungen: Creative Commons BY-SA 4.0, als offene Bildungsmaterialien weiterverwendbar.'),
         h('li', {}, 'Fotos der Orte: Wikimedia Commons, freie Lizenzen je Bild (Bildnachweis im Quellcode, inhalte/BILDNACHWEIS.md).'),
-        h('li', {}, 'Schrift Atkinson Hyperlegible Next: SIL Open Font License 1.1.'),
+        h('li', {}, 'Schriften Atkinson Hyperlegible Next und Grandstander: SIL Open Font License 1.1.'),
         h('li', {}, KARTE.quelle))),
   );
   return 'Über die Spurensuche';

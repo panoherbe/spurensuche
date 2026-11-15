@@ -9,8 +9,14 @@ Eigene Werke, ohne Bildgenerator gezeichnet (Panagiotis Herbe):
 - Sammelstücke und die Vergleichsbilder in `assets/spiele/vergleich/` (Frauenkirche, Kind, Ziegel): CC BY-SA 4.0.
 - Spielfigur und Ulla Uhu sind Programmcode (AGPL-3.0-only); die Zeichnungen stehen zusätzlich unter CC BY-SA 4.0.
 
-Schrift: Atkinson Hyperlegible Next, SIL Open Font License 1.1 (`assets/spiele/schrift/OFL.txt`, `app/schrift/OFL.txt`).
-Stand der Lizenzangaben: 15.11.2026.
+- Wappen der Gruppen (Tierköpfe, Wimpel), Stern, Stempel, Konfetti und der Schmuck der Karte (Bäume, Berge, Felsen,
+  Windrose, Weg) in `app/js/zeichnungen.js` sind Programmcode (AGPL-3.0-only); die Zeichnungen stehen zusätzlich
+  unter CC BY-SA 4.0.
+
+Schriften: Atkinson Hyperlegible Next für den Lesetext, SIL Open Font License 1.1 (`assets/spiele/schrift/OFL.txt`,
+`app/schrift/OFL.txt`); Grandstander für Überschriften und Knöpfe, SIL Open Font License 1.1
+(`app/schrift/OFL-Grandstander.txt`).
+Stand der Lizenzangaben: 16.11.2026.
 
 | Datei | Werk | Urheber | Lizenz | Quelle |
 |---|---|---|---|---|

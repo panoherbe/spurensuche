@@ -56,9 +56,10 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 128px; }
 .start-buehne { --buehne: #7cc8ff; --wiese: #8fdc82; position: relative; overflow: hidden; border-radius: var(--sp-radius); margin-bottom: 22px;
   background: var(--buehne); color: var(--sp-tinte); border: 3px solid var(--sp-kontur); box-shadow: var(--sp-schatten); }
 :root[data-kontrast="hoch"] .start-buehne { --buehne: var(--sp-flaeche); --wiese: var(--sp-flaeche); }
-.start-buehne .himmel { position: absolute; right: 0; top: 0; width: min(100%, 570px); height: auto; pointer-events: none; }
+.start-oben { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); align-items: start; }
+.start-buehne .himmel { width: 100%; height: auto; padding: 8px 8px 0 0; }
 .start-text { position: relative; padding: 24px 22px 6px; }
-@media (max-width: 560px) { .start-text { padding-top: clamp(58px, 21vw, 110px); } }
+@media (max-width: 600px) { .start-oben { grid-template-columns: minmax(0, 1fr); } .start-buehne .himmel { order: -1; justify-self: end; width: min(62%, 220px); margin-bottom: -34px; } }
 .start-buehne h1 { font-size: clamp(2.1rem, 8vw, 3.6rem); line-height: 1.02; margin-bottom: 0.2em; max-width: 7.5em; }
 .start-satz { font-size: 1.2rem; font-weight: 700; max-width: 24rem; margin-bottom: 0.6em; }
 .start-marken { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -108,7 +109,8 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 128px; }
 .fortschritt a.marke { text-decoration: none; background: var(--sp-sonne); color: var(--sp-tinte); box-shadow: var(--sp-schatten-hart); }
 
 /* Entdeckerkarte */
-.karte-rahmen { margin: 0 auto 22px; max-width: 56rem; }
+/* nie höher als das Fenster: Auf einem Tablet im Querformat passt die ganze Karte zwischen Kopf- und Unterleiste */
+.karte-rahmen { margin: 0 auto 22px; max-width: min(56rem, max(17rem, calc((100vh - 230px) * 1000 / 792))); }
 .karte-flaeche { position: relative; width: 100%; aspect-ratio: 1000 / 792; border-radius: var(--sp-radius); overflow: hidden; background: var(--sp-karte-grund); border: 3px solid var(--sp-kontur); box-shadow: var(--sp-schatten); }
 .karte-svg { width: 100%; height: 100%; }
 .karte-grund { fill: var(--sp-karte-grund); }
@@ -230,7 +232,8 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 128px; }
 
 /* Bild */
 .bild-bereich { display: grid; gap: 18px; grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 860px) { .bild-bereich { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+/* neben der Auswahl bleibt das Bild stehen: Die Gruppe sieht sofort, was eine Wahl ändert */
+@media (min-width: 860px) { .bild-bereich { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } .bild-bereich > :first-child { position: sticky; top: 84px; } }
 /* gelber Bilderrahmen um die Vorschau */
 .vorschau-rahmen { aspect-ratio: 1; width: calc(100% - 28px); margin: 14px 14px 22px; border-radius: 6px; overflow: hidden; background: var(--sp-flaeche-2); border: 3px solid var(--sp-kontur);
   box-shadow: 0 0 0 9px var(--sp-sonne), 0 0 0 12px var(--sp-kontur), 0 8px 0 12px var(--sp-kontur); display: flex; align-items: center; justify-content: center; }

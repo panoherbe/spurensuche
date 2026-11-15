@@ -26,6 +26,8 @@ Geräts; ohne deutsche Stimme bleibt der Knopf verborgen.
 | Orte, Aufgaben, Sammelstücke, Figurenteile, Zeichnungen | eigene Werke (`inhalte/`, `assets/spiele/`) | CC BY-SA 4.0 |
 | Fotos der Orte (13) | Wikimedia Commons, je Bild in `inhalte/BILDNACHWEIS.md` | je Bild: FAL 1.3, CC BY-SA 4.0, CC BY-SA 3.0 DE, CC BY-SA 3.0, CC BY 3.0 oder CC0 1.0 |
 | Schrift Atkinson Hyperlegible Next (`assets/spiele/schrift/` für die Spiele, `app/schrift/` für die App) | The Atkinson Hyperlegible Next Project Authors | SIL OFL 1.1 (`OFL.txt` in beiden Ordnern) |
+| Schrift Grandstander für Überschriften und Knöpfe (`app/schrift/`) | The Grandstander Project Authors | SIL OFL 1.1 (`app/schrift/OFL-Grandstander.txt`) |
+| Wappen der Gruppen, Stern, Stempel, Konfetti, Schmuck der Karte (`app/js/zeichnungen.js`) | eigene Zeichnungen | CC BY-SA 4.0 (als Programmcode AGPL-3.0-only) |
 | Programmcode | eigener Code | AGPL-3.0-only |
 
 ## Nur zum Prüfen (nicht im Betrieb)

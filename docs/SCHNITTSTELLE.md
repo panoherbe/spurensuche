@@ -187,11 +187,15 @@ Eine Rolle ist eine Aufgabe in der Gruppe und keine Person; sie trägt keinen Na
    | `--sp-text` | Text |
    | `--sp-text-leise` | Nebentext (immer noch ≥ 4,5 : 1) |
    | `--sp-rand` | Ränder, Trennlinien |
-   | `--sp-akzent`, `--sp-akzent-text` | Hauptknopf und seine Schrift |
+   | `--sp-akzent`, `--sp-akzent-text` | Akzentfarbe und Schrift darauf; in einer Aufgabe ist das die Farbe des Orts |
+   | `--sp-akzent-weich` | zarter Ton der Akzentfarbe für Flächen (optional) |
+   | `--sp-knopf`, `--sp-knopf-text` | Hauptknopf und seine Schrift (optional, sonst die Akzentfarbe) |
+   | `--sp-kontur` | Umriss von Karten und Knöpfen (optional) |
    | `--sp-erfolg`, `--sp-hinweis`, `--sp-fehler` | Rückmeldung (immer mit Text oder Symbol) |
    | `--sp-fokus` | Fokusrahmen |
    | `--sp-radius`, `--sp-abstand` | Ecken, Grundabstand |
    | `--sp-schrift` | Schriftfamilie |
+   | `--sp-schrift-titel` | Schrift für Überschriften und Knöpfe (optional) |
 
    Stil einbinden:
    ```js

@@ -138,9 +138,9 @@ function wimpel(name) {
   let summe = 0;
   for (const z of klein) summe = (summe * 31 + z.codePointAt(0)) % 9973;
   const farbe = WIMPEL_FARBEN[klein] ?? WIMPEL_REIHE[summe % WIMPEL_REIHE.length];
-  const buchstabe = ([...name.replace(/^(die|der|das|team)\s+/i, '').trim()][0] ?? '?').toLocaleUpperCase('de').replace(/[<>&"']/g, '?');
+  // ohne Buchstaben: Der Name steht immer daneben; ein Stern auf dem Wimpel reicht als Zeichen
   return ['#ffffff', () => `<path d="M24 90 V14" stroke="${TINTE}" stroke-width="6" stroke-linecap="round"/><path d="M27 17 H84 L72 38 L84 59 H27 Z" fill="${farbe}" stroke="${TINTE}" stroke-width="3.5" stroke-linejoin="round"/>`
-    + `<text x="50" y="47" text-anchor="middle" font-family="Grandstander, sans-serif" font-weight="800" font-size="27" fill="${TINTE}">${buchstabe}</text>`];
+    + `<path d="${STERN}" transform="translate(35 23) scale(.3)" fill="#fff" stroke="${TINTE}" stroke-width="9" stroke-linejoin="round"/>`];
 }
 
 /** Ist der Name ein Tier mit eigenem Wappen? */
@@ -172,12 +172,12 @@ export function kartenSchmuck() {
     baum(858, 196, 0.9), baum(884, 222, 0.7), baum(180, 520, 0.85),
     laubbaum(128, 286, 0.9), laubbaum(300, 150, 0.85), laubbaum(560, 150, 0.9), laubbaum(420, 330, 0.85), laubbaum(806, 150, 0.8),
   ];
-  const rose = `<g transform="translate(905 668)"><circle r="46" fill="#fff" stroke="${TINTE}" stroke-width="3.5"/><path d="M0 -38 L9 -9 L38 0 L9 9 L0 38 L-9 9 L-38 0 L-9 -9 Z" fill="#ffd43b" stroke="${TINTE}" stroke-width="3" stroke-linejoin="round"/><path d="M0 -38 L9 -9 L0 0 Z M0 38 L-9 9 L0 0 Z" fill="#ff7fae" stroke="${TINTE}" stroke-width="2" stroke-linejoin="round"/><circle r="4" fill="${TINTE}"/><text y="-52" text-anchor="middle" font-family="Grandstander, sans-serif" font-weight="800" font-size="26" fill="${TINTE}">N</text></g>`;
+  const rose = `<g transform="translate(905 668)"><circle r="46" fill="#fff" stroke="${TINTE}" stroke-width="3.5"/><path d="M0 -38 L9 -9 L38 0 L9 9 L0 38 L-9 9 L-38 0 L-9 -9 Z" fill="#ffd43b" stroke="${TINTE}" stroke-width="3" stroke-linejoin="round"/><path d="M0 -38 L9 -9 L0 0 Z M0 38 L-9 9 L0 0 Z" fill="#ff7fae" stroke="${TINTE}" stroke-width="2" stroke-linejoin="round"/><circle r="4" fill="${TINTE}"/><path d="M-8 -52 V-72 L8 -52 V-72" fill="none" stroke="${TINTE}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>`;
   return alsElement(`<svg ${SVG_KOPF}><g class="karte-schmuck">${teile.join('')}${rose}</g></svg>`).firstElementChild;
 }
 
-/** Zwei Wolken und eine Sonne für die Bühne der Startseite. */
+/** Sonne und zwei Wolken für die Bühne der Startseite (steht neben dem Text, nie dahinter). */
 export function himmel(klasse = 'himmel') {
   const wolke = (x, y, g) => `<g transform="translate(${x} ${y}) scale(${g})"><path d="M-44 14 a17 17 0 0 1 5 -33 a24 24 0 0 1 45 -6 a19 19 0 0 1 30 14 a14 14 0 0 1 -4 25 Z" fill="#fff" stroke="${TINTE}" stroke-width="3.5" stroke-linejoin="round"/></g>`;
-  return alsElement(`<svg ${SVG_KOPF} viewBox="0 0 600 200" preserveAspectRatio="xMaxYMin meet"><g transform="translate(520 62)"><path d="M0 -58 v-16 M41 -41 l11 -11 M58 0 h16 M41 41 l11 11 M-41 -41 l-11 -11 M-58 0 h-16 M-41 41 l-11 11" stroke="${TINTE}" stroke-width="6" stroke-linecap="round"/><circle r="40" fill="#ffd43b" stroke="${TINTE}" stroke-width="4"/></g>${wolke(372, 138, 0.9)}${wolke(250, 44, 0.6)}</svg>`, klasse);
+  return alsElement(`<svg ${SVG_KOPF} viewBox="0 0 330 200" preserveAspectRatio="xMaxYMin meet"><g transform="translate(244 78)"><path d="M0 -56 v-16 M40 -40 l11 -11 M56 0 h16 M40 40 l11 11 M-40 -40 l-11 -11 M-56 0 h-16 M-40 40 l-11 11" stroke="${TINTE}" stroke-width="6" stroke-linecap="round"/><circle r="39" fill="#ffd43b" stroke="${TINTE}" stroke-width="4"/></g>${wolke(118, 150, 0.85)}${wolke(64, 52, 0.55)}</svg>`, klasse);
 }
