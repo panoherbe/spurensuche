@@ -26,7 +26,7 @@ a("")
 a(f"Gemessen von **{m['beginn']}** bis **{m['ende']}** (UTC), Stand `{m.get('stand') or '?'}`. Alle Zahlen stammen aus")
 a("[`messwerte.json`](messwerte.json) und [`tests.tap`](tests.tap) dieses Laufs; nichts ist geschätzt.")
 a("")
-a(f"**Alle Spielenden sind simuliert:** {m['hinweis']}")
+a(f"**Hinweis:** {m['hinweis']}")
 a("")
 a("**Umgebung:** Container ohne Netz auf einem Mini-PC (Intel Core i7, Linux). Browser über Playwright "
   + ", ".join(f"{b} {v}" for b, v in m["umgebung"]["browser"].items())
