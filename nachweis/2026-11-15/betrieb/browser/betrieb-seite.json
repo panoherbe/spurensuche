@@ -1,0 +1,131 @@
+{
+  "zeitpunkt": "2026-11-15T03:43:42.109Z",
+  "axe": "4.10.2",
+  "schritte": [
+    "b01-status",
+    "b02-uebersicht",
+    "b03-telefon-dunkel",
+    "b04-neustart-fertig",
+    "b05-zurueckspielen-frage",
+    "b06-inhalt-geprueft",
+    "b07-inhalt-fehler",
+    "b08-version-fertig"
+  ],
+  "fehler": [],
+  "barrierefreiheit": {
+    "b-status": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "b-anmeldung": {
+      "verstoesse": [],
+      "bestanden": 15,
+      "unvollstaendig": 0
+    },
+    "b-anmeldung-fehler": {
+      "verstoesse": [],
+      "bestanden": 18,
+      "unvollstaendig": 0
+    },
+    "b-uebersicht": {
+      "verstoesse": [],
+      "bestanden": 28,
+      "unvollstaendig": 0
+    },
+    "b-uebersicht-telefon-dunkel": {
+      "verstoesse": [],
+      "bestanden": 29,
+      "unvollstaendig": 0
+    },
+    "b-status-telefon-dunkel": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "b-neustart-frage": {
+      "verstoesse": [],
+      "bestanden": 13,
+      "unvollstaendig": 1
+    },
+    "b-neustart-fertig": {
+      "verstoesse": [],
+      "bestanden": 16,
+      "unvollstaendig": 0
+    },
+    "b-zurueckspielen-frage": {
+      "verstoesse": [],
+      "bestanden": 15,
+      "unvollstaendig": 1
+    },
+    "b-zurueckgespielt": {
+      "verstoesse": [],
+      "bestanden": 16,
+      "unvollstaendig": 1
+    },
+    "b-inhalt-geprueft": {
+      "verstoesse": [],
+      "bestanden": 28,
+      "unvollstaendig": 0
+    },
+    "b-inhalt-fehler": {
+      "verstoesse": [],
+      "bestanden": 28,
+      "unvollstaendig": 0
+    },
+    "b-version-frage": {
+      "verstoesse": [],
+      "bestanden": 13,
+      "unvollstaendig": 1
+    },
+    "b-version-fertig": {
+      "verstoesse": [],
+      "bestanden": 16,
+      "unvollstaendig": 0
+    },
+    "b-ende": {
+      "verstoesse": [],
+      "bestanden": 28,
+      "unvollstaendig": 0
+    }
+  },
+  "messung": {
+    "punkte": 11,
+    "ampel": "Alles in Ordnung",
+    "telefonBreite": 390,
+    "neustartMs": 1023,
+    "neustartSeite": "Die Anwendung ist wieder erreichbar (nach 1,0 Sekunden).",
+    "vorDemZurueckspielen": [
+      "Klasse 6a vor der Sicherung",
+      "Klasse 6b nach der Sicherung"
+    ],
+    "sicherungAuswahl": "15.11.2026, 04:43 Uhr, von Hand angelegt",
+    "zurueckspielenMs": 1076,
+    "nachDemZurueckspielen": [
+      "Klasse 6a vor der Sicherung"
+    ],
+    "betriebAngemeldet": true,
+    "sicherungVorDemZurueckspielen": true,
+    "ortVorher": "Testort Nord",
+    "ortAktiv": "Testort Nord (aus dem Paket)",
+    "ablehnung": "Nicht übernommen: 2 Fehler in mit Programmcode.zip. Es wurde nichts verändert.\ninhalte/zusatz.js: Dateityp .js ist in Inhaltspaketen nicht erlaubt. Programmcode (zum Beispiel .js oder .html) kommt nur mit einer neuen Version der Anwendung.\nspiele/neu/index.js: Liegt außerhalb der Ordner inhalte/ und assets/spiele/. Ein Inhaltspaket enthält nur diese beiden Ordner.\n\nBitte diese Liste an das Redakti",
+    "ortZurueck": "Testort Nord",
+    "ohneDienst": true,
+    "versionAuftragMs": 2014,
+    "protokoll": [
+      "Auftrag erledigt",
+      "Letzte Version zurückspielen beauftragt",
+      "Inhalt aktiviert",
+      "Inhalt aktiviert",
+      "Inhaltspaket geprüft",
+      "Sicherung zurückgespielt",
+      "Anwendung gestartet",
+      "Anwendung gestartet",
+      "Neustart ausgelöst",
+      "Anmeldung",
+      "Anwendung gestartet"
+    ],
+    "konzeptAmpel": "Alles in Ordnung"
+  },
+  "hinweis": "Neustart, Zurückspielen und Inhalt tauschen echt (Docker, Volume). Den Betriebsdienst für „letzte Version zurückspielen“ stellt dieser Prüflauf nach; der echte Versionswechsel steht in betriebstest.json."
+}

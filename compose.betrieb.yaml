@@ -1,0 +1,49 @@
+# Prüflauf der Betriebsseite im Browser mit echtem Neustart durch Docker (restart: unless-stopped) und Daten in
+# einem Volume (überlebt den Neustart). Chrome, Instanz und Prüflauf teilen sich den Netzbereich des Browsers.
+#   UID_GID="$(id -u):$(id -g)" docker compose -p spur-bt -f compose.betrieb.yaml up -d --build --wait browser spur
+#   UID_GID="$(id -u):$(id -g)" docker compose -p spur-bt -f compose.betrieb.yaml run --rm pruefer
+#   docker compose -p spur-bt -f compose.betrieb.yaml down -v
+# Nur Testschlüssel; nichts davon gilt außerhalb dieses Prüflaufs.
+services:
+  browser:
+    image: chromedp/headless-shell:latest
+    shm_size: 1gb
+
+  spur:
+    build: .
+    network_mode: "service:browser"
+    restart: unless-stopped
+    environment:
+      SPUR_INHALTE: /inhalt
+      SPUR_OEFFENTLICHE_URL: http://localhost:8080
+      SPUR_HOST: 127.0.0.1
+      SPUR_VERWALTUNG_SCHLUESSEL: TEST-VERWALTUNG
+      SPUR_BETRIEB_SCHLUESSEL: TEST-BETR-IEB1-2345
+      SPUR_BETRIEB_AGENT_TOKEN: test-betriebsdienst-0123456789abcdef
+      SPUR_BETRIEB_KONTAKT: "Entwicklung (Testeintrag)"
+      SPUR_SICHERUNG_SCHLUESSEL: c3B1cmVuc3VjaGUtdGVzdC1zaWNoZXJ1bmctMzJieXQ=
+      TZ: Europe/Berlin
+    volumes:
+      - ./test/fixtures/inhalt:/inhalt:ro
+      - daten:/daten
+    depends_on: [browser]
+
+  pruefer:
+    image: node:24-alpine
+    network_mode: "service:browser"
+    working_dir: /app
+    user: "${UID_GID:-1000:1000}"
+    environment:
+      APP_URL: http://localhost:8080
+      BETRIEB_SCHLUESSEL: TEST-BETR-IEB1-2345
+      AGENT_TOKEN: test-betriebsdienst-0123456789abcdef
+      AUSGABE: ${AUSGABE:-nachweis/tmp}
+      NODE_NO_WARNINGS: "1"
+      HOME: /tmp
+      TZ: Europe/Berlin
+    volumes:
+      - .:/app
+    command: ["node", "test/e2e/betrieb.js"]
+
+volumes:
+  daten:

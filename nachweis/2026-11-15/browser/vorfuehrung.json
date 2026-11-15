@@ -1,0 +1,89 @@
+{
+  "zeitpunkt": "2026-11-15T02:05:54.735Z",
+  "axe": "4.10.2",
+  "schritte": [
+    "v01-lk-uebersicht",
+    "v02-lk-laufend",
+    "v03-lk-auswertung",
+    "v04-start",
+    "v05-karte",
+    "v06-ort",
+    "v07-spiel-start",
+    "v08-offline-aufgabe",
+    "v09-offline-sammelbuch",
+    "v10-lk-eule",
+    "v11-telefon-dunkel-karte"
+  ],
+  "fehler": [],
+  "barrierefreiheit": {
+    "v-lk-anmeldung": {
+      "verstoesse": [],
+      "bestanden": 24,
+      "unvollstaendig": 0
+    },
+    "v-lk-uebersicht": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "v-lk-laufend": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "v-lk-auswertung": {
+      "verstoesse": [],
+      "bestanden": 29,
+      "unvollstaendig": 1
+    },
+    "v-start": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 1
+    },
+    "v-karte": {
+      "verstoesse": [],
+      "bestanden": 23,
+      "unvollstaendig": 1
+    },
+    "v-ort": {
+      "verstoesse": [],
+      "bestanden": 22,
+      "unvollstaendig": 0
+    },
+    "v-spiel-start": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 1
+    },
+    "v-telefon-dunkel-start": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 1
+    },
+    "v-telefon-dunkel-karte": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 1
+    }
+  },
+  "messung": {
+    "vorschlaegeBiber": [
+      "Teamleistung: Teamleistung, Beurteilen / Sich positionieren",
+      "Problemlösung: Problemlösung, Beurteilen / Sich positionieren",
+      "Beteiligung: Beteiligung, Gestalten"
+    ],
+    "orte": 4,
+    "spielText": "BILDPUZZLE · ETWA 6 MINUTEN Die Brücke im Nebel Das Foto der Basteibrücke ist durcheinandergeraten. Setzt es wieder zusammen: Tippt auf zwei Teile, dann tauschen sie die Plätze. Vorlesen So teilt i",
+    "offlinePaket": {
+      "dateien": 143,
+      "bytes": 4662625,
+      "vorhanden": 143,
+      "cache": [
+        "spurensuche-e48fafb79d5ebc1a"
+      ]
+    },
+    "offlineGeladen": true,
+    "zeileEule": "Eule gerade: Bastei In Arbeit (0/3) – Noch nicht begonnen – Noch nicht begonnen – Noch nicht begonnen gerade eben"
+  }
+}

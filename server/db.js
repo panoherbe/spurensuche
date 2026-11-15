@@ -97,6 +97,29 @@ export const SCHEMA = [
      id INTEGER PRIMARY KEY, zeit TEXT NOT NULL, rolle TEXT NOT NULL, aktion TEXT NOT NULL, ziel TEXT);
    CREATE INDEX protokoll_zeit ON protokoll(zeit);
    CREATE TABLE einstellung (schluessel TEXT PRIMARY KEY, wert TEXT NOT NULL);`,
+  // Version 2: Rolle „betrieb“ (Betriebsseite), Aufträge an den Betriebsdienst am Server, Messreihe für die
+  // Statusseite, Stand der Anwendung je Rückmeldung. Nur Erweiterungen: Version 1 läuft auf dieser Datenbank weiter.
+  `CREATE TABLE sitzung_neu (
+     token_hash TEXT PRIMARY KEY,
+     rolle TEXT NOT NULL CHECK (rolle IN ('lehrkraft', 'lernende', 'verwaltung', 'betrieb')),
+     lehrkraft_id INTEGER REFERENCES lehrkraft(id) ON DELETE CASCADE,
+     ueber_anmeldedienst INTEGER NOT NULL DEFAULT 0,
+     zugang_id INTEGER REFERENCES zugangsschluessel(id) ON DELETE CASCADE,
+     ablauf TEXT NOT NULL);
+   INSERT INTO sitzung_neu (token_hash, rolle, lehrkraft_id, ueber_anmeldedienst, zugang_id, ablauf)
+     SELECT token_hash, rolle, lehrkraft_id, ueber_anmeldedienst, zugang_id, ablauf FROM sitzung;
+   DROP TABLE sitzung;
+   ALTER TABLE sitzung_neu RENAME TO sitzung;
+   ALTER TABLE rueckmeldung ADD COLUMN stand TEXT;
+   CREATE TABLE betriebsauftrag (
+     id INTEGER PRIMARY KEY,
+     aktion TEXT NOT NULL CHECK (aktion IN ('version-zurueck')),
+     status TEXT NOT NULL CHECK (status IN ('offen', 'laeuft', 'fertig', 'fehler')),
+     erstellt TEXT NOT NULL, begonnen TEXT, erledigt TEXT, meldung TEXT);
+   CREATE TABLE messreihe (
+     zeit TEXT PRIMARY KEY,
+     anfragen INTEGER NOT NULL, fehler INTEGER NOT NULL, p95_ms INTEGER,
+     sync INTEGER NOT NULL, gruppen_aktiv INTEGER NOT NULL, speicher_mb INTEGER, cpu_prozent INTEGER);`,
 ];
 
 export const SCHEMA_VERSION = SCHEMA.length;
@@ -136,8 +159,9 @@ export function transaktion(db, fn) {
 /**
  * Setzt die Löschfristen durch: Quest-Daten nach `loeschen_am` (zwölf Wochen nach Abschluss, spätestens Ende des
  * Schuljahres), abgelaufene Sitzungen und Anmeldevorgänge, Eingangsschlüssel nach zwei Tagen, Protokoll nach
- * `protokollTage`. Nicht freigegebene Bildbeiträge gelöschter Gruppen gehen mit; freigegebene bleiben ohne Bezug
- * zur Gruppe für die Ausstellung erhalten.
+ * `protokollTage`, Messreihe der Statusseite nach 14 Tagen, Aufträge an den Betriebsdienst nach 90 Tagen. Nicht
+ * freigegebene Bildbeiträge gelöschter Gruppen gehen mit; freigegebene bleiben ohne Bezug zur Gruppe für die
+ * Ausstellung erhalten.
  */
 export function raeumeAuf(db, jetzt = new Date(), { protokollTage = 365 } = {}) {
   const t = jetzt.toISOString();
@@ -149,6 +173,8 @@ export function raeumeAuf(db, jetzt = new Date(), { protokollTage = 365 } = {}) 
     db.prepare('DELETE FROM anmeldevorgang WHERE ablauf <= ?').run(t);
     db.prepare('DELETE FROM eingang WHERE zeit <= ?').run(new Date(jetzt.getTime() - 2 * 86400000).toISOString());
     db.prepare('DELETE FROM protokoll WHERE zeit <= ?').run(new Date(jetzt.getTime() - protokollTage * 86400000).toISOString());
+    db.prepare('DELETE FROM messreihe WHERE zeit <= ?').run(new Date(jetzt.getTime() - 14 * 86400000).toISOString());
+    db.prepare('DELETE FROM betriebsauftrag WHERE erstellt <= ?').run(new Date(jetzt.getTime() - 90 * 86400000).toISOString());
     return { lerngruppen, freigaben, bilder, sitzungen };
   });
 }

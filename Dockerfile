@@ -5,7 +5,10 @@ WORKDIR /srv/spurensuche
 COPY --chown=node:node . .
 RUN mkdir -p /daten && chown node:node /daten
 USER node
-ENV NODE_ENV=production SPUR_HOST=0.0.0.0 SPUR_PORT=8080 SPUR_DATEN=/daten
+# Version des Bildes (betrieb/spur aktualisieren setzt sie aus dem Git-Tag); leer: Version aus server/app.js
+ARG VERSION=
+LABEL org.opencontainers.image.version=$VERSION org.opencontainers.image.licenses=AGPL-3.0-only
+ENV NODE_ENV=production SPUR_HOST=0.0.0.0 SPUR_PORT=8080 SPUR_DATEN=/daten SPUR_VERSION_BILD=$VERSION
 VOLUME ["/daten"]
 EXPOSE 8080
 HEALTHCHECK --interval=15s --timeout=3s --retries=3 CMD wget -qO- http://127.0.0.1:8080/api/v1/status > /dev/null || exit 1

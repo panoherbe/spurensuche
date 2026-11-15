@@ -1,0 +1,17 @@
+{
+  "zeitpunkt": "2026-11-15T04:29:30+01:00",
+  "stand": "a202dfc+Arbeitskopie",
+  "docker": "29.1.3",
+  "einrichtenMs": 2587,
+  "version": "0.1.0",
+  "neustartMs": 1306,
+  "sicherungMs": 314,
+  "zurueckspielenMs": 12168,
+  "aktualisierenMs": 12458,
+  "versionZurueck": {"auftrag":1,"von":"0.1.0-probe","auf":"0.1.0","status":"fertig","meldung":"Version 0.1.0 läuft wieder (11 Sekunden).","dauerMs":31079,"sekundenOhneAntwort":0},
+  "defektBisZurueckMs": 113158,
+  "defektAutomatischZurueck": "ja",
+  "haengerBisWiederDaMs": 114242,
+  "fehler": 0,
+  "hinweis": "Simuliert: eigene Testinstanz mit Testschlüsseln und Testdaten auf einem Testrechner. Zeiten in Millisekunden vom Befehl bis zur Antwort der Anwendung."
+}

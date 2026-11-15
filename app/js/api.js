@@ -67,6 +67,34 @@ export class HttpApi {
   protokoll() { return aufruf('api/v1/verwaltung/protokoll'); }
   inhalteNeuLaden() { return aufruf('api/v1/verwaltung/inhalte-neu-laden', { methode: 'POST', daten: {} }); }
   archivUrl(umfang) { return new URL(`api/v1/verwaltung/archiv.zip?umfang=${umfang}`, basis()).href; }
+
+  // Betrieb (Betriebsseite und öffentliche Statusseite)
+  status() { return aufruf('api/v1/status'); }
+  ichBetrieb() { return this.ich(); }
+  abmeldenBetrieb() { return this.abmelden(); }
+  anmeldenBetrieb(schluessel) { return aufruf('api/v1/anmeldung/betrieb', { methode: 'POST', daten: { schluessel } }); }
+  betriebZustand() { return aufruf('api/v1/betrieb/zustand'); }
+  betriebProtokoll() { return aufruf('api/v1/betrieb/protokoll'); }
+  neustart() { return aufruf('api/v1/betrieb/neustart', { methode: 'POST', daten: { bestaetigt: true } }); }
+  sicherungen() { return aufruf('api/v1/betrieb/sicherungen'); }
+  sicherungAnlegen() { return aufruf('api/v1/betrieb/sicherung', { methode: 'POST', daten: {} }); }
+  zurueckspielen(datei) { return aufruf('api/v1/betrieb/zurueckspielen', { methode: 'POST', daten: { datei, bestaetigt: true } }); }
+  inhaltStand() { return aufruf('api/v1/betrieb/inhalt'); }
+  inhaltAktivieren(paket) { return aufruf('api/v1/betrieb/inhalt/aktivieren', { methode: 'POST', daten: { paket } }); }
+  versionZurueck() { return aufruf('api/v1/betrieb/version-zurueck', { methode: 'POST', daten: { bestaetigt: true } }); }
+  auftrag(id) { return aufruf(`api/v1/betrieb/auftraege/${id}`); }
+  /** Lädt ein Inhaltspaket zur Prüfung hoch. Liefert `{ ok, paket, warnungen }` oder `{ ok: false, fehler }`. */
+  async inhaltPruefen(datei) {
+    let r;
+    try {
+      r = await fetch(new URL('api/v1/betrieb/inhalt', basis()), { method: 'POST', body: datei, credentials: 'same-origin', cache: 'no-store', headers: { 'Content-Type': 'application/zip', 'X-Dateiname': encodeURIComponent(datei.name ?? 'inhalt.zip') } });
+    } catch { throw new ApiFehler(0, 'Keine Verbindung zum Server.'); }
+    let inhalt = null;
+    try { inhalt = await r.json(); } catch { /* kein JSON */ }
+    if (r.status === 422 && inhalt) return inhalt;
+    if (!r.ok) throw new ApiFehler(r.status, inhalt?.fehler ?? `Fehler ${r.status}`, inhalt ?? {});
+    return inhalt;
+  }
 }
 
 let api = null;

@@ -58,6 +58,9 @@ self.addEventListener('fetch', (ev) => {
   const url = new URL(anfrage.url);
   if (url.origin !== self.location.origin || !url.href.startsWith(basis()) || istSchnittstelle(url)) return;
 
+  // Betriebs- und Statusseite immer frisch vom Server (nie aus dem Gerät: sie sollen den echten Zustand zeigen)
+  if (anfrage.mode === 'navigate' && /\/(betrieb|status)(\.html)?$/.test(url.pathname)) return;
+
   if (anfrage.mode === 'navigate') {
     // Seiten: zuerst Netz (kurz), sonst aus dem Gerät
     ev.respondWith((async () => {

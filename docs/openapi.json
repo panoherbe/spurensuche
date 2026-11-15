@@ -37,7 +37,7 @@
   "paths": {
     "/api/v1/status": {
       "get": {
-        "summary": "Zustand der Instanz",
+        "summary": "Zustand der Instanz (öffentlich, ohne Zahlen zum Betrieb)",
         "tags": [
           "Betrieb"
         ],
@@ -55,6 +55,10 @@
                     "version": {
                       "type": "string"
                     },
+                    "installiert": {
+                      "type": "string",
+                      "description": "Version des laufenden Bildes"
+                    },
                     "schema": {
                       "type": "integer"
                     },
@@ -63,6 +67,36 @@
                     },
                     "inhaltFehler": {
                       "type": "integer"
+                    },
+                    "gestartet": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "betrieb": {
+                      "type": "object",
+                      "properties": {
+                        "zustand": {
+                          "enum": [
+                            "gut",
+                            "eingeschraenkt",
+                            "stoerung"
+                          ]
+                        },
+                        "anmeldedienst": {
+                          "enum": [
+                            "gut",
+                            "stoerung",
+                            "unbekannt",
+                            "nicht-eingerichtet"
+                          ]
+                        },
+                        "inhalte": {
+                          "enum": [
+                            "gut",
+                            "stoerung"
+                          ]
+                        }
+                      }
                     }
                   }
                 }
@@ -487,6 +521,7 @@
                         "lehrkraft",
                         "lernende",
                         "verwaltung",
+                        "betrieb",
                         null
                       ]
                     }
@@ -1769,6 +1804,673 @@
           }
         }
       }
+    },
+    "/api/v1/anmeldung/betrieb": {
+      "post": {
+        "summary": "Anmeldung des Betriebs (Betriebsseite)",
+        "tags": [
+          "Anmeldung"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "schluessel"
+                ],
+                "properties": {
+                  "schluessel": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "angemeldet (Set-Cookie)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "429": {
+            "$ref": "#/components/responses/F429"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/zustand": {
+      "get": {
+        "summary": "Ampel der Betriebsseite: Punkte mit Stufe, Wert, Erklärung und „Was tun“, Versionen, Knöpfe, Verlauf der letzten 24 Stunden",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BetriebZustand"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/protokoll": {
+      "get": {
+        "summary": "Protokoll der Betriebsaktionen (ohne Personendaten)",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/neustart": {
+      "post": {
+        "summary": "Anwendung neu starten (der Prozess endet, Docker startet ihn neu)",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bestaetigung"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Neustart beginnt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "409": {
+            "$ref": "#/components/responses/F409"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/sicherungen": {
+      "get": {
+        "summary": "Vorhandene Sicherungen, neueste zuerst",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "schluessel": {
+                      "type": "boolean"
+                    },
+                    "liste": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "datei": {
+                            "type": "string"
+                          },
+                          "art": {
+                            "enum": [
+                              "taeglich",
+                              "hand",
+                              "vor-zurueckspielen",
+                              "vor-aktualisierung"
+                            ]
+                          },
+                          "bytes": {
+                            "type": "integer"
+                          },
+                          "zeit": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/sicherung": {
+      "post": {
+        "summary": "Sicherung jetzt anlegen (verschlüsselt)",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "angelegt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "409": {
+            "$ref": "#/components/responses/F409"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/zurueckspielen": {
+      "post": {
+        "summary": "Sicherung zurückspielen: prüfen, jetzigen Stand sichern, beim Neustart ersetzen",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "datei",
+                  "bestaetigt"
+                ],
+                "properties": {
+                  "datei": {
+                    "type": "string"
+                  },
+                  "bestaetigt": {
+                    "const": true
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "vorgemerkt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "sicherheit": {
+                      "type": "string",
+                      "description": "Sicherung des Stands vor dem Zurückspielen"
+                    },
+                    "neustart": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          },
+          "409": {
+            "$ref": "#/components/responses/F409"
+          },
+          "422": {
+            "$ref": "#/components/responses/F422"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/inhalt": {
+      "get": {
+        "summary": "Aktiver Inhalt, vorheriger Inhalt, abgelegte Inhaltspakete",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      },
+      "post": {
+        "summary": "Inhaltspaket (ZIP mit inhalte/ und assets/spiele/, ohne Programmcode) hochladen und prüfen; noch nicht aktiv",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "X-Dateiname",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Dateiname, URL-kodiert"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/zip": {
+              "schema": {
+                "type": "string",
+                "contentMediaType": "application/zip"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "geprüft, keine Fehler",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "const": true
+                    },
+                    "paket": {
+                      "type": "object"
+                    },
+                    "warnungen": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "413": {
+            "$ref": "#/components/responses/F413"
+          },
+          "422": {
+            "description": "abgelehnt, nichts verändert",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": {
+                      "const": false
+                    },
+                    "fehler": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    },
+                    "anzahlFehler": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/inhalt/aktivieren": {
+      "post": {
+        "summary": "Geprüftes Inhaltspaket oder den mitgelieferten Inhalt aktivieren (ohne Neustart)",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "paket"
+                ],
+                "properties": {
+                  "paket": {
+                    "type": "string",
+                    "description": "Kennung des Pakets oder „mitgeliefert“"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          },
+          "422": {
+            "$ref": "#/components/responses/F422"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/version-zurueck": {
+      "post": {
+        "summary": "Letzte Version zurückspielen: Auftrag an den Betriebsdienst am Server",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Bestaetigung"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "beauftragt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "auftrag": {
+                      "type": "integer"
+                    },
+                    "von": {
+                      "type": "string"
+                    },
+                    "auf": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/F400"
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "409": {
+            "$ref": "#/components/responses/F409"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/auftraege/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          },
+          "description": "Nummer des Auftrags"
+        }
+      ],
+      "get": {
+        "summary": "Stand eines Auftrags an den Betriebsdienst",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "sitzung": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "enum": [
+                        "offen",
+                        "laeuft",
+                        "fertig",
+                        "fehler"
+                      ]
+                    },
+                    "meldung": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          },
+          "404": {
+            "$ref": "#/components/responses/F404"
+          }
+        }
+      }
+    },
+    "/api/v1/betrieb/agent": {
+      "post": {
+        "summary": "Betriebsdienst am Server: Stand melden, Ergebnis melden, Aufträge holen (Antwort: Textzeilen „zustand …“, „auftrag <nr> <aktion>“)",
+        "tags": [
+          "Betrieb"
+        ],
+        "security": [
+          {
+            "betriebsdienst": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "version": {
+                    "type": "string"
+                  },
+                  "vorher": {
+                    "type": "string"
+                  },
+                  "gesund": {
+                    "type": "string"
+                  },
+                  "neustarts": {
+                    "type": "integer"
+                  },
+                  "erledigt": {
+                    "type": "integer"
+                  },
+                  "ok": {
+                    "enum": [
+                      "0",
+                      "1"
+                    ]
+                  },
+                  "meldung": {
+                    "type": "string"
+                  },
+                  "nur": {
+                    "const": "zustand"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Textzeilen",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/F401"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1787,6 +2489,138 @@
           },
           "bestaetigen": {
             "type": "boolean"
+          }
+        }
+      },
+      "Bestaetigung": {
+        "type": "object",
+        "required": [
+          "bestaetigt"
+        ],
+        "properties": {
+          "bestaetigt": {
+            "const": true
+          }
+        }
+      },
+      "BetriebPunkt": {
+        "type": "object",
+        "required": [
+          "id",
+          "titel",
+          "stufe",
+          "wert",
+          "text"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "titel": {
+            "type": "string"
+          },
+          "stufe": {
+            "enum": [
+              "gut",
+              "info",
+              "achtung",
+              "stoerung"
+            ]
+          },
+          "wert": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "tun": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Was zu tun ist (bei achtung und stoerung immer gesetzt)"
+          }
+        }
+      },
+      "BetriebZustand": {
+        "type": "object",
+        "properties": {
+          "gesamt": {
+            "enum": [
+              "gut",
+              "achtung",
+              "stoerung"
+            ]
+          },
+          "ueberschrift": {
+            "type": "string"
+          },
+          "geprueft": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "punkte": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/BetriebPunkt"
+            }
+          },
+          "version": {
+            "type": "object",
+            "properties": {
+              "anwendung": {
+                "type": "string"
+              },
+              "installiert": {
+                "type": "string"
+              },
+              "vorher": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "schema": {
+                "type": "integer"
+              },
+              "gestartet": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "knoepfe": {
+            "type": "object",
+            "properties": {
+              "neustart": {
+                "type": "boolean"
+              },
+              "sicherung": {
+                "type": "boolean"
+              },
+              "versionZurueck": {
+                "type": "boolean"
+              }
+            }
+          },
+          "verlauf": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Fünf-Minuten-Fenster: zeit, anfragen, fehler, p95, sync, gruppen, speicher, cpu"
+            }
+          },
+          "auftraege": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "kontakt": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -2315,6 +3149,11 @@
         "type": "http",
         "scheme": "bearer",
         "description": "SPUR_MESSWERTE_TOKEN"
+      },
+      "betriebsdienst": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "SPUR_BETRIEB_AGENT_TOKEN (nur der Betriebsdienst am Server, über 127.0.0.1)"
       }
     }
   }

@@ -4,7 +4,7 @@
 import { createServer } from 'node:http';
 import { readFile, stat } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
-import { resolve, extname, relative } from 'node:path';
+import { resolve, extname, relative, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 
 import { oeffne, transaktion, raeumeAuf, SCHEMA_VERSION } from './db.js';
@@ -13,6 +13,8 @@ import { oidcKlient, AnmeldeFehler } from './oidc.js';
 import { attrappe as erstelleAttrappe } from './attrappe.js';
 import { bildInfo } from './bilder.js';
 import { erstelleArchiv } from './archiv.js';
+import { registriereBetrieb, Messreihe } from './betrieb.js';
+import { liesAktiv, liesBeschreibung, paketWurzel, MITGELIEFERT } from './inhaltspaket.js';
 import { COOKIE, hash, hmac, token, kennung, code as neuerCode, normalisiereCode, gleich, leseCookies, cookieKopf, bremse, kopfzeilen, SVG_RICHTLINIE } from './sicherheit.js';
 import { bereinigeEreignisse } from '../app/js/kern/ereignisse.js';
 import { beobachtungen, kompetenzraster, formulierungsentwurf, BEREICHE, STUFEN } from '../app/js/kern/raster.js';
@@ -29,10 +31,14 @@ const TYPEN = {
   '.txt': 'text/plain; charset=utf-8',
 };
 const TEXT = /^(text\/|application\/(json|manifest\+json)|image\/svg)/;
-const SEITEN = { '/': 'index.html', '/index.html': 'index.html', '/lehrkraefte': 'lehrkraefte.html', '/lehrkraefte.html': 'lehrkraefte.html', '/verwaltung': 'verwaltung.html', '/verwaltung.html': 'verwaltung.html' };
+const SEITEN = {
+  '/': 'index.html', '/index.html': 'index.html', '/lehrkraefte': 'lehrkraefte.html', '/lehrkraefte.html': 'lehrkraefte.html',
+  '/verwaltung': 'verwaltung.html', '/verwaltung.html': 'verwaltung.html', '/betrieb': 'betrieb.html', '/betrieb.html': 'betrieb.html',
+  '/status': 'status.html', '/status.html': 'status.html',
+};
 const MAX_KOERPER = 1024 * 1024;
 const MAX_BILD_KOERPER = 16 * 1024 * 1024;
-const SITZUNG_STUNDEN = { lehrkraft: 12, lernende: 8, verwaltung: 2 };
+const SITZUNG_STUNDEN = { lehrkraft: 12, lernende: 8, verwaltung: 2, betrieb: 8 };
 const GERAET_TAGE = 120;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const ISO = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:\d{2})$/;
@@ -52,7 +58,28 @@ export async function erstelleApp(cfg) {
   const log = cfg.log ?? console;
   const db = oeffne(cfg.datenbank);
   const jetzt = () => new Date().toISOString();
-  let inhalte = await ladeInhalte({ appWurzel: cfg.appWurzel, inhaltsWurzel: cfg.inhaltsWurzel });
+  const gestartet = Date.now();
+  const datenOrdner = cfg.datenOrdner ?? dirname(resolve(cfg.datenbank));
+
+  // Inhalte: das aktive Inhaltspaket (Betriebsseite, „Inhalt tauschen“) oder der mitgelieferte Inhalt. Hat das Paket
+  // Fehler oder fehlt es, läuft die Anwendung mit dem mitgelieferten Inhalt weiter und die Ampel zeigt das.
+  const paket = { id: MITGELIEFERT, beschreibung: null, warnung: null };
+  let datenWurzel = cfg.inhaltsWurzel;
+  let inhalte = null;
+  const aktiv = await liesAktiv(datenOrdner);
+  if (aktiv.paket !== MITGELIEFERT) {
+    const beschreibung = await liesBeschreibung(datenOrdner, aktiv.paket);
+    const probe = beschreibung ? await ladeInhalte({ appWurzel: cfg.appWurzel, inhaltsWurzel: cfg.inhaltsWurzel, datenWurzel: paketWurzel(datenOrdner, aktiv.paket) }) : null;
+    if (probe && !probe.fehler.length) {
+      Object.assign(paket, { id: aktiv.paket, beschreibung });
+      datenWurzel = paketWurzel(datenOrdner, aktiv.paket);
+      inhalte = probe;
+    } else {
+      paket.warnung = `Das aktive Inhaltspaket ${beschreibung?.name ?? aktiv.paket} ließ sich nicht laden${probe ? ` (${probe.fehler.length} Fehler)` : ''}; der mitgelieferte Inhalt ist aktiv.`;
+      log.error?.(paket.warnung);
+    }
+  }
+  inhalte ??= await ladeInhalte({ appWurzel: cfg.appWurzel, inhaltsWurzel: cfg.inhaltsWurzel });
   for (const f of inhalte.fehler) log.error?.(`Inhalt: ${f.datei} ${f.pfad}: ${f.meldung}`);
 
   // Geheimer Pfeffer für die HMAC der Pseudonyme; liegt nur in der Datenbank der Instanz.
@@ -69,6 +96,21 @@ export async function erstelleApp(cfg) {
     db.prepare("INSERT INTO einstellung (schluessel, wert) VALUES ('verwaltung', ?)").run(hash(normalisiereCode(s)));
     log.info?.(`Erster Start: Schlüssel der Verwaltung ${s} (nur jetzt sichtbar; ändern mit SPUR_VERWALTUNG_SCHLUESSEL)`);
   }
+  // Schlüssel des Betriebs (Betriebsseite): ebenso aus der Umgebung oder beim ersten Start erzeugt.
+  if (cfg.betriebSchluessel) {
+    db.prepare("INSERT INTO einstellung (schluessel, wert) VALUES ('betrieb', ?) ON CONFLICT(schluessel) DO UPDATE SET wert = excluded.wert").run(hash(normalisiereCode(cfg.betriebSchluessel)));
+  } else if (!db.prepare("SELECT 1 FROM einstellung WHERE schluessel = 'betrieb'").get()) {
+    const s = neuerCode(16);
+    db.prepare("INSERT INTO einstellung (schluessel, wert) VALUES ('betrieb', ?)").run(hash(normalisiereCode(s)));
+    log.info?.(`Erster Start: Schlüssel des Betriebs ${s} (nur jetzt sichtbar; ändern mit SPUR_BETRIEB_SCHLUESSEL)`);
+  }
+  // Wurde beim Start eine Sicherung zurückgespielt (server/start.js), bleibt angemeldet, wer sie ausgelöst hat.
+  if (cfg.zurueckgespielt) {
+    const z = cfg.zurueckgespielt;
+    for (const t of z.sitzungen ?? []) db.prepare('INSERT OR IGNORE INTO sitzung (token_hash, rolle, ablauf) VALUES (?, ?, ?)').run(t.token_hash, t.rolle, t.ablauf);
+    db.prepare("INSERT INTO einstellung (schluessel, wert) VALUES ('zurueckgespielt', ?) ON CONFLICT(schluessel) DO UPDATE SET wert = excluded.wert")
+      .run(JSON.stringify({ datei: z.datei, zeit: jetzt(), fehler: z.fehler ?? null }));
+  }
 
   const attrappe = cfg.attrappe ? erstelleAttrappe({
     aussteller: `${cfg.oeffentlicheUrl}/attrappe`,
@@ -79,9 +121,12 @@ export async function erstelleApp(cfg) {
   const fehlversuche = bremse(cfg.maxFehlversuche ?? 20);
   const familienBremse = bremse(cfg.maxFamilienbilder ?? 30);
   const messung = { start: Date.now(), anfragen: new Map(), dauer: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], grenzen: [5, 10, 25, 50, 100, 250, 500, 1000, 2500, Infinity], sync: { angenommen: 0, doppelt: 0 } };
+  const messreihe = new Messreihe(messung.grenzen);
   const dateiCache = new Map();
 
   const protokolliere = (rolle, aktion, ziel = null) => db.prepare('INSERT INTO protokoll (zeit, rolle, aktion, ziel) VALUES (?, ?, ?, ?)').run(jetzt(), rolle, aktion, ziel);
+  protokolliere('system', 'start', cfg.versionBild ?? VERSION);
+  if (cfg.zurueckgespielt) protokolliere('betrieb', cfg.zurueckgespielt.fehler ? 'zurueckspielen-fehlgeschlagen' : 'sicherung-zurueckgespielt', cfg.zurueckgespielt.datei);
   const aufraeumen = () => {
     const r = raeumeAuf(db, new Date());
     if (r.lerngruppen || r.freigaben || r.bilder) protokolliere('system', 'loeschfrist', JSON.stringify(r));
@@ -105,6 +150,18 @@ export async function erstelleApp(cfg) {
     const text = Buffer.concat(teile).toString('utf8');
     if (art === 'text') return text;
     try { return JSON.parse(text || '{}'); } catch { throw new HttpFehler(400, 'JSON nicht lesbar'); }
+  }
+
+  /** Roher Körper (Dateien wie Inhaltspakete), höchstens `max` Byte. */
+  async function koerperRoh(req, max) {
+    const teile = [];
+    let n = 0;
+    for await (const t of req) {
+      n += t.length;
+      if (n > max) throw new HttpFehler(413, `Datei zu groß (höchstens ${Math.round(max / 1048576)} MB)`);
+      teile.push(t);
+    }
+    return Buffer.concat(teile);
   }
 
   const absender = (req) => req.socket.remoteAddress ?? 'unbekannt';
@@ -224,9 +281,26 @@ export async function erstelleApp(cfg) {
   const route = (methode, muster, fn) => routen.push({ methode, muster: new RegExp(`^${muster}$`), fn });
 
   route('GET', '/api/v1/status', () => ({
-    ok: true, version: VERSION, schema: SCHEMA_VERSION, inhaltVersion: inhalte.inhaltVersion, inhaltFehler: inhalte.fehler.length,
-    zeit: jetzt(), anmeldung: { anmeldedienst: !!oidc, zugangsschluessel: true, attrappe: !!attrappe }, lernendeAnmeldung: cfg.lernendeAnmeldung,
+    ok: true, version: VERSION, installiert: cfg.versionBild ?? VERSION, schema: SCHEMA_VERSION, inhaltVersion: inhalte.inhaltVersion, inhaltFehler: inhalte.fehler.length,
+    zeit: jetzt(), gestartet: new Date(gestartet).toISOString(), betrieb: betriebTeil.oeffentlich(),
+    anmeldung: { anmeldedienst: !!oidc, zugangsschluessel: true, attrappe: !!attrappe }, lernendeAnmeldung: cfg.lernendeAnmeldung,
   }));
+
+  // Betrieb: Statusseite, Knöpfe und Betriebsdienst (server/betrieb.js)
+  const betriebTeil = registriereBetrieb({
+    route, db, cfg, log, jetzt, protokolliere, koerper, koerperRoh, sitzung, HttpFehler, mit, datei, VERSION, SCHEMA_VERSION, messreihe, gestartet, datenOrdner,
+    fehlversuche, absender, gleich, hash, normalisiereCode, neueSitzung,
+    inhalte: {
+      holen: () => inhalte,
+      paket: () => paket,
+      async setze(neu, id, wurzel) {
+        inhalte = neu;
+        datenWurzel = wurzel;
+        Object.assign(paket, { id, beschreibung: id === MITGELIEFERT ? null : await liesBeschreibung(datenOrdner, id), warnung: null });
+        dateiCache.clear();
+      },
+    },
+  });
 
   // Gerät einer Gruppe: Beitritt mit Code, danach Übertragung mit Gerätetoken
   route('POST', '/api/v1/beitritt', async (req) => {
@@ -304,13 +378,13 @@ export async function erstelleApp(cfg) {
         for (const r of Array.isArray(k.rueckmeldungen) ? k.rueckmeldungen.slice(0, 50) : []) {
           if (typeof r?.id !== 'string' || !UUID.test(r.id) || !inhalte.aufgabeNach.has(r.aufgabe)) continue;
           const wert = (feld) => (erlaubt[feld].includes(r[feld]) ? r[feld] : null);
-          ergebnis.angenommen.rueckmeldungen += db.prepare('INSERT OR IGNORE INTO rueckmeldung (id, freigabe_id, aufgabe, verstaendlich, spass, schwierigkeit, zeit) VALUES (?, ?, ?, ?, ?, ?, ?)')
-            .run(r.id, g.freigabe_id, r.aufgabe, wert('verstaendlich'), wert('spass'), wert('schwierigkeit'), jetzt()).changes;
+          ergebnis.angenommen.rueckmeldungen += db.prepare('INSERT OR IGNORE INTO rueckmeldung (id, freigabe_id, aufgabe, verstaendlich, spass, schwierigkeit, stand, zeit) VALUES (?, ?, ?, ?, ?, ?, ?, ?)')
+            .run(r.id, g.freigabe_id, r.aufgabe, wert('verstaendlich'), wert('spass'), wert('schwierigkeit'), cfg.standBezeichnung ?? VERSION, jetzt()).changes;
         }
       }
       db.prepare('UPDATE gruppe SET letzte_sync = ? WHERE id = ?').run(jetzt(), g.gruppe_id);
     });
-    if (ergebnis.doppelt) messung.sync.doppelt++; else messung.sync.angenommen++;
+    if (ergebnis.doppelt) messung.sync.doppelt++; else { messung.sync.angenommen++; messreihe.syncAngenommen(); }
     return ergebnis;
   });
 
@@ -636,8 +710,8 @@ export async function erstelleApp(cfg) {
   route('GET', '/api/v1/freigaben/([A-Za-z0-9_-]+)/rueckmeldungen.csv', (req, url, [id]) => {
     const s = lehrkraft(req);
     eigeneFreigabe(s, id);
-    const zeilen = db.prepare('SELECT aufgabe, verstaendlich, spass, schwierigkeit, zeit FROM rueckmeldung WHERE freigabe_id = ? ORDER BY zeit').all(id);
-    const text = `aufgabe,titel,verstaendlich,spass,schwierigkeit,zeit\n${zeilen.map((z) => [z.aufgabe, `"${(inhalte.aufgabeNach.get(z.aufgabe)?.titel ?? '').replace(/"/g, '""')}"`, z.verstaendlich ?? '', z.spass ?? '', z.schwierigkeit ?? '', z.zeit].join(',')).join('\n')}\n`;
+    const zeilen = db.prepare('SELECT aufgabe, verstaendlich, spass, schwierigkeit, stand, zeit FROM rueckmeldung WHERE freigabe_id = ? ORDER BY zeit').all(id);
+    const text = `aufgabe,titel,verstaendlich,spass,schwierigkeit,stand,zeit\n${zeilen.map((z) => [z.aufgabe, `"${(inhalte.aufgabeNach.get(z.aufgabe)?.titel ?? '').replace(/"/g, '""')}"`, z.verstaendlich ?? '', z.spass ?? '', z.schwierigkeit ?? '', `"${(z.stand ?? '').replace(/"/g, '""')}"`, z.zeit].join(',')).join('\n')}\n`;
     return datei(text, 'text/csv; charset=utf-8', { 'Content-Disposition': 'attachment; filename="rueckmeldungen.csv"' });
   });
 
@@ -747,7 +821,7 @@ export async function erstelleApp(cfg) {
 
   route('POST', '/api/v1/verwaltung/inhalte-neu-laden', async (req) => {
     verwaltung(req);
-    inhalte = await ladeInhalte({ appWurzel: cfg.appWurzel, inhaltsWurzel: cfg.inhaltsWurzel });
+    inhalte = await ladeInhalte({ appWurzel: cfg.appWurzel, inhaltsWurzel: cfg.inhaltsWurzel, datenWurzel });
     dateiCache.clear();
     protokolliere('verwaltung', 'inhalte-neu-geladen', inhalte.inhaltVersion);
     return { inhaltVersion: inhalte.inhaltVersion, fehler: inhalte.fehler };
@@ -771,7 +845,7 @@ export async function erstelleApp(cfg) {
   // --- Statische Dateien ---------------------------------------------------------------------------------------------
 
   function konfiguration() {
-    return { modus: 'server', version: VERSION, inhaltVersion: inhalte.inhaltVersion, anmeldung: { anmeldedienst: !!oidc, zugangsschluessel: true, attrappe: !!attrappe }, lernendeAnmeldung: cfg.lernendeAnmeldung };
+    return { modus: 'server', version: VERSION, inhaltVersion: inhalte.inhaltVersion, stand: cfg.standBezeichnung ?? null, anmeldung: { anmeldedienst: !!oidc, zugangsschluessel: true, attrappe: !!attrappe }, lernendeAnmeldung: cfg.lernendeAnmeldung };
   }
 
   async function statisch(req, pfad) {
@@ -787,7 +861,8 @@ export async function erstelleApp(cfg) {
       if (rel.split('/').some((teil) => teil.startsWith('.') || teil === '')) return null;
       let wurzel = null;
       if (/^app\//.test(rel)) wurzel = cfg.appWurzel;
-      else if (/^(spiele|inhalte|assets\/spiele)\//.test(rel)) wurzel = cfg.inhaltsWurzel;
+      else if (/^spiele\//.test(rel)) wurzel = cfg.inhaltsWurzel;
+      else if (/^(inhalte|assets\/spiele)\//.test(rel)) wurzel = datenWurzel;
       if (!wurzel) return null;
       const voll = resolve(wurzel, rel);
       if (relative(wurzel, voll).startsWith('..')) return null;
@@ -873,6 +948,7 @@ export async function erstelleApp(cfg) {
       const k = `${klasseVon(pfad)}|${status}`;
       messung.anfragen.set(k, (messung.anfragen.get(k) ?? 0) + 1);
       messung.dauer[messung.grenzen.findIndex((g) => ms <= g)]++;
+      messreihe.zaehle(status, ms);
       if (cfg.protokollAufrufe) log.info?.(JSON.stringify({ zeit: jetzt(), methode: req.method, route: klasseVon(pfad), status, ms: Math.round(ms) }));
     }
   }
@@ -885,6 +961,6 @@ export async function erstelleApp(cfg) {
     get inhalte() { return inhalte; },
     aufraeumen,
     async notiereSicherung(zeit) { db.prepare("INSERT INTO einstellung (schluessel, wert) VALUES ('letzte_sicherung', ?) ON CONFLICT(schluessel) DO UPDATE SET wert = excluded.wert").run(zeit); },
-    schliesse() { clearInterval(zeitgeber); server.close(); db.close(); },
+    schliesse() { clearInterval(zeitgeber); betriebTeil.schliesse(); server.close(); db.close(); },
   };
 }

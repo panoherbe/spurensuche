@@ -17,6 +17,11 @@ Bereich.
 | `SPUR_AUSSTELLUNG_TOKEN` | Bearer-Token des Ausstellungssystems für `/api/v1/ausstellung/…` | leer: Abruf gesperrt | ab 24 Zeichen |
 | `SPUR_AUSSTELLUNG_OFFEN` | Freigegebene Bildbeiträge ohne Token abrufbar | `0` | `0`/`1` |
 | `SPUR_MESSWERTE_TOKEN` | Bearer-Token für `/api/v1/betrieb/messwerte` | leer: Messwerte gesperrt | ab 24 Zeichen |
+| `SPUR_BETRIEB_SCHLUESSEL` | Schlüssel der Betriebsseite `/betrieb.html` (Telefondienst) | leer: wird beim ersten Start erzeugt und einmal ins Protokoll geschrieben | ab 16 Zeichen |
+| `SPUR_BETRIEB_AGENT_TOKEN` | Bearer-Token des Betriebsdienstes am Server (`betrieb/spur wache`) für `/api/v1/betrieb/agent` | leer: Betriebsdienst aus, Knopf „Letzte Version zurückspielen“ gesperrt | ab 24 Zeichen |
+| `SPUR_BETRIEB_KONTAKT` | Wen der Betrieb anruft, wenn nichts hilft (steht auf der Betriebsseite unter „Hilfe“) | leer | bis 160 Zeichen |
+| `SPUR_BILD` | Name des Docker-Bildes (nur `compose.yaml` und `betrieb/spur`) | `spurensuche` | Name |
+| `SPUR_VERSION_BILD` | Version des Bildes; setzt `betrieb/spur` beim Bauen aus dem Git-Tag (Build-Argument `VERSION`) | leer: Version aus `server/app.js` | Text |
 | `SPUR_OIDC_AUSSTELLER` | Aussteller (Issuer) des Anmeldedienstes | leer: keine Anmeldung über den Dienst | URL ohne Schrägstrich am Ende |
 | `SPUR_OIDC_CLIENT_ID` | Kennung der Anwendung beim Anmeldedienst | `spurensuche` | Text |
 | `SPUR_OIDC_CLIENT_SECRET` | Geheimnis der Anwendung beim Anmeldedienst | – (Pflicht, wenn ein Aussteller gesetzt ist) | Text |
@@ -26,6 +31,7 @@ Bereich.
 | `SPUR_OIDC_ROLLEN_LERNENDE` | Werte, die als Lernende gelten | `schueler,lernende` | durch Komma getrennt |
 | `SPUR_LERNENDE_ANMELDUNG` | Müssen Lernende vor dem Beitritt angemeldet sein? | `optional` | `optional`, `pflicht` |
 | `SPUR_AUFBEWAHRUNG_WOCHEN` | Löschfrist der Gruppendaten nach Ende der Quest | `12` | 1–52 (höchstens bis Schuljahresende) |
+| `SPUR_STAND_BEZEICHNUNG` | Bezeichnung des Stands, sichtbar für Lehrkräfte und unter „Über die Spurensuche“ (z. B. „Stand Workshop 2“), damit Rückmeldungen einem Stand zugeordnet werden | leer | bis 40 Zeichen |
 | `SPUR_WERKSTATT` | Werkstatt-Seite zum Prüfen einzelner Spiele | `0` | `0`/`1`, nur in Test und Entwicklung |
 | `SPUR_PROTOKOLL_AUFRUFE` | jede Anfrage protokollieren (Methode, Routenklasse, Status, Dauer; keine IP, keine Parameter) | `0` | `0`/`1` |
 | `SPUR_ATTRAPPE` | Attrappe des Anmeldedienstes mit Testkonten unter `/attrappe` | `0` | `0`/`1`, nie in Produktion |

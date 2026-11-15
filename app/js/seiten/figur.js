@@ -1,4 +1,6 @@
 // Spielfigur gestalten (Modul spiele/figur, docs/SCHNITTSTELLE.md 4.1). Die Auswahl bleibt nur im Gerät.
+// Zwei Formen des Moduls: `starteGestaltung` mit Katalog aus inhalte/figur.json (Stand der Spiele seit 15.11.2026)
+// und die ältere Form `gestalte`/`figurElement`.
 
 import { h, leere, symbol } from '../ui.js';
 import { t, einstellungen, reduzierteBewegung } from '../einstellungen.js';
@@ -10,7 +12,11 @@ export async function zeige({ haupt, inhalte, aufraeumen }) {
   const team = aktuellesTeam();
   let modul = null;
   try { modul = await import(url('spiele/figur/index.js')); } catch { /* noch nicht vorhanden */ }
-  if (!modul?.gestalte) {
+  let katalog = null;
+  if (modul?.starteGestaltung) {
+    try { katalog = await (await fetch(url('inhalte/figur.json'))).json(); } catch { katalog = null; }
+  }
+  if (!(modul?.starteGestaltung && katalog) && !modul?.gestalte) {
     leere(haupt, h('h1', {}, 'Eure Figur'), h('p', {}, 'Die Figur kommt mit dem nächsten Stand der Spiele.'));
     return 'Figur';
   }
@@ -22,15 +28,19 @@ export async function zeige({ haupt, inhalte, aufraeumen }) {
     h('p', { 'data-vorlesen': '' }, t({ standard: 'Mit Sammelstücken schaltet ihr neue Teile frei.', einfach: 'Mit gesammelten Dingen bekommt ihr neue Teile für die Figur.' })),
     h('div', { class: 'aufgabe-rahmen' }, wurzel));
   const e = einstellungen();
+  const umgebung = { sprache: e.sprache, vorlesen, tempo: e.tempo, hoherKontrast: e.kontrast === 'hoch', reduzierteBewegung: reduzierteBewegung(), melde: () => {}, signal: abbruch.signal, basisUrl: new URL('./', document.baseURI).href, ton: e.ton, rollen: false, katalog: inhalte.items };
   try {
-    const figur = await modul.gestalte(wurzel, {
-      figur: team.figur ?? null,
-      freigeschaltet: [...team.items],
-      umgebung: { sprache: e.sprache, vorlesen, tempo: e.tempo, hoherKontrast: e.kontrast === 'hoch', reduzierteBewegung: reduzierteBewegung(), melde: () => {}, signal: abbruch.signal, basisUrl: new URL('./', document.baseURI).href, ton: e.ton, rollen: false, katalog: inhalte.items },
-    });
-    if (figur !== undefined && !abbruch.signal.aborted) {
+    const figur = katalog
+      ? await modul.starteGestaltung(wurzel, { katalog, items: inhalte.items, freigeschaltet: [...team.items], auswahl: team.figur ?? {}, umgebung })
+      : await modul.gestalte(wurzel, { figur: team.figur ?? null, freigeschaltet: [...team.items], umgebung });
+    if (figur !== undefined && figur !== null && !abbruch.signal.aborted) {
       await setzeFigur(figur);
-      leere(wurzel, h('div', { class: 'feier' }, symbol('haken'), h('h2', { tabindex: '-1' }, 'Figur gespeichert'), modul.figurElement ? modul.figurElement(figur, { groesse: 220 }) : null,
+      let bild = null;
+      if (katalog && modul.figurSvg) {
+        const svg = new DOMParser().parseFromString(modul.figurSvg(figur, katalog), 'image/svg+xml').documentElement;
+        bild = h('div', { class: 'figur-gross', role: 'img', 'aria-label': modul.figurText ? modul.figurText(figur, katalog) : 'Eure Figur' }, document.importNode(svg, true));
+      } else if (modul.figurElement) bild = modul.figurElement(figur, { groesse: 220 });
+      leere(wurzel, h('div', { class: 'feier' }, symbol('haken'), h('h2', { tabindex: '-1' }, 'Figur gespeichert'), bild,
         h('p', {}, h('a', { class: 'knopf', href: '#/karte' }, 'Zur Karte'))));
       wurzel.querySelector('h2')?.focus();
     }

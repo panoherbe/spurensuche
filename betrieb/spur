@@ -1,0 +1,337 @@
+#!/usr/bin/env bash
+# Betriebswerkzeug der Spurensuche am Server. Für Menschen ohne Entwicklerwissen: Ohne Angabe erscheint ein Menü
+# mit Zahlen. Jede Aktion sagt, was sie tut; was sich nicht von selbst zurücknehmen lässt, wird vorher erfragt.
+# Für den Telefondienst: docs/BETRIEBSHANDBUCH.md. Technisch: docs/BETRIEB.md.
+#
+#   betrieb/spur                     Menü
+#   betrieb/spur status              Zustand (Container, Anwendung, Ampel, Versionen, Sicherungen)
+#   betrieb/spur neustart            Anwendung neu starten
+#   betrieb/spur sicherung           Sicherung jetzt anlegen
+#   betrieb/spur zurueckspielen      Sicherung zurückspielen (Auswahl aus der Liste)
+#   betrieb/spur zurueck             letzte Version zurückspielen
+#   betrieb/spur versionen           installierte Versionen
+#   betrieb/spur aktualisieren v0.2.0   neue Version bauen und starten (vorher Sicherung; startet sie nicht: automatisch zurück)
+#   betrieb/spur wache               Betriebsdienst: Aufträge der Betriebsseite ausführen, Hänger neu starten (systemd)
+#   betrieb/spur einrichten          Ersteinrichtung: .env mit neuen Schlüsseln, bauen, starten
+#   betrieb/spur dienst              Betriebsdienst als systemd-Dienst einrichten (mit sudo)
+#
+# Ohne Rückfrage (für Skripte und Tests): SPUR_JA=1. Anderer Bildname (Tests): SPUR_BILD=… in .env oder Umgebung.
+set -euo pipefail
+
+ORDNER="$(cd "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/.." && pwd)"
+cd "$ORDNER"
+mkdir -p betrieb
+STAND="betrieb/versionen"   # installierte Versionen, eine je Zeile; die letzte läuft
+LOG="betrieb/betrieb.log"
+SPERRE="betrieb/.wechsel"   # während Neustart, Zurückspielen und Versionswechsel: der Betriebsdienst greift nicht ein
+
+wert() { [ -f .env ] && sed -n "s/^$1=//p" .env | tail -n 1 | tr -d "\"'" || true; }
+BILD="${SPUR_BILD:-$(wert SPUR_BILD)}"
+BILD="${BILD:-spurensuche}"
+export SPUR_BILD="$BILD"
+PORT="$(wert SPUR_HOST_PORT)"
+URL="http://127.0.0.1:${PORT:-8080}"
+
+sag() { printf '%s\n' "$*"; }
+sekunden() { if [ "$1" = 1 ]; then printf '1 Sekunde'; else printf '%s Sekunden' "$1"; fi; }
+sperre() { date +%s > "$SPERRE"; trap 'rm -f "$SPERRE"' EXIT; }
+gesperrt() { [ -f "$SPERRE" ] && [ $(( $(date +%s) - $(cat "$SPERRE" 2>/dev/null || echo 0) )) -lt 900 ]; }
+log() { printf '%s %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$LOG"; }
+stopp() { sag "FEHLER: $*" >&2; log "FEHLER: $*"; exit 1; }
+dc() { docker compose "$@"; }
+bestaetige() {
+  [ "${SPUR_JA:-0}" = "1" ] && return 0
+  local a
+  read -r -p "$1 Zum Bestätigen ja eingeben: " a || return 1
+  [ "$a" = "ja" ]
+}
+
+antwort() { curl -fsS -m 5 "$URL/api/v1/status" 2>/dev/null || true; }
+feld() { sed -n "s/.*\"$1\":\"\([^\"]*\)\".*/\1/p"; }
+laeuft() { antwort | grep -q '"ok":true'; }
+gestartet() { antwort | feld gestartet; }
+installiert() { antwort | feld installiert; }
+
+# Wartet bis zu $1 Sekunden, bis die Anwendung antwortet; mit $2 muss die Startzeit neu sein, mit $3 die Version passen.
+warte() {
+  local bis=$((SECONDS + $1)) a g v
+  while [ $SECONDS -lt $bis ]; do
+    a="$(antwort)"
+    if printf '%s' "$a" | grep -q '"ok":true'; then
+      g="$(printf '%s' "$a" | feld gestartet)"
+      v="$(printf '%s' "$a" | feld installiert)"
+      if { [ -z "$2" ] || [ "$g" != "$2" ]; } && { [ -z "$3" ] || [ "$v" = "$3" ]; }; then return 0; fi
+    fi
+    sleep 1
+  done
+  return 1
+}
+
+# Versionsliste anlegen, falls sie fehlt (Installation ohne dieses Werkzeug): die laufende Version gilt als erste.
+sicherstellen_stand() {
+  [ -s "$STAND" ] && return 0
+  local v
+  v="$(installiert)"
+  [ -n "$v" ] || stopp "Die Anwendung antwortet nicht; ohne laufende Anwendung ist die installierte Version unbekannt."
+  docker image inspect "$BILD:aktuell" >/dev/null 2>&1 || stopp "Bild $BILD:aktuell fehlt."
+  docker image inspect "$BILD:$v" >/dev/null 2>&1 || docker tag "$BILD:aktuell" "$BILD:$v"
+  echo "$v" > "$STAND"
+}
+aktuelle_version() { tail -n 1 "$STAND" 2>/dev/null || true; }
+vorherige_version() { if [ -f "$STAND" ] && [ "$(wc -l < "$STAND")" -ge 2 ]; then tail -n 2 "$STAND" | head -n 1; fi; }
+
+status() {
+  sag "Container:"
+  dc ps --format 'table {{.Service}}\t{{.State}}\t{{.Status}}' 2>/dev/null || dc ps
+  if laeuft; then sag "Anwendung: antwortet (Version $(installiert), gestartet $(gestartet))"; else sag "Anwendung: ANTWORTET NICHT"; fi
+  local token z
+  token="$(wert SPUR_BETRIEB_AGENT_TOKEN)"
+  if [ -n "$token" ]; then
+    z="$(curl -fsS -m 5 -X POST -H "Authorization: Bearer $token" --data-urlencode "nur=zustand" \
+      --data-urlencode "version=$(aktuelle_version)" --data-urlencode "vorher=$(vorherige_version)" "$URL/api/v1/betrieb/agent" 2>/dev/null | sed -n 's/^zustand //p' || true)"
+    sag "Ampel der Betriebsseite: ${z:-unbekannt}"
+  fi
+  sag "Versionen: jetzt $(aktuelle_version || true), davor $(vorherige_version || true)"
+  sag "Neueste Sicherungen:"
+  dc run --rm --no-deps -T --entrypoint node spurensuche tools/rueckspielen.js --liste 2>/dev/null | head -n 3 | awk -F'\t' '{print "  "$1"  ("$2")"}' || sag "  (nicht lesbar)"
+  sag "Platz: $(df -h . | awk 'NR==2 {print $4" frei von "$2}')"
+}
+
+neustart() {
+  local vorher t0=$SECONDS
+  vorher="$(gestartet)"
+  sperre
+  sag "Die Anwendung startet neu (etwa 10 Sekunden) ..."
+  dc restart spurensuche >/dev/null
+  if warte 120 "$vorher" ""; then sag "Wieder erreichbar nach $(sekunden $((SECONDS - t0)))."; log "neustart ok ($((SECONDS - t0)) s)"
+  else stopp "Die Anwendung ist nach 2 Minuten nicht wieder da. Bitte die Entwicklung informieren."; fi
+}
+
+sicherung() {
+  local art="${1:-hand}"
+  sag "Sicherung wird angelegt ..."
+  dc run --rm --no-deps -T sicherung node tools/sicherung.js --art "$art" | tail -n 1
+  log "sicherung $art"
+}
+
+zurueckspielen() {
+  local liste=() datei="${1:-}" n t0
+  mapfile -t liste < <(dc run --rm --no-deps -T --entrypoint node spurensuche tools/rueckspielen.js --liste 2>/dev/null)
+  [ ${#liste[@]} -gt 0 ] || stopp "Keine Sicherung gefunden."
+  if [ -z "$datei" ]; then
+    sag "Vorhandene Sicherungen (neueste zuerst):"
+    for i in "${!liste[@]}"; do printf '  %2d  %s\n' $((i + 1)) "$(printf '%s' "${liste[$i]}" | awk -F'\t' '{print $1"  ("$2")"}')"; done
+    read -r -p "Welche Nummer zurückspielen? (Eingabetaste = abbrechen) " n || n=""
+    if ! [[ "$n" =~ ^[0-9]+$ ]] || [ "$n" -lt 1 ] || [ "$n" -gt ${#liste[@]} ]; then sag "Abgebrochen."; return 0; fi
+    datei="$(printf '%s' "${liste[$((n - 1))]}" | cut -f1)"
+  fi
+  [[ "$datei" =~ ^spurensuche-[0-9]{8}-[0-9]{6}(-[a-z-]+)?\.db\.enc$ ]] || stopp "Unbekannte Sicherung: $datei"
+  sag "Achtung: Alles, was nach dieser Sicherung eingegeben wurde, ist danach nicht mehr da."
+  sag "Der jetzige Stand wird vorher gesichert (Sicherung „vor-zurueckspielen“)."
+  bestaetige "Sicherung $datei zurückspielen?" || { sag "Abgebrochen."; return 0; }
+  sperre
+  t0=$SECONDS
+  dc stop spurensuche sicherung >/dev/null
+  if ! dc run --rm --no-deps -T --entrypoint node spurensuche tools/rueckspielen.js "$datei" --ziel /daten/spurensuche.db --ueberschreiben --vorher-sichern; then
+    dc up -d >/dev/null
+    stopp "Zurückspielen fehlgeschlagen; der vorherige Stand läuft weiter."
+  fi
+  dc up -d >/dev/null
+  if warte 120 "" ""; then sag "Zurückgespielt; die Anwendung läuft wieder ($(sekunden $((SECONDS - t0))))."; log "zurueckspielen $datei ok"
+  else stopp "Die Anwendung startet nach dem Zurückspielen nicht. Bitte die Entwicklung informieren."; fi
+}
+
+# Letzte Version zurückspielen: das Bild der Version davor wird wieder „aktuell“. Daten bleiben (das Schema wird
+# nur erweitert, ältere Versionen laufen auf einer neueren Datenbank).
+zurueck() {
+  sicherstellen_stand
+  local jetzt vorher t0
+  jetzt="$(aktuelle_version)"
+  vorher="$(vorherige_version)"
+  [ -n "$vorher" ] || stopp "Keine frühere Version installiert."
+  docker image inspect "$BILD:$vorher" >/dev/null 2>&1 || stopp "Das Bild der Version $vorher fehlt."
+  [ "${1:-}" = "--ohne-frage" ] || bestaetige "Von Version $jetzt auf $vorher zurück?" || { sag "Abgebrochen."; return 0; }
+  sperre
+  t0=$SECONDS
+  docker tag "$BILD:$vorher" "$BILD:aktuell"
+  dc up -d >/dev/null
+  if warte 120 "" "$vorher"; then
+    sed -i '$ d' "$STAND"
+    log "zurueck $jetzt -> $vorher ok ($((SECONDS - t0)) s)"
+    sag "Version $vorher läuft wieder ($(sekunden $((SECONDS - t0))))."
+  else
+    docker tag "$BILD:$jetzt" "$BILD:aktuell"
+    dc up -d >/dev/null
+    stopp "Version $vorher startet nicht; Version $jetzt läuft weiter."
+  fi
+}
+
+versionen() {
+  sag "Installierte Versionen (älteste zuerst, die letzte läuft):"
+  if [ -s "$STAND" ]; then nl -w3 -s'  ' "$STAND"; else sag "  (noch keine Liste; entsteht beim ersten Wechsel)"; fi
+  sag "Bilder:"
+  docker image ls "$BILD" --format '  {{.Tag}}\t{{.Size}}\t{{.CreatedSince}}'
+}
+
+# Neue Version aus einem Git-Tag bauen und starten. Vorher Sicherung; startet sie nicht binnen 90 Sekunden,
+# geht es automatisch auf die laufende Version zurück. Nur nach Absprache mit der Entwicklung.
+aktualisieren() {
+  local ziel="${1:-}" version jetzt t0
+  [ -n "$ziel" ] || stopp "Bitte die Version angeben, zum Beispiel: betrieb/spur aktualisieren v0.2.0"
+  [[ "$ziel" =~ ^v?[0-9A-Za-z._-]{1,40}$ ]] || stopp "Ungültige Version: $ziel"
+  sicherstellen_stand
+  git fetch --tags --quiet 2>/dev/null || sag "Hinweis: Neue Versionen konnten nicht geholt werden; es gelten die vorhandenen."
+  git rev-parse --verify --quiet "refs/tags/$ziel^{commit}" >/dev/null || stopp "Version $ziel gibt es nicht (git tag)."
+  version="${ziel#v}"
+  jetzt="$(aktuelle_version)"
+  [ "$version" != "$jetzt" ] || stopp "Version $version läuft schon."
+  sperre
+  sag "1/4 Sicherung vor dem Wechsel ..."
+  sicherung vor-aktualisierung >/dev/null || stopp "Sicherung fehlgeschlagen; es wurde nichts verändert."
+  sag "2/4 Version $version wird gebaut ..."
+  git archive --format=tar "refs/tags/$ziel" | docker build -q -t "$BILD:$version" --build-arg "VERSION=$version" - >/dev/null || stopp "Bauen fehlgeschlagen; es wurde nichts verändert."
+  sag "3/4 Version $version wird gestartet ..."
+  t0=$SECONDS
+  docker tag "$BILD:$version" "$BILD:aktuell"
+  dc up -d >/dev/null
+  if warte 90 "" "$version"; then
+    echo "$version" >> "$STAND"
+    log "aktualisiert $jetzt -> $version ($((SECONDS - t0)) s)"
+    sag "4/4 Fertig: Version $version läuft ($(sekunden $((SECONDS - t0))))."
+    return 0
+  fi
+  sag "4/4 Version $version startet nicht. Automatisch zurück auf $jetzt ..."
+  docker tag "$BILD:$jetzt" "$BILD:aktuell"
+  dc up -d >/dev/null
+  if warte 120 "" "$jetzt"; then
+    log "aktualisieren auf $version fehlgeschlagen, automatisch zurueck auf $jetzt ($((SECONDS - t0)) s)"
+    stopp "Version $version startete nicht; Version $jetzt läuft wieder ($(sekunden $((SECONDS - t0))))."
+  fi
+  stopp "Auch Version $jetzt startet nicht. Bitte sofort die Entwicklung informieren."
+}
+
+# Betriebsdienst: meldet sich alle 10 Sekunden bei der Anwendung (nur über 127.0.0.1), führt Aufträge der
+# Betriebsseite aus (nur die fest eingebaute Aktion version-zurueck) und startet die Anwendung neu, wenn Docker sie
+# 30 Sekunden lang als „unhealthy“ meldet (Docker selbst startet nur bei Absturz neu, nicht bei einem Hänger).
+wache() {
+  local token erledigt="" ok="0" meldung="" krank=0 neustarts=0 antwort gesund lauf zustand art nr aktion extra
+  token="$(wert SPUR_BETRIEB_AGENT_TOKEN)"
+  [ -n "$token" ] || stopp "SPUR_BETRIEB_AGENT_TOKEN fehlt in .env"
+  [ -s "$STAND" ] || ( sicherstellen_stand ) || true
+  sag "Betriebsdienst läuft ($URL, alle 10 Sekunden)."
+  log "wache gestartet"
+  while true; do
+    zustand="$(docker inspect -f '{{.State.Status}} {{if .State.Health}}{{.State.Health.Status}}{{else}}ohne{{end}}' "$(dc ps -q spurensuche 2>/dev/null)" 2>/dev/null || echo 'fehlt fehlt')"
+    lauf="${zustand%% *}"
+    gesund="${zustand##* }"
+    # nur ein laufender Container, der nicht antwortet, gilt als Hänger; Abstürze startet Docker selbst neu
+    if [ "$lauf" = "running" ] && [ "$gesund" = "unhealthy" ] && ! gesperrt; then krank=$((krank + 1)); else krank=0; fi
+    if [ "$krank" -ge 3 ]; then
+      log "wache: Anwendung hängt (unhealthy seit 30 Sekunden), Neustart"
+      dc restart spurensuche >/dev/null 2>&1 || true
+      neustarts=$((neustarts + 1))
+      krank=0
+    fi
+    extra=()
+    if [ -n "$erledigt" ]; then extra=(--data-urlencode "erledigt=$erledigt" --data-urlencode "ok=$ok" --data-urlencode "meldung=$meldung"); fi
+    antwort="$(curl -fsS -m 5 -X POST -H "Authorization: Bearer $token" \
+      --data-urlencode "version=$(aktuelle_version)" --data-urlencode "vorher=$(vorherige_version)" \
+      --data-urlencode "gesund=$gesund" --data-urlencode "neustarts=$neustarts" ${extra[@]+"${extra[@]}"} \
+      "$URL/api/v1/betrieb/agent" 2>/dev/null || true)"
+    if [ -n "$antwort" ]; then erledigt=""; fi
+    while read -r art nr aktion; do
+      [ "$art" = "auftrag" ] || continue
+      [[ "$nr" =~ ^[0-9]{1,9}$ ]] || continue
+      erledigt="$nr"
+      case "$aktion" in
+        version-zurueck)
+          log "wache: Auftrag $nr version-zurueck"
+          if meldung="$(zurueck --ohne-frage 2>&1 | tail -n 1)"; then ok=1; else ok=0; fi ;;
+        *) ok=0; meldung="Unbekannte Aktion" ;;
+      esac
+      log "wache: Auftrag $nr ok=$ok $meldung"
+    done <<< "$antwort"
+    sleep 10
+  done
+}
+
+code() {  # lesbarer Schlüssel wie ABCD-EFGH-JKLM-NPQR (ohne 0/O und 1/I)
+  local z
+  z="$(LC_ALL=C tr -dc 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789' < <(head -c 2048 /dev/urandom))"
+  printf '%s-%s-%s-%s' "${z:0:4}" "${z:4:4}" "${z:8:4}" "${z:12:4}"
+}
+token() { local z; z="$(LC_ALL=C tr -dc 'A-Za-z0-9' < <(head -c 2048 /dev/urandom))"; printf '%s' "${z:0:40}"; }
+setze() {  # setzt NAME=WERT in .env (ersetzt oder hängt an)
+  if grep -q "^$1=" .env; then sed -i "s|^$1=.*|$1=$2|" .env; else printf '%s=%s\n' "$1" "$2" >> .env; fi
+}
+
+einrichten() {
+  command -v docker >/dev/null || stopp "Docker fehlt."
+  docker compose version >/dev/null 2>&1 || stopp "Docker Compose (docker compose) fehlt."
+  command -v curl >/dev/null || stopp "curl fehlt."
+  command -v git >/dev/null || stopp "git fehlt."
+  if [ ! -f .env ]; then cp .env.beispiel .env; chmod 600 .env; sag "Einstellungsdatei .env aus .env.beispiel angelegt."; fi
+  local n version
+  for n in SPUR_VERWALTUNG_SCHLUESSEL SPUR_BETRIEB_SCHLUESSEL; do [ -n "$(wert "$n")" ] || setze "$n" "$(code)"; done
+  for n in SPUR_BETRIEB_AGENT_TOKEN SPUR_MESSWERTE_TOKEN SPUR_AUSSTELLUNG_TOKEN; do [ -n "$(wert "$n")" ] || setze "$n" "$(token)"; done
+  [ -n "$(wert SPUR_SICHERUNG_SCHLUESSEL)" ] || setze SPUR_SICHERUNG_SCHLUESSEL "$(head -c 32 /dev/urandom | base64 | tr -d '\n')"
+  version="$(git describe --tags --exact-match 2>/dev/null || sed -n "s/^export const VERSION = '\(.*\)';/\1/p" server/app.js)"
+  version="${version#v}"
+  sag "Version $version wird gebaut (Stand des Repositorys: $(git rev-parse --short HEAD)) ..."
+  git archive --format=tar HEAD | docker build -q -t "$BILD:$version" --build-arg "VERSION=$version" - >/dev/null || stopp "Bauen fehlgeschlagen."
+  docker tag "$BILD:$version" "$BILD:aktuell"
+  echo "$version" > "$STAND"
+  dc up -d >/dev/null
+  warte 120 "" "" || stopp "Die Anwendung startet nicht: docker compose logs spurensuche"
+  log "eingerichtet $version"
+  sag "Eingerichtet: Version $version läuft auf $URL (nur auf diesem Rechner; davor gehört der Reverse Proxy mit https)."
+  sag "Schlüssel stehen in .env (nur für die Entwicklung). Dem Betrieb nur den Betriebsschlüssel geben: SPUR_BETRIEB_SCHLUESSEL."
+  sag "Betriebsdienst einrichten: sudo betrieb/spur dienst"
+}
+
+dienst() {
+  [ "$(id -u)" = "0" ] || stopp "Bitte mit sudo aufrufen: sudo betrieb/spur dienst"
+  local nutzer="${SUDO_USER:-}"
+  [ -n "$nutzer" ] && [ "$nutzer" != "root" ] || stopp "Bitte als normaler Benutzer mit sudo aufrufen (der Dienst läuft dann unter diesem Benutzer)."
+  sed -e "s|@ORDNER@|$ORDNER|g" -e "s|@NUTZER@|$nutzer|g" betrieb/spurensuche-wache.service > /etc/systemd/system/spurensuche-wache.service
+  systemctl daemon-reload
+  systemctl enable --now spurensuche-wache.service
+  sag "Betriebsdienst eingerichtet und gestartet: systemctl status spurensuche-wache"
+}
+
+menue() {
+  local w
+  while true; do
+    printf '\nSpurensuche – Betrieb am Server (%s)\n' "$ORDNER"
+    printf '  1  Zustand anzeigen\n  2  Neu starten\n  3  Sicherung jetzt anlegen\n  4  Sicherung zurückspielen\n  5  Letzte Version zurückspielen\n  6  Installierte Versionen zeigen\n  0  Beenden\n'
+    read -r -p "Bitte eine Zahl eingeben: " w || exit 0
+    case "$w" in
+      1) ( status ) || true ;;
+      2) ( neustart ) || true ;;
+      3) ( sicherung ) || true ;;
+      4) ( zurueckspielen ) || true ;;
+      5) ( zurueck ) || true ;;
+      6) ( versionen ) || true ;;
+      0 | q | "") exit 0 ;;
+      *) sag "Bitte eine Zahl von 0 bis 6 eingeben." ;;
+    esac
+  done
+}
+
+befehl="${1:-menue}"
+[ $# -gt 0 ] && shift
+case "$befehl" in
+  menue) menue ;;
+  status) status ;;
+  neustart) neustart ;;
+  sicherung) sicherung "${1:-hand}" ;;
+  zurueckspielen) zurueckspielen "${1:-}" ;;
+  zurueck) zurueck "${1:-}" ;;
+  versionen) versionen ;;
+  aktualisieren) aktualisieren "${1:-}" ;;
+  wache) wache ;;
+  einrichten) einrichten ;;
+  dienst) dienst ;;
+  hilfe | -h | --help) sed -n '2,19p' "$0" | sed 's/^# \{0,1\}//' ;;
+  *) stopp "Unbekannter Befehl: $befehl (Hilfe: betrieb/spur hilfe)" ;;
+esac

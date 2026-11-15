@@ -347,4 +347,169 @@ export class VorfuehrApi {
 
   /** Setzt die Vorführung auf die Beispieldaten zurück. */
   async zuruecksetzen() { this.zustand = await beispieldaten(); await this.speichern(); }
+
+  // --- Betrieb (nachgebildet: keine echte Anwendung dahinter; die Seite sagt das oben) ---
+
+  async betrieb() {
+    let b = await lies(BETRIEB).catch(() => null);
+    if (b?.stand !== 1) {
+      const t = Date.now();
+      const nacht = (tage) => { const d = new Date(t - tage * 86400_000); d.setHours(2, 0, 0, 0); return d; };
+      const sicherung = (d) => ({ datei: `spurensuche-${stempel(d)}.db.enc`, art: 'taeglich', stempel: stempel(d), bytes: 1_400_000 + Math.round(d.getDate() * 9000), zeit: d.toISOString() });
+      b = {
+        stand: 1, angemeldet: false, gestartet: new Date(t - 3 * 86400_000 - 4 * 3600_000).toISOString(), neustartBis: 0,
+        sicherungen: [0, 1, 2].map((n) => sicherung(nacht(n))).filter((x) => Date.parse(x.zeit) < t),
+        inhalt: { paket: 'mitgeliefert', vorher: null, seit: null, pakete: [] },
+        auftraege: [], protokoll: [{ zeit: new Date(t - 3 * 86400_000 - 4 * 3600_000).toISOString(), rolle: 'system', aktion: 'start', ziel: this.konfiguration.version }],
+      };
+      await schreibe(BETRIEB, b).catch(() => {});
+    }
+    return b;
+  }
+  async betriebSpeichern(b) { await schreibe(BETRIEB, b).catch(() => {}); }
+  async betriebMerken(b, aktion, ziel = null, rolle = 'betrieb') { b.protokoll.unshift({ zeit: jetzt(), rolle, aktion, ziel }); await this.betriebSpeichern(b); }
+
+  async ichBetrieb() { return { rolle: (await this.betrieb()).angemeldet ? 'betrieb' : null }; }
+  async anmeldenBetrieb(schluessel) {
+    if (String(schluessel ?? '').toUpperCase().replace(/[^A-Z0-9]/g, '') !== 'BETRIEBDEMO') throw this.fehler(401, 'Schlüssel falsch');
+    const b = await this.betrieb();
+    b.angemeldet = true;
+    await this.betriebMerken(b, 'anmeldung');
+    return { rolle: 'betrieb' };
+  }
+  async abmeldenBetrieb() { const b = await this.betrieb(); b.angemeldet = false; await this.betriebSpeichern(b); return { abgemeldet: true }; }
+  async angemeldetBetrieb() { const b = await this.betrieb(); if (!b.angemeldet) throw this.fehler(401, 'Bitte mit dem Betriebsschlüssel anmelden'); return b; }
+
+  async status() {
+    const b = await this.betrieb();
+    if (b.neustartBis && Date.now() < b.neustartBis) throw this.fehler(0, 'Keine Verbindung');
+    if (b.neustartBis) { b.neustartBis = 0; b.gestartet = jetzt(); await this.betriebMerken(b, 'start', this.konfiguration.version, 'system'); }
+    return { ok: true, version: this.konfiguration.version, installiert: this.konfiguration.version, gestartet: b.gestartet, betrieb: { zustand: 'gut', anmeldedienst: 'gut', inhalte: 'gut' } };
+  }
+
+  async betriebZustand() {
+    const b = await this.angemeldetBetrieb();
+    const inhalte = await ladeInhalte();
+    const t = Date.now();
+    const letzte = b.sicherungen[0]?.zeit;
+    const stunden = letzte ? Math.max(1, Math.round((t - Date.parse(letzte)) / 3600_000)) : null;
+    const reihe = beispielVerlauf(t);
+    const letzte15 = reihe.slice(-3).reduce((a, r) => a + r.anfragen, 0);
+    const p = (id, titel, wert, text) => ({ id, titel, stufe: 'gut', wert, text, tun: null });
+    const name = b.inhalt.paket === 'mitgeliefert' ? 'mitgelieferter Inhalt' : b.inhalt.pakete.find((x) => x.id === b.inhalt.paket)?.name ?? 'Inhaltspaket';
+    return {
+      gesamt: 'gut', ueberschrift: 'Alles in Ordnung', geprueft: jetzt(),
+      punkte: [
+        p('anwendung', 'Anwendung', `Version ${this.konfiguration.version}, läuft seit ${Math.max(1, Math.round((t - Date.parse(b.gestartet)) / 86400_000))} Tagen`, 'Die Anwendung antwortet.'),
+        p('datenbank', 'Datenbank', '1,4 MB', 'Die Datenbank ist in Ordnung (Prüfung alle 10 Minuten).'),
+        p('sicherung', 'Sicherung', stunden ? `vor ${stunden} Stunden, ${b.sicherungen.length} Sicherungen vorhanden` : 'noch keine', 'Die Datenbank wird jede Nacht verschlüsselt gesichert.'),
+        p('speicherplatz', 'Speicherplatz', '31,2 GB frei von 40 GB', 'Platz für Datenbank, Sicherungen und Inhaltspakete.'),
+        p('fehler', 'Fehler in den letzten 15 Minuten', `0 von ${letzte15.toLocaleString('de-DE')} Anfragen (0 %)`, 'Anfragen, bei denen in der Anwendung ein Fehler auftrat.'),
+        p('antwortzeit', 'Antwortzeit', '95 von 100 Antworten in höchstens 25 ms', 'So lange warten Nutzende höchstens auf eine Antwort.'),
+        p('arbeitsspeicher', 'Arbeitsspeicher', '96 MB von 2 GB', 'Speicher, den die Anwendung gerade belegt.'),
+        p('anmeldedienst', 'Anmeldung über das Schulkonto', `erreichbar (geprüft ${new Date(t - 120_000).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' })} Uhr)`, 'Der Anmeldedienst der Schulen antwortet.'),
+        p('inhalte', 'Inhalte', `${name}: ${inhalte.orte.length} Orte, ${inhalte.aufgaben?.length ?? inhalte.orte.reduce((n, o) => n + o.aufgaben.length, 0)} Aufgaben`, 'Die Inhalte sind vollständig und geprüft.'),
+        p('betriebsdienst', 'Betriebsdienst am Server', 'meldet sich (vor 4 Sekunden)', 'Er kann die letzte Version zurückspielen und startet die Anwendung neu, wenn sie hängt.'),
+        p('zertifikat', 'Zertifikat (https)', `gültig bis ${datum(new Date(t + 61 * 86400_000).toISOString())}`, 'Das Zertifikat für die verschlüsselte Verbindung ist gültig.'),
+      ],
+      version: { anwendung: this.konfiguration.version, installiert: this.konfiguration.version, vorher: 'Vorversion (nachgebildet)', schema: 2, gestartet: b.gestartet },
+      knoepfe: { neustart: true, sicherung: true, versionZurueck: true },
+      kontakt: null, verlauf: reihe, auftraege: b.auftraege.slice(0, 5),
+    };
+  }
+  async betriebProtokoll() { return (await this.angemeldetBetrieb()).protokoll.slice(0, 100); }
+
+  async neustart() {
+    const b = await this.angemeldetBetrieb();
+    b.neustartBis = Date.now() + 2600;
+    await this.betriebMerken(b, 'neustart');
+    return { ok: true, gestartet: b.gestartet };
+  }
+  async sicherungen() { return { schluessel: true, liste: (await this.angemeldetBetrieb()).sicherungen }; }
+  async sicherungAnlegen() {
+    const b = await this.angemeldetBetrieb();
+    const d = new Date();
+    const neu = { datei: `spurensuche-${stempel(d)}-hand.db.enc`, art: 'hand', stempel: stempel(d), bytes: 1_402_368, zeit: d.toISOString() };
+    b.sicherungen.unshift(neu);
+    await this.betriebMerken(b, 'sicherung-angelegt', neu.datei);
+    return { ok: true, datei: neu.datei, bytes: neu.bytes, dauerMs: 180 };
+  }
+  async zurueckspielen(datei) {
+    const b = await this.angemeldetBetrieb();
+    if (!b.sicherungen.some((x) => x.datei === datei)) throw this.fehler(404, 'Diese Sicherung gibt es nicht');
+    const d = new Date();
+    const sicherheit = { datei: `spurensuche-${stempel(d)}-vor-zurueckspielen.db.enc`, art: 'vor-zurueckspielen', stempel: stempel(d), bytes: 1_402_368, zeit: d.toISOString() };
+    b.sicherungen.unshift(sicherheit);
+    b.neustartBis = Date.now() + 3200;
+    await this.betriebMerken(b, 'zurueckspielen-vorgemerkt', datei);
+    return { ok: true, datei, sicherheit: sicherheit.datei, neustart: true };
+  }
+
+  async inhaltStand() {
+    const b = await this.angemeldetBetrieb();
+    const inhalte = await ladeInhalte();
+    const name = (id) => (id === 'mitgeliefert' ? 'mitgelieferter Inhalt' : b.inhalt.pakete.find((x) => x.id === id)?.name ?? id);
+    return {
+      aktiv: { paket: b.inhalt.paket, name: name(b.inhalt.paket), seit: b.inhalt.seit, orte: inhalte.orte.map((o) => o.name), aufgaben: inhalte.orte.reduce((n, o) => n + o.aufgaben.length, 0), inhaltVersion: this.konfiguration.inhaltVersion },
+      vorher: b.inhalt.vorher, vorherName: b.inhalt.vorher ? name(b.inhalt.vorher) : null, pakete: b.inhalt.pakete,
+    };
+  }
+  async inhaltPruefen(datei) {
+    const b = await this.angemeldetBetrieb();
+    const name = String(datei?.name ?? 'inhalt.zip').slice(0, 60);
+    if (!/\.zip$/i.test(name)) return { ok: false, name, fehler: [{ datei: name, pfad: '/', meldung: 'Die Datei ist kein ZIP-Archiv.' }], anzahlFehler: 1 };
+    const inhalte = await ladeInhalte();
+    const paket = { id: stempel(new Date()), name, hochgeladen: jetzt(), dateien: 87, bytes: datei.size ?? 0, orte: inhalte.orte.map((o) => o.name), aufgaben: inhalte.orte.reduce((n, o) => n + o.aufgaben.length, 0), sammelstuecke: inhalte.items?.length ?? 16 };
+    b.inhalt.pakete.unshift(paket);
+    await this.betriebMerken(b, 'inhaltspaket-geprueft', paket.id);
+    return { ok: true, paket, warnungen: ['Vorführung: Der Inhalt wurde hier nicht wirklich geprüft. Auf dem Server prüft die Anwendung Aufbau, Dateitypen, Pflichtfelder und Verweise jeder Datei.'] };
+  }
+  async inhaltAktivieren(paket) {
+    const b = await this.angemeldetBetrieb();
+    if (paket !== 'mitgeliefert' && !b.inhalt.pakete.some((x) => x.id === paket)) throw this.fehler(404, 'Dieses Inhaltspaket gibt es nicht (mehr)');
+    const vorher = b.inhalt.paket;
+    b.inhalt = { ...b.inhalt, paket, vorher: vorher === paket ? b.inhalt.vorher : vorher, seit: jetzt() };
+    await this.betriebMerken(b, 'inhalt-aktiviert', paket);
+    const inhalte = await ladeInhalte();
+    return { ok: true, aktiv: paket, vorher, orte: inhalte.orte.length, aufgaben: inhalte.orte.reduce((n, o) => n + o.aufgaben.length, 0) };
+  }
+  async versionZurueck() {
+    const b = await this.angemeldetBetrieb();
+    const a = { id: b.auftraege.length + 1, aktion: 'version-zurueck', status: 'laeuft', erstellt: jetzt(), begonnen: jetzt(), erledigt: null, meldung: null, fertigAb: Date.now() + 7000 };
+    b.auftraege.unshift(a);
+    await this.betriebMerken(b, 'version-zurueck-beauftragt', `${this.konfiguration.version} → Vorversion (nachgebildet)`);
+    return { ok: true, auftrag: a.id, von: this.konfiguration.version, auf: 'Vorversion (nachgebildet)' };
+  }
+  async auftrag(nummer) {
+    const b = await this.angemeldetBetrieb();
+    const a = b.auftraege.find((x) => x.id === Number(nummer));
+    if (!a) throw this.fehler(404, 'Auftrag nicht gefunden');
+    const rest = a.fertigAb - Date.now();
+    if (a.status === 'laeuft' && rest <= 0) {
+      Object.assign(a, { status: 'fertig', erledigt: jetzt(), meldung: 'Nachgebildet: Auf einem Server liefe jetzt die Version davor.' });
+      await this.betriebMerken(b, 'auftrag-erledigt', `${a.id}: Vorversion`, 'system');
+    } else if (a.status === 'laeuft' && rest < 4500) throw this.fehler(0, 'Keine Verbindung'); // Neustart mit der anderen Version
+    const { fertigAb, ...sichtbar } = a;
+    return sichtbar;
+  }
+}
+
+const BETRIEB = 'vorfuehrung-betrieb';
+const zwei = (n) => String(n).padStart(2, '0');
+function stempel(d) { return `${d.getFullYear()}${zwei(d.getMonth() + 1)}${zwei(d.getDate())}-${zwei(d.getHours())}${zwei(d.getMinutes())}${zwei(d.getSeconds())}`; }
+
+/** Nachgebildeter Verlauf der letzten 24 Stunden: Schultage zwischen 8 und 15 Uhr mit Betrieb, sonst wenig. */
+function beispielVerlauf(t) {
+  const reihe = [];
+  const r = zufall(7);
+  const ende = Math.floor(t / 300_000) * 300_000;
+  for (let i = 287; i >= 0; i--) {
+    const zeit = new Date(ende - i * 300_000);
+    const stunde = zeit.getHours() + zeit.getMinutes() / 60;
+    const schultag = zeit.getDay() >= 1 && zeit.getDay() <= 5;
+    const betrieb = schultag && stunde >= 8 && stunde < 15 ? Math.sin(((stunde - 8) / 7) * Math.PI) : 0;
+    const anfragen = Math.round(6 + r() * 10 + betrieb * (420 + r() * 160));
+    reihe.push({ zeit: zeit.toISOString(), anfragen, fehler: 0, p95: betrieb > 0.2 ? 25 : 10, sync: Math.round(anfragen / 12), gruppen: Math.round(betrieb * (40 + r() * 12)), speicher: 96, cpu: Math.round(1 + betrieb * 9) });
+  }
+  return reihe;
 }

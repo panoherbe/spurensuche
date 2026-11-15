@@ -147,6 +147,10 @@ export async function pruefeInhalte(leser) {
           const schema = schemata.get(format);
           if (schema) melde(adatei, pruefeSchema(schema, aufgabe));
         }
+        // Bilder und Töne, auf die die Aufgabe verweist, müssen da sein (sonst fehlt im Spiel ein Bild)
+        for (const verweis of new Set(JSON.stringify(aufgabe).match(/assets\/spiele\/[A-Za-z0-9_./-]+\.(svg|png|webp|jpe?g|mp3|ogg)/g) ?? [])) {
+          if (!(await leser.existiert(verweis))) fehler.push({ datei: adatei, pfad: '/', meldung: `Datei ${verweis} fehlt` });
+        }
         for (const [i, b] of (Array.isArray(aufgabe.belohnung) ? aufgabe.belohnung : []).entries()) {
           if (!itemIds.has(b)) fehler.push({ datei: adatei, pfad: `/belohnung/${i}`, meldung: `Sammelstück „${b}“ steht nicht in inhalte/items.json` });
         }

@@ -1,6 +1,6 @@
 # Schnittstelle zwischen App und Spielen
 
-> **Version 1.1, Stand 15.11.2026.** Dieses Dokument ist der Vertrag zwischen der App (Karte, Ablauf, Speicher,
+> **Version 1.2, Stand 15.11.2026.** Dieses Dokument ist der Vertrag zwischen der App (Karte, Ablauf, Speicher,
 > Auswertung) und den Spielen (Minigames, Sammelstücke, Collage). Beide Seiten bauen gegen genau diese Fassung.
 > Jede Änderung erhöht die Versionsnummer und steht unten im Verlauf; eine Änderung, die bestehende Spiele bricht,
 > gibt es nur gemeinsam und mit Übergangsfrist.
@@ -297,17 +297,20 @@ der geplanten Dauer (`dauerMinuten`) neben dem Zeitrahmen.
 
 ### 4.1 Figur (`inhalte/figur.json`, `spiele/figur/index.js`)
 
-Die Gruppe gestaltet eine Spielfigur; Teile werden mit Sammelstücken freigeschaltet. Den Katalog in
-`inhalte/figur.json` liest nur das Figur-Modul; die App speichert die Auswahl nur im Gerät, nie auf dem Server.
+Die Gruppe gestaltet eine Spielfigur; Teile werden mit Sammelstücken freigeschaltet. Die App lädt den Katalog
+`inhalte/figur.json` und übergibt ihn; sie speichert die Auswahl nur im Gerät, nie auf dem Server.
 
 ```js
-export async function gestalte(wurzel, { figur, freigeschaltet, umgebung }) → figur  // Auswahl ändern
-export function figurElement(figur, { groesse }) → SVGSVGElement                     // Figur anzeigen
+export async function starteGestaltung(wurzel, { katalog, items, freigeschaltet, auswahl, umgebung }) → auswahl | null
+export function figurSvg(auswahl, katalog) → string      // SVG-Markup, ohne style-Attribute (CSP)
+export function figurText(auswahl, katalog) → string     // Beschreibung in Worten (Alternativtext)
 ```
 
-- `figur` ist ein kleines JSON-Objekt (höchstens 2 KB), dessen Aufbau das Modul festlegt; `null` heißt Grundfigur.
-- `freigeschaltet` sind die Kennungen der gesammelten Sammelstücke.
-- `figurElement` baut das SVG mit `createElementNS`, ohne `style`-Attribute (CSP) und ohne Text über die Gruppe.
+- `auswahl` ist ein kleines JSON-Objekt `{ <gruppe>: <option> }` (höchstens 2 KB); `{}` heißt Grundfigur.
+- `items` sind alle Sammelstücke (für Namen bei gesperrten Teilen), `freigeschaltet` die Kennungen der gesammelten.
+- `null` heißt abgebrochen (`umgebung.signal`). Die App zeigt die gespeicherte Figur mit `figurSvg` und `figurText`.
+- Ältere Form (bis 1.1, weiter unterstützt): `gestalte(wurzel, { figur, freigeschaltet, umgebung })` und
+  `figurElement(figur, { groesse })`.
 
 ## 5. Collage (`spiele/collage/index.js`)
 
@@ -369,3 +372,4 @@ gibt das Team selbst frei) und stellt nur freigegebene Beiträge über die Schni
 |---|---|---|
 | 1 | 15.11.2026 | erste Fassung |
 | 1.1 | 15.11.2026 | `umgebung` um `basisUrl`, `ton`, `rollen`, `katalog` ergänzt; Abschlusskarte im Spiel erlaubt; `zeit` ausdrücklich als Zahl; `inhalte/ablaeufe.json` (3.4) und Figur (4.1) neu. Alles abwärtskompatibel. |
+| 1.2 | 15.11.2026 | Figur (4.1) wie gebaut: `starteGestaltung` mit Katalog, `figurSvg`, `figurText`; die ältere Form bleibt gültig. Inhalte lassen sich als Inhaltspaket tauschen (docs/BETRIEB.md): `inhalte/` und `assets/spiele/` ohne Programmcode. |

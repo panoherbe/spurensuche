@@ -1,0 +1,65 @@
+/* Betriebsseite und Statusseite: Ampel, Punkte, Knöpfe, Verlauf. Farbe nie allein: immer Symbol und Wort dazu. */
+
+.ampel { display: flex; gap: 16px; align-items: center; border-radius: var(--sp-radius); padding: 18px 20px; border: 2px solid var(--sp-rand); background: var(--sp-flaeche); margin: 8px 0 20px; }
+.ampel .symbol { width: 2.6rem; height: 2.6rem; flex: none; }
+.ampel h2 { margin: 0 0 4px; font-size: 1.45rem; }
+.ampel p { margin: 0; }
+.ampel.gut { border-color: var(--sp-erfolg); background: var(--sp-akzent-weich); }
+.ampel.gut .symbol { color: var(--sp-erfolg); }
+.ampel.achtung, .ampel.eingeschraenkt { border-color: var(--sp-hinweis); background: var(--sp-hinweis-weich); }
+.ampel.achtung .symbol, .ampel.eingeschraenkt .symbol { color: var(--sp-hinweis); }
+.ampel.stoerung { border-color: var(--sp-fehler); background: var(--sp-fehler-weich); }
+.ampel.stoerung .symbol { color: var(--sp-fehler); }
+
+.punkte { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+.punkte > li { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-left: 6px solid var(--sp-rand); border-radius: var(--sp-radius-klein); padding: 12px 14px; }
+.punkte > li.gut { border-left-color: var(--sp-erfolg); }
+.punkte > li.info { border-left-color: var(--sp-zweit); }
+.punkte > li.achtung { border-left-color: var(--sp-hinweis); }
+.punkte > li.stoerung { border-left-color: var(--sp-fehler); }
+.punkt-kopf { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; }
+.punkt-kopf strong { font-size: 1.05rem; }
+.punkt-wert { color: var(--sp-text-leise); }
+.punkte p { margin: 6px 0 0; }
+.punkte .tun { font-weight: 600; }
+
+.stufe { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 700; padding: 1px 8px 1px 4px; border-radius: 999px; border: 1px solid currentColor; }
+.stufe .symbol { width: 1rem; height: 1rem; }
+.stufe.gut { color: var(--sp-erfolg); }
+.stufe.info { color: var(--sp-zweit); }
+.stufe.achtung { color: var(--sp-hinweis); }
+.stufe.stoerung { color: var(--sp-fehler); }
+
+.knopfkarten { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: 14px; align-items: start; }
+#b-zutun { margin-bottom: 20px; }
+#b-zustand + .knopfreihe { margin: 0 0 10px; }
+.knopfkarten .karte { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.knopfkarten .karte h3 { margin: 0; display: flex; gap: 8px; align-items: center; font-size: 1.15rem; }
+.knopfkarten .karte p { margin: 0; }
+.grund { font-size: 0.95rem; color: var(--sp-text-leise); }
+.ergebnis { border-radius: var(--sp-radius-klein); padding: 10px 12px; }
+.ergebnis ul { margin: 6px 0 0; padding-left: 1.2rem; }
+.ergebnis li { overflow-wrap: anywhere; }
+
+.verlauf { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: 14px; }
+.verlauf figure { margin: 0; background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius-klein); padding: 10px 12px; }
+.verlauf figcaption { font-size: 0.95rem; }
+.verlauf figcaption strong { display: block; font-size: 1rem; }
+.verlauf svg { width: 100%; height: 64px; display: block; margin-top: 6px; color: var(--sp-zweit); }
+.verlauf svg .fehler { color: var(--sp-fehler); }
+.verlauf svg .achse { stroke: var(--sp-rand); }
+
+.vorfuehrung-hinweis { margin: 0 0 14px; }
+.status-liste { list-style: none; padding: 0; margin: 0 0 12px; display: grid; gap: 8px; }
+.status-liste li { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: baseline; }
+.leise-zeile { color: var(--sp-text-leise); font-size: 0.95rem; }
+.verstanden { display: flex; gap: 10px; align-items: flex-start; margin: 4px 0 12px; font-weight: 600; }
+.verstanden input { width: 1.3rem; height: 1.3rem; margin-top: 0.15rem; flex: none; accent-color: var(--sp-akzent); }
+.sicherungswahl { border: 0; padding: 0; margin: 0; display: grid; gap: 6px; }
+.sicherungswahl legend { font-weight: 700; padding: 0; margin-bottom: 6px; }
+.wahl-zeile { display: flex; gap: 8px; align-items: flex-start; }
+.wahl-zeile label { font-weight: 400; }
+.wahl-zeile input { width: 1.2rem; height: 1.2rem; margin-top: 0.2rem; flex: none; accent-color: var(--sp-akzent); }
+.sicherungswahl details { margin-top: 4px; }
+.sicherungswahl summary { cursor: pointer; color: var(--sp-zweit); font-weight: 600; }
+.sicherungswahl details .wahl-zeile { margin-top: 6px; }

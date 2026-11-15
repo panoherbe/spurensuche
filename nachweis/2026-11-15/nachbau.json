@@ -1,0 +1,12 @@
+{
+  "zeitpunkt": "2026-11-15T02:06:58Z",
+  "stand": "02a07c7",
+  "anleitung": "docs/INSTALLATION.md (git clone, .env aus .env.beispiel, docker compose build/up)",
+  "bau": "ohne Zwischenspeicher (--no-cache), Basis-Image neu geprüft (--pull)",
+  "sekundenGesamt": 2.2,
+  "sekundenKlonen": 0.1,
+  "sekundenBauen": 1.2,
+  "sekundenStarten": 0.9,
+  "status": {"ok":true,"version":"0.1.0","schema":1,"inhaltVersion":"5c27a1f437024cf4","inhaltFehler":0,"zeit":"2026-11-15T02:06:58.705Z","anmeldung":{"anmeldedienst":false,"zugangsschluessel":true,"attrappe":false},"lernendeAnmeldung":"optional"},
+  "ersteSicherung": "ja"
+}

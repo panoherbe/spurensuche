@@ -1,10 +1,11 @@
-// Die Schnittstellenbeschreibung stimmt mit der Umsetzung überein: jede Route steht in docs/openapi.json und umgekehrt.
+// Die Schnittstellenbeschreibung stimmt mit der Umsetzung überein: jede Route (server/app.js, server/betrieb.js) steht
+// in docs/openapi.json und umgekehrt.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 
-test('docs/openapi.json beschreibt genau die Routen aus server/app.js', () => {
-  const code = readFileSync(new URL('../server/app.js', import.meta.url), 'utf8');
+test('docs/openapi.json beschreibt genau die Routen aus server/app.js und server/betrieb.js', () => {
+  const code = ['../server/app.js', '../server/betrieb.js'].map((d) => readFileSync(new URL(d, import.meta.url), 'utf8')).join('\n');
   const routen = new Set([...code.matchAll(/route\('(GET|POST|PATCH|DELETE)', '([^']+)'/g)].map(([, m, p]) => {
     const pfad = p.replace(/\(\[0-9a-fA-F-\]\{36\}\)/g, '{kennung}').replace(/\(\[A-Za-z0-9_-\]\+\)/g, '{id}').replace(/\(\\\\d\+\)/g, '{id}').replace(/\\\\\./g, '.');
     return `${m.toLowerCase()} ${pfad}`;

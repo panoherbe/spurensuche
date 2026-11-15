@@ -26,6 +26,7 @@ export async function starteInstanz(optionen = {}) {
   const url = `http://127.0.0.1:${port}`;
   const cfg = {
     datenbank: join(ordner, 'test.db'),
+    datenOrdner: ordner,
     appWurzel: WURZEL,
     inhaltsWurzel: BEISPIEL,
     oeffentlicheUrl: url,
@@ -52,10 +53,11 @@ export async function starteInstanz(optionen = {}) {
 export function klient(basis) {
   const cookies = new Map();
   async function anfrage(pfad, { methode = 'GET', json, text, token, kopf = {}, folgen = false } = {}) {
-    const k = { ...kopf };
+    const k = {};
     if (json !== undefined) k['Content-Type'] = 'application/json';
     if (text !== undefined) k['Content-Type'] = 'application/x-www-form-urlencoded';
     if (token) k.Authorization = `Bearer ${token}`;
+    Object.assign(k, kopf); // ausdrücklich gesetzte Kopfzeilen gehen vor
     if (cookies.size) k.Cookie = [...cookies].map(([n, w]) => `${n}=${w}`).join('; ');
     const r = await fetch(pfad.startsWith('http') ? pfad : basis + pfad, { method: methode, headers: k, body: json !== undefined ? JSON.stringify(json) : text, redirect: 'manual' });
     for (const c of r.headers.getSetCookie()) {

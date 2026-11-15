@@ -1,0 +1,215 @@
+{
+  "zeitpunkt": "2026-11-15T02:05:15.761Z",
+  "axe": "4.10.2",
+  "schritte": [
+    "01-start",
+    "02-familie",
+    "03-karte",
+    "04-ort",
+    "05-ort-aufgaben",
+    "06-aufgabe",
+    "07-aufgabe-geschafft",
+    "08-sammelbuch",
+    "09-einstellungen",
+    "10-einfach-kontrast",
+    "11-lk-anmeldung",
+    "12-attrappe",
+    "13-lk-lerngruppe-dialog",
+    "14-lk-freigeben",
+    "15-lk-gruppen",
+    "16-schule-beitritt",
+    "17-schule-karte",
+    "18-schule-ort-geschafft",
+    "19-schule-offline",
+    "20-lk-uebersicht",
+    "21-lk-auswertung",
+    "22-lk-einwilligung",
+    "23-telefon-dunkel-start",
+    "24-telefon-dunkel-karte"
+  ],
+  "fehler": [],
+  "barrierefreiheit": {
+    "start": {
+      "verstoesse": [],
+      "bestanden": 17,
+      "unvollstaendig": 1
+    },
+    "familie": {
+      "verstoesse": [],
+      "bestanden": 21,
+      "unvollstaendig": 0
+    },
+    "karte": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 1
+    },
+    "ort-pruefung": {
+      "verstoesse": [],
+      "bestanden": 19,
+      "unvollstaendig": 0
+    },
+    "ort-aufgaben": {
+      "verstoesse": [],
+      "bestanden": 21,
+      "unvollstaendig": 0
+    },
+    "aufgabe": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "aufgabe-geschafft": {
+      "verstoesse": [],
+      "bestanden": 18,
+      "unvollstaendig": 0
+    },
+    "sammelbuch": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "datenschutz": {
+      "verstoesse": [],
+      "bestanden": 17,
+      "unvollstaendig": 0
+    },
+    "info": {
+      "verstoesse": [],
+      "bestanden": 19,
+      "unvollstaendig": 0
+    },
+    "bild-gesperrt": {
+      "verstoesse": [],
+      "bestanden": 18,
+      "unvollstaendig": 0
+    },
+    "einstellungen": {
+      "verstoesse": [],
+      "bestanden": 17,
+      "unvollstaendig": 1
+    },
+    "karte-einfach-kontrast": {
+      "verstoesse": [],
+      "bestanden": 21,
+      "unvollstaendig": 1
+    },
+    "lk-anmeldung": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "lk-uebersicht-leer": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "lk-lerngruppe-dialog": {
+      "verstoesse": [],
+      "bestanden": 17,
+      "unvollstaendig": 1
+    },
+    "lk-uebersicht": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "lk-lerngruppe": {
+      "verstoesse": [],
+      "bestanden": 22,
+      "unvollstaendig": 0
+    },
+    "lk-freigeben": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "lk-gruppen": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "tablet-beitritt": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "tablet-karte": {
+      "verstoesse": [],
+      "bestanden": 23,
+      "unvollstaendig": 1
+    },
+    "tablet-aufgabe": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "lk-laufend": {
+      "verstoesse": [],
+      "bestanden": 24,
+      "unvollstaendig": 0
+    },
+    "lk-auswertung": {
+      "verstoesse": [],
+      "bestanden": 29,
+      "unvollstaendig": 1
+    },
+    "lk-bilder": {
+      "verstoesse": [],
+      "bestanden": 22,
+      "unvollstaendig": 0
+    },
+    "lk-einwilligung": {
+      "verstoesse": [],
+      "bestanden": 22,
+      "unvollstaendig": 0
+    },
+    "telefon-dunkel-start": {
+      "verstoesse": [],
+      "bestanden": 17,
+      "unvollstaendig": 1
+    },
+    "telefon-dunkel-karte": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 1
+    },
+    "telefon-dunkel-ort": {
+      "verstoesse": [],
+      "bestanden": 19,
+      "unvollstaendig": 0
+    },
+    "telefon-dunkel-lk-anmeldung": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    }
+  },
+  "messung": {
+    "offlinePaket": {
+      "dateien": 67,
+      "bytes": 344664,
+      "vorhanden": 67,
+      "cache": [
+        "spurensuche-15ac11cbb39d44b1"
+      ]
+    },
+    "offlineGeladen": true,
+    "ausgangOffline": "Offline · 4 warten",
+    "nachOnline": "Alles übertragen",
+    "uebersichtBiber": "Biber Fertig Fertig gerade eben",
+    "auswertungSaetze": [
+      "2 Stationen abgeschlossen.",
+      "3 Aufgaben gelöst bzw. entschieden, 3 Aufgaben bearbeitet.",
+      "1 Station vor Ort, 1 Station ortsunabhängig gespielt.",
+      "2 Aufgaben im ersten Versuch gelöst; in 1 Aufgabe gab es Fehlversuche.",
+      "Nach einem Fehlversuch hat die Gruppe 1-mal ihr Vorgehen gewechselt und 0-mal dasselbe noch einmal versucht.",
+      "Keine Hilfe genutzt.",
+      "In 1 Aufgabe mit mehreren Wegen gewählt: „Probeentscheidung“ (wald).",
+      "Eingaben je Rolle: Navigation 1.",
+      "1 Abstimmung: 1 einig, 0 mit Mehrheit.",
+      "Aktive Bearbeitungszeit: unter 1 Minute.",
+      "1 Phase ohne Netz; Daten danach übertragen."
+    ]
+  }
+}

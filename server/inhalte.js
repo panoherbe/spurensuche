@@ -35,14 +35,19 @@ async function sha256(datei) {
   return createHash('sha256').update(await readFile(datei)).digest('hex');
 }
 
+/** Wurzel für einen Inhaltspfad: Spiele (Programmcode) immer aus `inhaltsWurzel`, Daten aus `datenWurzel`. */
+export const wurzelFuer = (pfad, { inhaltsWurzel, datenWurzel = inhaltsWurzel }) => (/^(inhalte|assets\/spiele)(\/|$)/.test(pfad) ? datenWurzel : inhaltsWurzel);
+
 /**
- * Lädt und prüft die Inhalte. `appWurzel` enthält `app/`, `inhaltsWurzel` enthält `spiele/`, `inhalte/` und
- * `assets/spiele/` (im Betrieb dasselbe Verzeichnis, in Tests ein Beispielordner).
+ * Lädt und prüft die Inhalte. `appWurzel` enthält `app/`, `inhaltsWurzel` enthält `spiele/` und den mitgelieferten
+ * Inhalt (`inhalte/`, `assets/spiele/`; im Betrieb das Verzeichnis der Anwendung, in Tests ein Beispielordner).
+ * `datenWurzel` ersetzt `inhalte/` und `assets/spiele/`, wenn ein Inhaltspaket aktiv ist (server/inhaltspaket.js).
  */
-export async function ladeInhalte({ appWurzel, inhaltsWurzel }) {
+export async function ladeInhalte({ appWurzel, inhaltsWurzel, datenWurzel = inhaltsWurzel }) {
   const imInhalt = (pfad) => {
-    const voll = resolve(inhaltsWurzel, pfad);
-    if (relative(inhaltsWurzel, voll).startsWith('..')) throw new Error(`Pfad außerhalb: ${pfad}`);
+    const wurzel = wurzelFuer(pfad, { inhaltsWurzel, datenWurzel });
+    const voll = resolve(wurzel, pfad);
+    if (relative(wurzel, voll).startsWith('..')) throw new Error(`Pfad außerhalb: ${pfad}`);
     return voll;
   };
   const bericht = await pruefeInhalte({
@@ -59,7 +64,7 @@ export async function ladeInhalte({ appWurzel, inhaltsWurzel }) {
     const voll = resolve(appWurzel, 'app', seite);
     try { const s = await stat(voll); dateien.push({ pfad: seite, quelle: voll, groesse: s.size, sha256: await sha256(voll) }); } catch { /* fehlt in Tests */ }
   }
-  for (const [wurzel, ordner] of [[appWurzel, OFFLINE_ORDNER.app], [inhaltsWurzel, OFFLINE_ORDNER.inhalt]]) {
+  for (const [wurzel, ordner] of [[appWurzel, OFFLINE_ORDNER.app], ...OFFLINE_ORDNER.inhalt.map((o) => [wurzelFuer(o, { inhaltsWurzel, datenWurzel }), [o]])]) {
     for (const o of ordner) {
       for (const pfad of await dateienIn(wurzel, o)) {
         if (AUSGESCHLOSSEN.test(pfad) || /\.html$/.test(pfad)) continue;

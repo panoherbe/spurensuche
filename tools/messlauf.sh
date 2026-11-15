@@ -2,6 +2,7 @@
 # Messlauf für den Nachweis: alle Prüfungen nacheinander, Ergebnisse nach nachweis/<datum>/, danach PROTOKOLL.md.
 # Läuft auf dem Prüfrechner im Repository (Docker nötig). Jede Zahl im Protokoll kommt aus einer Datei hier.
 # Aufruf: tools/messlauf.sh [ordner]   Umgebung: LAST_MIN (45), STRESS_MIN (15), BUENDEL (git-Quelle für den Nachbau)
+# Rechenlast: auf einem gemeinsam genutzten Prüfrechner unter einer Sperre starten (flock), damit keine fremde Last mitmisst.
 set -uo pipefail
 DATUM="$(date +%Y-%m-%d)"
 ZIEL="${1:-nachweis/${DATUM}}"
@@ -14,7 +15,7 @@ ergebnis() { echo "   -> Rückgabe $1" | tee -a "$LOG"; echo "$2=$1" >> "$ZIEL/r
 : > "$ZIEL/rueckgaben.txt"
 echo "${STAND:-unbekannt}" > "$ZIEL/stand.txt"
 uptime > "$ZIEL/rechner-vorher.txt"; nproc >> "$ZIEL/rechner-vorher.txt"; free -g >> "$ZIEL/rechner-vorher.txt"
-docker ps --format '{{.Names}} {{.Image}}' >> "$ZIEL/rechner-vorher.txt"
+echo "andere Container auf dem Rechner: $(docker ps -q | wc -l)" >> "$ZIEL/rechner-vorher.txt"   # nur die Zahl, keine Namen
 
 schritt "Tests"
 docker run --rm --user "$UID_GID" -e HOME=/tmp -v "$PWD":/app -w /app node:24-alpine sh -c "node --version > $ZIEL/node-version.txt; node --test --test-reporter=tap test/*.test.js" > "$ZIEL/tests.tap" 2>&1
@@ -45,6 +46,16 @@ if [ -f test/e2e/spiele.js ]; then
   ergebnis $? spiele
   docker compose -p spur-test -f compose.test.yaml down -v > /dev/null 2>&1
 fi
+
+schritt "Browser: Betriebsseite mit echtem Neustart, Zurückspielen und Inhalt tauschen"
+docker compose -p spur-bt -f compose.betrieb.yaml up -d --build --wait browser spur > "$ZIEL/browser-betrieb.log" 2>&1
+AUSGABE="$ZIEL/browser" timeout 900 docker compose -p spur-bt -f compose.betrieb.yaml run --rm pruefer >> "$ZIEL/browser-betrieb.log" 2>&1
+ergebnis $? betriebsseite
+docker compose -p spur-bt -f compose.betrieb.yaml down -v > /dev/null 2>&1
+
+schritt "Betriebstest: Werkzeug betrieb/spur und Betriebsdienst gegen echte Container"
+timeout 1800 tools/betriebstest.sh "$ZIEL" > "$ZIEL/betriebstest-ausgabe.log" 2>&1
+ergebnis $? betriebstest
 
 if [ -n "${BUENDEL:-}" ]; then
   schritt "Nachbau-Test"

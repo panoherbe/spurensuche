@@ -16,6 +16,7 @@ export async function seite({ breite = 1280, hoehe = 900, mobil = false, dunkel 
   await s.sende('Emulation.setDeviceMetricsOverride', { width: breite, height: hoehe, deviceScaleFactor: 1, mobile: mobil });
   if (mobil) await s.sende('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
   if (dunkel) await s.sende('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-color-scheme', value: 'dark' }] });
+  await s.sende('Emulation.setTimezoneOverride', { timezoneId: process.env.TZ || 'Europe/Berlin' }).catch(() => {});
   await s.sende('Network.enable');
   return s;
 }

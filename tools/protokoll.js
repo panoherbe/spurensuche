@@ -64,7 +64,7 @@ function axeZeile(datei) {
 }
 z('## Browser-Prüfläufe (Chrome ohne Oberfläche, simuliert)');
 z('');
-for (const [datei, titel] of [['browser/rauchtest.json', 'Instanz mit Testinhalten'], ['browser/vorfuehrung.json', 'Vorführung mit echten Inhalten'], ['browser/spiele.json', 'alle Spiele der echten Inhalte']]) {
+for (const [datei, titel] of [['browser/rauchtest.json', 'Instanz mit Testinhalten'], ['browser/vorfuehrung.json', 'Vorführung mit echten Inhalten'], ['browser/spiele.json', 'alle Spiele der echten Inhalte', ['browser/betrieb-seite.json', 'Betriebsseite (Knöpfe wirklich gedrückt)']]]) {
   const a = axeZeile(datei);
   if (!a) continue;
   z(`### ${titel}`);
@@ -77,7 +77,28 @@ for (const [datei, titel] of [['browser/rauchtest.json', 'Instanz mit Testinhalt
   if (m.offlineGeladen) z('- Ohne Netz neu geladen und gespielt: ja');
   if (m.ausgangOffline) z(`- Anzeige ohne Netz: „${m.ausgangOffline}“, nach Rückkehr des Netzes: „${m.nachOnline}“`);
   if (m.auswertungSaetze) z(`- Auswertung danach: „${m.auswertungSaetze.find((s) => s.includes('Aufgaben gelöst')) ?? '–'}“ (ohne Doppelzählung)`);
+  if (m.neustartMs) z(`- Neustart über den Knopf: wieder erreichbar nach **${zahl(m.neustartMs / 1000, 1)} s** (vom Klick bis zur Meldung der Seite; Docker startet den Container neu)`);
+  if (m.zurueckspielenMs) z(`- Sicherung zurückspielen über den Knopf: **${zahl(m.zurueckspielenMs / 1000, 1)} s** bis zur Meldung; danach Lerngruppen ${JSON.stringify(m.nachDemZurueckspielen)} (vorher ${JSON.stringify(m.vorDemZurueckspielen)})`);
+  if (m.ortAktiv) z(`- Inhalt tauschen: Paket geprüft und aktiviert (Ort heißt „${m.ortAktiv}“), fehlerhaftes Paket abgelehnt, vorheriger Inhalt wiederhergestellt („${m.ortZurueck}“)`);
+  if (m.versionAuftragMs) z(`- Letzte Version zurückspielen: Auftrag bis „Erledigt“ ${zahl(m.versionAuftragMs / 1000, 1)} s (Betriebsdienst in diesem Lauf nachgestellt; echter Wechsel unten im Betriebstest)`);
   for (const f of a.r.fehler) z(`  - Fehler: ${f.split('\n')[0]}`);
+  z('');
+}
+
+const bt = json('betriebstest.json');
+if (bt) {
+  const s = (ms) => (Number.isFinite(ms) ? `${zahl(ms / 1000, 1)} s` : '–');
+  const vz = typeof bt.versionZurueck === 'object' ? bt.versionZurueck : {};
+  z('## Betriebstest: Werkzeug betrieb/spur und Betriebsdienst (simuliert, echte Container)');
+  z('');
+  z(`- Einrichten (Schlüssel erzeugen, bauen, starten): ${s(bt.einrichtenMs)}; Docker ${bt.docker} (betriebstest.json)`);
+  z(`- Neu starten: **${s(bt.neustartMs)}** bis die Anwendung wieder antwortet; Daten danach vollständig`);
+  z(`- Sicherung anlegen: ${s(bt.sicherungMs)}; Sicherung zurückspielen: **${s(bt.zurueckspielenMs)}**, danach Stand der Sicherung, jetziger Stand vorher gesichert`);
+  z(`- Neue Version einspielen (bauen, Sicherung vorher, starten): ${s(bt.aktualisierenMs)}`);
+  z(`- Letzte Version zurück über die Betriebsseite und den Betriebsdienst: **${s(vz.dauerMs)}** vom Knopf bis „Erledigt“ (Status ${vz.status ?? '–'}; ${vz.sekundenOhneAntwort ?? '–'} Sekunden ohne Antwort)`);
+  z(`- Defekte neue Version: automatisch zurück auf die laufende Version: ${bt.defektAutomatischZurueck} nach ${s(bt.defektBisZurueckMs)}`);
+  z(`- Hänger (Prozess angehalten): vom Betriebsdienst erkannt und neu gestartet nach **${s(bt.haengerBisWiederDaMs)}**`);
+  z(`- **${bt.fehler} Fehler** in den Prüfungen (betriebstest.log)`);
   z('');
 }
 

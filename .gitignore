@@ -7,3 +7,9 @@ nachweis/tmp/
 *.log
 .env
 !.env.beispiel
+betrieb/versionen
+# Bildschirmfotos der Probeläufe bleiben lokal (die Bilder für README und Konzept kommen aus dem offiziellen Messlauf)
+nachweis/2026-11-15/browser/bilder/
+nachweis/2026-11-15/betrieb/browser/bilder/
+betrieb/.wechsel
+nachweis/2026-11-15/betrieb/browser/konzept/

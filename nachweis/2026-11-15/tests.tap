@@ -1,0 +1,148 @@
+TAP version 13
+# Subtest: Schema: Typen, Pflichtfelder, Muster, Verweise, unbekannte Schlüsselwörter
+ok 1 - Schema: Typen, Pflichtfelder, Muster, Verweise, unbekannte Schlüsselwörter
+  ---
+  duration_ms: 2.147982
+  type: 'test'
+  ...
+# Subtest: Ereignisse: nur erlaubte Arten und Werte, kein Freitext
+ok 2 - Ereignisse: nur erlaubte Arten und Werte, kein Freitext
+  ---
+  duration_ms: 0.515002
+  type: 'test'
+  ...
+# Subtest: Ergebnis: Vertrag geprüft, Punkte nicht übernommen, Items nur aus der Belohnung
+ok 3 - Ergebnis: Vertrag geprüft, Punkte nicht übernommen, Items nur aus der Belohnung
+  ---
+  duration_ms: 0.392823
+  type: 'test'
+  ...
+# Subtest: Kompetenzraster: Belege nach festen Regeln, Vorschlag, Einschätzung geht vor
+ok 4 - Kompetenzraster: Belege nach festen Regeln, Vorschlag, Einschätzung geht vor
+  ---
+  duration_ms: 1.670403
+  type: 'test'
+  ...
+# Subtest: Beobachtungen und Entwurf: beschreibend, als Entwurf gekennzeichnet
+ok 5 - Beobachtungen und Entwurf: beschreibend, als Entwurf gekennzeichnet
+  ---
+  duration_ms: 1.91411
+  type: 'test'
+  ...
+# Subtest: PDF: gültiger Aufbau mit Querverweistabelle, Umlaute
+ok 6 - PDF: gültiger Aufbau mit Querverweistabelle, Umlaute
+  ---
+  duration_ms: 2.281155
+  type: 'test'
+  ...
+# Subtest: ZIP: Hin und zurück, CRC32 bekannt
+ok 7 - ZIP: Hin und zurück, CRC32 bekannt
+  ---
+  duration_ms: 0.727264
+  type: 'test'
+  ...
+# Subtest: QR: Größe je Version, Suchmarken, Zeitmuster
+ok 8 - QR: Größe je Version, Suchmarken, Zeitmuster
+  ---
+  duration_ms: 19.104815
+  type: 'test'
+  ...
+# Subtest: Löschfristen: zwölf Wochen, spätestens Ende des Schuljahres
+ok 9 - Löschfristen: zwölf Wochen, spätestens Ende des Schuljahres
+  ---
+  duration_ms: 0.633515
+  type: 'test'
+  ...
+# Subtest: Gruppenbezeichnungen: Vorschläge ohne Hinweis, freie Namen mit Hinweis, Unzulässiges abgelehnt
+ok 10 - Gruppenbezeichnungen: Vorschläge ohne Hinweis, freie Namen mit Hinweis, Unzulässiges abgelehnt
+  ---
+  duration_ms: 1.229273
+  type: 'test'
+  ...
+# Subtest: docs/openapi.json beschreibt genau die Routen aus server/app.js
+ok 11 - docs/openapi.json beschreibt genau die Routen aus server/app.js
+  ---
+  duration_ms: 3.377676
+  type: 'test'
+  ...
+# Subtest: Status, Startseite mit strenger Inhaltsrichtlinie, kein Zugriff außerhalb der Ordner
+ok 12 - Status, Startseite mit strenger Inhaltsrichtlinie, kein Zugriff außerhalb der Ordner
+  ---
+  duration_ms: 105.736107
+  type: 'test'
+  ...
+# Subtest: Gruppen: Vorschlag ohne Rückfrage, freie Bezeichnung erst nach Bestätigung
+ok 13 - Gruppen: Vorschlag ohne Rückfrage, freie Bezeichnung erst nach Bestätigung
+  ---
+  duration_ms: 11.094511
+  type: 'test'
+  ...
+# Subtest: Übertragung: bereinigt, wiederholungssicher, ohne Doppelzählung
+ok 14 - Übertragung: bereinigt, wiederholungssicher, ohne Doppelzählung
+  ---
+  duration_ms: 14.302072
+  type: 'test'
+  ...
+# Subtest: Auswertung: Beobachtungen, Raster mit Vorschlag, Einschätzung, Entwurf
+ok 15 - Auswertung: Beobachtungen, Raster mit Vorschlag, Einschätzung, Entwurf
+  ---
+  duration_ms: 14.57144
+  type: 'test'
+  ...
+# Subtest: Ohne Kernzielgruppe oder ohne Einwilligung entstehen keine Datensätze
+ok 16 - Ohne Kernzielgruppe oder ohne Einwilligung entstehen keine Datensätze
+  ---
+  duration_ms: 12.029236
+  type: 'test'
+  ...
+# Subtest: Bildbeiträge: Schule wartet auf Freigabe, Familie nur selbst freigegeben, Ausstellung sieht nur Freigegebenes
+ok 17 - Bildbeiträge: Schule wartet auf Freigabe, Familie nur selbst freigegeben, Ausstellung sieht nur Freigegebenes
+  ---
+  duration_ms: 33.184093
+  type: 'test'
+  ...
+# Subtest: Archiv: Export, Übernahme in eine leere Instanz, gleiche Prüfsummen
+ok 18 - Archiv: Export, Übernahme in eine leere Instanz, gleiche Prüfsummen
+  ---
+  duration_ms: 56.477178
+  type: 'test'
+  ...
+# Subtest: Löschfristen und vorzeitige Löschung: Gruppendaten weg, freigegebene Bilder bleiben ohne Gruppe
+ok 19 - Löschfristen und vorzeitige Löschung: Gruppendaten weg, freigegebene Bilder bleiben ohne Gruppe
+  ---
+  duration_ms: 88.057195
+  type: 'test'
+  ...
+# Subtest: Anmeldung über OpenID Connect: Rolle aus Merkmalen, Name und E-Mail nie gespeichert
+ok 20 - Anmeldung über OpenID Connect: Rolle aus Merkmalen, Name und E-Mail nie gespeichert
+  ---
+  duration_ms: 15.199339
+  type: 'test'
+  ...
+# Subtest: Anmeldung: fehlende Rolle, Schlüsselwechsel beim Anbieter, Ausfall des Anbieters
+ok 21 - Anmeldung: fehlende Rolle, Schlüsselwechsel beim Anbieter, Ausfall des Anbieters
+  ---
+  duration_ms: 84.099466
+  type: 'test'
+  ...
+# Subtest: Messwerte nur mit Schlüssel; Verwaltung sieht Übersicht ohne Personendaten
+ok 22 - Messwerte nur mit Schlüssel; Verwaltung sieht Übersicht ohne Personendaten
+  ---
+  duration_ms: 9.153831
+  type: 'test'
+  ...
+# Subtest: Sicherung verschlüsselt, Rückspielen ergibt dieselben Tabellen
+ok 23 - Sicherung verschlüsselt, Rückspielen ergibt dieselben Tabellen
+  ---
+  duration_ms: 76.285675
+  type: 'test'
+  ...
+1..23
+# tests 23
+# suites 0
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 553.209249

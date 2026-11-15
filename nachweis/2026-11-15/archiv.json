@@ -1,0 +1,27 @@
+{
+  "zeitpunkt": "2026-11-15T02:53:41.324Z",
+  "format": "BagIt 1.0 (RFC 8493) in ZIP, SHA-256 je Datei",
+  "export": {
+    "dateien": 98,
+    "bytes": 4332960,
+    "zipBytes": 4365839,
+    "bildbeitraege": 0,
+    "dauerMs": 39
+  },
+  "pruefung": {
+    "ok": true,
+    "fehler": [],
+    "dauerMs": 13
+  },
+  "uebernahme": {
+    "dateien": 94,
+    "bildbeitraege": 0,
+    "inhaltFehler": 0,
+    "dauerMs": 22
+  },
+  "vergleich": {
+    "gleich": true,
+    "dateien": 98,
+    "abweichend": []
+  }
+}

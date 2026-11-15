@@ -1,0 +1,6 @@
+ 03:04:34 up 15 days,  8:28, 10 users,  load average: 0.76, 1.05, 0.76
+16
+               total        used        free      shared  buff/cache   available
+Mem:              62           8           3           0          51          54
+Swap:              7           3           4
+andere Container auf dem Rechner: 8

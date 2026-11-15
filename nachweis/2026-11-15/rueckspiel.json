@@ -1,0 +1,31 @@
+{
+  "zeitpunkt": "2026-11-15T02:53:38.640Z",
+  "verfahren": "VACUUM INTO, AES-256-GCM, Rückspielen mit GCM-Prüfung und PRAGMA integrity_check",
+  "datenbankBytes": 707579904,
+  "sicherungBytes": 707006501,
+  "sicherungMs": 2812,
+  "rueckspielenMs": 2857,
+  "tabellen": 17,
+  "zeilen": 86475,
+  "abweichend": [],
+  "gleich": true,
+  "jeTabelle": {
+    "anmeldevorgang": 0,
+    "bildbeitrag": 400,
+    "eingang": 30191,
+    "einstellung": 2,
+    "freigabe": 50,
+    "geraet": 400,
+    "gruppe": 400,
+    "lauf": 22438,
+    "lehrkraft": 50,
+    "lerngruppe": 50,
+    "protokoll": 601,
+    "rueckmeldung": 0,
+    "schema_version": 1,
+    "sitzung": 51,
+    "station": 1600,
+    "technik": 30191,
+    "zugangsschluessel": 50
+  }
+}

@@ -14,13 +14,21 @@ flowchart LR
   subgraph Lehrkraft (Browser)
     L[Lerngruppen, Quests, Gruppen, Übersicht, Auswertung, Bericht, Bildfreigabe]
   end
+  subgraph Betrieb (Browser)
+    B[Betriebsseite: Ampel, Verlauf, Neustart, Sicherung, Inhalt, Version]
+  end
   subgraph Server (Container, Node.js 24)
     R[/api/v1 REST/] --> D[(SQLite)]
     R --> I[Inhalte: inhalte/, spiele/, assets/spiele/]
     Z[Sicherung täglich, AES-256-GCM] --> D
   end
+  subgraph Server (Host)
+    G[Betriebsdienst betrieb/spur wache: Versionen, Neustart bei Hänger]
+  end
   A -- Beitritt, Übertragung (wiederholungssicher) --> R
   L -- Sitzung --> R
+  B -- Sitzung Betrieb --> R
+  G -- 127.0.0.1, Bearer-Token: Stand melden, Aufträge holen --> R
   X[Ausstellungssystem] -- Bearer-Token: freigegebene Bildbeiträge --> R
   O[Anmeldedienst OIDC] -. Code + PKCE .- R
 ```
@@ -29,13 +37,14 @@ flowchart LR
 
 | Ordner | Inhalt |
 |---|---|
-| `app/` | Seiten (`index.html` Spieler, `lehrkraefte.html`, `verwaltung.html`, `werkstatt.html`), Stile (`css/`), Skripte (`js/`), Service Worker, Manifest |
+| `app/` | Seiten (`index.html` Spieler, `lehrkraefte.html`, `verwaltung.html`, `betrieb.html`, `status.html`, `werkstatt.html`), Stile (`css/`), Skripte (`js/`), Service Worker, Manifest |
 | `app/js/kern/` | gemeinsame Regeln ohne Browser- oder Server-Bezug: Schema-Prüfung, Ereignisse, Kompetenzraster, Löschfristen, Bezeichnungen, PDF, ZIP, QR |
 | `app/js/seiten/` | Seiten der Spieler-Ansicht |
 | `app/js/vorfuehrung.js` | Nachbildung der Schnittstelle im Browser für die statische Vorführung |
-| `server/` | HTTP-Server (`app.js`), Datenbank (`db.js`), Anmeldung (`oidc.js`, `attrappe.js`), Inhalte (`inhalte.js`), Archiv (`archiv.js`), Sicherung (`sicherung.js`) |
+| `server/` | HTTP-Server (`app.js`), Datenbank (`db.js`), Anmeldung (`oidc.js`, `attrappe.js`), Inhalte (`inhalte.js`, `inhaltspaket.js`), Archiv (`archiv.js`), Sicherung (`sicherung.js`), Betrieb mit Ampel und Knöpfen (`betrieb.js`) |
+| `betrieb/` | Werkzeug `spur` am Server (Menü, Neustart, Sicherung, Versionen, Betriebsdienst) und der systemd-Dienst |
 | `spiele/`, `inhalte/`, `assets/spiele/` | Spielformate und Inhalte (Austauschformat: `docs/SCHNITTSTELLE.md`) |
-| `tools/` | Werkzeuge: Inhalte prüfen, Karte bauen, Vorführung bauen, Sicherung, Rückspielen, OpenAPI erzeugen |
+| `tools/` | Werkzeuge: Inhalte prüfen, Inhaltspaket bauen, Karte bauen, Vorführung bauen, Sicherung, Rückspielen, OpenAPI erzeugen, Messlauf, Betriebstest |
 | `test/` | Tests (`node --test`), Browser-Prüfläufe (`e2e/`), Lasttest (`last.js`) |
 
 ## Datenfluss einer Schulgruppe
@@ -59,6 +68,8 @@ flowchart LR
 | Inhalte als Dateien | versionierbar, prüfbar (`tools/pruefe-inhalte.js`), offline vorzuladen, als offene Bildungsmaterialien weiterzugeben |
 | eigene Karte aus offenen Daten | keine Kachel-Server, offline, keine Nutzungsbedingungen Dritter, gemeinfrei |
 | Bildbeitrag als Item-Collage im Gerät | ohne generative KI, regelbasiert, ohne Personenbezug; der Server prüft Format und Größe |
+| Betrieb mit wenigen sicheren Knöpfen | Telefondienst ohne Entwicklerwissen: jede Aktion erklärt sich, prüft vorher und ist umkehrbar; die Anwendung hat keinen Zugriff auf Docker, Versionen wechselt nur der Betriebsdienst am Server mit fest eingebauten Aktionen |
+| Inhaltspakete ohne Programmcode | Redaktion und Betrieb tauschen Inhalte ohne Entwicklung; Code (Spiele) kommt nur mit geprüften Versionen auf die Geräte der Kinder |
 
 ## Grenzen dieses Prototyps
 

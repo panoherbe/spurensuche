@@ -13,6 +13,7 @@ export async function zeige({ haupt, konfig, api }) {
     h('section', { class: 'karte' },
       h('h2', {}, 'Stand'),
       h('ul', {},
+        konfig?.stand ? h('li', {}, h('strong', {}, konfig.stand)) : null,
         h('li', {}, `Version ${konfig?.version ?? '–'}${api.vorfuehrung ? ' (Vorführung ohne Server)' : ''}`),
         h('li', {}, `Inhalte ${konfig?.inhaltVersion ?? '–'}`),
         liste ? h('li', {}, `Offline-Paket: ${liste.dateien.length} Dateien, ${formatiereBytes(liste.gesamtBytes)}`) : null,

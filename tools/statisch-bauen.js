@@ -24,7 +24,7 @@ for (const d of inhalte.offlineListe.dateien) {
   await mkdir(dirname(join(ziel, d.pfad)), { recursive: true });
   await cp(quelle, join(ziel, d.pfad));
 }
-for (const datei of ['sw.js', 'manifest.webmanifest']) await cp(join(WURZEL, 'app', datei), join(ziel, datei));
+for (const datei of ['sw.js', 'manifest.webmanifest', 'betrieb.html', 'status.html']) await cp(join(WURZEL, 'app', datei), join(ziel, datei));
 // ohne eigene Vorschläge je Zeitrahmen: leere Liste, damit die Seite keine 404 sieht
 if (!inhalte.offlineListe.dateien.some((d) => d.pfad === 'inhalte/ablaeufe.json')) {
   await mkdir(join(ziel, 'inhalte'), { recursive: true });

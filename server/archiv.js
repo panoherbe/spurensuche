@@ -73,7 +73,7 @@ export async function erstelleArchiv({ db, inhalte, umfang = 'archiv', version, 
       gruppen: ['SELECT id, freigabe_id, bezeichnung, einschaetzung, erstellt, letzte_sync FROM gruppe ORDER BY erstellt, id', ['id', 'freigabe_id', 'bezeichnung', 'einschaetzung', 'erstellt', 'letzte_sync']],
       stationen: ['SELECT gruppe_id, ort, status, verifikation, begonnen, beendet, aktiv_sekunden FROM station ORDER BY gruppe_id, ort', ['gruppe_id', 'ort', 'status', 'verifikation', 'begonnen', 'beendet', 'aktiv_sekunden']],
       laeufe: ['SELECT id, gruppe_id, aufgabe, geloest, versuche, dauer_sekunden, items, ereignisse, beendet FROM lauf ORDER BY beendet, id', ['id', 'gruppe_id', 'aufgabe', 'geloest', 'versuche', 'dauer_sekunden', 'items', 'ereignisse', 'beendet']],
-      rueckmeldungen: ['SELECT id, freigabe_id, aufgabe, verstaendlich, spass, schwierigkeit, zeit FROM rueckmeldung ORDER BY zeit, id', ['id', 'freigabe_id', 'aufgabe', 'verstaendlich', 'spass', 'schwierigkeit', 'zeit']],
+      rueckmeldungen: ['SELECT id, freigabe_id, aufgabe, verstaendlich, spass, schwierigkeit, stand, zeit FROM rueckmeldung ORDER BY zeit, id', ['id', 'freigabe_id', 'aufgabe', 'verstaendlich', 'spass', 'schwierigkeit', 'stand', 'zeit']],
     };
     for (const [name, [sql, spalten]] of Object.entries(tabellen)) {
       const zeilen = db.prepare(sql).all();

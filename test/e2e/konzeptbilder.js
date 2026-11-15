@@ -11,6 +11,7 @@ const kontext = await Cdp.neuerKontext();
 const s = await Cdp.neueSeite('http://127.0.0.1:9222', kontext);
 await s.sende('Emulation.setDeviceMetricsOverride', { width: 820, height: 1180, deviceScaleFactor: 2, mobile: true });
 await s.sende('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+await s.sende('Emulation.setTimezoneOverride', { timezoneId: process.env.TZ || 'Europe/Berlin' }).catch(() => {});
 
 async function bild(name) {
   await js(s, `(document.getElementById('meldung')?.setAttribute('hidden', ''), window.scrollTo(0, 0), true)`);

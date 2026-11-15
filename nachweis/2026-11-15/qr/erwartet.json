@@ -1,0 +1,104 @@
+[
+  {
+    "datei": "qr-00.png",
+    "text": "NORD-1234",
+    "version": 1,
+    "maske": 4
+  },
+  {
+    "datei": "qr-01.png",
+    "text": "K7QH-M3PZ",
+    "version": 1,
+    "maske": 1
+  },
+  {
+    "datei": "qr-02.png",
+    "text": "https://spurensuche.example.org/index.html#/beitritt?code=K7QH-M3PZ",
+    "version": 5,
+    "maske": 2
+  },
+  {
+    "datei": "qr-03.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxx",
+    "version": 4,
+    "maske": 2
+  },
+  {
+    "datei": "qr-04.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 4,
+    "maske": 0
+  },
+  {
+    "datei": "qr-05.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 5,
+    "maske": 0
+  },
+  {
+    "datei": "qr-06.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 6,
+    "maske": 0
+  },
+  {
+    "datei": "qr-07.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 7,
+    "maske": 2
+  },
+  {
+    "datei": "qr-08.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 8,
+    "maske": 2
+  },
+  {
+    "datei": "qr-09.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 8,
+    "maske": 2
+  },
+  {
+    "datei": "qr-10.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 9,
+    "maske": 0
+  },
+  {
+    "datei": "qr-11.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 9,
+    "maske": 0
+  },
+  {
+    "datei": "qr-12.png",
+    "text": "https://spurensuche.example.org/#/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    "version": 10,
+    "maske": 0
+  },
+  {
+    "datei": "qr-13.png",
+    "text": "https://spurensuche.example.org/#/ort/bastei?code=BASTEI-1851",
+    "version": 4,
+    "maske": 2
+  },
+  {
+    "datei": "qr-14.png",
+    "text": "https://spurensuche.example.org/#/ort/frauenkirche?code=DRESDEN-2005",
+    "version": 5,
+    "maske": 4
+  },
+  {
+    "datei": "qr-15.png",
+    "text": "https://spurensuche.example.org/#/ort/goeltzschtal?code=VOGTLAND-1851",
+    "version": 5,
+    "maske": 2
+  },
+  {
+    "datei": "qr-16.png",
+    "text": "https://spurensuche.example.org/#/ort/bautzen?code=BUDYSIN-1490",
+    "version": 5,
+    "maske": 4
+  }
+]

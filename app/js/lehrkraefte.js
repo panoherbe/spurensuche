@@ -44,6 +44,7 @@ function zeichneKopf() {
   leere(document.getElementById('kopf'),
     h('a', { class: 'marke-app', href: '#/' }, logo(), 'Spurensuche · Für Lehrkräfte'),
     api.vorfuehrung ? h('span', { class: 'marke warten' }, 'Vorführung mit Beispieldaten') : null,
+    api.konfiguration?.stand ? h('span', { class: 'marke' }, api.konfiguration.stand) : null,
     h('a', { class: 'knopf leise', href: 'index.html' }, 'Zur Spieler-Ansicht'),
     h('button', { type: 'button', class: 'knopf leise symbolknopf', 'aria-label': 'Einstellungen', onclick: () => zeigeEinstellungen() }, symbol('zahnrad')),
     ich ? knopf('Abmelden', async () => {

@@ -151,3 +151,5 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 110px; }
   :root:not([data-bewegung="reduziert"]) .feier > .symbol { animation: hupf calc(700ms / var(--sp-tempo)) ease-out 1; }
 }
 @keyframes hupf { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
+.figur-gross { width: min(220px, 60vw); margin: 0 auto 12px; }
+.figur-gross svg { width: 100%; height: auto; display: block; }

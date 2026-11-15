@@ -1,0 +1,20 @@
+# Betriebsdienst der Spurensuche (betrieb/spur wache): führt Aufträge der Betriebsseite aus (nur „letzte Version
+# zurückspielen“) und startet die Anwendung neu, wenn sie hängt. Einrichten mit: sudo betrieb/spur dienst
+# @ORDNER@ und @NUTZER@ setzt das Werkzeug beim Einrichten ein. Der Benutzer braucht Zugriff auf Docker.
+[Unit]
+Description=Spurensuche: Betriebsdienst (Aufträge der Betriebsseite, Neustart bei Hänger)
+After=docker.service network-online.target
+Requires=docker.service
+
+[Service]
+Type=simple
+User=@NUTZER@
+WorkingDirectory=@ORDNER@
+ExecStart=@ORDNER@/betrieb/spur wache
+Restart=always
+RestartSec=10
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
