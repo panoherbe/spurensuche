@@ -1,0 +1,41 @@
+✔ Schema: eine Datenbank der Version 1 wird erweitert, Sitzungen und Daten bleiben (236.810652ms)
+✔ Anmeldung und Rollen: Betrieb sieht Technik, aber keine Lerngruppen; Verwaltung nicht den Betrieb (142.393106ms)
+✔ Neustart: nur bestätigt und nur im Container; die Anwendung beendet sich, Docker startet sie neu (554.290834ms)
+✔ Sicherung: anlegen, zurückspielen (vorher gesichert, beim Start ausgeführt), angemeldet bleiben (1771.112867ms)
+✔ Sicherungen: besondere Arten bleiben getrennt erhalten (je zehn), tägliche nach Anzahl (238.251751ms)
+✔ Inhalt tauschen: prüfen, aktivieren, zurück; Fehlerhaftes wird abgelehnt und nichts ändert sich (282.554106ms)
+✔ Inhaltspakete: Grenzen beim Lesen (Größe, Beschädigung, Verschlüsselung) (27.980362ms)
+✔ Betriebsdienst und „letzte Version zurückspielen“: Auftrag, Ausführung am Server, Rückmeldung (62.581411ms)
+✔ Messreihe: Anfragen, Fehler und Antwortzeit je Minute; jedes Fünf-Minuten-Fenster einmal, nach Neustart addiert (21.326289ms)
+✔ Die Anwendung schreibt nichts außerhalb ihres Datenordners (Pakete, Vormerkung, Sicherungen) (77.706477ms)
+✔ Schema: Typen, Pflichtfelder, Muster, Verweise, unbekannte Schlüsselwörter (2.084013ms)
+✔ Ereignisse: nur erlaubte Arten und Werte, kein Freitext (0.481631ms)
+✔ Ergebnis: Vertrag geprüft, Punkte nicht übernommen, Items nur aus der Belohnung (0.389555ms)
+✔ Kompetenzraster: Belege nach festen Regeln, Vorschlag, Einschätzung geht vor (1.333714ms)
+✔ Beobachtungen und Entwurf: beschreibend, als Entwurf gekennzeichnet (1.743501ms)
+✔ PDF: gültiger Aufbau mit Querverweistabelle, Umlaute (2.645767ms)
+✔ ZIP: Hin und zurück, CRC32 bekannt (0.780963ms)
+✔ QR: Größe je Version, Suchmarken, Zeitmuster (22.672209ms)
+✔ Löschfristen: zwölf Wochen, spätestens Ende des Schuljahres (0.57519ms)
+✔ Gruppenbezeichnungen: Vorschläge ohne Hinweis, freie Namen mit Hinweis, Unzulässiges abgelehnt (1.186536ms)
+✔ docs/openapi.json beschreibt genau die Routen aus server/app.js und server/betrieb.js (3.834812ms)
+✔ Status, Startseite mit strenger Inhaltsrichtlinie, kein Zugriff außerhalb der Ordner (199.704114ms)
+✔ Gruppen: Vorschlag ohne Rückfrage, freie Bezeichnung erst nach Bestätigung (11.458669ms)
+✔ Übertragung: bereinigt, wiederholungssicher, ohne Doppelzählung (14.431624ms)
+✔ Auswertung: Beobachtungen, Raster mit Vorschlag, Einschätzung, Entwurf (13.578299ms)
+✔ Außerhalb der Klassen 4 bis 8 oder ohne Einwilligung entstehen keine Datensätze (12.042522ms)
+✔ Bildbeiträge: Schule wartet auf Freigabe, Familie nur selbst freigegeben, Ausstellung sieht nur Freigegebenes (33.655667ms)
+✔ Archiv: Export, Übernahme in eine leere Instanz, gleiche Prüfsummen (56.385442ms)
+✔ Löschfristen und vorzeitige Löschung: Gruppendaten weg, freigegebene Bilder bleiben ohne Gruppe (111.33828ms)
+✔ Anmeldung über OpenID Connect: Rolle aus Merkmalen, Name und E-Mail nie gespeichert (16.069673ms)
+✔ Anmeldung: fehlende Rolle, Schlüsselwechsel beim Anbieter, Ausfall des Anbieters (158.280128ms)
+✔ Messwerte nur mit Schlüssel; Verwaltung sieht Übersicht ohne Personendaten (8.963712ms)
+✔ Sicherung verschlüsselt, Rückspielen ergibt dieselben Tabellen (71.495358ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 3513.801946
