@@ -1,0 +1,76 @@
+{
+  "format": "dilemma",
+  "titel": "Ruine oder Wiederaufbau?",
+  "text": {
+    "standard": "Nach dem Krieg lag die Frauenkirche fast 50 Jahre in Trümmern. Soll die Ruine als Mahnmal bleiben oder die Kirche wieder aufgebaut werden? Stimmt ab und begründet eure Entscheidung.",
+    "einfach": "Die Frauenkirche war fast 50 Jahre kaputt. Soll sie kaputt bleiben, oder soll man sie neu bauen? Ihr entscheidet. Und ihr sagt, warum."
+  },
+  "dauerMinuten": 10,
+  "belohnung": ["turmkreuz"],
+  "stufe": "beurteilen",
+  "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
+  "bild": {
+    "datei": "assets/spiele/orte/frauenkirche/ruine.webp",
+    "breite": 1600,
+    "hoehe": 1124,
+    "alt": {
+      "standard": "Altes Schwarzweißfoto: die Ruine der Frauenkirche, zwei hohe Mauerreste über einem Berg aus Steinen. Davor steht ein leerer Sockel, die Figur von Martin Luther liegt auf dem Boden.",
+      "einfach": "Ein altes Foto: Die Kirche ist kaputt. Überall liegen Steine."
+    },
+    "quelle": "Foto: Deutsche Fotothek (Brück & Sohn Kunstverlag), CC BY-SA 4.0, Wikimedia Commons (verkleinert)"
+  },
+  "situation": {
+    "standard": "Im Februar 1945 brannte Dresden nach Luftangriffen. Am 15. Februar stürzte die ausgebrannte Frauenkirche ein. Danach lag fast 50 Jahre lang ein Trümmerberg mitten in der Stadt. Er wurde zum Mahnmal gegen den Krieg: Menschen kamen hierher, um still an die Toten zu erinnern. Um 1990 fragen viele: Soll man die Kirche wieder aufbauen?",
+    "einfach": "1945 war Krieg. Dresden brannte. Die Frauenkirche stürzte ein. Fast 50 Jahre lag sie in Trümmern. Die Trümmer erinnerten an den Krieg. Dann fragten viele Menschen: Soll man die Kirche neu bauen?"
+  },
+  "frage": {
+    "standard": "Soll die Frauenkirche wieder aufgebaut werden?",
+    "einfach": "Soll man die Frauenkirche neu bauen?"
+  },
+  "optionen": [
+    {
+      "id": "ruine-lassen",
+      "titel": { "standard": "Die Ruine bleibt als Mahnmal", "einfach": "Die Ruine bleibt" },
+      "text": { "standard": "Die Trümmer erinnern alle an das Leid im Krieg.", "einfach": "Die Steine erinnern an den Krieg." },
+      "folge": { "standard": "Der Trümmerberg bleibt, gesichert und mit Rosen bepflanzt. Er erinnert weiter an den Krieg, aber die Steine verwittern langsam.", "einfach": "Die Steine bleiben liegen. Rosen wachsen darauf. Die Steine werden mit der Zeit kaputt." }
+    },
+    {
+      "id": "wieder-aufbauen",
+      "titel": { "standard": "Die Kirche wird wieder aufgebaut", "einfach": "Die Kirche wird neu gebaut" },
+      "text": { "standard": "Aus alten und neuen Steinen entsteht ein Zeichen der Versöhnung.", "einfach": "Alte und neue Steine werden eine Kirche." },
+      "folge": { "standard": "Die Trümmer werden Stein für Stein vermessen und sortiert. Alte und neue Steine bilden zusammen die neue Kirche.", "einfach": "Man sortiert alle Steine. Aus alten und neuen Steinen baut man die Kirche." }
+    }
+  ],
+  "argumente": [
+    { "id": "dresdnerin", "fuer": "ruine-lassen",
+      "wer": { "standard": "Eine ältere Frau aus Dresden", "einfach": "Eine alte Frau aus Dresden" },
+      "text": { "standard": "An der Ruine denke ich an meine Familie, die im Krieg gestorben ist. Die Trümmer erzählen davon.", "einfach": "Meine Familie ist im Krieg gestorben. An der Ruine denke ich an sie." } },
+    { "id": "architekt", "fuer": "ruine-lassen",
+      "wer": { "standard": "Ein Architekt", "einfach": "Ein Architekt" },
+      "text": { "standard": "Ein Neubau ist nie die alte Kirche. Mit der Ruine verlieren wir ein echtes Zeugnis.", "einfach": "Eine neue Kirche ist nicht die alte Kirche. Die Ruine ist echt." } },
+    { "id": "lehrer", "fuer": "ruine-lassen",
+      "wer": { "standard": "Ein Lehrer", "einfach": "Ein Lehrer" },
+      "text": { "standard": "Das viele Geld könnte man auch für Schulen und Wohnungen ausgeben.", "einfach": "Mit dem Geld kann man auch Schulen bauen." } },
+    { "id": "junger-dresdner", "fuer": "wieder-aufbauen",
+      "wer": { "standard": "Ein junger Mann aus Dresden", "einfach": "Ein junger Mann aus Dresden" },
+      "text": { "standard": "Die Kirche gehört zum Bild unserer Stadt. Ich möchte sie so sehen, wie meine Großeltern sie kannten.", "einfach": "Die Kirche gehört zu unserer Stadt. Ich will sie sehen wie meine Oma und mein Opa." } },
+    { "id": "pfarrerin", "fuer": "wieder-aufbauen",
+      "wer": { "standard": "Eine Pfarrerin", "einfach": "Eine Pfarrerin" },
+      "text": { "standard": "Wenn Menschen aus vielen Ländern zusammen spenden und bauen, wird die Kirche ein Zeichen der Versöhnung.", "einfach": "Menschen aus vielen Ländern helfen. Dann wird die Kirche ein Zeichen für Frieden." } },
+    { "id": "steinmetzin", "fuer": "wieder-aufbauen",
+      "wer": { "standard": "Eine Steinmetzin", "einfach": "Eine Steinmetzin" },
+      "text": { "standard": "Viele alte Steine liegen noch da. Wenn wir sie wieder einbauen, bleibt die Geschichte sichtbar.", "einfach": "Viele alte Steine sind noch da. Wir bauen sie wieder ein." } }
+  ],
+  "wirklichkeit": {
+    "standard": "Ab 1993 wurden die Trümmer Stein für Stein abgetragen und vermessen. Von 1994 bis 2005 wurde die Kirche wieder aufgebaut, bezahlt vor allem mit Spenden aus der ganzen Welt. Über 3.500 alte Steine kamen in die Außenmauern; man erkennt sie an ihrer dunklen Farbe. Am 30. Oktober 2005 wurde die Kirche geweiht. Manche fanden es schade, dass das Mahnmal verschwand.",
+    "einfach": "Die Kirche wurde neu gebaut, von 1994 bis 2005. Menschen aus der ganzen Welt gaben Geld dafür. Viele alte Steine sind wieder in der Mauer. Sie sind dunkel. Manche Menschen fanden das schade: Die Ruine war weg."
+  },
+  "tipps": [
+    { "text": { "standard": "Lest jede Meinung laut vor. Fragt: Woran erinnert die Ruine, und was könnte eine neue Kirche bedeuten?", "einfach": "Lest jede Meinung vor. Woran erinnert die Ruine?" } },
+    { "text": { "standard": "Beim Begründen passen nur Meinungen, die für eure Wahl sprechen. Die Steinmetzin zum Beispiel ist für den Wiederaufbau.", "einfach": "Wählt Meinungen, die zu eurer Wahl passen. Die Steinmetzin ist für den Neubau." } }
+  ],
+  "wusstetIhr": {
+    "standard": "Das goldene Kreuz auf der Kuppel ist ein Zeichen der Versöhnung: Gebaut hat es Alan Smith aus London, Sohn eines britischen Piloten, der 1945 Dresden bombardiert hatte. Bezahlt wurde es mit Spenden aus Großbritannien.",
+    "einfach": "Das goldene Kreuz oben auf der Kirche kommt aus England. Der Vater des Mannes, der es gebaut hat, flog 1945 im Krieg über Dresden. Das Kreuz ist ein Zeichen für Frieden."
+  }
+}

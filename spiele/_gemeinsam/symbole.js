@@ -36,7 +36,7 @@ export const SYMBOLE = {
   pruefen: linie('<path d="M7 3.8h10a1.5 1.5 0 0 1 1.5 1.5v14.4A1.5 1.5 0 0 1 17 21.2H7a1.5 1.5 0 0 1-1.5-1.5V5.3A1.5 1.5 0 0 1 7 3.8z"/><path d="M9 12.3l2.1 2.1 4.1-4.3"/>'),
   // Formate
   bildpuzzle: linie('<path d="M4 4h6.5v2.2a1.8 1.8 0 1 0 3 0V4H20v6.5h-2.2a1.8 1.8 0 1 0 0 3H20V20h-6.5v-2.2a1.8 1.8 0 1 0-3 0V20H4v-6.5h2.2a1.8 1.8 0 1 0 0-3H4z"/>'),
-  schaetzfrage: linie('<path d="M4.5 18.5a8.5 8.5 0 1 1 15 0"/><path d="M12 13.2l4.2-4.4"/><circle cx="12" cy="13.6" r="1.4" fill="currentColor"/><path d="M6.5 13.6h1.2M16.3 13.6h1.2M12 6.8v1.2"/>'),
+  schaetzen: linie('<path d="M4.5 18.5a8.5 8.5 0 1 1 15 0"/><path d="M12 13.2l4.2-4.4"/><circle cx="12" cy="13.6" r="1.4" fill="currentColor"/><path d="M6.5 13.6h1.2M16.3 13.6h1.2M12 6.8v1.2"/>'),
   dilemma: linie('<path d="M12 3.5v16.5M7.5 20.5h9M4.5 7h15"/><path d="M4.5 7L2 12.8a2.6 2.6 0 0 0 5 0zM19.5 7L17 12.8a2.6 2.6 0 0 0 5 0z"/>'),
   sortieren: linie('<rect x="3.5" y="3.8" width="17" height="4.4" rx="1.4"/><rect x="3.5" y="9.8" width="17" height="4.4" rx="1.4"/><rect x="3.5" y="15.8" width="17" height="4.4" rx="1.4"/>'),
   bildsuche: linie('<rect x="2.8" y="4" width="18.4" height="14.5" rx="2.2"/><path d="M2.8 15.5l4.6-4.2 3.6 3.2 2.5-2.2 3 2.6"/><circle cx="16.6" cy="8.6" r="1.6"/>'),

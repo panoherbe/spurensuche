@@ -1,0 +1,229 @@
+{
+  "format": "bildsuche",
+  "titel": "Spurensuche am Reichenturm",
+  "text": {
+    "standard": "Der Reichenturm ist ein alter Wachturm der Stadtmauer von Bautzen. Findet die vier Dinge aus der Liste und tippt im Foto darauf.",
+    "einfach": "Das ist ein alter Turm in Bautzen. Findet vier Dinge. Tippt im Foto darauf."
+  },
+  "dauerMinuten": 7,
+  "belohnung": [
+    "schiefer-turm"
+  ],
+  "stufe": "einblick",
+  "rollen": [
+    "vorlesen",
+    "steuern",
+    "nachschlagen",
+    "pruefen"
+  ],
+  "bild": {
+    "datei": "assets/spiele/orte/bautzen/reichenturm.webp",
+    "breite": 1920,
+    "hoehe": 1280,
+    "alt": {
+      "standard": "Der Reichenturm in Bautzen vor blauem Himmel mit Schleierwolken: ein hoher, weißer, runder Turm mit verziertem Aufsatz, schwarzem Geländer und goldener Wetterfahne. Links und rechts alte Häuser, unten Bäume und ein Platz.",
+      "einfach": "Ein hoher weißer Turm. Oben ist er verziert. Daneben stehen alte Häuser."
+    },
+    "quelle": "Foto: Frank Vincentz, CC BY-SA 3.0, Wikimedia Commons (verkleinert)"
+  },
+  "raster": {
+    "spalten": 6,
+    "zeilen": 4
+  },
+  "felder": [
+    {
+      "standard": "Himmel mit Schleierwolken",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "Himmel mit Schleierwolken",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "Himmel, rechts die Spitze des Turms mit goldener Wetterfahne",
+      "einfach": "die Turmspitze"
+    },
+    {
+      "standard": "Himmel, links die Spitze des Turms",
+      "einfach": "Himmel und Turmspitze"
+    },
+    {
+      "standard": "blauer Himmel",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "blauer Himmel mit Wolken",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "Himmel mit Wolken",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "Himmel mit Wolken",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "linke Seite des verzierten Turmaufsatzes mit einem bunten Wappen und schwarzem Geländer",
+      "einfach": "der Turm oben, links"
+    },
+    {
+      "standard": "rechte Seite des verzierten Turmaufsatzes mit einem bunten Wappen und schwarzem Geländer",
+      "einfach": "der Turm oben, rechts"
+    },
+    {
+      "standard": "blauer Himmel",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "blauer Himmel mit Wolken",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "Dächer alter Häuser mit Schornsteinen",
+      "einfach": "Dächer"
+    },
+    {
+      "standard": "rotes Haus mit schwarzem Dach",
+      "einfach": "ein rotes Haus"
+    },
+    {
+      "standard": "linke Seite des weißen runden Turms und ein grünes Haus",
+      "einfach": "der weiße Turm, links"
+    },
+    {
+      "standard": "rechte Seite des weißen Turms, Dächer",
+      "einfach": "der weiße Turm, rechts"
+    },
+    {
+      "standard": "Himmel, Baumspitzen und ein Haus",
+      "einfach": "Bäume und ein Haus"
+    },
+    {
+      "standard": "Himmel und Häuser mit roten Dächern",
+      "einfach": "Häuser"
+    },
+    {
+      "standard": "Häuser und Bäume am Platz",
+      "einfach": "Häuser und Bäume"
+    },
+    {
+      "standard": "rotes Haus und Bäume",
+      "einfach": "ein rotes Haus"
+    },
+    {
+      "standard": "Fuß des Turms mit einer gelben Figur und Glaskästen",
+      "einfach": "unten am Turm"
+    },
+    {
+      "standard": "Fuß des Turms mit einem Steinbild und einer Tür",
+      "einfach": "ein Steinbild am Turm"
+    },
+    {
+      "standard": "Bäume und Häuser",
+      "einfach": "Bäume"
+    },
+    {
+      "standard": "Bäume, Straße und Schilder",
+      "einfach": "Bäume und Straße"
+    }
+  ],
+  "ziele": [
+    {
+      "id": "wetterfahne",
+      "frage": {
+        "standard": "die goldene Wetterfahne ganz oben",
+        "einfach": "die goldene Fahne oben"
+      },
+      "bereiche": [
+        {
+          "x": 0.472,
+          "y": 0.125,
+          "b": 0.045,
+          "h": 0.06
+        }
+      ],
+      "gefunden": {
+        "standard": "Nach Bränden wurden Kugel und Fahne auf der Spitze mehrmals neu aufgesetzt.",
+        "einfach": "Die Fahne ist ganz oben auf der Spitze."
+      },
+      "tipp": {
+        "standard": "Schaut ganz nach oben auf die Spitze.",
+        "einfach": "Schaut ganz nach oben."
+      }
+    },
+    {
+      "id": "wappen",
+      "frage": {
+        "standard": "die bunten Wappen",
+        "einfach": "die bunten Wappen"
+      },
+      "bereiche": [
+        {
+          "x": 0.461,
+          "y": 0.289,
+          "b": 0.066,
+          "h": 0.06
+        }
+      ],
+      "gefunden": {
+        "standard": "Am Turm hängen zwei Wappen des Kurfürsten und zwei Wappen der Stadt.",
+        "einfach": "Das sind Wappen. Sie zeigen, wem der Turm gehörte."
+      },
+      "tipp": {
+        "standard": "Die Wappen sind oben am verzierten Teil des Turms, über dem Geländer.",
+        "einfach": "Sucht oben am Turm, über dem Geländer."
+      }
+    },
+    {
+      "id": "gelaender",
+      "frage": {
+        "standard": "das schwarze Geländer rund um den Turm",
+        "einfach": "das schwarze Geländer"
+      },
+      "bereiche": [
+        {
+          "x": 0.45,
+          "y": 0.425,
+          "b": 0.095,
+          "h": 0.04
+        }
+      ],
+      "gefunden": {
+        "standard": "Von dort oben konnte man weit über die Stadt schauen.",
+        "einfach": "Von oben sieht man die ganze Stadt."
+      },
+      "tipp": {
+        "standard": "Es ist dort, wo der weiße runde Teil des Turms aufhört.",
+        "einfach": "Sucht dort, wo der weiße Teil aufhört."
+      }
+    },
+    {
+      "id": "kaiser",
+      "frage": {
+        "standard": "das Steinbild mit dem Kaiser",
+        "einfach": "das Bild aus Stein"
+      },
+      "bereiche": [
+        {
+          "x": 0.5,
+          "y": 0.748,
+          "b": 0.042,
+          "h": 0.064
+        }
+      ],
+      "gefunden": {
+        "standard": "Das Steinbild ist von 1593 und zeigt Kaiser Rudolf II. mit zwei Herolden, also Boten.",
+        "einfach": "Das Bild ist über 400 Jahre alt. Es zeigt einen Kaiser."
+      },
+      "tipp": {
+        "standard": "Schaut unten auf den Turm, über der Tür.",
+        "einfach": "Schaut unten am Turm."
+      }
+    }
+  ],
+  "wusstetIhr": {
+    "standard": "Der Reichenturm ist 56 Meter hoch und steht schief: Seine Spitze weicht deutlich von der Senkrechten ab. Deshalb heißt er auch „Schiefer Turm von Bautzen“.",
+    "einfach": "Der Turm ist 56 Meter hoch. Er steht schief. Man nennt ihn „Schiefer Turm von Bautzen“."
+  }
+}

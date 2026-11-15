@@ -1,0 +1,247 @@
+{
+  "$id": "spiele/bildsuche/schema.json",
+  "title": "Spurensuche im Bild",
+  "description": "Details auf einem Foto finden. Bereiche relativ zum Bild (0–1). felder beschreiben das Raster für Bildschirmleser, Reihe für Reihe.",
+  "type": "object",
+  "required": [
+    "format",
+    "titel",
+    "text",
+    "dauerMinuten",
+    "belohnung",
+    "stufe",
+    "bild",
+    "raster",
+    "ziele"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "bildsuche"
+    },
+    "titel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60
+    },
+    "text": {
+      "$ref": "#/$defs/zweitext"
+    },
+    "dauerMinuten": {
+      "type": "number",
+      "minimum": 5,
+      "maximum": 10
+    },
+    "belohnung": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/kennung"
+      }
+    },
+    "stufe": {
+      "enum": [
+        "einblick",
+        "kennen",
+        "anwenden",
+        "beurteilen",
+        "gestalten"
+      ]
+    },
+    "rollen": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/kennung"
+      }
+    },
+    "mischen": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "quelle": {
+      "type": "string",
+      "minLength": 3
+    },
+    "wusstetIhr": {
+      "$ref": "#/$defs/zweitext"
+    },
+    "bild": {
+      "$ref": "#/$defs/bild"
+    },
+    "raster": {
+      "type": "object",
+      "required": [
+        "spalten",
+        "zeilen"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "spalten": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 8
+        },
+        "zeilen": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 8
+        }
+      }
+    },
+    "felder": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 64,
+      "items": {
+        "$ref": "#/$defs/zweitext"
+      }
+    },
+    "ziele": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "frage",
+          "bereiche",
+          "gefunden",
+          "tipp"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/kennung"
+          },
+          "frage": {
+            "$ref": "#/$defs/zweitext"
+          },
+          "bereiche": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 6,
+            "items": {
+              "$ref": "#/$defs/bereich"
+            }
+          },
+          "gefunden": {
+            "$ref": "#/$defs/zweitext"
+          },
+          "tipp": {
+            "$ref": "#/$defs/zweitext"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "zweitext": {
+      "type": "object",
+      "required": [
+        "standard",
+        "einfach"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "standard": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "einfach": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        }
+      }
+    },
+    "kennung": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{1,40}$"
+    },
+    "bild": {
+      "type": "object",
+      "required": [
+        "datei",
+        "breite",
+        "hoehe",
+        "alt",
+        "quelle"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "datei": {
+          "type": "string",
+          "pattern": "^assets/spiele/[a-z0-9/_.-]+\\.(webp|jpg|png|svg)$"
+        },
+        "breite": {
+          "type": "integer",
+          "minimum": 200
+        },
+        "hoehe": {
+          "type": "integer",
+          "minimum": 200
+        },
+        "alt": {
+          "$ref": "#/$defs/zweitext"
+        },
+        "quelle": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 300
+        }
+      }
+    },
+    "tipp": {
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/zweitext"
+        },
+        "nochmal": {
+          "$ref": "#/$defs/zweitext"
+        }
+      }
+    },
+    "bereich": {
+      "type": "object",
+      "required": [
+        "x",
+        "y",
+        "b",
+        "h"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "y": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "b": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "h": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  }
+}

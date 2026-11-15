@@ -1,0 +1,47 @@
+/* Spurensuche im Bild – nur Variablen aus basis.css (--spi-…), die aus den Variablen der App kommen. */
+
+.sp-suche { display: grid; gap: calc(var(--spi-a) * 2.5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .sp-suche { grid-template-columns: minmax(0, 1.5fr) minmax(240px, 1fr); align-items: start; } }
+.sp-suche-bild { display: grid; gap: var(--spi-a); min-width: 0; }
+.sp-suchbild-rahmen { overflow: auto; max-height: 80vh; border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-text); box-shadow: var(--spi-schatten); }
+.sp-suchbild {
+  --sp-zoom: 1; --sp-seiten: 1.5;
+  position: relative; margin: 0 auto;
+  width: calc(min(100%, 76vh * var(--sp-seiten)) * var(--sp-zoom));
+  transition: width var(--spi-dauer) ease;
+}
+.sp-suchbild img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
+.sp-suchraster { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(var(--sp-felder-x, 4), 1fr); grid-template-rows: repeat(var(--sp-felder-y, 4), 1fr); }
+.sp-feld { display: block; margin: 0; padding: 0; border: 0; background: transparent; cursor: crosshair; min-width: 24px; min-height: 24px; }
+.sp-feld:focus-visible { outline: 4px solid var(--spi-flaeche); outline-offset: -4px; box-shadow: inset 0 0 0 8px var(--spi-fokus); }
+.sp-feld:disabled { cursor: default; }
+.sp-marken { position: absolute; inset: 0; pointer-events: none; }
+.sp-fund {
+  position: absolute; transform: translate(-50%, -50%); border-radius: 50%;
+  border: 5px solid var(--spi-flaeche); box-shadow: 0 0 0 4px var(--spi-erfolg), 0 6px 14px rgb(0 0 0 / 0.35);
+  animation: sp-auftauchen calc(380ms / var(--sp-tempo, 1)) cubic-bezier(.2, 1.4, .4, 1) both;
+}
+.sp-fund-nr {
+  position: absolute; right: -14px; top: -14px; width: 30px; height: 30px; display: grid; place-items: center; border-radius: 50%;
+  background: var(--spi-erfolg); color: var(--spi-akzent-text); font-weight: 800; font-size: 0.85em; border: 2px solid var(--spi-flaeche);
+}
+.sp-fehlklick { position: absolute; width: 48px; height: 48px; transform: translate(-50%, -50%); border-radius: 50%; border: 4px dashed var(--spi-flaeche); box-shadow: 0 0 0 2px var(--spi-hinweis); animation: sp-einblenden var(--spi-dauer) ease both; }
+.sp-licht { position: absolute; border-radius: 14px; box-shadow: 0 0 0 4px var(--spi-hinweis), 0 0 0 9999px rgb(0 0 0 / 0.35); animation: sp-einblenden var(--spi-dauer) ease both; }
+.sp-leuchten { position: absolute; transform: translate(-50%, -50%); border-radius: 50%; border: 5px solid var(--spi-hinweis); animation: sp-puls calc(1300ms / var(--sp-tempo, 1)) ease-out infinite; }
+.sp-ruhig .sp-leuchten, .sp-kontrast .sp-leuchten { box-shadow: 0 0 0 6px var(--spi-flaeche); }
+.sp-suche-unter { display: flex; flex-wrap: wrap; gap: var(--spi-a); justify-content: space-between; align-items: center; }
+.sp-zoom { display: flex; gap: var(--spi-a); align-items: center; }
+.sp-zoom-wert { min-width: 4.2ch; text-align: center; font-weight: 750; font-variant-numeric: tabular-nums; }
+.sp-bildnachweis { font-size: 0.8em; color: var(--spi-leise); }
+.sp-suche-seite { display: grid; gap: calc(var(--spi-a) * 1.5); align-content: start; }
+.sp-ziele { list-style: none; padding: 0; display: grid; gap: var(--spi-a); }
+.sp-ziel { display: grid; grid-template-columns: auto 1fr; gap: calc(var(--spi-a) * 1.25); align-items: start; padding: calc(var(--spi-a) * 1.5); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie); }
+.sp-ziel--jetzt { background: var(--spi-hinweis-hell); border: 2px solid var(--spi-hinweis); }
+.sp-ziel--gefunden { background: var(--spi-erfolg-hell); border-color: var(--spi-erfolg); }
+.sp-ziel-nr { display: grid; place-items: center; width: 1.9em; height: 1.9em; border-radius: 50%; background: var(--spi-linie); font-weight: 800; }
+.sp-ziel--jetzt .sp-ziel-nr { background: var(--spi-hinweis); color: var(--spi-flaeche); }
+.sp-ziel--gefunden .sp-ziel-nr { background: var(--spi-erfolg); color: var(--spi-akzent-text); }
+.sp-ziel-nr .sp-symbol { width: 1.1em; height: 1.1em; }
+.sp-ziel-text { font-weight: 650; }
+.sp-ziel-text small { display: block; margin-top: 4px; font-weight: 500; color: var(--spi-leise); font-size: 0.9em; }
+.sp-hilfetext { color: var(--spi-leise); font-size: 0.95em; }

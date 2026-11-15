@@ -1,0 +1,100 @@
+{
+  "$id": "spiele/schaetzen/schema.json",
+  "title": "Schätzfrage",
+  "description": "Die Gruppe schätzt eine Zahl, einigt sich und sieht die Auflösung mit einem Vergleich.",
+  "type": "object",
+  "required": ["format", "titel", "text", "dauerMinuten", "belohnung", "stufe", "frage", "einheit", "antwort", "bereich", "tipps", "aufloesung"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "schaetzen" },
+    "titel": { "type": "string", "minLength": 1, "maxLength": 60 },
+    "text": { "$ref": "#/$defs/zweitext" },
+    "dauerMinuten": { "type": "number", "minimum": 5, "maximum": 10 },
+    "belohnung": { "type": "array", "minItems": 1, "maxItems": 3, "items": { "$ref": "#/$defs/kennung" } },
+    "stufe": { "enum": ["einblick", "kennen", "anwenden", "beurteilen", "gestalten"] },
+    "rollen": { "type": "array", "minItems": 1, "maxItems": 5, "items": { "$ref": "#/$defs/kennung" } },
+    "mischen": { "type": "integer", "minimum": 0 },
+    "quelle": { "type": "string", "minLength": 3 },
+    "wusstetIhr": { "$ref": "#/$defs/zweitext" },
+    "bild": { "$ref": "#/$defs/bild" },
+    "frage": { "$ref": "#/$defs/zweitext" },
+    "einheit": {
+      "oneOf": [
+        { "type": "string", "minLength": 1, "maxLength": 30 },
+        {
+          "type": "object", "required": ["eins", "viele"], "additionalProperties": false,
+          "properties": { "eins": { "type": "string", "minLength": 1 }, "viele": { "type": "string", "minLength": 1 } }
+        }
+      ]
+    },
+    "antwort": { "type": "number", "minimum": 0 },
+    "bereich": {
+      "type": "object",
+      "required": ["min", "max", "schritt"],
+      "additionalProperties": false,
+      "properties": {
+        "min": { "type": "number", "minimum": 0 },
+        "max": { "type": "number", "minimum": 1 },
+        "schritt": { "type": "number", "minimum": 0.001 }
+      }
+    },
+    "skala": { "enum": ["linear", "log"] },
+    "start": { "type": "number", "minimum": 0 },
+    "toleranz": {
+      "description": "Grenzen für 3, 2 und 1 Stern: Abweichung in Prozent (linear) oder Faktor (log); innerhalb von „eins“ gilt die Schätzung als getroffen.",
+      "type": "object",
+      "required": ["drei", "zwei", "eins"],
+      "additionalProperties": false,
+      "properties": {
+        "drei": { "type": "number", "minimum": 0 },
+        "zwei": { "type": "number", "minimum": 0 },
+        "eins": { "type": "number", "minimum": 0 }
+      }
+    },
+    "vergleich": {
+      "type": "object",
+      "required": ["satz"],
+      "additionalProperties": false,
+      "properties": {
+        "bild": { "type": "string", "pattern": "^assets/spiele/[a-z0-9/_.-]+\\.svg$" },
+        "anzahl": { "type": "integer", "minimum": 1, "maximum": 12 },
+        "satz": { "$ref": "#/$defs/zweitext" }
+      }
+    },
+    "tipps": { "type": "array", "minItems": 1, "maxItems": 3, "items": { "$ref": "#/$defs/tipp" } },
+    "aufloesung": { "$ref": "#/$defs/zweitext" }
+  },
+  "$defs": {
+    "zweitext": {
+      "type": "object",
+      "required": ["standard", "einfach"],
+      "additionalProperties": false,
+      "properties": {
+        "standard": { "type": "string", "minLength": 1, "maxLength": 600 },
+        "einfach": { "type": "string", "minLength": 1, "maxLength": 600 }
+      }
+    },
+    "kennung": { "type": "string", "pattern": "^[a-z0-9-]{1,40}$" },
+    "bild": {
+      "type": "object",
+      "required": ["datei", "breite", "hoehe", "alt", "quelle"],
+      "additionalProperties": false,
+      "properties": {
+        "datei": { "type": "string", "pattern": "^assets/spiele/[a-z0-9/_.-]+\\.(webp|jpg|png|svg)$" },
+        "breite": { "type": "integer", "minimum": 200 },
+        "hoehe": { "type": "integer", "minimum": 200 },
+        "alt": { "$ref": "#/$defs/zweitext" },
+        "quelle": { "type": "string", "minLength": 3, "maxLength": 300 }
+      }
+    },
+    "tipp": {
+      "type": "object",
+      "required": ["text"],
+      "additionalProperties": false,
+      "properties": {
+        "text": { "$ref": "#/$defs/zweitext" },
+        "nochmal": { "$ref": "#/$defs/zweitext" }
+      }
+    }
+  }
+}

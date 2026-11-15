@@ -1,0 +1,53 @@
+{
+  "format": "schaetzen",
+  "titel": "Wie tief geht es hinunter?",
+  "text": {
+    "standard": "Von der Bastei schaut man tief hinunter ins Elbtal. Schätzt gemeinsam, wie viele Meter es bis zum Fluss sind.",
+    "einfach": "Von der Bastei schaut man weit nach unten. Wie tief ist es bis zum Fluss? Schätzt zusammen."
+  },
+  "dauerMinuten": 6,
+  "belohnung": ["felsturm"],
+  "stufe": "anwenden",
+  "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
+  "bild": {
+    "datei": "assets/spiele/orte/bastei/felsen.webp",
+    "breite": 1440,
+    "hoehe": 960,
+    "alt": {
+      "standard": "Blick von oben auf die Bastei: schmale, hohe Felssäulen aus grauem Sandstein, dazwischen Wald, rechts die Basteibrücke mit ihren Bögen.",
+      "einfach": "Hohe graue Felsen und Wald. Rechts ist die Brücke."
+    },
+    "quelle": "Foto: W. Bulach, CC BY-SA 4.0, Wikimedia Commons (verkleinert)"
+  },
+  "frage": {
+    "standard": "Wie viele Meter fällt der Fels von der Bastei bis hinunter zur Elbe ab?",
+    "einfach": "Wie viele Meter sind es von oben bis unten zum Fluss?"
+  },
+  "einheit": "Meter",
+  "antwort": 190,
+  "bereich": { "min": 0, "max": 500, "schritt": 5 },
+  "skala": "linear",
+  "start": 100,
+  "toleranz": { "drei": 10, "zwei": 25, "eins": 50 },
+  "vergleich": {
+    "bild": "assets/spiele/vergleich/frauenkirche.svg",
+    "anzahl": 2,
+    "satz": {
+      "standard": "Stellt euch die Dresdner Frauenkirche vor, 91 Meter hoch: Zwei davon übereinander wären immer noch etwas niedriger als die Bastei über der Elbe.",
+      "einfach": "Die Frauenkirche in Dresden ist 91 Meter hoch. Zwei Frauenkirchen übereinander sind fast so hoch wie die Bastei."
+    }
+  },
+  "tipps": [
+    { "text": { "standard": "Ein Stockwerk eines Hauses ist etwa 3 Meter hoch. Wie viele Stockwerke würden übereinander bis hinunter zur Elbe passen?", "einfach": "Ein Stockwerk ist etwa 3 Meter hoch." } },
+    { "text": { "standard": "Ein Kirchturm in einer Stadt ist oft etwa 50 Meter hoch. Die Felsen der Bastei sind viel höher.", "einfach": "Ein Kirchturm ist etwa 50 Meter hoch. Die Felsen sind viel höher." } },
+    { "text": { "standard": "Es sind mehr als 150 und weniger als 250 Meter.", "einfach": "Es sind mehr als 150 Meter und weniger als 250 Meter." } }
+  ],
+  "aufloesung": {
+    "standard": "Von der Bastei fällt das schmale Felsriff etwa 190 Meter steil zur Elbe ab. Deshalb reicht der Blick so weit über das Elbtal.",
+    "einfach": "Von oben bis zur Elbe sind es etwa 190 Meter. Darum kann man so weit sehen."
+  },
+  "wusstetIhr": {
+    "standard": "Schon 1801 schrieb ein Wanderführer, dass man sich von dieser Aussicht kaum losreißen kann. Heute kommen rund 1,5 Millionen Menschen im Jahr.",
+    "einfach": "Schon vor über 200 Jahren kamen Menschen wegen der Aussicht. Heute kommen sehr viele Menschen jedes Jahr."
+  }
+}

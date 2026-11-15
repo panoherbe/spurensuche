@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Dampflok</title>
+  <desc>Sammelstück: eine kleine schwarze Dampflok mit roten Rädern, Schornstein und Dampfwolken auf Schienen. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs><clipPath id="dampflok-k"><circle cx="256" cy="248" r="212"/></clipPath><linearGradient id="dampflok-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#D9E6EF"/><stop offset="1" stop-color="#EEF4F8"/></linearGradient></defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#dampflok-h)"/>
+  <g clip-path="url(#dampflok-k)" stroke-linejoin="round" stroke-linecap="round">
+
+    <circle cx="150" cy="120" r="30" fill="#FFFFFF" stroke="#263238" stroke-width="5"/><circle cx="196" cy="96" r="22" fill="#FFFFFF" stroke="#263238" stroke-width="5"/><circle cx="110" cy="86" r="20" fill="#FFFFFF" stroke="#263238" stroke-width="5"/>
+    <path d="M40 400 H480" stroke="#6B5A44" stroke-width="12"/>
+    <path d="M60 400 V416 M110 400 V416 M160 400 V416 M210 400 V416 M260 400 V416 M310 400 V416 M360 400 V416 M410 400 V416 M460 400 V416" stroke="#8A7558" stroke-width="10"/>
+    <path d="M134 150 H180 L174 180 H140 Z" fill="#2E3438" stroke="#263238" stroke-width="6"/>
+    <path d="M100 196 C100 184 108 178 120 178 H300 V316 H100 Z" fill="#30373C" stroke="#263238" stroke-width="7"/>
+    <path d="M100 236 H300 M100 276 H300" stroke="#4C565D" stroke-width="6"/>
+    <circle cx="94" cy="246" r="20" fill="#F2B233" stroke="#263238" stroke-width="6"/>
+    <path d="M300 150 H420 V316 H300 Z" fill="#B3261E" stroke="#263238" stroke-width="7"/>
+    <path d="M290 140 H430 V160 H290 Z" fill="#30373C" stroke="#263238" stroke-width="6"/>
+    <path d="M324 182 H396 V238 H324 Z" fill="#CFE6F5" stroke="#263238" stroke-width="6"/>
+    <path d="M70 316 H440 V340 H70 Z" fill="#30373C" stroke="#263238" stroke-width="7"/>
+    <path d="M60 340 L90 316" stroke="#263238" stroke-width="7"/>
+    <circle cx="150" cy="356" r="40" fill="#E25B45" stroke="#263238" stroke-width="7"/><circle cx="150" cy="356" r="10" fill="#263238"/>
+    <circle cx="250" cy="356" r="40" fill="#E25B45" stroke="#263238" stroke-width="7"/><circle cx="250" cy="356" r="10" fill="#263238"/>
+    <circle cx="370" cy="366" r="30" fill="#E25B45" stroke="#263238" stroke-width="7"/><circle cx="370" cy="366" r="8" fill="#263238"/>
+    <path d="M150 356 H250" stroke="#C7CDD1" stroke-width="10"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

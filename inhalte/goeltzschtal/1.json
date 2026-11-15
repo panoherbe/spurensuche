@@ -1,0 +1,86 @@
+{
+  "format": "schaetzen",
+  "titel": "Wie viele Ziegel?",
+  "text": {
+    "standard": "Die Göltzschtalbrücke ist aus Ziegelsteinen gemauert. Schätzt gemeinsam, wie viele Ziegel darin stecken.",
+    "einfach": "Die Brücke ist aus Ziegeln gebaut. Wie viele Ziegel sind es? Schätzt zusammen."
+  },
+  "dauerMinuten": 7,
+  "belohnung": [
+    "dampflok"
+  ],
+  "stufe": "anwenden",
+  "rollen": [
+    "vorlesen",
+    "steuern",
+    "nachschlagen",
+    "pruefen"
+  ],
+  "bild": {
+    "datei": "assets/spiele/orte/goeltzschtal/bogen.webp",
+    "breite": 1600,
+    "hoehe": 1200,
+    "alt": {
+      "standard": "Blick von unten auf die Göltzschtalbrücke: riesige Bögen aus rotbraunen Ziegeln über alten Fabrikgebäuden und einer Wiese.",
+      "einfach": "Große Bögen aus roten Ziegeln. Darunter alte Häuser."
+    },
+    "quelle": "Foto: Ermell, CC BY-SA 4.0, Wikimedia Commons (verkleinert)"
+  },
+  "frage": {
+    "standard": "Wie viele Ziegelsteine wurden in der Göltzschtalbrücke verbaut?",
+    "einfach": "Wie viele Ziegel sind in der Brücke?"
+  },
+  "einheit": {
+    "eins": "Ziegel",
+    "viele": "Ziegel"
+  },
+  "antwort": 26000000,
+  "bereich": {
+    "min": 1000,
+    "max": 1000000000,
+    "schritt": 1
+  },
+  "skala": "log",
+  "start": 100000,
+  "toleranz": {
+    "drei": 1.25,
+    "zwei": 2,
+    "eins": 4
+  },
+  "vergleich": {
+    "bild": "assets/spiele/vergleich/ziegel.svg",
+    "anzahl": 6,
+    "satz": {
+      "standard": "Legt man 26 Millionen Ziegel hintereinander, reicht die Reihe über 7.000 Kilometer weit: weiter als von Dresden nach New York.",
+      "einfach": "Alle Ziegel hintereinander sind über 7.000 Kilometer lang. Das ist weiter als von Dresden bis nach Amerika."
+    }
+  },
+  "tipps": [
+    {
+      "text": {
+        "standard": "Die Brücke hat 98 Bögen und ist 78 Meter hoch. Für jeden einzelnen Bogen braucht man sehr viele Ziegel.",
+        "einfach": "Die Brücke hat 98 Bögen. Für jeden Bogen braucht man viele Ziegel."
+      }
+    },
+    {
+      "text": {
+        "standard": "Es waren mehr als eine Million Ziegel.",
+        "einfach": "Es waren mehr als 1 Million Ziegel."
+      }
+    },
+    {
+      "text": {
+        "standard": "Es waren mehr als 10 Millionen und weniger als 50 Millionen Ziegel.",
+        "einfach": "Mehr als 10 Millionen. Weniger als 50 Millionen."
+      }
+    }
+  ],
+  "aufloesung": {
+    "standard": "Bis 1851 wurden etwa 26 Millionen Ziegel verbaut. An manchen Tagen kamen 150.000 Ziegel an die Baustelle.",
+    "einfach": "In der Brücke sind etwa 26 Millionen Ziegel. An manchen Tagen kamen 150.000 neue Ziegel."
+  },
+  "wusstetIhr": {
+    "standard": "Die Göltzschtalbrücke ist die größte Ziegelsteinbrücke der Welt. Sie war auch die erste Brücke, deren Tragkraft vorher genau berechnet wurde.",
+    "einfach": "Es ist die größte Brücke aus Ziegeln auf der Welt."
+  }
+}

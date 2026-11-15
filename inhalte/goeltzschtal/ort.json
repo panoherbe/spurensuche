@@ -1,0 +1,31 @@
+{
+  "id": "goeltzschtal",
+  "name": "Göltzschtalbrücke",
+  "region": "Vogtland",
+  "lage": {
+    "lat": 50.62258,
+    "lon": 12.24374,
+    "radius": 300
+  },
+  "qr": "VOGTLAND-1851",
+  "text": {
+    "standard": "Die Göltzschtalbrücke im Vogtland trägt seit 1851 die Eisenbahn über das Tal der Göltzsch. Sie ist 78 Meter hoch, hat 98 Bögen und ist die größte Ziegelsteinbrücke der Welt.",
+    "einfach": "Die Göltzschtalbrücke ist im Vogtland. Über die Brücke fahren Züge. Sie ist aus Ziegeln gebaut. Sie ist sehr hoch und hat viele Bögen."
+  },
+  "bild": "assets/spiele/orte/goeltzschtal/viadukt.webp",
+  "alt": "Die Göltzschtalbrücke von unten: viele Bögen aus rotbraunen Ziegeln übereinander, davor grüne Bäume.",
+  "bildQuelle": "Foto: Cookroach, CC BY-SA 4.0, Wikimedia Commons (verkleinert)",
+  "aufgaben": [
+    "1",
+    "2",
+    "3"
+  ],
+  "ersatz": {
+    "text": {
+      "standard": "Ihr seid heute nicht im Vogtland? Kein Problem. Schaut euch das Foto an und stellt euch vor, ihr steht unter den riesigen Bögen.",
+      "einfach": "Ihr seid heute nicht an der Brücke. Das macht nichts. Schaut euch das Foto an. Stellt euch vor: Ihr steht unter der Brücke."
+    },
+    "bild": "assets/spiele/orte/goeltzschtal/viadukt.webp",
+    "alt": "Die Göltzschtalbrücke von unten: viele Bögen aus rotbraunen Ziegeln übereinander, davor grüne Bäume."
+  }
+}

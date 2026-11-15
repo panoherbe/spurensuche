@@ -1,5 +1,10 @@
 {
   "version": 1,
-  "orte": ["bastei"],
-  "finale": "bastei"
+  "orte": [
+    "bastei",
+    "frauenkirche",
+    "goeltzschtal",
+    "bautzen"
+  ],
+  "finale": "frauenkirche"
 }

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Alter Stein</title>
+  <desc>Sammelstück: ein dunkler, alter Sandsteinblock mit abgeschlagenen Kanten und einem kleinen Nummernschild. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs><clipPath id="alter-stein-k"><circle cx="256" cy="248" r="212"/></clipPath><linearGradient id="alter-stein-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F8ECD4"/><stop offset="1" stop-color="#EBD8B3"/></linearGradient></defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#alter-stein-h)"/>
+  <g clip-path="url(#alter-stein-k)" stroke-linejoin="round" stroke-linecap="round">
+
+    <path d="M30 380 H490 V480 H30 Z" fill="#E7D3AE"/>
+    <path d="M136 220 L300 176 L408 214 L244 262 Z" fill="#6B5A44" stroke="#263238" stroke-width="7"/>
+    <path d="M136 220 L244 262 L244 404 L136 362 Z" fill="#4A3C2C" stroke="#263238" stroke-width="7"/>
+    <path d="M244 262 L408 214 L408 352 L244 404 Z" fill="#3A2F23" stroke="#263238" stroke-width="7"/>
+    <path d="M300 176 L322 196 L300 214 L282 188 Z" fill="#8A7558" stroke="#263238" stroke-width="5"/>
+    <path d="M160 260 L176 268 M196 300 L214 306 M160 330 L172 336 M282 290 L300 284 M340 300 L360 292 M300 350 L318 344 M372 260 L388 254" stroke="#7A684F" stroke-width="6"/>
+    <path d="M150 360 C160 352 168 362 176 356 M380 330 C390 322 396 332 404 326" fill="none" stroke="#7A684F" stroke-width="5"/>
+    <g transform="rotate(-12 312 318)">
+      <rect x="276" y="296" width="80" height="44" rx="8" fill="#FFFFFF" stroke="#263238" stroke-width="5"/>
+      <path d="M290 312 H342 M290 326 H330" stroke="#45545D" stroke-width="5"/>
+      <circle cx="282" cy="318" r="5" fill="#45545D"/>
+    </g>
+    <path d="M112 420 C160 410 220 412 260 418 C300 424 360 424 410 414" fill="none" stroke="#CDB78F" stroke-width="8"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

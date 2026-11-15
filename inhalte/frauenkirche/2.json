@@ -1,0 +1,44 @@
+{
+  "format": "sortieren",
+  "titel": "Die Geschichte der Kirche",
+  "text": {
+    "standard": "Bringt die Ereignisse in die richtige Reihenfolge: oben das früheste, unten das späteste.",
+    "einfach": "Was war zuerst? Was kam danach? Bringt die Karten in die richtige Reihenfolge."
+  },
+  "dauerMinuten": 6,
+  "belohnung": ["kuppel"],
+  "stufe": "kennen",
+  "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
+  "mischen": 1743,
+  "bild": {
+    "datei": "assets/spiele/orte/frauenkirche/neumarkt.webp",
+    "breite": 1600,
+    "hoehe": 1067,
+    "alt": {
+      "standard": "Die Frauenkirche am Neumarkt in Dresden: ein hoher Kuppelbau aus hellem Sandstein mit Laterne und Kreuz, links eine Reihe bunter Bürgerhäuser.",
+      "einfach": "Die Frauenkirche in Dresden. Sie hat eine große runde Kuppel."
+    },
+    "quelle": "Foto: CEphoto, Uwe Aranas, CC BY-SA 3.0, Wikimedia Commons (verkleinert)"
+  },
+  "art": "reihenfolge",
+  "enden": {
+    "anfang": { "standard": "früher", "einfach": "zuerst" },
+    "ende": { "standard": "später", "einfach": "danach" }
+  },
+  "karten": [
+    { "id": "fertig", "text": { "standard": "Die Kirche mit der steinernen Kuppel ist fertig gebaut.", "einfach": "Die Kirche ist fertig." }, "zusatz": { "standard": "1743", "einfach": "1743" } },
+    { "id": "einsturz", "text": { "standard": "Nach Luftangriffen stürzt die ausgebrannte Kirche ein.", "einfach": "Im Krieg stürzt die Kirche ein." }, "zusatz": { "standard": "1945", "einfach": "1945" } },
+    { "id": "mahnmal", "text": { "standard": "Die Ruine wird offiziell zum Mahnmal gegen den Krieg erklärt.", "einfach": "Die Ruine soll an den Krieg erinnern." }, "zusatz": { "standard": "1966", "einfach": "1966" } },
+    { "id": "grundstein", "text": { "standard": "Der Grundstein für den Wiederaufbau wird gelegt.", "einfach": "Der Neubau beginnt." }, "zusatz": { "standard": "1994", "einfach": "1994" } },
+    { "id": "weihe", "text": { "standard": "Die wieder aufgebaute Kirche wird mit einem Festgottesdienst geweiht.", "einfach": "Die neue Kirche ist fertig. Es gibt ein Fest." }, "zusatz": { "standard": "2005", "einfach": "2005" } }
+  ],
+  "tipps": [
+    { "text": { "standard": "Eine Kirche muss erst gebaut sein, bevor sie einstürzen kann. Und eine Ruine kommt vor dem Wiederaufbau.", "einfach": "Erst wird gebaut. Dann geht etwas kaputt. Dann baut man neu." } },
+    { "text": { "standard": "Jetzt seht ihr, welche Karten schon richtig liegen.", "einfach": "Ein Haken heißt: Diese Karte ist richtig." } },
+    { "text": { "standard": "Ulla legt eine Karte an ihren Platz.", "einfach": "Ulla legt eine Karte richtig hin." }, "nochmal": { "standard": "Noch eine Karte legen", "einfach": "Noch eine Karte" } }
+  ],
+  "wusstetIhr": {
+    "standard": "Die Kuppel der Frauenkirche heißt „Steinerne Glocke“: Unten ist sie nach innen gewölbt wie eine Glocke. Sie ist ganz aus Sandstein gebaut.",
+    "einfach": "Die Kuppel heißt „Steinerne Glocke“. Sie sieht aus wie eine Glocke. Sie ist aus Stein."
+  }
+}

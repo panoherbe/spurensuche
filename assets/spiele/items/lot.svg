@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Lot</title>
+  <desc>Sammelstück: ein Senklot aus Messing an einer Schnur, mit dem man prüft, ob etwas genau senkrecht steht. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs><clipPath id="lot-k"><circle cx="256" cy="248" r="212"/></clipPath><linearGradient id="lot-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#DCE7EE"/><stop offset="1" stop-color="#EEF4F8"/></linearGradient></defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#lot-h)"/>
+  <g clip-path="url(#lot-k)" stroke-linejoin="round" stroke-linecap="round">
+
+    <path d="M118 470 L132 210 C132 196 160 196 162 210 L168 470 Z" fill="#FFFFFF" opacity=".75" stroke="#9AA7AE" stroke-width="5" transform="rotate(6 140 470)"/>
+    <path d="M150 80 H362" stroke="#8A5A30" stroke-width="14"/>
+    <path d="M150 80 H362" stroke="#B07A47" stroke-width="7"/>
+    <path d="M256 80 V250" stroke="#263238" stroke-width="5"/>
+    <path d="M256 250 V440" stroke="#2A6FA8" stroke-width="5" stroke-dasharray="12 12"/>
+    <path d="M226 250 H286 V286 L256 380 L226 286 Z" fill="#E8B13A" stroke="#263238" stroke-width="7"/>
+    <path d="M226 250 H286 V270 H226 Z" fill="#C88E1C" stroke="#263238" stroke-width="6"/>
+    <path d="M240 284 L256 344" stroke="#F8D98A" stroke-width="8"/>
+    <path d="M100 440 C150 420 200 430 256 440 C312 450 362 430 412 440" fill="none" stroke="#9AA7AE" stroke-width="8"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

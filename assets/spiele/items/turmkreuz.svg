@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Turmkreuz</title>
+  <desc>Sammelstück: ein goldenes Kreuz mit Strahlenkranz über einer goldenen Kugel, das Zeichen der Versöhnung auf der Frauenkirche. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs><clipPath id="turmkreuz-k"><circle cx="256" cy="248" r="212"/></clipPath><linearGradient id="turmkreuz-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFF3CF"/><stop offset="1" stop-color="#FBE3A0"/></linearGradient></defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#turmkreuz-h)"/>
+  <g clip-path="url(#turmkreuz-k)" stroke-linejoin="round" stroke-linecap="round">
+
+    <path d="M256 214 L406.0 214.0" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L385.9 289.0" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L331.0 343.9" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L256.0 364.0" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L181.0 343.9" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L126.1 289.0" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L106.0 214.0" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L126.1 139.0" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L181.0 84.1" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L256.0 64.0" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L331.0 84.1" stroke="#F7D36B" stroke-width="10"/><path d="M256 214 L385.9 139.0" stroke="#F7D36B" stroke-width="10"/>
+    <circle cx="256" cy="214" r="62" fill="#FFF6D6" stroke="#B07B12" stroke-width="6"/>
+    <circle cx="256" cy="214" r="40" fill="#2A4A8C" stroke="#263238" stroke-width="5"/>
+    <path d="M232 70 H280 V150 H360 V198 H280 V380 H232 V198 H152 V150 H232 Z" fill="#F2B233" stroke="#263238" stroke-width="7"/>
+    <path d="M244 82 H268 V162 H348 V186 H268 V368 H244 V186 H164 V162 H244 Z" fill="#F7D36B"/>
+    <circle cx="256" cy="174" r="34" fill="#2A4A8C" stroke="#263238" stroke-width="6"/>
+    <path d="M256 150 V198 M232 174 H280" stroke="#F7D36B" stroke-width="6"/>
+    <circle cx="256" cy="420" r="52" fill="#F2B233" stroke="#263238" stroke-width="7"/>
+    <path d="M222 402 C232 388 248 382 262 384" fill="none" stroke="#FFF1C2" stroke-width="8"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

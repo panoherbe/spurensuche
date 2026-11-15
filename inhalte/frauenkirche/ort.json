@@ -1,0 +1,31 @@
+{
+  "id": "frauenkirche",
+  "name": "Frauenkirche Dresden",
+  "region": "Dresden",
+  "lage": {
+    "lat": 51.05188,
+    "lon": 13.74158,
+    "radius": 120
+  },
+  "qr": "DRESDEN-2005",
+  "text": {
+    "standard": "Die Frauenkirche am Dresdner Neumarkt ist eine evangelische Kirche mit einer großen Kuppel aus Sandstein. Im Zweiten Weltkrieg wurde sie zerstört. Heute steht sie wieder, gebaut aus alten und neuen Steinen.",
+    "einfach": "Die Frauenkirche steht in Dresden. Sie hat eine große runde Kuppel. Im Krieg ging sie kaputt. Heute ist sie wieder ganz."
+  },
+  "bild": "assets/spiele/orte/frauenkirche/neumarkt.webp",
+  "alt": "Die Frauenkirche am Neumarkt in Dresden: ein hoher Kuppelbau aus hellem Sandstein mit Laterne und Kreuz, links eine Reihe bunter Häuser.",
+  "bildQuelle": "Foto: CEphoto, Uwe Aranas, CC BY-SA 3.0, Wikimedia Commons (verkleinert)",
+  "aufgaben": [
+    "1",
+    "2",
+    "3"
+  ],
+  "ersatz": {
+    "text": {
+      "standard": "Ihr seid heute nicht in Dresden? Kein Problem. Schaut euch das Foto der Kirche genau an und stellt euch vor, ihr steht auf dem Platz davor.",
+      "einfach": "Ihr seid heute nicht in Dresden. Das macht nichts. Schaut euch das Foto an. Stellt euch vor: Ihr steht vor der Kirche."
+    },
+    "bild": "assets/spiele/orte/frauenkirche/neumarkt.webp",
+    "alt": "Die Frauenkirche am Neumarkt in Dresden: ein hoher Kuppelbau aus hellem Sandstein mit Laterne und Kreuz, links eine Reihe bunter Häuser."
+  }
+}

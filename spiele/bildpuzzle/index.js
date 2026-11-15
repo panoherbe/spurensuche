@@ -235,9 +235,9 @@ function aufbau(k) {
     fertig = true;
     protokoll.versuch(true);
     brett.classList.add('sp-puzzle--fertig');
-    for (const kachel of kacheln) { kachel.setAttribute('aria-disabled', 'true'); kachel.tabIndex = -1; }
-    brett.setAttribute('role', 'img');
-    brett.setAttribute('aria-label', t(bild.alt));
+    for (const kachel of kacheln) { kachel.disabled = true; kachel.removeAttribute('aria-pressed'); kachel.setAttribute('aria-hidden', 'true'); }
+    brett.removeAttribute('aria-describedby');
+    brett.setAttribute('aria-label', `Fertiges Foto: ${t(bild.alt)}`);
     k.sage(k.u.sprache === 'einfach' ? 'Geschafft! Das Foto ist wieder ganz.' : 'Geschafft! Das Foto ist wieder ganz.', 'gut');
     const punkte = sterne({ geloest: true, versuche: protokoll.versuche, hilfen: protokoll.hilfen, glatt: 1, gut: 3 });
     const weiter = k.knopf({ text: 'Weiter', symbol: 'weiter', art: 'haupt', gross: true, beiKlick: () => k.fertig({ geloest: true, punkte }) });

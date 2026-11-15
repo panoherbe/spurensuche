@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Schiefer Turm</title>
+  <desc>Sammelstück: der Reichenturm in Bautzen: ein weißer runder Turm mit verziertem Aufsatz, der sichtbar schief steht. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs><clipPath id="schiefer-turm-k"><circle cx="256" cy="248" r="212"/></clipPath><linearGradient id="schiefer-turm-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9CCBEB"/><stop offset="1" stop-color="#DCEEF9"/></linearGradient></defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#schiefer-turm-h)"/>
+  <g clip-path="url(#schiefer-turm-k)" stroke-linejoin="round" stroke-linecap="round">
+
+    <path d="M256 70 V430" stroke="#2A6FA8" stroke-width="5" stroke-dasharray="12 12"/>
+    <g transform="rotate(5 256 440)">
+      <path d="M256 66 V92 M246 76 H272" stroke="#8A5A00" stroke-width="9"/>
+      <path d="M256 66 V92 M246 76 H272" stroke="#F2B233" stroke-width="4"/>
+      <circle cx="256" cy="98" r="9" fill="#F2B233" stroke="#263238" stroke-width="4"/>
+      <path d="M236 150 C236 120 256 106 256 106 C256 106 276 120 276 150 Z" fill="#E7E9EA" stroke="#263238" stroke-width="6"/>
+      <path d="M220 150 H292 V230 H220 Z" fill="#B7A57E" stroke="#263238" stroke-width="6"/>
+      <path d="M238 228 V196 C238 186 252 186 252 196 V228 M260 228 V196 C260 186 274 186 274 196 V228" fill="#5D4B33" stroke="#263238" stroke-width="5"/>
+      <circle cx="246" cy="168" r="9" fill="#E25B45" stroke="#263238" stroke-width="4"/><circle cx="268" cy="168" r="9" fill="#2A6FA8" stroke="#263238" stroke-width="4"/>
+      <path d="M210 230 H302 V246 H210 Z" fill="#30373C" stroke="#263238" stroke-width="5"/>
+      <path d="M216 246 H296 L304 440 H208 Z" fill="#F7F7F5" stroke="#263238" stroke-width="7"/>
+      <path d="M266 246 H296 L304 440 H272 Z" fill="#DCDFE0"/>
+      <path d="M216 246 H296 L304 440 H208 Z" fill="none" stroke="#263238" stroke-width="7"/>
+      <path d="M248 286 H260 V304 H248 Z M244 346 H256 V364 H244 Z M262 396 H274 V414 H262 Z" fill="#5D4B33"/>
+    </g>
+    <path d="M30 400 L110 360 L190 400 V480 H30 Z M330 410 L400 372 L480 410 V480 H330 Z" fill="#C8644A" stroke="#263238" stroke-width="6"/>
+    <path d="M40 410 H180 V480 H40 Z M340 418 H470 V480 H340 Z" fill="#F3E2C7" stroke="#263238" stroke-width="6"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

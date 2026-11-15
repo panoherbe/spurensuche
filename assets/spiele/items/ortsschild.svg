@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Ortsschild</title>
+  <desc>Sammelstück: ein gelbes Ortsschild mit zwei Namen untereinander: Bautzen und Budyšin. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs><clipPath id="ortsschild-k"><circle cx="256" cy="248" r="212"/></clipPath><linearGradient id="ortsschild-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E9E2F7"/><stop offset="1" stop-color="#D9CFF0"/></linearGradient></defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#ortsschild-h)"/>
+  <g clip-path="url(#ortsschild-k)" stroke-linejoin="round" stroke-linecap="round">
+
+    <path d="M226 330 H286 V480 H226 Z" fill="#9AA7AE" stroke="#263238" stroke-width="7"/>
+    <path d="M60 128 H452 C462 128 470 136 470 146 V330 C470 340 462 348 452 348 H60 C50 348 42 340 42 330 V146 C42 136 50 128 60 128 Z" fill="#F7C52C" stroke="#263238" stroke-width="8"/>
+    <path d="M70 154 H442 V322 H70 Z" fill="none" stroke="#263238" stroke-width="6"/>
+    <text x="256" y="226" text-anchor="middle" font-family="Arial, Helvetica, 'DejaVu Sans', sans-serif" font-weight="700" font-size="64" fill="#263238">Bautzen</text>
+    <text x="256" y="300" text-anchor="middle" font-family="Arial, Helvetica, 'DejaVu Sans', sans-serif" font-weight="700" font-size="64" fill="#263238">Budyšin</text>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Göltzschtalbrücke</title>
+  <desc>Sammelstück: eine lange Eisenbahnbrücke aus roten Ziegeln mit zwei Reihen offener Bögen und einem großen Bogen in der Mitte, oben fährt ein roter Zug, unten ein Tal mit Bäumen. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs>
+    <clipPath id="goeltzschtalbruecke-k"><circle cx="256" cy="248" r="212"/></clipPath>
+    <linearGradient id="goeltzschtalbruecke-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8CC4EA"/><stop offset="1" stop-color="#DCEEF9"/></linearGradient>
+  </defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#goeltzschtalbruecke-h)"/>
+  <g clip-path="url(#goeltzschtalbruecke-k)" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M20 330 C110 300 190 316 256 300 C330 284 410 300 492 288 V480 H20 Z" fill="#B7D69C"/>
+    <path d="M20 168 H492 V400 H20 Z M36 262 V206 C36 186 80 186 80 206 V262 Z M96 262 V206 C96 186 140 186 140 206 V262 Z M156 262 V206 C156 186 200 186 200 206 V262 Z M216 262 V206 C216 186 260 186 260 206 V262 Z M276 262 V206 C276 186 320 186 320 206 V262 Z M336 262 V206 C336 186 380 186 380 206 V262 Z M396 262 V206 C396 186 440 186 440 206 V262 Z M456 262 V206 C456 186 500 186 500 206 V262 Z M36 392 V300 C36 280 80 280 80 300 V392 Z M96 392 V300 C96 280 140 280 140 300 V392 Z M156 392 V300 C156 280 200 280 200 300 V392 Z M336 392 V300 C336 280 380 280 380 300 V392 Z M396 392 V300 C396 280 440 280 440 300 V392 Z M456 392 V300 C456 280 500 280 500 300 V392 Z M206 400 V332 C206 286 306 286 306 332 V400 Z" fill="#C8644A" fill-rule="evenodd" stroke="#263238" stroke-width="6"/>
+    <path d="M20 274 H492" stroke="#A84F38" stroke-width="10"/>
+    <path d="M20 150 H492 V170 H20 Z" fill="#9E4A34" stroke="#263238" stroke-width="6"/>
+    <path d="M128 128 H352 V150 H128 Z" fill="#D7322B" stroke="#263238" stroke-width="5"/>
+    <path d="M146 134 H174 M194 134 H222 M242 134 H270 M290 134 H318" stroke="#CFE6F5" stroke-width="7"/>
+    <path d="M352 150 L366 132 V150 Z" fill="#D7322B" stroke="#263238" stroke-width="4"/>
+    <path d="M20 400 H492 V480 H20 Z" fill="#7FAF67"/>
+    <path d="M60 420 C110 410 150 430 200 422 C260 412 320 432 380 420 C420 412 460 420 492 416" fill="none" stroke="#5E9FD0" stroke-width="12"/>
+    <path d="M40 470 C60 420 110 420 130 470 Z M330 470 C350 416 410 416 430 470 Z M190 480 C200 446 240 446 250 480 Z" fill="#E39A2D" stroke="#263238" stroke-width="5"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>
