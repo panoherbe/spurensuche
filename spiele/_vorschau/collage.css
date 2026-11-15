@@ -7,6 +7,8 @@
 .cl-items { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); }
 .cl-item { width: 100%; display: grid; justify-items: center; gap: 4px; padding: 8px; border-radius: 14px; border: 2px solid var(--sp-rand); background: var(--sp-flaeche); color: var(--sp-text); font: inherit; font-size: 0.8rem; font-weight: 700; cursor: pointer; min-height: 44px; }
 .cl-item img { width: 64px; height: 64px; }
+/* Lange Namen (Göltzschtalbrücke) liefen 7 px über die Kachel (Messlauf 15.11.): trennen, wo der Browser es kann, sonst umbrechen */
+.cl-item > span, .cl-item { min-width: 0; overflow-wrap: anywhere; -webkit-hyphens: auto; hyphens: auto; }
 .cl-item[aria-pressed='true'] { border-color: var(--sp-akzent); box-shadow: 0 0 0 3px var(--sp-akzent); }
 .cl-regler { display: grid; gap: 12px; }
 .cl-regler fieldset { margin: 0; border: 1px solid var(--sp-rand); border-radius: 12px; padding: 10px 12px; display: flex; flex-wrap: wrap; gap: 8px 14px; }
