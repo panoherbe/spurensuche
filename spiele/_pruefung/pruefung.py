@@ -488,12 +488,12 @@ def konzeptbilder(browser, basis, aus):
     warte_bis(s, "document.getElementById('cl-vorschau').src.startsWith('blob:')", 20000)
     s.evaluate("() => document.querySelector('.vs-kopf').style.setProperty('display', 'none')")
     ruhig(s); s.screenshot(path=str(ziel / "5-collage-regler.png"), full_page=True); bilder.append("5-collage-regler.png"); k.close()
-    # 6 Figur
+    # 6 Figur: nur das Fenster (1280 × 900), der ganze Baukasten wäre fürs Konzept zu lang
     k, s = seite_neu((1280, 900))
     s.goto(f"{basis}/spiele/_vorschau/figur.html")
     s.wait_for_selector(".sp-figur-baukasten svg")
     s.evaluate("() => { for (const e of document.querySelectorAll('.vs-kopf, .vs-protokoll')) e.style.setProperty('display', 'none'); }")
-    ruhig(s); s.screenshot(path=str(ziel / "6-figur-baukasten.png"), full_page=True); bilder.append("6-figur-baukasten.png"); k.close()
+    ruhig(s); s.screenshot(path=str(ziel / "6-figur-baukasten.png")); bilder.append("6-figur-baukasten.png"); k.close()
     # 7 Startkarte auf dem iPad hochkant (820 × 1180, doppelte Dichte: 1640 × 2360 px), Rollen 2 × 2
     k, s = seite_neu((820, 1180))
     s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=frauenkirche/2")
