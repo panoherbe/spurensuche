@@ -410,10 +410,10 @@ export async function erstelleApp(cfg) {
     return mit(200, { abgemeldet: true, weiter: zentral }, { 'Set-Cookie': cookieKopf('', 0, cfg.sichereCookies) });
   });
 
+  // Ohne Sitzung: 200 mit rolle null (die Anmeldeseite fragt das bei jedem Aufruf; kein Fehler im Browserprotokoll)
   route('GET', '/api/v1/ich', (req) => {
     const s = sitzung(req);
-    if (!s) throw new HttpFehler(401, 'Nicht angemeldet');
-    return { rolle: s.rolle, ueberAnmeldedienst: !!s.ueber_anmeldedienst };
+    return { rolle: s?.rolle ?? null, ueberAnmeldedienst: !!s?.ueber_anmeldedienst };
   });
 
   // --- Lehrkräfte ------------------------------------------------------------------------------------------------

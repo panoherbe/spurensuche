@@ -1,0 +1,33 @@
+# Betrieb: docker compose up -d   (Einstellungen in .env, Vorlage: .env.beispiel; Beschreibung: docs/INSTALLATION.md)
+# Der Dienst ist nur auf 127.0.0.1 erreichbar; davor gehört ein Reverse Proxy mit TLS (Beispiel in docs/BETRIEB.md).
+services:
+  spurensuche:
+    build: .
+    image: spurensuche:0.1.0
+    restart: unless-stopped
+    env_file: [.env]
+    ports:
+      - "127.0.0.1:${SPUR_HOST_PORT:-8080}:8080"
+    volumes:
+      - daten:/daten
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+
+  # Tägliche verschlüsselte Sicherung der Datenbank nach /daten/sicherungen (docs/BETRIEB.md, Abschnitt Sicherung)
+  sicherung:
+    image: spurensuche:0.1.0
+    restart: unless-stopped
+    env_file: [.env]
+    volumes:
+      - daten:/daten
+    read_only: true
+    tmpfs: [/tmp]
+    security_opt: ["no-new-privileges:true"]
+    cap_drop: [ALL]
+    command: ["node", "tools/sicherung.js", "--taeglich"]
+    depends_on: [spurensuche]
+
+volumes:
+  daten:

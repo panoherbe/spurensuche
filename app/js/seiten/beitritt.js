@@ -54,6 +54,7 @@ export async function zeige({ haupt, api, konfig, navigiere, params }) {
       h('div', { class: 'knopfreihe' }, knopf('Beitreten', null, { typ: 'submit', art: 'gross', sym: 'weiter' }), h('a', { href: '#/' }, 'Zurück'))),
     h('p', { class: 'leise' }, t({ standard: 'Es werden keine Namen gespeichert. Bezugspunkt ist nur der Gruppenname.', einfach: 'Eure Namen werden nicht gespeichert.' })),
   );
-  if (api.vorfuehrung) feld.value = 'DEMO-2026';
+  if (params.get('code')) feld.value = String(params.get('code')).toUpperCase().slice(0, 9); // vom QR-Code der Lehrkraft
+  else if (api.vorfuehrung) feld.value = 'DEMO-2026';
   return 'Mit der Klasse';
 }

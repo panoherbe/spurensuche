@@ -259,7 +259,7 @@ test('Anmeldung über OpenID Connect: Rolle aus Merkmalen, Name und E-Mail nie g
   }
   const ab = await b.anfrage('/api/v1/abmeldung', { methode: 'POST', json: {} });
   assert.match(ab.daten.weiter, /\/attrappe\/abmelden\?client_id=spurensuche/);
-  assert.equal((await b.anfrage('/api/v1/ich')).status, 401);
+  assert.equal((await b.anfrage('/api/v1/ich')).daten.rolle, null);
 });
 
 test('Anmeldung: fehlende Rolle, Schlüsselwechsel beim Anbieter, Ausfall des Anbieters', async () => {

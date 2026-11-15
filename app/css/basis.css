@@ -139,6 +139,10 @@ small, .leise { color: var(--sp-text-leise); }
 [hidden] { display: none !important; }
 
 :focus-visible { outline: 3px solid var(--sp-fokus); outline-offset: 3px; border-radius: 6px; }
+/* Überschriften bekommen nach einem Seitenwechsel den Fokus für Bildschirmleser; sie sind nicht bedienbar, daher ohne Rahmen */
+h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
+.symbol { width: 1.25em; height: 1.25em; flex: none; }
+.marke .symbol { width: 1em; height: 1em; }
 .nur-vorlesbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
 .sprung { position: absolute; left: 8px; top: -60px; background: var(--sp-flaeche); color: var(--sp-text); padding: 10px 14px; z-index: 100; border-radius: var(--sp-radius-klein); border: 2px solid var(--sp-fokus); }
 .sprung:focus { top: 8px; }

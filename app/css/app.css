@@ -55,7 +55,7 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 110px; }
 .fortschritt .marke { font-size: 0.95rem; padding: 0.3em 0.8em; }
 
 /* Karte */
-.karte-rahmen { margin: 0 0 18px; }
+.karte-rahmen { margin: 0 auto 18px; max-width: 56rem; }
 .karte-flaeche { position: relative; width: 100%; aspect-ratio: 1000 / 792; border-radius: 20px; overflow: hidden; background: var(--sp-flaeche-2); border: 1px solid var(--sp-rand); }
 .karte-svg { width: 100%; height: 100%; }
 .karte-grund { fill: var(--sp-flaeche-2); }
@@ -99,7 +99,7 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 110px; }
 .ortskarte .leise { font-size: 0.9rem; }
 
 /* Ort */
-.ortsbild { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 20px; background: var(--sp-flaeche-2); border: 1px solid var(--sp-rand); margin-bottom: 14px; }
+.ortsbild { width: 100%; aspect-ratio: 16 / 9; max-height: 22rem; object-fit: cover; border-radius: 20px; background: var(--sp-flaeche-2); border: 1px solid var(--sp-rand); margin-bottom: 14px; }
 .ortstext { font-size: 1.08rem; max-width: 42rem; }
 .pruefwahl { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: 12px; margin: 14px 0; }
 .aufgabenliste { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -140,11 +140,11 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 110px; }
 .itemwahl img { width: 56px; height: 56px; object-fit: contain; }
 
 .feier { text-align: center; padding: 26px 16px; }
-.feier .symbol { width: 64px; height: 64px; margin: 0 auto 10px; color: var(--sp-akzent); }
+.feier > .symbol { width: 64px; height: 64px; margin: 0 auto 10px; color: var(--sp-akzent); }
 .neues-item { display: flex; align-items: center; gap: 14px; justify-content: center; margin: 14px 0; }
 .neues-item img { width: 96px; height: 96px; object-fit: contain; }
 
 @media (prefers-reduced-motion: no-preference) {
-  :root:not([data-bewegung="reduziert"]) .feier .symbol { animation: hupf calc(700ms / var(--sp-tempo)) ease-out 1; }
+  :root:not([data-bewegung="reduziert"]) .feier > .symbol { animation: hupf calc(700ms / var(--sp-tempo)) ease-out 1; }
 }
 @keyframes hupf { 0% { transform: scale(0.6); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
