@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "beschreibung": "Vorschau auf Option 1 (KI-Bild): Bausteine, aus denen der Prompt entsteht. Nur diese geprüften Bausteine werden verwendet; Kinder tippen keinen Freitext. Ein Bild entsteht erst mit einem angebundenen Bildmodell; bis dahin gilt die Item-Collage.",
+  "beschreibung": "Vorschau auf ein KI-Bild (Erweiterung, nicht angebunden): Bausteine, aus denen der Prompt entsteht. Nur diese geprüften Bausteine werden verwendet; Kinder tippen keinen Freitext. Ein Bild entsteht erst mit einem angebundenen Bildmodell; bis dahin gilt die Item-Collage.",
   "stil": {
     "de": "Bild im Stil einer freundlichen Kinderbuch-Illustration mit klaren Umrissen und warmen Farben",
     "en": "friendly children's book illustration, clean outlines, warm colours"

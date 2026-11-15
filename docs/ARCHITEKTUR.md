@@ -61,7 +61,7 @@ flowchart LR
 
 | Entscheidung | Grund |
 |---|---|
-| PWA statt nativer App | ein Code für iPad, Android, Windows, ChromeOS; offline über Service Worker; kein App-Store; Betrieb ohne den Auftragnehmer |
+| PWA statt nativer App | ein Code für iPad, Android, Windows, ChromeOS; offline über Service Worker; kein App-Store; Betrieb durch Dritte möglich |
 | keine Fremdbibliotheken | geringer Wartungsaufwand im Betrieb, keine Lieferkettenrisiken, keine Lizenzfragen |
 | SQLite | eine Datei, leicht zu sichern und zu übergeben; Austausch gegen PostgreSQL auf `server/db.js` und `server/app.js` begrenzt |
 | Regeln in `app/js/kern/` | Gerät, Server und Vorführung wenden dieselben Regeln an; getestet an einer Stelle |
@@ -75,7 +75,7 @@ flowchart LR
 
 - QR-Erkennung in der App nutzt die eingebaute Erkennung des Browsers (Chrome, Edge, Android, ChromeOS). Auf iPad und
   in Firefox scannt die Kamera-App den Code oder die Gruppe tippt den Code vom Schild ein.
-- Die Anmeldung ist gegen eine Attrappe getestet; die Integrationsspezifikation des schulischen Anmeldedienstes wird
-  im Auftrag eingearbeitet.
+- Die Anmeldung ist gegen eine Attrappe und gegen Keycloak geprüft; die Vorgaben eines bestimmten schulischen
+  Anmeldedienstes (Merkmale, Rollen) kommen beim Anbinden über die Konfiguration hinzu.
 - Ein Gerät je Gruppe ist der vorgesehene Fall; mehrere Geräte einer Gruppe übertragen zusammen, sehen aber jeweils
   nur den eigenen Spielstand.

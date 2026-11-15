@@ -1,7 +1,7 @@
 # Bildnachweis
 
 Alle Fotos der Orte stammen aus Wikimedia Commons und stehen unter freien Lizenzen, die eine Weitergabe unter
-CC BY-SA 4.0 erlauben. Sie wurden verkleinert, ohne Kamera-Metadaten als WebP gespeichert und sonst nicht verändert.
+CC BY-SA 4.0 erlauben. Sie wurden verkleinert, teils zugeschnitten und ohne Kamera-Metadaten als WebP gespeichert.
 Sammelstücke, Figurenteile und Ulla Uhu sind eigene Zeichnungen (CC BY-SA 4.0, Panagiotis Herbe).
 Stand der Lizenzangaben: 15.11.2026.
 

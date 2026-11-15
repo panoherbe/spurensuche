@@ -39,7 +39,7 @@ im Formulierungsentwurf.
 
 - Teamleistung: Stationen abgeschlossen, abgebrochen, in Arbeit; Aufgaben gelöst bzw. bearbeitet; vor Ort oder
   ortsunabhängig gespielt; Bildbeitrag gestaltet.
-- Problemlösung: Aufgaben im ersten Versuch gelöst; Aufgaben mit Fehlversuchen; Wechsel des Vorgehens nach einem
+- Problemlösung: Aufgaben im ersten Versuch gelöst; Aufgaben mit Fehlversuchen; ein anderes Vorgehen nach einem
   Fehlversuch (wie oft gewechselt, wie oft dasselbe noch einmal); genutzte Hilfen mit Zeitpunkt; gewählte Wege.
 - Beteiligung: Eingaben je Rollenposition; Abstimmungen (einig, mit Mehrheit).
 - Zeit und Technik: aktive Bearbeitungszeit; Phasen ohne Netz und Zeitpunkt der Übertragung.

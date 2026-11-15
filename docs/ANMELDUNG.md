@@ -6,8 +6,8 @@ Lehrkräfte bleibt ein HMAC des Pseudonyms, für Lernende nichts. Fällt der Die
 weiter. Bis zur Anbindung melden sich Lehrkräfte mit einem Zugangsschlüssel an. Getestet wird gegen eine Attrappe
 (`server/attrappe.js`), die sich wie ein echter Anbieter verhält, und gegen Keycloak 26 als unabhängigen Anbieter
 (`compose.keycloak.yaml`, Prüflauf `test/keycloak.js`: Lehrkraft, Lernende, Konto ohne Rolle, zentrale Abmeldung,
-keine Namen und E-Mails in der Datenbank). Die konkrete Integrationsspezifikation des Betreibers wird im Auftrag
-eingearbeitet.
+keine Namen und E-Mails in der Datenbank). Die Vorgaben eines bestimmten Anmeldedienstes (Merkmale, Rollen,
+Abmeldung) kommen beim Anbinden über die Konfiguration hinzu.
 
 ## Integrationsbeschreibung
 
@@ -92,4 +92,4 @@ sein SHA-256. Gesperrte Schlüssel melden sofort ab. Die Lehrkraft ist dann der 
 ## Weitere Identitätsanbieter
 
 Ein zweiter Anbieter (z. B. ein länderübergreifender Dienst) ist ein weiterer OpenID-Connect-Client derselben Art:
-`server/oidc.js` wird mit einer zweiten Konfiguration erzeugt; die Anmeldearchitektur bleibt gleich.
+`server/oidc.js` wird mit einer zweiten Konfiguration erzeugt; am Ablauf der Anmeldung ändert sich nichts.

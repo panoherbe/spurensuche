@@ -2,7 +2,8 @@
 
 Kurz: Es gibt keine Datensätze über Kinder. Bezugspunkt aller Beobachtungen ist eine Gruppe mit neutraler
 Bezeichnung („Biber“). Lehrkräfte stehen nur als Pseudonym in der Datenbank. Familien hinterlassen auf dem Server
-nichts, außer einem Bild, das sie selbst freigeben. Alles wird nach festen Fristen gelöscht. Dieses Dokument
+nichts, außer einem Bild, das sie selbst freigeben. Gruppendaten löscht der Server nach festen Fristen; Zugänge von
+Lehrkräften entfernt die Verwaltung, freigegebene Bilder bleiben ohne Bezug zur Gruppe für die Ausstellung. Dieses Dokument
 beschreibt den Stand des Codes; die Tests in `test/` prüfen die wichtigsten Zusagen.
 
 ## Grundsätze im Code

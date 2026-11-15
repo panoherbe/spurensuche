@@ -21,7 +21,7 @@ export async function zeige({ haupt, api, navigiere }) {
       'Die Kamera liest nur den QR-Code. Der Standort wird nur im Gerät geprüft und nicht gespeichert.'),
     abschnitt('Wann gelöscht wird',
       'Gruppendaten löscht der Server zwölf Wochen nach dem Ende der Quest, spätestens am Ende des Schuljahres. Die Lehrkraft kann früher löschen. Ein Bild für die Ausstellung bleibt nur, wenn es freigegeben wurde; es enthält keinen Namen.',
-      'Nach zwölf Wochen wird alles gelöscht. Die Lehrkraft kann es auch früher löschen.'),
+      'Nach zwölf Wochen werden die Daten der Gruppe gelöscht. Die Lehrkraft kann sie auch früher löschen.'),
     abschnitt('Familien und Gruppen ohne Schule',
       'Im Familienmodus verlässt nichts das Gerät. Nur ein Bild, das ihr selbst für die Ausstellung freigebt, wird übertragen, ohne euren Teamnamen.',
       'Als Familie bleibt alles auf dem Gerät. Nur euer Bild schickt ihr, wenn ihr das wollt.'),

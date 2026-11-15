@@ -436,7 +436,7 @@ def breiten_laeufe(browser_fuer, basis, aufgaben, aus, fotos):
 
 
 def konzeptbilder(browser, basis, aus):
-    """Bilder für Konzept und README: Fenster 1280 × 800 bei doppelter Pixeldichte (2560 px breit), ganze Seitenhöhe
+    """Bilder für das README: Fenster 1280 × 800 bei doppelter Pixeldichte (2560 px breit), ganze Seitenhöhe
     (sonst schneidet ein zum Fokus gescrolltes Fenster die erste Zeile ab), nach allen Animationen."""
     ziel = aus / "konzept"
     ziel.mkdir(exist_ok=True)
@@ -488,7 +488,7 @@ def konzeptbilder(browser, basis, aus):
     warte_bis(s, "document.getElementById('cl-vorschau').src.startsWith('blob:')", 20000)
     s.evaluate("() => document.querySelector('.vs-kopf').style.setProperty('display', 'none')")
     ruhig(s); s.screenshot(path=str(ziel / "5-collage-regler.png"), full_page=True); bilder.append("5-collage-regler.png"); k.close()
-    # 6 Figur: nur das Fenster (1280 × 900), der ganze Baukasten wäre fürs Konzept zu lang
+    # 6 Figur: nur das Fenster (1280 × 900), der ganze Baukasten wäre als Bild zu lang
     k, s = seite_neu((1280, 900))
     s.goto(f"{basis}/spiele/_vorschau/figur.html")
     s.wait_for_selector(".sp-figur-baukasten svg")

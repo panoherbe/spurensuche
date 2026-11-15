@@ -42,7 +42,8 @@ Nur im Umfang „vollständig“:
 data/gruppen/*.json, *.csv   Lerngruppen, Freigaben, Gruppen, Stationen, Aufgabenläufe, Rückmeldungen.
                              Es gibt keine Daten einzelner Personen; Bezugspunkt ist die Gruppenbezeichnung.
 
-Lizenzen: Inhalte und Bilder CC BY-SA 4.0, Programmcode AGPL-3.0-only (siehe data/inhaltspaket).
+Lizenzen: Texte, Aufgaben und Zeichnungen CC BY-SA 4.0; Fotos der Orte mit eigener freier Lizenz je Bild
+(Bildnachweis im Quellcode, inhalte/BILDNACHWEIS.md); Programmcode AGPL-3.0-only (siehe data/inhaltspaket).
 `;
 
 /** Erzeugt das Paket. `inhalte` ist das Ergebnis von ladeInhalte(), `einstellungen` ein flaches Objekt. */

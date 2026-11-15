@@ -19,7 +19,7 @@ export function gruppenbericht({ auswertung, entwurf, jetzt = new Date() }) {
   pdf.absatz(`Stand der Beobachtungen: ${datum(a.stand ?? jetzt.toISOString())} · Bericht erstellt am ${datum(jetzt.toISOString())}`, { groesse: 10, farbe: GRAU, abstand: 10 });
 
   pdf.rechteck(pdf.rand, pdf.y, breite, 46, { fuellung: '#dde8f3' });
-  pdf.text(pdf.rand + 10, pdf.y + 17, 'Beobachtungsgrundlage, keine Bewertung: keine Note, keine Punktzahl, keine Rangfolge.', { groesse: 10, fett: true });
+  pdf.text(pdf.rand + 10, pdf.y + 17, 'Beobachtungsgrundlage, keine Bewertung: ohne Noten, ohne Punkte, ohne Rangfolge.', { groesse: 10, fett: true });
   pdf.text(pdf.rand + 10, pdf.y + 33, 'Alle Angaben gelten für die Gruppe, nicht für einzelne Schülerinnen und Schüler.', { groesse: 10 });
   pdf.y += 62;
 

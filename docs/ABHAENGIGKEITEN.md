@@ -23,7 +23,9 @@ Geräts; ohne deutsche Stimme bleibt der Knopf verborgen.
 |---|---|---|
 | Kartengrundlage (Umriss Sachsens, Nachbarregionen, Flüsse) | Natural Earth 5.1.2 (`ne_10m_admin_1_states_provinces`, `ne_10m_rivers_lake_centerlines`, `ne_10m_rivers_europe`) | gemeinfrei |
 | Lage der Städte auf der Karte | eigene Liste (Fakten) | – |
-| Orte, Aufgaben, Sammelstücke, Bilder | eigene Werke (`inhalte/`, `assets/spiele/`; Nachweise in `inhalte/BILDNACHWEIS.md`) | CC BY-SA 4.0 |
+| Orte, Aufgaben, Sammelstücke, Figurenteile, Zeichnungen | eigene Werke (`inhalte/`, `assets/spiele/`) | CC BY-SA 4.0 |
+| Fotos der Orte (13) | Wikimedia Commons, je Bild in `inhalte/BILDNACHWEIS.md` | je Bild: FAL 1.3, CC BY-SA 4.0, CC BY-SA 3.0 DE, CC BY-SA 3.0, CC BY 3.0 oder CC0 1.0 |
+| Schrift Atkinson Hyperlegible Next (`assets/spiele/schrift/`) | The Atkinson Hyperlegible Next Project Authors | SIL OFL 1.1 (`OFL.txt`) |
 | Programmcode | eigener Code | AGPL-3.0-only |
 
 ## Nur zum Prüfen (nicht im Betrieb)

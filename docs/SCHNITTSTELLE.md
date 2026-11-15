@@ -17,8 +17,9 @@
 - Der Zweig `spiele` ändert nur diese drei Pfade. `main` übernimmt ihn regelmäßig mit `git merge --no-ff spiele`.
   Weil sich die Pfade nicht überschneiden, gibt es keine Konflikte; `main` ändert in diesen Pfaden nichts.
 - Der Zweig `spiele` darf `main` jederzeit hereinholen (`git merge main`), um die App und die Prüfwerkzeuge zu nutzen.
-- Lizenz: Code unter `AGPL-3.0-only` (Datei `LICENSE`). Inhalte in `inhalte/` und Bilder in `assets/spiele/` stehen als
-  offene Bildungsmaterialien unter **CC BY-SA 4.0** (Abschnitt 8).
+- Lizenz: Code unter `AGPL-3.0-only` (Datei `LICENSE`). Texte und Aufgaben in `inhalte/` und eigene Zeichnungen in
+  `assets/spiele/` stehen als offene Bildungsmaterialien unter **CC BY-SA 4.0**; Fotos der Orte und die Schrift haben
+  eigene freie Lizenzen (Abschnitt 8).
 
 ## 2. Ein Minigame
 
@@ -160,7 +161,7 @@ Diese Arten erzeugt nur die App, nie ein Spiel: `start`, `ende` (`abgeschlossen`
 `aktiv` (aktive Sekunden), `offline`, `online`, `sync`. Beginn, Ende und aktive Zeit misst also die App um das Spiel
 herum; das Spiel meldet nur, was in ihm passiert.
 
-Rollen sind Positionen, keine Personen: Sie tragen keine Namen. Wer gerade „Navigation“ ist, weiß nur die Gruppe.
+Eine Rolle ist eine Aufgabe in der Gruppe und keine Person; sie trägt keinen Namen. Wer gerade „Navigation“ ist, weiß nur die Gruppe.
 
 ### 2.6 Regeln für jedes Spiel
 
@@ -176,8 +177,8 @@ Rollen sind Positionen, keine Personen: Sie tragen keine Namen. Wer gerade „Na
    - Rückmeldungen („richtig“, „noch nicht“) zusätzlich in einem Element mit `role="status"`
    - Überschriften in `wurzel` beginnen bei `<h2>` (die Seite hat die `<h1>`)
    - Texte nur über `textContent`, nie über `innerHTML`
-4. **Aussehen:** Farben und Maße nur über diese CSS-Variablen der App. Die App garantiert mindestens 4,5 : 1 Kontrast
-   für Text auf Grund und Fläche, hell, dunkel und kontrastreich:
+4. **Aussehen:** Farben und Maße nur über diese CSS-Variablen der App. Die Farben der App sind auf mindestens
+   4,5 : 1 Kontrast für Text auf Grund und Fläche ausgelegt, hell, dunkel und kontrastreich:
 
    | Variable | wofür |
    |---|---|
@@ -360,8 +361,11 @@ gibt das Team selbst frei) und stellt nur freigegebene Beiträge über die Schni
 
 ## 8. Lizenzen der Inhalte
 
-- Texte, Aufgaben und Bilder in `inhalte/` und `assets/spiele/` sind eigene Werke unter **CC BY-SA 4.0**
+- Texte, Aufgaben und eigene Zeichnungen in `inhalte/` und `assets/spiele/` stehen unter **CC BY-SA 4.0**
   (<https://creativecommons.org/licenses/by-sa/4.0/legalcode.de>), Namensnennung „Panagiotis Herbe“.
+- Fotos der Orte stammen aus Wikimedia Commons und behalten ihre Lizenzen, je Bild in `inhalte/BILDNACHWEIS.md`.
+- Die Schrift Atkinson Hyperlegible Next in `assets/spiele/schrift/` steht unter der SIL Open Font License 1.1
+  (`assets/spiele/schrift/OFL.txt`).
 - Fremdes Material nur mit einer Lizenz, die CC BY-SA 4.0 erlaubt (z. B. CC0, CC BY, CC BY-SA), mit Quelle und Lizenz
   im Feld `quelle` bzw. `bildQuelle`.
 - Keine Texte, Bilder oder Logos von Einrichtungen, die einen Ort betreiben.

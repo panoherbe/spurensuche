@@ -47,7 +47,7 @@ if [ -f test/e2e/spiele.js ]; then
   docker compose -p spur-test -f compose.test.yaml down -v > /dev/null 2>&1
 fi
 
-schritt "Bilder für die Präsentation (iPad hochkant, doppelte Auflösung)"
+schritt "Bilder für das README (iPad hochkant, doppelte Auflösung)"
 AUSGABE="$ZIEL/browser" PRUEFSKRIPT=test/e2e/konzeptbilder.js timeout 900 docker compose -p spur-test -f compose.test.yaml up --build --abort-on-container-exit --exit-code-from pruefer > "$ZIEL/browser-konzeptbilder.log" 2>&1
 ergebnis $? konzeptbilder
 docker compose -p spur-test -f compose.test.yaml down -v > /dev/null 2>&1

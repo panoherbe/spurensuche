@@ -140,7 +140,7 @@ test('Löschfristen: zwölf Wochen, spätestens Ende des Schuljahres', () => {
 test('Gruppenbezeichnungen: Vorschläge ohne Hinweis, freie Namen mit Hinweis, Unzulässiges abgelehnt', () => {
   assert.equal(pruefeBezeichnung('Biber').hinweis, null);
   assert.ok(pruefeBezeichnung('Lisa').hinweis);
-  assert.equal(pruefeBezeichnung('lisa@schule.de').ok, false);
+  assert.equal(pruefeBezeichnung('lisa@schule.example').ok, false);
   assert.equal(pruefeBezeichnung('').ok, false);
   assert.ok(!freieVorschlaege(['Biber']).Tiere.includes('Biber'));
 });

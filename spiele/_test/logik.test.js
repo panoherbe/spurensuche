@@ -206,7 +206,7 @@ test('Figur: jede Option zeichnet sich, Text beschreibt sie, unbekannte Werte fa
   assert.match(figurText({ begleiter: 'dackel' }, katalog), /Begleiter: Dackel/);
 });
 
-test('Prompt-Baukasten (Vorschau Option 1): nur geprüfte Bausteine, kein Freitext', () => {
+test('Prompt-Baukasten (Vorschau KI-Bild): nur geprüfte Bausteine, kein Freitext', () => {
   const bausteine = JSON.parse(readFileSync(new URL('../../inhalte/prompt-bausteine.json', import.meta.url), 'utf8'));
   const p = bauePrompt(['kuppel', 'dampflok', '<script>'], { anordnung: 'wirbel', farbstimmung: 'nacht' }, bausteine);
   assert.deepEqual(p.items, ['kuppel', 'dampflok']);

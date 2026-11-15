@@ -1,4 +1,4 @@
-// Vorschau auf Option 1 (KI-Bild): Der Prompt entsteht nur aus geprüften Bausteinen der gewählten Sammelstücke und der
+// Vorschau auf ein KI-Bild (Erweiterung, nicht angebunden): Der Prompt entsteht nur aus geprüften Bausteinen der gewählten Sammelstücke und der
 // Regler; es gibt kein Freitextfeld. So lassen sich unangemessene Bilder schon beim Prompt vermeiden, und die Gruppe sieht
 // in einfachen Worten, was die KI malen soll. Ohne angebundenes Bildmodell bleibt es bei der Item-Collage.
 

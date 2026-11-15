@@ -51,12 +51,20 @@ export function cookieKopf(wert, maxAlterSek, sicher, name = COOKIE, sameSite = 
  */
 export function bremse(max = 20) {
   const fenster = new Map();
-  const eintrag = (schluessel) => {
+  let laufend = Math.floor(Date.now() / 60000);
+  // Mit jeder neuen Minute vergisst die Bremse alle Absender: beim nächsten Zugriff und, ohne weitere Anfragen,
+  // spätestens zehn Sekunden nach dem Minutenwechsel (der Zeitgeber hält den Prozess nicht am Leben).
+  const vergiss = () => {
     const minute = Math.floor(Date.now() / 60000);
+    if (minute !== laufend) { fenster.clear(); laufend = minute; }
+  };
+  setInterval(vergiss, 10000).unref?.();
+  const eintrag = (schluessel) => {
+    vergiss();
     let e = fenster.get(schluessel);
-    if (!e || e.minute !== minute) {
+    if (!e) {
       if (fenster.size > 10000) fenster.clear();
-      e = { minute, n: 0 };
+      e = { n: 0 };
       fenster.set(schluessel, e);
     }
     return e;

@@ -2,7 +2,7 @@
 //
 // Grundsätze, die dieser Code umsetzt:
 // - nur Gruppenebene: Eingabe ist immer eine Gruppe, nie eine Person;
-// - keine Note, keine Punktzahl, kein Prozentwert als Gesamturteil, keine Rangfolge zwischen Gruppen;
+// - ohne Noten, Punkte oder Prozentwerte als Gesamturteil und ohne Rangfolge zwischen Gruppen;
 // - Vorgehen vor Ergebnis: Versuche, Hilfen, Wechsel des Vorgehens, Lösungswege, Rollen und Abstimmungen;
 // - das Raster schlägt nur vor; die Einschätzung trifft die Lehrkraft.
 //
@@ -284,7 +284,7 @@ export function kompetenzraster(gruppe, einschaetzung = {}) {
 }
 
 /**
- * Formulierungsentwurf für eine Verbaleinschätzung auf Grundlage der Stufen. Immer als Entwurf gekennzeichnet;
+ * Formulierungsentwurf für eine schriftliche Einschätzung, abgeleitet aus den Stufen. Immer als Entwurf gekennzeichnet;
  * die Lehrkraft bearbeitet ihn vor dem Export.
  */
 export function formulierungsentwurf(raster, { gruppe, quest, datum }) {

@@ -1,4 +1,4 @@
-// Bilder für Präsentation und Angebot: iPad hochkant (820 × 1180 CSS-Pixel, doppelte Auflösung = 1640 × 2360 px),
+// Bilder für das README: iPad hochkant (820 × 1180 CSS-Pixel, doppelte Auflösung = 1640 × 2360 px),
 // aufgenommen in der Vorführung mit den echten Inhalten. Der Spielstand auf der Karte ist simuliert (eingesetzt per
 // Skript), ebenso die Gruppen der Beispielklasse. Ergebnis: AUSGABE/konzept/*.png
 import { mkdirSync, writeFileSync } from 'node:fs';

@@ -28,7 +28,7 @@ const { png, vorschau, metadaten } = await erzeugeCollage(items, { anordnung: 'k
 - Inhaltsrichtlinie: Die Sticker kommen aus `assets/spiele/items/` (gleiche Herkunft); für die Vorschau als Bild braucht
   die Seite `img-src blob:`.
 
-## Vorschau auf Option 1 (KI-Bild, nicht angebunden)
+## Vorschau: KI-Bild (Erweiterung, nicht angebunden)
 
 `prompt.js` setzt aus den gewählten Sammelstücken und den Reglern einen Prompt zusammen, nur aus geprüften Bausteinen in
 `inhalte/prompt-bausteine.json` (kein Freitextfeld; Ausschluss von Menschen, Gesichtern, Schrift, Logos). Deutsch zum Zeigen

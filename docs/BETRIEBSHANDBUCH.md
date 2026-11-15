@@ -66,8 +66,7 @@ eine von Hand.
 2. „Zurückspielen …“ klicken.
 3. Lesen: Alles, was nach diesem Stand eingegeben wurde, ist danach nicht mehr da.
 4. Das Häkchen „Verstanden“ setzen und „Zurückspielen“ klicken.
-5. Warten, bis die Seite meldet: „Der Stand vom … ist zurückgespielt“ (gemessen: wenige Sekunden; bei sehr vielen
-   Daten bis etwa eine Minute).
+5. Warten, bis die Seite meldet: „Der Stand vom … ist zurückgespielt“ (gemessen: wenige Sekunden).
 
 **Zurück:** Vor dem Zurückspielen sichert die Anwendung den jetzigen Stand. In der Liste heißt diese Sicherung
 „vor dem Zurückspielen“. Wählen Sie sie, kommt alles wieder wie vorher.

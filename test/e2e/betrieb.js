@@ -208,7 +208,7 @@ await schritt('Letzte Version zurückspielen: ohne Betriebsdienst gesperrt, mit 
   await axe(s, 'b-ende');
 });
 
-await schritt('Bild für die Präsentation: Betriebsseite auf dem iPad hochkant (doppelte Auflösung)', async () => {
+await schritt('Bild für das README: Betriebsseite auf dem iPad hochkant (doppelte Auflösung)', async () => {
   // Betriebsdienst wie im Betrieb: Version der Prüfung installiert, die vorige verfügbar (Knopf frei)
   await agent({ version: '0.1.1-pruefung', vorher: '0.1.0', gesund: 'healthy' });
   const k = await seite({ breite: 820, hoehe: 1180, mobil: true });
