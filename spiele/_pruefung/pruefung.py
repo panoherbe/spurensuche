@@ -25,6 +25,7 @@ GERAETE = {
     "tablet": {"viewport": {"width": 800, "height": 1280}, "has_touch": True},
     "telefon": {"viewport": {"width": 390, "height": 844}, "is_mobile": True, "has_touch": True},
     "ipad": {"viewport": {"width": 820, "height": 1180}, "has_touch": True},  # iPad hochkant (Air, 10. Generation)
+    "klein": {"viewport": {"width": 320, "height": 640}, "is_mobile": True, "has_touch": True},  # kleinstes Telefon
 }
 EINSTELLUNGEN = {
     "standard": {},
@@ -572,7 +573,7 @@ def main():
         plan += [("chromium", aufgabe, "desktop", "standard"), ("chromium", aufgabe, "telefon", "standard")]
         if a.umfang == "voll" and fmt not in formate_gesehen:
             formate_gesehen.add(fmt)
-            plan += [("chromium", aufgabe, "tablet", "standard")]
+            plan += [("chromium", aufgabe, "tablet", "standard"), ("chromium", aufgabe, "klein", "standard")]
             plan += [("chromium", aufgabe, "desktop", e) for e in ("einfach", "kontrast", "dunkel", "ruhig-langsam")]
             plan += [("chromium", aufgabe, "telefon", e) for e in ("einfach", "kontrast")]
             plan += [("firefox", aufgabe, "desktop", "standard"), ("webkit", aufgabe, "ipad", "standard")]

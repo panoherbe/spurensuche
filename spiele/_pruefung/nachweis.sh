@@ -13,9 +13,15 @@ cp "$AUS/messwerte.json" "$AUS/tests.tap" "$AUS/node.txt" "$AUS/groessen.json" "
 cp "$AUS"/konzept/*.png "$NACHWEIS/konzept/" 2>/dev/null || true
 docker run --rm --network none --user "$IDS" -e HOME=/tmp -v "$REPO":/repo:ro -v "$NACHWEIS":/n spurensuche-pruefung:1.56.0 \
   python3 /repo/spiele/_pruefung/protokoll.py /n
-# Bilder: je Format die Zustände auf Desktop (Standard) und Telefon, dazu kontrastreich und dunkel; als WebP
+# Bilder ins Repo nur als Auswahl (alle liegen weiter im Ausgabeordner des Messlaufs): je Format die erste Aufgabe mit
+# Start, Spiel und Abschluss auf dem Desktop, das Spiel auf Telefon, kontrastreich, dunkel und in einfacher Sprache; dazu
+# Figur, Collage und die Startkarte im Breiten-Durchlauf bei 820 px (iPad hochkant). Als WebP.
 docker run --rm --network none --user "$IDS" -e HOME=/tmp -v "$AUS":/a:ro -v "$NACHWEIS":/n spurensuche-bilder:1 sh -c '
-  for f in /a/bilder/chromium-desktop-standard-*.png /a/bilder/chromium-telefon-standard-*.png /a/bilder/chromium-desktop-kontrast-*.png /a/bilder/chromium-desktop-dunkel-*.png /a/bilder/chromium-desktop-einfach-*.png /a/bilder/figur-*.png /a/bilder/collage-*.png; do
+  for b in bastei-1 bastei-2 bastei-3 frauenkirche-1 frauenkirche-2; do
+    set -- "$@" /a/bilder/chromium-desktop-standard-$b-start.png /a/bilder/chromium-desktop-standard-$b-spiel.png /a/bilder/chromium-desktop-standard-$b-abschluss.png \
+      /a/bilder/chromium-telefon-standard-$b-spiel.png /a/bilder/chromium-desktop-kontrast-$b-spiel.png /a/bilder/chromium-desktop-dunkel-$b-spiel.png /a/bilder/chromium-desktop-einfach-$b-spiel.png
+  done
+  for f in "$@" /a/bilder/figur-*.png /a/bilder/collage-1-*.png /a/bilder/breite-820-*.png; do
     [ -f "$f" ] || continue
     magick "$f" -strip -resize "1280x>" -quality 78 "/n/bilder/$(basename "$f" .png).webp"
   done
