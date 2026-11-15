@@ -1,0 +1,39 @@
+/* Bildpuzzle – nur Variablen aus basis.css (--spi-…), die aus den Variablen der App kommen. */
+
+.sp-puzzle-feld { display: grid; gap: calc(var(--spi-a) * 2.5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .sp-puzzle-feld { grid-template-columns: minmax(0, 1fr) minmax(220px, 280px); align-items: start; } }
+.sp-puzzle-spalte { display: grid; gap: var(--spi-a); }
+.sp-puzzle {
+  --sp-spalten: 3;
+  display: grid; grid-template-columns: repeat(var(--sp-spalten), minmax(0, 1fr)); gap: 4px;
+  width: min(100%, 720px); margin: 0 auto; padding: 4px; border-radius: calc(var(--spi-radius) * 0.9);
+  background: var(--spi-text); touch-action: none; user-select: none; -webkit-user-select: none;
+}
+.sp-puzzle--fertig { gap: 0; padding: 0; background: transparent; transition: gap calc(420ms / var(--sp-tempo, 1)) ease, padding calc(420ms / var(--sp-tempo, 1)) ease; overflow: hidden; }
+.sp-kachel {
+  position: relative; display: block; width: 100%; padding: 0; margin: 0; border: 0; border-radius: 6px;
+  aspect-ratio: var(--sp-kachel-seiten, 1); background-repeat: no-repeat; background-color: var(--spi-flaeche-2);
+  cursor: grab; transition: transform var(--spi-dauer) ease, box-shadow var(--spi-dauer) ease, filter var(--spi-dauer) ease;
+}
+.sp-kachel:hover { filter: brightness(1.06); }
+.sp-puzzle--fertig .sp-kachel { border-radius: 0; cursor: default; filter: none; }
+.sp-kachel--gewaehlt { transform: scale(0.92); box-shadow: 0 0 0 4px var(--spi-flaeche), 0 0 0 8px var(--spi-hinweis); z-index: 2; }
+.sp-kachel--ziel { box-shadow: inset 0 0 0 5px var(--spi-hinweis); }
+.sp-kachel--zieht { opacity: 0.35; }
+.sp-kachel:focus-visible { outline: 4px solid var(--spi-flaeche); outline-offset: -4px; box-shadow: 0 0 0 4px var(--spi-fokus); z-index: 3; }
+.sp-kachel-haken {
+  position: absolute; right: 6px; bottom: 6px; width: 32px; height: 32px; padding: 5px; border-radius: 50%;
+  background: var(--spi-erfolg); color: var(--spi-akzent-text); box-shadow: 0 0 0 2px var(--spi-flaeche);
+  animation: sp-auftauchen var(--spi-dauer) ease both;
+}
+.sp-puzzle-seite { display: grid; gap: calc(var(--spi-a) * 1.5); align-content: start; }
+.sp-vorlage { margin: 0; display: grid; gap: calc(var(--spi-a) * 0.75); padding: calc(var(--spi-a) * 1.25); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie); animation: sp-einblenden var(--spi-dauer) ease both; }
+.sp-vorlage[hidden] { display: none; }
+.sp-vorlage img { border-radius: 8px; width: 100%; }
+.sp-vorlage figcaption, .sp-bildnachweis { font-size: 0.82em; color: var(--spi-leise); }
+.sp-bildnachweis { text-align: center; }
+.sp-hilfetext { color: var(--spi-leise); font-size: 0.95em; }
+.sp-schwebend {
+  position: fixed; z-index: 1000; pointer-events: none; border-radius: 8px; box-shadow: var(--spi-schatten-hoch);
+  background-repeat: no-repeat; transform: scale(1.06) rotate(-2deg);
+}

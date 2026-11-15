@@ -1,0 +1,202 @@
+/* Spurensuche – gemeinsames Aussehen der Minispiele (Schnittstelle 2.6).
+   Farben, Ecken und Abstände kommen nur aus den Variablen der App (--sp-grund, --sp-flaeche, --sp-text, …);
+   die Rückfallwerte gelten nur, wenn ein Spiel ohne die App läuft. Helle, dunkle und kontrastreiche Darstellung
+   kommen damit von der App. Abgeleitete Töne entstehen mit color-mix aus diesen Variablen.
+   Bewegung: Dauer = Grunddauer / --sp-tempo; bei reduzierter Bewegung keine Animation. */
+
+.sp-spiel {
+  --spi-grund: var(--sp-grund, #f6f1e7);
+  --spi-flaeche: var(--sp-flaeche, #ffffff);
+  --spi-text: var(--sp-text, #1f2a30);
+  --spi-leise: var(--sp-text-leise, #45545d);
+  --spi-rand: var(--sp-rand, #857865);
+  --spi-akzent: var(--sp-akzent, #1e7a4c);
+  --spi-akzent-text: var(--sp-akzent-text, #ffffff);
+  --spi-erfolg: var(--sp-erfolg, #1e7a4c);
+  --spi-hinweis: var(--sp-hinweis, #8a5a00);
+  --spi-fehler: var(--sp-fehler, #b3261e);
+  --spi-fokus: var(--sp-fokus, #0b57d0);
+  --spi-radius: var(--sp-radius, 16px);
+  --spi-a: var(--sp-abstand, 8px);
+
+  --spi-flaeche-2: color-mix(in srgb, var(--spi-text) 4%, var(--spi-flaeche));
+  --spi-linie: color-mix(in srgb, var(--spi-rand) 45%, var(--spi-flaeche));
+  --spi-akzent-hell: color-mix(in srgb, var(--spi-akzent) 11%, var(--spi-flaeche));
+  --spi-erfolg-hell: color-mix(in srgb, var(--spi-erfolg) 13%, var(--spi-flaeche));
+  --spi-hinweis-hell: color-mix(in srgb, var(--spi-hinweis) 12%, var(--spi-flaeche));
+  --spi-schatten: 0 1px 2px rgb(0 0 0 / 0.06), 0 8px 24px rgb(0 0 0 / 0.08);
+  --spi-schatten-hoch: 0 2px 4px rgb(0 0 0 / 0.1), 0 14px 34px rgb(0 0 0 / 0.18);
+  --spi-dauer: calc(220ms / var(--sp-tempo, 1));
+
+  box-sizing: border-box;
+  max-width: 1040px;
+  margin: 0 auto;
+  color: var(--spi-text);
+  font-family: var(--sp-schrift, inherit);
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+.sp-spiel *, .sp-spiel *::before, .sp-spiel *::after { box-sizing: inherit; }
+.sp-spiel img { max-width: 100%; height: auto; }
+.sp-spiel p { margin: 0; }
+.sp-spiel h2, .sp-spiel h3 { margin: 0; line-height: 1.2; font-weight: 750; }
+.sp-spiel ul, .sp-spiel ol { margin: 0; }
+
+.sp-unsichtbar {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Symbole */
+.sp-symbol { display: inline-flex; flex: none; width: 1.25em; height: 1.25em; }
+.sp-symbol svg { width: 100%; height: 100%; }
+.sp-ulla { display: block; }
+.sp-ulla svg { display: block; width: 100%; height: auto; }
+
+/* Überschriften und Texte */
+.sp-ueberzeile {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 0.4em;
+  color: var(--spi-leise); font-weight: 700; font-size: 0.85em; letter-spacing: 0.03em; text-transform: uppercase;
+}
+.sp-ueberzeile .sp-symbol { width: 1.15em; height: 1.15em; color: var(--spi-akzent); }
+.sp-titel { font-size: clamp(1.4em, 2vw + 0.9em, 1.9em); letter-spacing: -0.01em; margin: 0.15em 0 0.25em; }
+.sp-titel--gross { font-size: clamp(1.6em, 3vw + 1em, 2.3em); }
+.sp-aufgabe-titel {
+  display: flex; align-items: center; gap: 0.45em;
+  font-size: 0.9em; font-weight: 750; letter-spacing: 0.03em; text-transform: uppercase; color: var(--spi-leise);
+}
+.sp-aufgabe-titel .sp-symbol { color: var(--spi-akzent); width: 1.3em; height: 1.3em; }
+/* Überschriften bekommen den Fokus nur, damit Bildschirmleser den neuen Abschnitt ansagen; sie sind nicht bedienbar. */
+.sp-spiel [tabindex='-1']:focus, .sp-spiel [tabindex='-1']:focus-visible { outline: none; }
+.sp-zwischentitel { font-size: 1em; font-weight: 750; margin-bottom: calc(var(--spi-a) * 0.75); }
+.sp-auftrag-text { font-size: 1.15em; font-weight: 600; max-width: 44em; line-height: 1.45; }
+.sp-einfach .sp-auftrag-text { font-size: 1.2em; }
+
+/* Karten */
+.sp-start, .sp-flaeche, .sp-abschluss {
+  background: var(--spi-flaeche); border-radius: var(--spi-radius); box-shadow: var(--spi-schatten);
+  border: 1px solid var(--spi-linie); padding: clamp(16px, 3vw, 32px);
+}
+.sp-flaeche { display: grid; gap: calc(var(--spi-a) * 2.5); }
+.sp-buehne { min-width: 0; }
+
+/* Startkarte */
+.sp-start { display: grid; gap: calc(var(--spi-a) * 3); }
+.sp-start-kopf { display: grid; gap: calc(var(--spi-a) * 3); grid-template-columns: minmax(0, 1fr); align-items: center; }
+@media (min-width: 760px) { .sp-start-kopf:has(.sp-start-bild) { grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); } }
+.sp-start-ulla { width: min(220px, 60%); justify-self: center; }
+.sp-start-bild { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: calc(var(--spi-radius) * 0.75); box-shadow: var(--spi-schatten); background: var(--spi-flaeche-2); }
+.sp-start-text { display: grid; gap: calc(var(--spi-a) * 1.25); justify-items: start; }
+.sp-start-unten { display: grid; gap: calc(var(--spi-a) * 3); }
+@media (min-width: 760px) { .sp-start-unten:has(.sp-gewinnvorschau):has(.sp-rollen) { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); } }
+.sp-rollenliste { list-style: none; padding: 0; display: grid; gap: var(--spi-a); grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+.sp-rolle {
+  display: grid; grid-template-columns: auto 1fr; column-gap: calc(var(--spi-a) * 1.25); align-items: start; align-content: start;
+  padding: calc(var(--spi-a) * 1.5); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie);
+}
+.sp-rolle-symbol { grid-row: span 2; width: 2.1em; height: 2.1em; padding: 0.38em; border-radius: 50%; background: var(--spi-akzent-hell); color: var(--spi-akzent); }
+.sp-rolle-name { font-weight: 750; }
+.sp-rolle-aufgabe { color: var(--spi-leise); font-size: 0.9em; line-height: 1.35; }
+.sp-gewinnvorschau { align-self: start; padding: calc(var(--spi-a) * 1.75); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-hinweis-hell); border: 2px dashed var(--spi-hinweis); }
+.sp-gewinnliste { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 2); justify-content: center; }
+
+/* Sammelstücke als Sticker */
+.sp-item { margin: 0; display: grid; justify-items: center; gap: calc(var(--spi-a) * 0.75); text-align: center; font-weight: 700; font-size: 0.92em; }
+.sp-item img { width: 96px; height: 96px; filter: drop-shadow(0 4px 6px rgb(0 0 0 / 0.18)); }
+.sp-item--klein img { width: 80px; height: 80px; }
+.sp-item--gross img { width: clamp(120px, 22vw, 170px); height: clamp(120px, 22vw, 170px); }
+.sp-gewinn .sp-item--gross img { animation: sp-auftauchen calc(560ms / var(--sp-tempo, 1)) cubic-bezier(.2, 1.4, .4, 1) both; }
+
+/* Kopf im Spiel */
+.sp-kopf { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 1.5) calc(var(--spi-a) * 2.5); align-items: flex-end; justify-content: space-between; }
+.sp-kopf-text { flex: 1 1 26em; display: grid; gap: calc(var(--spi-a) * 0.75); }
+
+/* Knöpfe: mindestens 48 × 48 px, immer mit Wort */
+.sp-knopf {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
+  min-height: 48px; min-width: 48px; padding: 0.55em 1.05em;
+  border-radius: 999px; border: 2px solid var(--spi-rand); background: var(--spi-flaeche); color: var(--spi-text);
+  font: inherit; font-weight: 700; line-height: 1.15; cursor: pointer; text-align: center;
+  transition: transform var(--spi-dauer) ease, background-color var(--spi-dauer) ease;
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+}
+.sp-knopf:hover { background: var(--spi-flaeche-2); }
+.sp-knopf:active { transform: translateY(1px) scale(0.98); }
+.sp-spiel :focus-visible { outline: 3px solid var(--spi-fokus); outline-offset: 3px; }
+.sp-knopf--haupt { background: var(--spi-akzent); border-color: var(--spi-akzent); color: var(--spi-akzent-text); box-shadow: 0 3px 0 color-mix(in srgb, var(--spi-akzent) 60%, #000); }
+.sp-knopf--haupt:hover { background: color-mix(in srgb, var(--spi-akzent) 86%, #000); }
+.sp-knopf--leise { border-color: transparent; background: var(--spi-akzent-hell); color: var(--spi-text); }
+.sp-knopf--leise .sp-symbol { color: var(--spi-akzent); }
+.sp-knopf--leise:hover { background: color-mix(in srgb, var(--spi-akzent) 18%, var(--spi-flaeche)); }
+.sp-knopf--tipp { background: var(--spi-hinweis-hell); border-color: var(--spi-hinweis); color: var(--spi-text); }
+.sp-knopf--tipp .sp-symbol { color: var(--spi-hinweis); }
+.sp-knopf--tipp:hover { background: color-mix(in srgb, var(--spi-hinweis) 20%, var(--spi-flaeche)); }
+.sp-knopf--gross { min-height: 56px; padding: 0.7em 1.6em; font-size: 1.1em; }
+.sp-knopf--klein { min-height: 44px; padding: 0.4em 0.85em; font-size: 0.92em; }
+.sp-knopf--aus, .sp-knopf[aria-disabled='true'] { opacity: 0.55; cursor: not-allowed; box-shadow: none; }
+.sp-zaehler { display: inline-block; min-width: 2.4em; padding: 0.05em 0.45em; border-radius: 999px; background: color-mix(in srgb, var(--spi-text) 10%, transparent); font-size: 0.85em; }
+
+.sp-aktionen { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 1.5); justify-content: flex-end; align-items: center; }
+.sp-aktionen--mitte { justify-content: center; }
+.sp-werkzeuge { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 1.25); align-items: center; }
+.sp-fuss { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 1.5); justify-content: space-between; align-items: center; border-top: 1px solid var(--spi-linie); padding-top: calc(var(--spi-a) * 2); }
+
+/* Rückmeldung: immer mit Wort und Symbol, nie nur Farbe */
+.sp-ansage { display: flex; gap: 0.55em; align-items: flex-start; font-weight: 650; border-radius: calc(var(--spi-radius) * 0.75); }
+.sp-ansage:empty { display: none; }
+.sp-ansage--gut, .sp-ansage--hinweis, .sp-ansage--fehler, .sp-ansage--neutral { padding: calc(var(--spi-a) * 1.5) calc(var(--spi-a) * 2); border: 2px solid; animation: sp-einblenden var(--spi-dauer) ease both; }
+.sp-ansage--gut { background: var(--spi-erfolg-hell); border-color: var(--spi-erfolg); }
+.sp-ansage--gut .sp-symbol { color: var(--spi-erfolg); }
+.sp-ansage--hinweis { background: var(--spi-hinweis-hell); border-color: var(--spi-hinweis); }
+.sp-ansage--hinweis .sp-symbol { color: var(--spi-hinweis); }
+.sp-ansage--fehler { background: color-mix(in srgb, var(--spi-fehler) 10%, var(--spi-flaeche)); border-color: var(--spi-fehler); }
+.sp-ansage--neutral { background: var(--spi-akzent-hell); border-color: var(--spi-akzent); }
+.sp-ansage .sp-symbol { margin-top: 0.12em; }
+
+/* Tipps */
+.sp-tippbox {
+  display: grid; grid-template-columns: auto 1fr; gap: calc(var(--spi-a) * 1.75); align-items: center;
+  padding: calc(var(--spi-a) * 1.75) calc(var(--spi-a) * 2.25); border-radius: calc(var(--spi-radius) * 0.75);
+  background: var(--spi-hinweis-hell); border: 2px solid var(--spi-hinweis); animation: sp-einblenden var(--spi-dauer) ease both;
+}
+.sp-tippbox[hidden] { display: none; }
+.sp-tipp-ulla { width: 64px; }
+.sp-tipp-inhalt { display: grid; gap: calc(var(--spi-a) * 0.75); justify-items: start; }
+.sp-tipp-titel { font-weight: 750; font-size: 0.9em; color: var(--spi-leise); }
+
+/* Schritte */
+.sp-schritte { list-style: none; display: flex; flex-wrap: wrap; gap: var(--spi-a); padding: 0; font-size: 0.9em; }
+.sp-schritt { display: inline-flex; align-items: center; gap: 0.45em; padding: 0.3em 0.8em 0.3em 0.35em; border-radius: 999px; background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie); color: var(--spi-leise); }
+.sp-schritt-nr { display: inline-grid; place-items: center; width: 1.7em; height: 1.7em; border-radius: 50%; background: var(--spi-linie); color: var(--spi-text); font-weight: 750; font-size: 0.9em; }
+.sp-schritt--jetzt { color: var(--spi-text); font-weight: 750; border-color: var(--spi-akzent); background: var(--spi-akzent-hell); }
+.sp-schritt--jetzt .sp-schritt-nr { background: var(--spi-akzent); color: var(--spi-akzent-text); }
+.sp-schritt--fertig .sp-schritt-nr { background: var(--spi-erfolg); color: var(--spi-akzent-text); }
+
+/* Abschluss */
+.sp-abschluss { display: grid; gap: calc(var(--spi-a) * 3); justify-items: center; text-align: center; }
+.sp-abschluss-kopf { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 2) calc(var(--spi-a) * 3.5); align-items: center; justify-content: center; }
+.sp-abschluss-ulla { width: clamp(110px, 18vw, 160px); }
+.sp-sterne { display: flex; gap: calc(var(--spi-a) * 0.75); justify-content: center; }
+.sp-stern { width: 2.6em; height: 2.6em; color: var(--spi-rand); }
+.sp-stern--an { filter: drop-shadow(0 2px 0 rgb(0 0 0 / 0.2)); }
+.sp-stern--an:nth-child(1) { animation: sp-stern calc(480ms / var(--sp-tempo, 1)) calc(120ms / var(--sp-tempo, 1)) cubic-bezier(.2, 1.6, .4, 1) both; }
+.sp-stern--an:nth-child(2) { animation: sp-stern calc(480ms / var(--sp-tempo, 1)) calc(300ms / var(--sp-tempo, 1)) cubic-bezier(.2, 1.6, .4, 1) both; }
+.sp-stern--an:nth-child(3) { animation: sp-stern calc(480ms / var(--sp-tempo, 1)) calc(480ms / var(--sp-tempo, 1)) cubic-bezier(.2, 1.6, .4, 1) both; }
+.sp-gewinn { display: grid; justify-items: center; }
+.sp-wusstet { max-width: 40em; display: grid; gap: var(--spi-a); justify-items: center; padding: calc(var(--spi-a) * 2) calc(var(--spi-a) * 2.5); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-akzent-hell); border: 1px solid var(--spi-linie); }
+
+/* Kontrastreich: kräftigere Ränder (Farben setzt die App) */
+.sp-kontrast .sp-start, .sp-kontrast .sp-flaeche, .sp-kontrast .sp-abschluss, .sp-kontrast .sp-rolle,
+.sp-kontrast .sp-tippbox, .sp-kontrast .sp-wusstet, .sp-kontrast .sp-knopf { border-width: 3px; border-color: var(--spi-text); }
+.sp-kontrast .sp-knopf--haupt { border-color: var(--spi-akzent); }
+
+/* Bewegung */
+@keyframes sp-einblenden { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes sp-auftauchen { from { opacity: 0; transform: scale(0.6) rotate(-8deg); } to { opacity: 1; transform: none; } }
+@keyframes sp-stern { from { opacity: 0; transform: scale(0.3) rotate(-30deg); } to { opacity: 1; transform: none; } }
+@keyframes sp-wackeln { 0%, 100% { transform: none; } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+@keyframes sp-puls { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--spi-hinweis) 80%, transparent); } 100% { box-shadow: 0 0 0 18px transparent; } }
+.sp-ruhig *, .sp-ruhig *::before, .sp-ruhig *::after { animation: none !important; transition: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .sp-spiel *, .sp-spiel *::before, .sp-spiel *::after { animation: none !important; transition: none !important; }
+}
