@@ -24,9 +24,9 @@
   --sp-karte-rand: #8aa384;
   --sp-karte-kreis: #c8d8c3;
   --sp-karte-wasser: #78a9cf;
-  --sp-schatten: 0 1px 2px rgb(30 35 30 / 0.08), 0 4px 16px rgb(30 35 30 / 0.07);
-  --sp-radius: 14px;
-  --sp-radius-klein: 10px;
+  --sp-schatten: none;
+  --sp-radius: 6px;
+  --sp-radius-klein: 4px;
   --sp-abstand: 16px;
   --sp-schrift: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Helvetica Neue", Arial, sans-serif;
   --sp-schriftgroesse: 18px;
@@ -58,7 +58,7 @@
     --sp-karte-rand: #6f8f7a;
     --sp-karte-kreis: #34453c;
     --sp-karte-wasser: #4f7fa6;
-    --sp-schatten: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
+    --sp-schatten: none;
   }
 }
 
@@ -85,7 +85,7 @@
   --sp-karte-rand: #6f8f7a;
   --sp-karte-kreis: #34453c;
   --sp-karte-wasser: #4f7fa6;
-  --sp-schatten: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 16px rgb(0 0 0 / 0.3);
+  --sp-schatten: none;
 }
 
 /* Hoher Kontrast: Schwarz auf Weiß (bzw. Weiß auf Schwarz bei dunkler Darstellung), keine Zwischentöne */
@@ -152,7 +152,7 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
   display: inline-flex; align-items: center; justify-content: center; gap: 0.5em;
   min-height: 48px; min-width: 48px; padding: 0.6em 1.2em;
   font: inherit; font-weight: 600; line-height: 1.2; text-decoration: none; text-align: center;
-  border: 2px solid var(--sp-akzent); border-radius: 999px;
+  border: 2px solid var(--sp-akzent); border-radius: var(--sp-radius-klein);
   background: var(--sp-akzent); color: var(--sp-akzent-text); cursor: pointer;
   transition: transform calc(var(--sp-dauer) / var(--sp-tempo)) ease, background-color calc(var(--sp-dauer) / var(--sp-tempo));
 }
@@ -175,10 +175,10 @@ h1[tabindex="-1"]:focus, h2[tabindex="-1"]:focus { outline: none; }
   padding: var(--sp-abstand); box-shadow: var(--sp-schatten);
 }
 .karte + .karte { margin-top: 14px; }
-.hinweisfeld { border-radius: var(--sp-radius-klein); padding: 12px 14px; background: var(--sp-hinweis-weich); color: var(--sp-text); border-left: 5px solid var(--sp-hinweis); }
-.hinweisfeld.gut { background: var(--sp-akzent-weich); border-left-color: var(--sp-erfolg); }
-.hinweisfeld.fehler { background: var(--sp-fehler-weich); border-left-color: var(--sp-fehler); }
-.marke { display: inline-flex; align-items: center; gap: 0.35em; font-size: 0.85rem; font-weight: 600; padding: 0.15em 0.6em; border-radius: 999px; background: var(--sp-flaeche-2); color: var(--sp-text); border: 1px solid var(--sp-rand); }
+.hinweisfeld { border-radius: var(--sp-radius-klein); padding: 12px 14px; background: var(--sp-hinweis-weich); color: var(--sp-text); border: 1px solid var(--sp-hinweis); }
+.hinweisfeld.gut { background: var(--sp-akzent-weich); border-color: var(--sp-erfolg); }
+.hinweisfeld.fehler { background: var(--sp-fehler-weich); border-color: var(--sp-fehler); }
+.marke { display: inline-flex; align-items: center; gap: 0.35em; font-size: 0.85rem; font-weight: 600; padding: 0.15em 0.6em; border-radius: 3px; background: var(--sp-flaeche-2); color: var(--sp-text); border: 1px solid var(--sp-rand); }
 .marke.gut { background: var(--sp-akzent-weich); border-color: var(--sp-erfolg); }
 .marke.warten { background: var(--sp-hinweis-weich); border-color: var(--sp-hinweis); }
 
@@ -199,7 +199,7 @@ legend { font-weight: 700; padding: 0 0.3em; }
 .wahl input { position: absolute; opacity: 0; width: 1px; height: 1px; }
 .wahl label {
   display: inline-flex; align-items: center; min-height: 48px; padding: 0.5em 1em; margin: 0; font-weight: 600;
-  border: 2px solid var(--sp-rand); border-radius: 999px; background: var(--sp-flaeche); cursor: pointer;
+  border: 2px solid var(--sp-rand); border-radius: var(--sp-radius-klein); background: var(--sp-flaeche); cursor: pointer;
 }
 .wahl input:checked + label { background: var(--sp-akzent); color: var(--sp-akzent-text); border-color: var(--sp-akzent); }
 .wahl input:focus-visible + label { outline: 3px solid var(--sp-fokus); outline-offset: 3px; }
@@ -209,8 +209,8 @@ input[type="range"] { width: 100%; min-height: 48px; accent-color: var(--sp-akze
 
 /* Dialoge */
 dialog {
-  border: none; border-radius: 20px; padding: 0; max-width: min(36rem, calc(100vw - 24px)); width: 100%;
-  background: var(--sp-flaeche); color: var(--sp-text); box-shadow: 0 10px 40px rgb(0 0 0 / 0.35);
+  border: 1px solid color-mix(in srgb, var(--sp-text) 30%, var(--sp-flaeche)); border-radius: var(--sp-radius); padding: 0; max-width: min(36rem, calc(100vw - 24px)); width: 100%;
+  background: var(--sp-flaeche); color: var(--sp-text);
 }
 dialog::backdrop { background: rgb(10 16 13 / 0.55); }
 dialog .kopf { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 16px 18px 0; }
@@ -220,7 +220,7 @@ dialog h2 { margin: 0; }
 /* Meldungen */
 .meldung {
   position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 50; max-width: calc(100vw - 24px);
-  background: var(--sp-text); color: var(--sp-grund); padding: 12px 18px; border-radius: 999px; font-weight: 600;
+  background: var(--sp-text); color: var(--sp-grund); padding: 12px 18px; border-radius: var(--sp-radius-klein); font-weight: 600;
   box-shadow: var(--sp-schatten);
 }
 

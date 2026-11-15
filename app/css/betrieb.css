@@ -12,18 +12,18 @@
 .ampel.stoerung .symbol { color: var(--sp-fehler); }
 
 .punkte { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
-.punkte > li { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-left: 6px solid var(--sp-rand); border-radius: var(--sp-radius-klein); padding: 12px 14px; }
-.punkte > li.gut { border-left-color: var(--sp-erfolg); }
-.punkte > li.info { border-left-color: var(--sp-zweit); }
-.punkte > li.achtung { border-left-color: var(--sp-hinweis); }
-.punkte > li.stoerung { border-left-color: var(--sp-fehler); }
+.punkte > li { background: var(--sp-flaeche); border: 1px solid var(--sp-rand); border-radius: var(--sp-radius-klein); padding: 12px 14px; }
+.punkte > li.gut { border-color: var(--sp-erfolg); }
+.punkte > li.info { border-color: var(--sp-zweit); }
+.punkte > li.achtung { border-color: var(--sp-hinweis); }
+.punkte > li.stoerung { border-color: var(--sp-fehler); }
 .punkt-kopf { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: baseline; }
 .punkt-kopf strong { font-size: 1.05rem; }
 .punkt-wert { color: var(--sp-text-leise); }
 .punkte p { margin: 6px 0 0; }
 .punkte .tun { font-weight: 600; }
 
-.stufe { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 700; padding: 1px 8px 1px 4px; border-radius: 999px; border: 1px solid currentColor; }
+.stufe { display: inline-flex; align-items: center; gap: 4px; font-size: 0.85rem; font-weight: 700; padding: 1px 8px 1px 4px; border-radius: 3px; border: 1px solid currentColor; }
 .stufe .symbol { width: 1rem; height: 1rem; }
 .stufe.gut { color: var(--sp-erfolg); }
 .stufe.info { color: var(--sp-zweit); }
