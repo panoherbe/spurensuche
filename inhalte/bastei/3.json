@@ -1,0 +1,76 @@
+{
+  "format": "dilemma",
+  "titel": "Eine Bahn auf die Bastei?",
+  "text": {
+    "standard": "Um 1880 gab es einen Plan für eine Seilbahn von der Elbe hinauf zur Bastei. Hört, was die Leute sagen, stimmt ab und begründet eure Entscheidung.",
+    "einfach": "Früher wollten Menschen eine Bahn auf die Bastei bauen. Ihr entscheidet: Soll die Bahn kommen? Und warum?"
+  },
+  "dauerMinuten": 9,
+  "belohnung": ["wanderschuh"],
+  "stufe": "beurteilen",
+  "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
+  "bild": {
+    "datei": "assets/spiele/orte/bastei/bruecke-morgen.webp",
+    "breite": 1600,
+    "hoehe": 1037,
+    "alt": {
+      "standard": "Die Basteibrücke am Morgen: Steinbögen zwischen hohen Sandsteinfelsen und Wald, im Hintergrund Nebel über dem Elbtal.",
+      "einfach": "Eine Brücke aus Stein zwischen hohen Felsen. Hinten ist Nebel."
+    },
+    "quelle": "Foto: Thomas Wolf, www.foto-tw.de, CC BY-SA 3.0 DE, Wikimedia Commons (verkleinert)"
+  },
+  "situation": {
+    "standard": "Um 1880 kommen schon viele Ausflügler zur Bastei. Der Weg von der Elbe hinauf ist steil und anstrengend. Nun gibt es einen Plan: Eine Bahn soll die Gäste an einem Drahtseil durch eine Schlucht von der Elbe bis zur Bastei ziehen.",
+    "einfach": "Viele Menschen besuchen die Bastei. Der Weg nach oben ist steil. Jemand plant eine Bahn. Ein Seil soll die Bahn durch eine Schlucht nach oben ziehen."
+  },
+  "frage": {
+    "standard": "Soll die Bahn zur Bastei gebaut werden?",
+    "einfach": "Soll die Bahn kommen?"
+  },
+  "optionen": [
+    {
+      "id": "bahn-bauen",
+      "titel": { "standard": "Ja, baut die Bahn", "einfach": "Ja, baut die Bahn" },
+      "text": { "standard": "Mehr Menschen können die Aussicht erleben, auch wer nicht gut laufen kann.", "einfach": "Mehr Menschen können die Aussicht sehen." },
+      "folge": { "standard": "Die Bahn bringt viele Gäste schnell nach oben. Auf der Bastei wird es voller, die Gasthäuser wachsen. In der Schlucht stehen Masten und Seile.", "einfach": "Viele Menschen fahren schnell nach oben. Oben wird es voll. In der Schlucht sind Masten und Seile." }
+    },
+    {
+      "id": "nicht-bauen",
+      "titel": { "standard": "Nein, keine Bahn", "einfach": "Nein, keine Bahn" },
+      "text": { "standard": "Die Schlucht und der Wald bleiben, wie sie sind. Der Weg nach oben bleibt ein Abenteuer.", "einfach": "Die Schlucht und der Wald bleiben so, wie sie sind." },
+      "folge": { "standard": "Die Gäste kommen weiter zu Fuß, mit der Kutsche und später mit dem Auto. Die Schlucht bleibt wild.", "einfach": "Die Menschen kommen weiter zu Fuß. Die Schlucht bleibt wild." }
+    }
+  ],
+  "argumente": [
+    { "id": "wirtin", "fuer": "bahn-bauen",
+      "wer": { "standard": "Eine Wirtin auf der Bastei", "einfach": "Eine Wirtin" },
+      "text": { "standard": "Mit der Bahn kommen mehr Gäste. Dann kann ich mehr Leuten aus dem Dorf Arbeit geben.", "einfach": "Mit der Bahn kommen mehr Gäste. Dann haben mehr Leute Arbeit." } },
+    { "id": "grossvater", "fuer": "bahn-bauen",
+      "wer": { "standard": "Ein Großvater mit kranken Knien", "einfach": "Ein Opa mit kranken Knien" },
+      "text": { "standard": "Den steilen Weg schaffe ich nicht mehr. Mit der Bahn könnte ich die Aussicht noch einmal sehen.", "einfach": "Ich kann den steilen Weg nicht mehr gehen. Mit der Bahn kann ich die Aussicht sehen." } },
+    { "id": "ingenieur", "fuer": "bahn-bauen",
+      "wer": { "standard": "Ein Ingenieur", "einfach": "Ein Ingenieur" },
+      "text": { "standard": "Eine Bahn ist moderne Technik. Sie ist sicherer als der rutschige Pfad.", "einfach": "Die Bahn ist modern. Der Pfad ist rutschig, die Bahn ist sicherer." } },
+    { "id": "foersterin", "fuer": "nicht-bauen",
+      "wer": { "standard": "Eine Försterin", "einfach": "Eine Försterin" },
+      "text": { "standard": "Für die Bahn müssten viele Bäume in der Schlucht weichen. Tiere verlieren dort ihren Platz.", "einfach": "Für die Bahn fällt man viele Bäume. Die Tiere verlieren ihr Zuhause." } },
+    { "id": "maler", "fuer": "nicht-bauen",
+      "wer": { "standard": "Ein Maler", "einfach": "Ein Maler" },
+      "text": { "standard": "Ich male die wilden Felsen. Masten und Seile würden das Bild der Landschaft zerstören.", "einfach": "Ich male die Felsen. Masten und Seile machen die Landschaft kaputt." } },
+    { "id": "wanderin", "fuer": "nicht-bauen",
+      "wer": { "standard": "Eine Wanderin", "einfach": "Eine Wanderin" },
+      "text": { "standard": "Der Weg nach oben gehört dazu. Wer selbst hinaufsteigt, freut sich doppelt über die Aussicht.", "einfach": "Der Weg nach oben gehört dazu. Oben freut man sich dann doppelt." } }
+  ],
+  "wirklichkeit": {
+    "standard": "Die Bahn wurde nie gebaut. Viele Menschen aus der Gegend und das sächsische Königshaus waren dagegen, und es war unklar, wem der Boden gehörte. Die Schlucht heißt bis heute „Eisenbahnergründel“. Seit 1990 gehört die Gegend zum Nationalpark Sächsische Schweiz.",
+    "einfach": "Die Bahn wurde nie gebaut. Viele Menschen waren dagegen, auch der König. Die Schlucht heißt heute noch „Eisenbahnergründel“. Heute ist hier ein Nationalpark."
+  },
+  "tipps": [
+    { "text": { "standard": "Lest jede Meinung laut vor. Fragt: Wer hätte etwas von der Bahn, wer nicht?", "einfach": "Lest jede Meinung vor. Wer freut sich über die Bahn? Wer nicht?" } },
+    { "text": { "standard": "Beim Begründen passen nur Meinungen, die für eure Wahl sprechen. Die Wirtin zum Beispiel ist für die Bahn.", "einfach": "Wählt Meinungen, die zu eurer Wahl passen. Die Wirtin ist für die Bahn." } }
+  ],
+  "wusstetIhr": {
+    "standard": "2023 wurde an der Bastei eine neue Aussichtsplattform eröffnet. Sie liegt nur auf festem Fels auf und schwebt vorn ein Stück über dem bröckelnden Sandstein.",
+    "einfach": "Seit 2023 gibt es oben einen neuen Aussichtsplatz. Er schwebt ein Stück über dem Felsen."
+  }
+}

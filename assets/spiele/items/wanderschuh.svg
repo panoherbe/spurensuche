@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Wanderschuh</title>
+  <desc>Sammelstück: ein brauner Wanderschuh mit roten Schnürsenkeln und grober Sohle auf einem Weg. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs><clipPath id="wanderschuh-k"><circle cx="256" cy="248" r="212"/></clipPath><linearGradient id="wanderschuh-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E4F3DC"/><stop offset="1" stop-color="#CFE8C4"/></linearGradient></defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#wanderschuh-h)"/>
+  <g clip-path="url(#wanderschuh-k)" stroke-linejoin="round" stroke-linecap="round">
+
+    <path d="M40 400 C140 380 380 380 480 400 L480 480 L40 480 Z" fill="#B9D7A8"/>
+    <path d="M70 410 C160 396 360 396 450 410" fill="none" stroke="#9CC08A" stroke-width="10"/>
+    <path d="M150 140 C150 128 160 120 172 120 L262 120 C274 120 282 130 282 142 L284 230 C300 246 330 262 370 270 C420 280 448 300 450 330 L452 352 L132 352 L134 300 C136 260 142 200 150 140 Z" fill="#9A5B32" stroke="#263238" stroke-width="7"/>
+    <path d="M276 236 C300 254 336 268 372 274 C414 282 440 300 446 324" fill="none" stroke="#7A4524" stroke-width="7"/>
+    <path d="M150 140 C150 128 160 120 172 120 L262 120 C274 120 282 130 282 142 L282 170 L150 170 Z" fill="#6E3E21" stroke="#263238" stroke-width="7"/>
+    <path d="M176 196 L250 214 M176 222 L262 240 M176 248 L276 262 M250 196 L180 214 M262 222 L180 238 M272 248 L186 262" stroke="#E25B45" stroke-width="7"/>
+    <circle cx="176" cy="196" r="6" fill="#F2B233" stroke="#263238" stroke-width="3"/><circle cx="176" cy="222" r="6" fill="#F2B233" stroke="#263238" stroke-width="3"/><circle cx="176" cy="248" r="6" fill="#F2B233" stroke="#263238" stroke-width="3"/>
+    <path d="M124 352 L460 352 C466 352 470 358 468 366 L462 384 C460 392 452 396 444 396 L128 396 C120 396 114 390 114 382 L114 362 C114 356 118 352 124 352 Z" fill="#3B3F44" stroke="#263238" stroke-width="7"/>
+    <path d="M150 384 V396 M190 384 V396 M230 384 V396 M270 384 V396 M310 384 V396 M350 384 V396 M390 384 V396 M430 384 V396" stroke="#22262A" stroke-width="8"/>
+    <path d="M300 300 C330 306 360 306 392 300" fill="none" stroke="#C47C4A" stroke-width="6"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

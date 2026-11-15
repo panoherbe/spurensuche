@@ -1,3 +1,114 @@
 [
-  { "id": "basteibruecke", "name": "Basteibrücke", "bild": "assets/spiele/items/basteibruecke.svg", "alt": "Eine Steinbrücke mit Bögen zwischen zwei zerklüfteten Sandsteinfelsen, dahinter ein Berg im Nebel", "kategorie": "bauwerk" }
+  {
+    "id": "basteibruecke",
+    "name": "Basteibrücke",
+    "bild": "assets/spiele/items/basteibruecke.svg",
+    "alt": "Eine Steinbrücke mit Bögen zwischen zwei zerklüfteten Sandsteinfelsen, dahinter ein Berg im Nebel",
+    "kategorie": "bauwerk"
+  },
+  {
+    "id": "felsturm",
+    "name": "Felsturm",
+    "bild": "assets/spiele/items/felsturm.svg",
+    "alt": "Ein schmaler Felsturm aus Sandstein, oben eine Kiefer und eine kleine Kletterin mit rotem Helm am Seil",
+    "kategorie": "natur"
+  },
+  {
+    "id": "wanderschuh",
+    "name": "Wanderschuh",
+    "bild": "assets/spiele/items/wanderschuh.svg",
+    "alt": "Ein brauner Wanderschuh mit roten Schnürsenkeln und grober Sohle auf einem Weg",
+    "kategorie": "ausruestung"
+  },
+  {
+    "id": "alter-stein",
+    "name": "Alter Stein",
+    "bild": "assets/spiele/items/alter-stein.svg",
+    "alt": "Ein dunkler, alter Sandsteinblock mit abgeschlagenen Kanten und einem kleinen Nummernschild",
+    "kategorie": "fundstueck"
+  },
+  {
+    "id": "kuppel",
+    "name": "Steinerne Glocke",
+    "bild": "assets/spiele/items/kuppel.svg",
+    "alt": "Die Kuppel der Frauenkirche aus hellem Sandstein mit Laterne und goldenem Kreuz",
+    "kategorie": "bauwerk"
+  },
+  {
+    "id": "turmkreuz",
+    "name": "Turmkreuz",
+    "bild": "assets/spiele/items/turmkreuz.svg",
+    "alt": "Ein goldenes Kreuz mit Strahlenkranz über einer goldenen Kugel",
+    "kategorie": "zeichen"
+  },
+  {
+    "id": "dampflok",
+    "name": "Dampflok",
+    "bild": "assets/spiele/items/dampflok.svg",
+    "alt": "Eine kleine schwarze Dampflok mit roten Rädern, Schornstein und Dampfwolken auf Schienen",
+    "kategorie": "technik"
+  },
+  {
+    "id": "goeltzschtalbruecke",
+    "name": "Göltzschtalbrücke",
+    "bild": "assets/spiele/items/goeltzschtalbruecke.svg",
+    "alt": "Eine lange Brücke aus roten Ziegeln mit zwei Reihen offener Bögen, oben ein roter Zug",
+    "kategorie": "bauwerk"
+  },
+  {
+    "id": "ziegel",
+    "name": "Ziegel",
+    "bild": "assets/spiele/items/ziegel.svg",
+    "alt": "Ein roter Ziegelstein mit einer Maurerkelle",
+    "kategorie": "baustoff"
+  },
+  {
+    "id": "ortsschild",
+    "name": "Ortsschild",
+    "bild": "assets/spiele/items/ortsschild.svg",
+    "alt": "Ein gelbes Ortsschild mit zwei Namen untereinander: Bautzen und Budyšin",
+    "kategorie": "sprache"
+  },
+  {
+    "id": "schiefer-turm",
+    "name": "Schiefer Turm",
+    "bild": "assets/spiele/items/schiefer-turm.svg",
+    "alt": "Ein weißer runder Turm mit verziertem Aufsatz, der sichtbar schief steht",
+    "kategorie": "bauwerk"
+  },
+  {
+    "id": "lot",
+    "name": "Lot",
+    "bild": "assets/spiele/items/lot.svg",
+    "alt": "Ein Senklot aus Messing an einer Schnur, daneben ein schiefer Turm",
+    "kategorie": "technik"
+  },
+  {
+    "id": "abzeichen-bastei",
+    "name": "Abzeichen Bastei",
+    "bild": "assets/spiele/items/abzeichen-bastei.svg",
+    "alt": "Grüne Rosette mit einer Brücke zwischen Felsen",
+    "kategorie": "abzeichen"
+  },
+  {
+    "id": "abzeichen-frauenkirche",
+    "name": "Abzeichen Frauenkirche",
+    "bild": "assets/spiele/items/abzeichen-frauenkirche.svg",
+    "alt": "Blaue Rosette mit der Kuppel der Frauenkirche",
+    "kategorie": "abzeichen"
+  },
+  {
+    "id": "abzeichen-goeltzschtal",
+    "name": "Abzeichen Göltzschtal",
+    "bild": "assets/spiele/items/abzeichen-goeltzschtal.svg",
+    "alt": "Rote Rosette mit Bögen aus Ziegeln",
+    "kategorie": "abzeichen"
+  },
+  {
+    "id": "abzeichen-bautzen",
+    "name": "Abzeichen Bautzen",
+    "bild": "assets/spiele/items/abzeichen-bautzen.svg",
+    "alt": "Lila Rosette mit einem schiefen weißen Turm",
+    "kategorie": "abzeichen"
+  }
 ]

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="80" viewBox="0 0 120 80">
+  <title>Ziegelstein (Umriss)</title>
+  <desc>Vergleichsbild: ein roter Ziegelstein. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <g stroke="#263238" stroke-width="3" stroke-linejoin="round">
+    <path d="M10 34 L70 18 L110 32 L50 50 Z" fill="#E07A55"/>
+    <path d="M10 34 L50 50 L50 72 L10 56 Z" fill="#B54C30"/>
+    <path d="M50 50 L110 32 L110 54 L50 72 Z" fill="#C95C3C"/>
+  </g>
+</svg>

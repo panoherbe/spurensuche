@@ -1,0 +1,258 @@
+{
+  "$id": "spiele/sortieren/schema.json",
+  "title": "Sortieren und Zuordnen",
+  "description": "Karten in die richtige Reihenfolge bringen (art reihenfolge; karten in richtiger Reihenfolge angeben) oder Gruppen zuordnen (art gruppen; jede Karte nennt ihre gruppe).",
+  "type": "object",
+  "required": [
+    "format",
+    "titel",
+    "text",
+    "dauerMinuten",
+    "belohnung",
+    "stufe",
+    "art",
+    "karten",
+    "tipps"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "sortieren"
+    },
+    "titel": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 60
+    },
+    "text": {
+      "$ref": "#/$defs/zweitext"
+    },
+    "dauerMinuten": {
+      "type": "number",
+      "minimum": 5,
+      "maximum": 10
+    },
+    "belohnung": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/kennung"
+      }
+    },
+    "stufe": {
+      "enum": [
+        "einblick",
+        "kennen",
+        "anwenden",
+        "beurteilen",
+        "gestalten"
+      ]
+    },
+    "rollen": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 5,
+      "items": {
+        "$ref": "#/$defs/kennung"
+      }
+    },
+    "mischen": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "quelle": {
+      "type": "string",
+      "minLength": 3
+    },
+    "wusstetIhr": {
+      "$ref": "#/$defs/zweitext"
+    },
+    "bild": {
+      "$ref": "#/$defs/bild"
+    },
+    "art": {
+      "enum": [
+        "reihenfolge",
+        "gruppen"
+      ]
+    },
+    "karten": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/kennung"
+          },
+          "text": {
+            "$ref": "#/$defs/zweitext"
+          },
+          "zusatz": {
+            "$ref": "#/$defs/zweitext"
+          },
+          "gruppe": {
+            "$ref": "#/$defs/kennung"
+          },
+          "bild": {
+            "type": "object",
+            "required": [
+              "datei",
+              "alt"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "datei": {
+                "type": "string",
+                "pattern": "^assets/spiele/[a-z0-9/_.-]+\\.(webp|jpg|png|svg)$"
+              },
+              "alt": {
+                "$ref": "#/$defs/zweitext"
+              }
+            }
+          }
+        }
+      }
+    },
+    "gruppen": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "titel"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/$defs/kennung"
+          },
+          "titel": {
+            "$ref": "#/$defs/zweitext"
+          },
+          "bild": {
+            "type": "object",
+            "required": [
+              "datei"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "datei": {
+                "type": "string",
+                "pattern": "^assets/spiele/[a-z0-9/_.-]+\\.(webp|jpg|png|svg)$"
+              }
+            }
+          }
+        }
+      }
+    },
+    "enden": {
+      "type": "object",
+      "required": [
+        "anfang",
+        "ende"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "anfang": {
+          "$ref": "#/$defs/zweitext"
+        },
+        "ende": {
+          "$ref": "#/$defs/zweitext"
+        }
+      }
+    },
+    "tipps": {
+      "description": "Drei Stufen: 1 eigener Hinweis, 2 richtige Karten markieren, 3 eine Karte legen (wiederholbar).",
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "$ref": "#/$defs/tipp"
+      }
+    }
+  },
+  "$defs": {
+    "zweitext": {
+      "type": "object",
+      "required": [
+        "standard",
+        "einfach"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "standard": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        },
+        "einfach": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 600
+        }
+      }
+    },
+    "kennung": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]{1,40}$"
+    },
+    "bild": {
+      "type": "object",
+      "required": [
+        "datei",
+        "breite",
+        "hoehe",
+        "alt",
+        "quelle"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "datei": {
+          "type": "string",
+          "pattern": "^assets/spiele/[a-z0-9/_.-]+\\.(webp|jpg|png|svg)$"
+        },
+        "breite": {
+          "type": "integer",
+          "minimum": 200
+        },
+        "hoehe": {
+          "type": "integer",
+          "minimum": 200
+        },
+        "alt": {
+          "$ref": "#/$defs/zweitext"
+        },
+        "quelle": {
+          "type": "string",
+          "minLength": 3,
+          "maxLength": 300
+        }
+      }
+    },
+    "tipp": {
+      "type": "object",
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "text": {
+          "$ref": "#/$defs/zweitext"
+        },
+        "nochmal": {
+          "$ref": "#/$defs/zweitext"
+        }
+      }
+    }
+  }
+}

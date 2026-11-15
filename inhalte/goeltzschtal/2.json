@@ -1,0 +1,72 @@
+{
+  "format": "bildpuzzle",
+  "titel": "Die Brücke aus der Luft",
+  "text": {
+    "standard": "Das Luftbild der Göltzschtalbrücke ist durcheinandergeraten. Setzt es wieder zusammen: Tippt auf zwei Teile, dann tauschen sie die Plätze.",
+    "einfach": "Das Foto ist durcheinander. Macht es wieder richtig. Tippt auf zwei Teile. Dann tauschen die Teile den Platz."
+  },
+  "dauerMinuten": 6,
+  "belohnung": [
+    "goeltzschtalbruecke"
+  ],
+  "stufe": "einblick",
+  "rollen": [
+    "vorlesen",
+    "steuern",
+    "nachschlagen",
+    "pruefen"
+  ],
+  "mischen": 98,
+  "bild": {
+    "datei": "assets/spiele/orte/goeltzschtal/luftbild.webp",
+    "breite": 1600,
+    "hoehe": 781,
+    "alt": {
+      "standard": "Luftbild im Herbst: Die Göltzschtalbrücke zieht sich mit vielen Bögen aus rotbraunen Ziegeln quer durch das Tal, oben fährt ein roter Zug. Dahinter Felder und ein Dorf, davor bunter Wald und ein Parkplatz.",
+      "einfach": "Eine lange Brücke mit vielen Bögen. Oben fährt ein roter Zug. Unten ist bunter Wald."
+    },
+    "quelle": "Foto: UlrichAAB, CC BY 3.0, Wikimedia Commons (zugeschnitten, verkleinert)"
+  },
+  "raster": {
+    "spalten": 4,
+    "zeilen": 2
+  },
+  "teile": [
+    {
+      "standard": "Felder und ein Dorf, darunter der linke Teil der Brücke",
+      "einfach": "ein Dorf und die Brücke"
+    },
+    {
+      "standard": "der rote Zug auf der Brücke, darunter der große Mittelbogen",
+      "einfach": "der rote Zug"
+    },
+    {
+      "standard": "Wälder in der Ferne und Bögen der Brücke",
+      "einfach": "Wald und Bögen"
+    },
+    {
+      "standard": "Hügel mit Wald, rechts das Ende der Brücke",
+      "einfach": "Wald und das Ende der Brücke"
+    },
+    {
+      "standard": "Häuser, Wiese und Bäume am Hang",
+      "einfach": "Häuser und Wiese"
+    },
+    {
+      "standard": "der untere Teil der großen Bögen und ein Backsteinhaus",
+      "einfach": "große Bögen und ein Haus"
+    },
+    {
+      "standard": "ein großer grauer Parkplatz zwischen bunten Bäumen",
+      "einfach": "ein grauer Platz"
+    },
+    {
+      "standard": "Herbstwald in Gelb, Orange und Grün",
+      "einfach": "bunter Wald"
+    }
+  ],
+  "wusstetIhr": {
+    "standard": "Die Göltzschtalbrücke ist 78 Meter hoch und hat 98 Bögen. Als sie 1851 fertig war, war sie die höchste Eisenbahnbrücke der Welt.",
+    "einfach": "Die Brücke ist 78 Meter hoch. Sie hat 98 Bögen."
+  }
+}

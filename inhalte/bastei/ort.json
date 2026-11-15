@@ -2,7 +2,11 @@
   "id": "bastei",
   "name": "Bastei",
   "region": "Sächsische Schweiz",
-  "lage": { "lat": 50.96222, "lon": 14.07139, "radius": 150 },
+  "lage": {
+    "lat": 50.96222,
+    "lon": 14.07139,
+    "radius": 150
+  },
   "qr": "BASTEI-1851",
   "text": {
     "standard": "Die Bastei ist ein Felsriff aus Sandstein hoch über der Elbe in der Sächsischen Schweiz. Seit über 200 Jahren kommen Menschen wegen der Aussicht hierher, heute rund 1,5 Millionen im Jahr. Die steinerne Basteibrücke von 1851 führt über eine tiefe Schlucht von Felsen zu Felsen.",
@@ -11,7 +15,11 @@
   "bild": "assets/spiele/orte/bastei/wehlnadel.webp",
   "alt": "Abendlicht über der Sächsischen Schweiz: vorn eine schmale Felsnadel, dahinter die Basteibrücke zwischen hohen Sandsteinfelsen über einem bewaldeten Tal.",
   "bildQuelle": "Foto: Robert Ahner, CC BY-SA 4.0, Wikimedia Commons (verkleinert)",
-  "aufgaben": ["1"],
+  "aufgaben": [
+    "1",
+    "2",
+    "3"
+  ],
   "ersatz": {
     "text": {
       "standard": "Ihr seid heute nicht an der Bastei? Kein Problem. Schaut euch das Foto genau an und stellt euch vor, ihr steht auf der Brücke und schaut hinunter in die Schlucht.",

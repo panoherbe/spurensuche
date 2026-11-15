@@ -1,0 +1,83 @@
+{
+  "format": "schaetzen",
+  "titel": "Wie schief ist der Turm?",
+  "text": {
+    "standard": "Der Reichenturm in Bautzen steht schief. Schätzt gemeinsam, wie weit seine Spitze zur Seite hängt.",
+    "einfach": "Der Turm in Bautzen ist schief. Wie weit hängt die Spitze zur Seite? Schätzt zusammen."
+  },
+  "dauerMinuten": 6,
+  "belohnung": [
+    "lot"
+  ],
+  "stufe": "anwenden",
+  "rollen": [
+    "vorlesen",
+    "steuern",
+    "nachschlagen",
+    "pruefen"
+  ],
+  "bild": {
+    "datei": "assets/spiele/orte/bautzen/reichenturm-strasse.webp",
+    "breite": 1600,
+    "hoehe": 1067,
+    "alt": {
+      "standard": "Der Reichenturm in Bautzen an einer Straße: ein hoher, weißer, runder Turm mit verziertem Aufsatz und Spitze, davor Bäume und ein Platz.",
+      "einfach": "Ein hoher weißer Turm an einer Straße. Davor sind Bäume."
+    },
+    "quelle": "Foto: Radler59, CC BY-SA 4.0, Wikimedia Commons (verkleinert)"
+  },
+  "frage": {
+    "standard": "Um wie viele Meter weicht die Spitze des Reichenturms von der Senkrechten ab?",
+    "einfach": "Wie viele Meter hängt die Spitze zur Seite?"
+  },
+  "einheit": "Meter",
+  "antwort": 1.44,
+  "bereich": {
+    "min": 0,
+    "max": 10,
+    "schritt": 0.1
+  },
+  "skala": "linear",
+  "start": 5,
+  "toleranz": {
+    "drei": 10,
+    "zwei": 25,
+    "eins": 60
+  },
+  "vergleich": {
+    "bild": "assets/spiele/vergleich/kind.svg",
+    "anzahl": 1,
+    "satz": {
+      "standard": "1,44 Meter, das ist ungefähr so viel, wie ein Kind in der 4. Klasse groß ist.",
+      "einfach": "Das ist ungefähr so groß wie ein Kind in der 4. Klasse."
+    }
+  },
+  "tipps": [
+    {
+      "text": {
+        "standard": "Der Turm ist 56 Meter hoch. Die Spitze hängt nur ein kleines Stück über.",
+        "einfach": "Der Turm ist 56 Meter hoch. Die Spitze hängt nur ein bisschen über."
+      }
+    },
+    {
+      "text": {
+        "standard": "Es ist weniger als 3 Meter.",
+        "einfach": "Es ist weniger als 3 Meter."
+      }
+    },
+    {
+      "text": {
+        "standard": "Es ist mehr als 1 Meter und weniger als 2 Meter.",
+        "einfach": "Mehr als 1 Meter. Weniger als 2 Meter."
+      }
+    }
+  ],
+  "aufloesung": {
+    "standard": "Die Spitze weicht 1,44 Meter von der Senkrechten ab. Das Fundament war mit 80 Zentimetern zu flach für den schweren steinernen Aufsatz. Erst 1953 und 1954 wurde es befestigt; seitdem neigt sich der Turm nicht weiter.",
+    "einfach": "Die Spitze hängt 1,44 Meter zur Seite. Der Turm stand auf einem zu flachen Boden. Seit 1954 ist der Boden fest. Der Turm kippt nicht weiter."
+  },
+  "wusstetIhr": {
+    "standard": "Der Reichenturm brannte mehrmals aus: 1620, 1639, 1686 und 1709. Seit 1718 trägt er den steinernen Aufsatz, den ihr auf dem Foto seht.",
+    "einfach": "Der Turm hat oft gebrannt. Seit über 300 Jahren hat er oben einen Aufsatz aus Stein."
+  }
+}

@@ -1,12 +1,7 @@
 /* Testseite der Spiele: setzt die Variablen, die sonst die App setzt (Schnittstelle 2.6), hell, dunkel und
    kontrastreich, damit jedes Format allein geprüft werden kann (Tastatur, Bildschirmleser, axe). */
 
-@font-face {
-  font-family: 'Atkinson Hyperlegible Next';
-  src: url('../../assets/spiele/schrift/AtkinsonHyperlegibleNext-Variable.woff2') format('woff2');
-  font-weight: 200 800;
-  font-display: swap;
-}
+@import url('../../assets/spiele/schrift/schrift.css');
 
 :root {
   --sp-grund: #f6f1e7;

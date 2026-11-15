@@ -1,0 +1,88 @@
+{
+  "$id": "spiele/dilemma/schema.json",
+  "title": "Dilemma",
+  "description": "Eine echte Streitfrage zum Ort: Meinungen hören, abstimmen, begründen, Folgen und Wirklichkeit sehen.",
+  "type": "object",
+  "required": ["format", "titel", "text", "dauerMinuten", "belohnung", "stufe", "situation", "frage", "optionen", "argumente", "wirklichkeit"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "dilemma" },
+    "titel": { "type": "string", "minLength": 1, "maxLength": 60 },
+    "text": { "$ref": "#/$defs/zweitext" },
+    "dauerMinuten": { "type": "number", "minimum": 5, "maximum": 10 },
+    "belohnung": { "type": "array", "minItems": 1, "maxItems": 3, "items": { "$ref": "#/$defs/kennung" } },
+    "stufe": { "enum": ["einblick", "kennen", "anwenden", "beurteilen", "gestalten"] },
+    "rollen": { "type": "array", "minItems": 1, "maxItems": 5, "items": { "$ref": "#/$defs/kennung" } },
+    "mischen": { "type": "integer", "minimum": 0 },
+    "quelle": { "type": "string", "minLength": 3 },
+    "wusstetIhr": { "$ref": "#/$defs/zweitext" },
+    "abschluss": { "$ref": "#/$defs/zweitext" },
+    "bild": { "$ref": "#/$defs/bild" },
+    "situation": { "$ref": "#/$defs/zweitext" },
+    "frage": { "$ref": "#/$defs/zweitext" },
+    "optionen": {
+      "type": "array", "minItems": 2, "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "titel", "text", "folge"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/kennung" },
+          "titel": { "$ref": "#/$defs/zweitext" },
+          "text": { "$ref": "#/$defs/zweitext" },
+          "folge": { "$ref": "#/$defs/zweitext" }
+        }
+      }
+    },
+    "argumente": {
+      "description": "Meinungen erfundener, typischer Personen; jede spricht für genau eine Möglichkeit (fuer = id der Möglichkeit).",
+      "type": "array", "minItems": 4, "maxItems": 8,
+      "items": {
+        "type": "object",
+        "required": ["id", "wer", "text", "fuer"],
+        "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "#/$defs/kennung" },
+          "wer": { "$ref": "#/$defs/zweitext" },
+          "text": { "$ref": "#/$defs/zweitext" },
+          "fuer": { "$ref": "#/$defs/kennung" }
+        }
+      }
+    },
+    "wirklichkeit": { "$ref": "#/$defs/zweitext" },
+    "tipps": { "type": "array", "minItems": 1, "maxItems": 3, "items": { "$ref": "#/$defs/tipp" } }
+  },
+  "$defs": {
+    "zweitext": {
+      "type": "object",
+      "required": ["standard", "einfach"],
+      "additionalProperties": false,
+      "properties": {
+        "standard": { "type": "string", "minLength": 1, "maxLength": 900 },
+        "einfach": { "type": "string", "minLength": 1, "maxLength": 900 }
+      }
+    },
+    "kennung": { "type": "string", "pattern": "^[a-z0-9-]{1,40}$" },
+    "bild": {
+      "type": "object",
+      "required": ["datei", "breite", "hoehe", "alt", "quelle"],
+      "additionalProperties": false,
+      "properties": {
+        "datei": { "type": "string", "pattern": "^assets/spiele/[a-z0-9/_.-]+\\.(webp|jpg|png|svg)$" },
+        "breite": { "type": "integer", "minimum": 200 },
+        "hoehe": { "type": "integer", "minimum": 200 },
+        "alt": { "$ref": "#/$defs/zweitext" },
+        "quelle": { "type": "string", "minLength": 3, "maxLength": 300 }
+      }
+    },
+    "tipp": {
+      "type": "object",
+      "required": ["text"],
+      "additionalProperties": false,
+      "properties": {
+        "text": { "$ref": "#/$defs/zweitext" },
+        "nochmal": { "$ref": "#/$defs/zweitext" }
+      }
+    }
+  }
+}

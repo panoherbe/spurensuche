@@ -1,0 +1,47 @@
+{
+  "format": "sortieren",
+  "titel": "Zwei Namen für eine Stadt",
+  "text": {
+    "standard": "In der Lausitz haben viele Orte zwei Namen: einen deutschen und einen sorbischen. Ordnet jedem deutschen Ortsnamen seinen sorbischen Namen zu.",
+    "einfach": "Viele Orte in der Lausitz haben zwei Namen. Einen deutschen und einen sorbischen. Welche Namen gehören zusammen?"
+  },
+  "dauerMinuten": 6,
+  "belohnung": ["ortsschild"],
+  "stufe": "kennen",
+  "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
+  "mischen": 1868,
+  "bild": {
+    "datei": "assets/spiele/orte/bautzen/ortsschild.webp",
+    "breite": 1200,
+    "hoehe": 900,
+    "alt": {
+      "standard": "Gelbes Ortsschild mit zwei Namen untereinander: Bautzen und Budyšin, darüber „Große Kreisstadt“.",
+      "einfach": "Ein gelbes Ortsschild. Darauf steht Bautzen und Budyšin."
+    },
+    "quelle": "Foto: Julian Nyča, CC BY 3.0, Wikimedia Commons (verkleinert)"
+  },
+  "art": "gruppen",
+  "gruppen": [
+    { "id": "bautzen", "titel": { "standard": "Bautzen", "einfach": "Bautzen" } },
+    { "id": "hoyerswerda", "titel": { "standard": "Hoyerswerda", "einfach": "Hoyerswerda" } },
+    { "id": "kamenz", "titel": { "standard": "Kamenz", "einfach": "Kamenz" } },
+    { "id": "weisswasser", "titel": { "standard": "Weißwasser", "einfach": "Weißwasser" } },
+    { "id": "bad-muskau", "titel": { "standard": "Bad Muskau", "einfach": "Bad Muskau" } }
+  ],
+  "karten": [
+    { "id": "budysin", "gruppe": "bautzen", "text": { "standard": "Budyšin", "einfach": "Budyšin" } },
+    { "id": "wojerecy", "gruppe": "hoyerswerda", "text": { "standard": "Wojerecy", "einfach": "Wojerecy" } },
+    { "id": "kamjenc", "gruppe": "kamenz", "text": { "standard": "Kamjenc", "einfach": "Kamjenc" } },
+    { "id": "bela-woda", "gruppe": "weisswasser", "text": { "standard": "Běła Woda", "einfach": "Běła Woda" } },
+    { "id": "muzakow", "gruppe": "bad-muskau", "text": { "standard": "Mužakow", "einfach": "Mužakow" } }
+  ],
+  "tipps": [
+    { "text": { "standard": "Sprecht die Namen laut aus. Manche klingen fast gleich, zum Beispiel Kamenz und Kamjenc. „Běła Woda“ heißt „weißes Wasser“.", "einfach": "Sprecht die Namen laut. Kamenz und Kamjenc klingen ähnlich. Běła Woda heißt: weißes Wasser." } },
+    { "text": { "standard": "Jetzt seht ihr, welche Karten schon richtig liegen.", "einfach": "Ein Haken heißt: Diese Karte ist richtig." } },
+    { "text": { "standard": "Ulla legt eine Karte an ihren Platz.", "einfach": "Ulla legt eine Karte richtig hin." }, "nochmal": { "standard": "Noch eine Karte legen", "einfach": "Noch eine Karte" } }
+  ],
+  "wusstetIhr": {
+    "standard": "Die Sorben sind ein westslawisches Volk, das vor allem in der Lausitz lebt. In ihrem Gebiet stehen auf vielen Ortsschildern zwei Namen, der deutsche und der sorbische.",
+    "einfach": "Die Sorben leben in der Lausitz. Sie haben eine eigene Sprache. Darum stehen auf vielen Schildern zwei Namen."
+  }
+}

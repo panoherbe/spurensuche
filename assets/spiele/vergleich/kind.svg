@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="200" viewBox="0 0 80 200">
+  <title>Kind (Umriss)</title>
+  <desc>Vergleichsbild: ein Kind von etwa 1,40 Meter Größe mit Rucksack. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <g stroke="#263238" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M16 72 C16 60 24 56 40 56 C56 56 64 60 64 72 V120 H16 Z" fill="#2A6FA8"/>
+    <path d="M60 70 H70 V112 H60 Z" fill="#E39A2D"/>
+    <path d="M24 120 H56 L58 188 H44 L40 140 L36 188 H22 Z" fill="#3D4B55"/>
+    <path d="M20 190 H38 M42 190 H60" stroke-width="6"/>
+    <path d="M16 74 L8 116 M64 74 L60 100" stroke-width="7" stroke="#F1C7A1"/>
+    <circle cx="40" cy="34" r="20" fill="#F1C7A1"/>
+    <path d="M20 30 C20 12 60 12 60 30 C52 22 30 22 20 30 Z" fill="#6B4430"/>
+    <circle cx="33" cy="36" r="2.5" fill="#263238" stroke="none"/><circle cx="47" cy="36" r="2.5" fill="#263238" stroke="none"/>
+    <path d="M34 45 Q40 49 46 45" fill="none" stroke-width="2.5"/>
+  </g>
+</svg>

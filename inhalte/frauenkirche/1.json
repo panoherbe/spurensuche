@@ -1,0 +1,241 @@
+{
+  "format": "bildsuche",
+  "titel": "Spurensuche an der Kuppel",
+  "text": {
+    "standard": "Schaut euch die Kuppel der Frauenkirche genau an. Findet die vier Dinge aus der Liste und tippt im Foto darauf.",
+    "einfach": "Schaut euch das Foto genau an. Findet vier Dinge. Tippt im Foto darauf."
+  },
+  "dauerMinuten": 7,
+  "belohnung": [
+    "alter-stein"
+  ],
+  "stufe": "einblick",
+  "rollen": [
+    "vorlesen",
+    "steuern",
+    "nachschlagen",
+    "pruefen"
+  ],
+  "bild": {
+    "datei": "assets/spiele/orte/frauenkirche/kuppel.webp",
+    "breite": 1400,
+    "hoehe": 2014,
+    "alt": {
+      "standard": "Die Kuppel der Frauenkirche von unten: eine große, runde Sandsteinkuppel mit Fenstern, oben die Laterne mit Bögen und einem Geländer, ganz oben ein goldenes Kreuz. Vorn ein Turm mit Uhr; dort sind manche Steine dunkel, andere hell.",
+      "einfach": "Die runde Kuppel der Frauenkirche. Oben ist ein goldenes Kreuz. Vorn ist ein Turm mit einer Uhr."
+    },
+    "quelle": "Foto: Perituss, CC0 (gemeinfrei), Wikimedia Commons (verkleinert)"
+  },
+  "raster": {
+    "spalten": 4,
+    "zeilen": 6
+  },
+  "felder": [
+    {
+      "standard": "grauer Himmel",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "Himmel, rechts am Rand die Spitze",
+      "einfach": "Himmel und die Spitze"
+    },
+    {
+      "standard": "goldenes Kreuz mit Kugel über dem dunklen Dach der Laterne",
+      "einfach": "das goldene Kreuz"
+    },
+    {
+      "standard": "grauer Himmel",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "grauer Himmel",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "linke Seite der Laterne mit hohem Bogen",
+      "einfach": "die Laterne, links"
+    },
+    {
+      "standard": "rechte Seite der Laterne mit Bögen",
+      "einfach": "die Laterne, rechts"
+    },
+    {
+      "standard": "grauer Himmel",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "Himmel",
+      "einfach": "Himmel"
+    },
+    {
+      "standard": "Geländer der Aussichtsplattform, darunter ein kleines rundes Fenster",
+      "einfach": "ein Geländer und ein rundes Fenster"
+    },
+    {
+      "standard": "Geländer der Aussichtsplattform und ein rundes Fenster in der Kuppel",
+      "einfach": "ein Geländer und ein rundes Fenster"
+    },
+    {
+      "standard": "Himmel und ein kleines Dachfenster am Rand der Kuppel",
+      "einfach": "Himmel und ein kleines Fenster"
+    },
+    {
+      "standard": "linker Teil der Kuppel mit einem großen Fenster",
+      "einfach": "Kuppel mit großem Fenster"
+    },
+    {
+      "standard": "Kuppel aus hellem Sandstein",
+      "einfach": "helle Kuppel"
+    },
+    {
+      "standard": "Turmspitze mit rundem Fenster vor der Kuppel",
+      "einfach": "ein Turm mit rundem Fenster"
+    },
+    {
+      "standard": "rechte Seite der Kuppel mit Fenster",
+      "einfach": "Kuppel mit Fenster"
+    },
+    {
+      "standard": "unterer Rand der Kuppel mit Bogenmuster",
+      "einfach": "Rand mit Bögen"
+    },
+    {
+      "standard": "Sandsteinband mit Bogenmuster, ein paar dunkle Steine",
+      "einfach": "Steinband mit Bögen"
+    },
+    {
+      "standard": "Uhr mit römischen Ziffern, ringsum helle und dunkle Steine",
+      "einfach": "die Uhr und dunkle Steine"
+    },
+    {
+      "standard": "Sandsteinband mit Bogenmuster und dunklen Steinen",
+      "einfach": "Steinband und dunkle Steine"
+    },
+    {
+      "standard": "Seitenteil mit Fenster und Dach",
+      "einfach": "ein Fenster"
+    },
+    {
+      "standard": "Mauer mit einem Regenrohr",
+      "einfach": "eine Mauer"
+    },
+    {
+      "standard": "Glockenstube mit Holzlamellen, viele dunkle Steine",
+      "einfach": "dunkle Steine am Turm"
+    },
+    {
+      "standard": "Mauer mit dunklen Steinen, rechts ein Dach",
+      "einfach": "dunkle Steine und ein Dach"
+    }
+  ],
+  "ziele": [
+    {
+      "id": "kreuz",
+      "frage": {
+        "standard": "das goldene Kreuz ganz oben",
+        "einfach": "das goldene Kreuz"
+      },
+      "bereiche": [
+        {
+          "x": 0.485,
+          "y": 0.012,
+          "b": 0.07,
+          "h": 0.075
+        }
+      ],
+      "gefunden": {
+        "standard": "Das Kreuz ist ein Zeichen der Versöhnung zwischen Großbritannien und Deutschland.",
+        "einfach": "Das Kreuz ist ein Zeichen für Frieden."
+      },
+      "tipp": {
+        "standard": "Schaut ganz nach oben, über das dunkle Dach.",
+        "einfach": "Schaut ganz nach oben."
+      }
+    },
+    {
+      "id": "plattform",
+      "frage": {
+        "standard": "die Aussichtsplattform mit dem Geländer",
+        "einfach": "das Geländer ganz oben"
+      },
+      "bereiche": [
+        {
+          "x": 0.385,
+          "y": 0.318,
+          "b": 0.27,
+          "h": 0.06
+        }
+      ],
+      "gefunden": {
+        "standard": "Von der Plattform in 67 Metern Höhe schauen Besucher über ganz Dresden.",
+        "einfach": "Von hier oben sieht man ganz Dresden."
+      },
+      "tipp": {
+        "standard": "Unter den hohen Bögen der Laterne läuft ein Geländer rundherum.",
+        "einfach": "Sucht unter den Bögen."
+      }
+    },
+    {
+      "id": "uhr",
+      "frage": {
+        "standard": "die Uhr",
+        "einfach": "die Uhr"
+      },
+      "bereiche": [
+        {
+          "x": 0.612,
+          "y": 0.71,
+          "b": 0.095,
+          "h": 0.07
+        }
+      ],
+      "gefunden": {
+        "standard": "Das Uhrwerk der Turmuhr ist von 1919 und stammt aus einer anderen Kirche.",
+        "einfach": "Die Uhr ist über 100 Jahre alt."
+      },
+      "tipp": {
+        "standard": "Die Uhr ist weiß mit schwarzen Zeigern, vorn am Turm.",
+        "einfach": "Die Uhr ist weiß. Sie ist vorn am Turm."
+      }
+    },
+    {
+      "id": "alte-steine",
+      "frage": {
+        "standard": "dunkle Steine aus der alten Kirche",
+        "einfach": "dunkle Steine"
+      },
+      "bereiche": [
+        {
+          "x": 0.545,
+          "y": 0.75,
+          "b": 0.068,
+          "h": 0.085
+        },
+        {
+          "x": 0.708,
+          "y": 0.722,
+          "b": 0.058,
+          "h": 0.09
+        },
+        {
+          "x": 0.52,
+          "y": 0.835,
+          "b": 0.24,
+          "h": 0.12
+        }
+      ],
+      "gefunden": {
+        "standard": "Die dunklen Steine lagen nach 1945 in den Trümmern und wurden wieder eingebaut. Ihre Farbe kommt vom Eisen im Sandstein.",
+        "einfach": "Die dunklen Steine sind alt. Sie lagen in den Trümmern. Man hat sie wieder eingebaut."
+      },
+      "tipp": {
+        "standard": "Am Turm mit der Uhr sind manche Steine fast schwarz.",
+        "einfach": "Schaut auf den Turm mit der Uhr."
+      }
+    }
+  ],
+  "wusstetIhr": {
+    "standard": "Die neuen, hellen Steine werden mit der Zeit nachdunkeln. In vielen Jahren sieht man kaum noch, welche Steine alt und welche neu sind.",
+    "einfach": "Die hellen Steine werden mit der Zeit dunkler. Später sieht man den Unterschied kaum noch."
+  }
+}

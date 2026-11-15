@@ -1,0 +1,59 @@
+/* Sortieren und Zuordnen – nur Variablen aus basis.css (--spi-…), die aus den Variablen der App kommen. */
+
+.sp-sortieren { display: grid; gap: calc(var(--spi-a) * 2.5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 900px) { .sp-sortieren:has(.sp-sortier-bild) { grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr); align-items: start; } }
+.sp-sortier-bild { margin: 0; display: grid; gap: 4px; }
+.sp-sortier-bild img { width: 100%; border-radius: calc(var(--spi-radius) * 0.75); box-shadow: var(--spi-schatten); }
+.sp-sortier-bild--klein img { max-width: 420px; }
+.sp-bildnachweis { font-size: 0.8em; color: var(--spi-leise); }
+.sp-sortier-spalte { display: grid; gap: calc(var(--spi-a) * 1.5); }
+.sp-hilfetext { color: var(--spi-leise); }
+.sp-ende { display: flex; align-items: center; gap: 0.4em; font-weight: 750; font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.04em; color: var(--spi-leise); }
+.sp-ende .sp-symbol { color: var(--spi-akzent); }
+
+.sp-liste { list-style: none; padding: 0; display: grid; gap: var(--spi-a); }
+.sp-sortkarte {
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr) auto; gap: calc(var(--spi-a) * 1.25); align-items: center;
+  padding: calc(var(--spi-a) * 1.1) calc(var(--spi-a) * 1.25); border-radius: calc(var(--spi-radius) * 0.75);
+  background: var(--spi-flaeche); border: 2px solid var(--spi-rand); box-shadow: 0 2px 0 rgb(0 0 0 / 0.05);
+}
+.sp-sortkarte:has(img) { grid-template-columns: auto auto auto minmax(0, 1fr) auto; }
+.sp-sortkarte img { width: 56px; height: 56px; object-fit: cover; border-radius: 10px; }
+.sp-sortkarte--richtig { border-color: var(--spi-erfolg); background: var(--spi-erfolg-hell); }
+.sp-sortkarte--falsch { border-color: var(--spi-hinweis); background: var(--spi-hinweis-hell); }
+.sp-sortkarte--zieht { opacity: 0.55; }
+.sp-sortkarte--ziel { box-shadow: 0 0 0 3px var(--spi-hinweis); }
+.sp-griff { display: grid; place-items: center; width: 32px; min-height: 44px; color: var(--spi-leise); cursor: grab; touch-action: none; }
+.sp-platz { display: grid; place-items: center; width: 2.1em; height: 2.1em; border-radius: 50%; background: var(--spi-akzent); color: var(--spi-akzent-text); font-weight: 800; }
+.sp-sorttext { font-weight: 650; display: grid; gap: 2px; }
+.sp-zusatz { justify-self: start; padding: 0 0.5em; border-radius: 999px; font-weight: 800; font-size: 0.95em; color: var(--spi-text); background: var(--spi-flaeche); border: 1px solid var(--spi-rand); }
+.sp-markierung { display: inline-flex; align-items: center; gap: 4px; font-weight: 750; font-size: 0.85em; }
+.sp-sortkarte--richtig .sp-markierung .sp-symbol { color: var(--spi-erfolg); }
+.sp-sortkarte--falsch .sp-markierung .sp-symbol { color: var(--spi-hinweis); }
+.sp-pfeile { display: flex; gap: 6px; }
+.sp-pfeile .sp-knopf { min-width: 48px; padding: 0.4em; }
+
+.sp-ablage { display: grid; gap: var(--spi-a); padding: calc(var(--spi-a) * 1.75); border-radius: var(--spi-radius); background: var(--spi-akzent-hell); border: 1px solid var(--spi-linie); }
+.sp-ablage-titel { font-weight: 750; }
+.sp-ablage-karten { display: flex; flex-wrap: wrap; gap: var(--spi-a); min-height: 48px; }
+.sp-ablage .sp-knopf { justify-self: start; }
+.sp-gruppen { display: grid; gap: calc(var(--spi-a) * 1.5); grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+.sp-gruppe { display: grid; gap: var(--spi-a); align-content: start; min-height: 130px; padding: calc(var(--spi-a) * 1.5); border-radius: var(--spi-radius); background: var(--spi-flaeche-2); border: 2px dashed var(--spi-rand); }
+.sp-gruppe--ziel { border-style: solid; border-color: var(--spi-hinweis); background: var(--spi-hinweis-hell); }
+.sp-gruppe-titel { display: flex; gap: var(--spi-a); align-items: center; font-weight: 750; font-size: 1.05em; }
+.sp-gruppe-titel img { width: 44px; height: 44px; object-fit: cover; border-radius: 10px; }
+.sp-gruppe-karten { display: flex; flex-wrap: wrap; gap: var(--spi-a); min-height: 48px; }
+.sp-gruppe .sp-knopf { justify-self: stretch; }
+.sp-chip {
+  display: inline-flex; align-items: center; gap: 0.5em; min-height: 48px; padding: 0.4em 0.95em; border-radius: 14px; cursor: pointer;
+  background: var(--spi-flaeche); border: 2px solid var(--spi-rand); font: inherit; font-weight: 700; color: inherit; text-align: left;
+}
+.sp-chip:hover { background: var(--spi-flaeche-2); }
+.sp-chip[aria-pressed='true'] { border-color: var(--spi-hinweis); box-shadow: 0 0 0 3px var(--spi-hinweis); background: var(--spi-hinweis-hell); }
+.sp-chip--richtig { border-color: var(--spi-erfolg); background: var(--spi-erfolg-hell); }
+.sp-chip--richtig .sp-symbol { color: var(--spi-erfolg); }
+.sp-chip--falsch { border-color: var(--spi-hinweis); background: var(--spi-hinweis-hell); }
+.sp-chip--falsch .sp-symbol { color: var(--spi-hinweis); }
+.sp-chip-stand:empty { display: none; }
+.sp-chip-stand { display: inline-flex; }
+.sp-chip .sp-symbol { width: 1.1em; height: 1.1em; }

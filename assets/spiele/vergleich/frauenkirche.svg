@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="200" viewBox="0 0 120 200">
+  <title>Frauenkirche (Umriss)</title>
+  <desc>Vergleichsbild: die Dresdner Frauenkirche mit Kuppel, Laterne und goldenem Kreuz. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <g stroke="#263238" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M60 4 V30 M52 12 H68" stroke="#B07B12" stroke-width="5"/>
+    <path d="M60 4 V30 M52 12 H68" stroke="#F2B233" stroke-width="2.5"/>
+    <path d="M50 46 C50 34 70 34 70 46 Z" fill="#7C8A92"/>
+    <path d="M51 46 H69 V66 H51 Z" fill="#E4D2AC"/>
+    <path d="M57 64 V54 C57 50 63 50 63 54 V64" fill="#5D4B33"/>
+    <path d="M22 128 C32 120 36 104 40 92 C46 74 54 66 60 64 C66 66 74 74 80 92 C84 104 88 120 98 128 Z" fill="#E4D2AC"/>
+    <path d="M60 64 C66 66 74 74 80 92 C84 104 88 120 98 128 H74 C74 110 70 86 60 64 Z" fill="#CDB68C" stroke="none"/>
+    <path d="M22 128 C32 120 36 104 40 92 C46 74 54 66 60 64 C66 66 74 74 80 92 C84 104 88 120 98 128 Z" fill="none"/>
+    <path d="M12 110 L18 98 L24 110 Z M96 110 L102 98 L108 110 Z" fill="#CDB68C"/>
+    <path d="M12 110 H24 V150 H12 Z M96 110 H108 V150 H96 Z" fill="#E4D2AC"/>
+    <path d="M14 128 H104 V196 H14 Z" fill="#E4D2AC"/>
+    <path d="M78 128 H104 V196 H78 Z" fill="#CDB68C" stroke="none"/>
+    <path d="M14 128 H104 V196 H14 Z" fill="none"/>
+    <path d="M30 152 C30 144 40 144 40 152 V176 H30 Z M55 150 C55 142 65 142 65 150 V176 H55 Z M80 152 C80 144 90 144 90 152 V176 H80 Z" fill="#5D4B33"/>
+    <path d="M52 196 V186 C52 178 68 178 68 186 V196" fill="#5D4B33"/>
+  </g>
+</svg>

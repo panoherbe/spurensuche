@@ -231,7 +231,7 @@ function baueFlaeche(k) {
   const auftrag = h('p', { class: 'sp-auftrag-text', 'data-vorlesen': '' }, t(aufgabe.text));
   const kopf = h('header', { class: 'sp-kopf' },
     h('div', { class: 'sp-kopf-text' }, titel, auftrag),
-    vorleseKnopf(k, () => t(aufgabe.text)));
+    vorleseKnopf(k, () => (k.vorleseText ? k.vorleseText() : t(aufgabe.text))));
   const buehne = h('div', { class: 'sp-buehne' });
   const tippBox = h('aside', { class: 'sp-tippbox', hidden: true, 'aria-label': 'Tipp' });
   const ansage = h('p', { class: 'sp-ansage', role: 'status', 'aria-live': 'polite', 'aria-atomic': 'true' });
@@ -284,6 +284,7 @@ function tippLeiste(k, { liste, beiTipp, wiederholbar = false }) {
   const { werkzeuge, tippBox } = k.flaeche;
   let stufe = 0;
   const zaehler = h('span', { class: 'sp-zaehler', 'aria-hidden': 'true' }, `0/${liste.length}`);
+  const zaehlerText = h('span', { class: 'sp-unsichtbar' }, `, 0 von ${liste.length} genutzt`);
   const tippText = h('p', { class: 'sp-tipp-text', 'data-vorlesen': '' });
   const tippTitel = h('p', { class: 'sp-tipp-titel' });
   tippBox.replaceChildren(ullaElement('denkt', 'sp-tipp-ulla'), h('div', { class: 'sp-tipp-inhalt' }, tippTitel, tippText, vorleseKnopf(k, () => tippText.textContent)));
@@ -301,7 +302,7 @@ function tippLeiste(k, { liste, beiTipp, wiederholbar = false }) {
       tippText.textContent = k.t(tipp.text);
       tippBox.hidden = false;
       zaehler.textContent = `${stufe}/${liste.length}`;
-      el.setAttribute('aria-label', `Tipp holen, ${stufe} von ${liste.length} genutzt`);
+      zaehlerText.textContent = `, ${stufe} von ${liste.length} genutzt`;
       if (stufe >= liste.length) {
         if (wiederholbar) el.querySelector('.sp-knopf-text').textContent = k.t(tipp.nochmal) || 'Noch ein Tipp';
         else { el.setAttribute('aria-disabled', 'true'); el.classList.add('sp-knopf--aus'); }
@@ -309,10 +310,22 @@ function tippLeiste(k, { liste, beiTipp, wiederholbar = false }) {
       beiTipp?.(stufe, tipp);
     },
   });
-  el.setAttribute('aria-label', `Tipp holen, 0 von ${liste.length} genutzt`);
-  el.append(zaehler);
+  el.append(zaehlerText, zaehler);
   werkzeuge.append(el);
-  return { get stufe() { return stufe; }, knopf: el };
+  return {
+    get stufe() { return stufe; },
+    knopf: el,
+    /** Zurück auf Stufe 0, etwa wenn ein Spiel zum nächsten Ziel wechselt. */
+    zuruecksetzen() {
+      stufe = 0;
+      zaehler.textContent = `0/${liste.length}`;
+      zaehlerText.textContent = `, 0 von ${liste.length} genutzt`;
+      el.removeAttribute('aria-disabled');
+      el.classList.remove('sp-knopf--aus');
+      el.querySelector('.sp-knopf-text').textContent = 'Tipp holen';
+      tippBox.hidden = true;
+    },
+  };
 }
 
 /** Schrittanzeige für Spiele mit mehreren Teilen. */

@@ -1,0 +1,34 @@
+{
+  "format": "sortieren",
+  "titel": "Vom Lehm zum Ziegel",
+  "text": {
+    "standard": "Für die Brücke brauchte man Millionen Ziegel. Bringt die Arbeitsschritte in die richtige Reihenfolge: Wie wird aus Lehm ein Ziegel?",
+    "einfach": "Wie macht man einen Ziegel? Bringt die Schritte in die richtige Reihenfolge."
+  },
+  "dauerMinuten": 6,
+  "belohnung": ["ziegel"],
+  "stufe": "anwenden",
+  "rollen": ["vorlesen", "steuern", "nachschlagen", "pruefen"],
+  "mischen": 1846,
+  "art": "reihenfolge",
+  "enden": {
+    "anfang": { "standard": "erster Schritt", "einfach": "zuerst" },
+    "ende": { "standard": "letzter Schritt", "einfach": "zuletzt" }
+  },
+  "karten": [
+    { "id": "graben", "text": { "standard": "Lehm aus der Erde graben", "einfach": "Lehm aus der Erde holen" } },
+    { "id": "kneten", "text": { "standard": "Den Lehm mit Wasser mischen und kneten", "einfach": "Lehm mit Wasser kneten" } },
+    { "id": "formen", "text": { "standard": "Den Lehm in eine Holzform drücken", "einfach": "Lehm in eine Form drücken" } },
+    { "id": "trocknen", "text": { "standard": "Die rohen Ziegel an der Luft trocknen lassen", "einfach": "Die Ziegel trocknen lassen" } },
+    { "id": "brennen", "text": { "standard": "Die Ziegel im Ofen hart brennen", "einfach": "Die Ziegel im Ofen brennen" } }
+  ],
+  "tipps": [
+    { "text": { "standard": "Nasser Lehm würde im heißen Ofen platzen. Was muss also vorher passieren?", "einfach": "Nasse Ziegel platzen im Ofen. Was kommt vorher?" } },
+    { "text": { "standard": "Jetzt seht ihr, welche Karten schon richtig liegen.", "einfach": "Ein Haken heißt: Diese Karte ist richtig." } },
+    { "text": { "standard": "Ulla legt eine Karte an ihren Platz.", "einfach": "Ulla legt eine Karte richtig hin." }, "nochmal": { "standard": "Noch eine Karte legen", "einfach": "Noch eine Karte" } }
+  ],
+  "wusstetIhr": {
+    "standard": "Für die Göltzschtalbrücke brannten fast 20 Ziegeleien entlang der Bahnstrecke jeden Tag 50.000 Ziegel. Den Lehm gab es in der Gegend reichlich.",
+    "einfach": "Fast 20 Ziegeleien machten jeden Tag 50.000 Ziegel für die Brücke."
+  }
+}

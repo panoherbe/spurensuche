@@ -1,0 +1,31 @@
+{
+  "id": "bautzen",
+  "name": "Bautzen/Budyšin",
+  "region": "Oberlausitz",
+  "lage": {
+    "lat": 51.18105,
+    "lon": 14.42735,
+    "radius": 250
+  },
+  "qr": "BUDYSIN-1490",
+  "text": {
+    "standard": "Bautzen, sorbisch Budyšin, ist eine alte Stadt an der Spree in der Oberlausitz. Hier leben Deutsche und Sorben zusammen; viele Schilder sind zweisprachig. Über der Altstadt ragen viele Türme auf, einer davon steht schief.",
+    "einfach": "Bautzen heißt auf Sorbisch Budyšin. Die Stadt ist alt. Hier leben Deutsche und Sorben. Viele Schilder haben zwei Sprachen. Ein Turm ist schief."
+  },
+  "bild": "assets/spiele/orte/bautzen/reichenturm-strasse.webp",
+  "alt": "Der Reichenturm in Bautzen: ein hoher, weißer, runder Turm mit verziertem Aufsatz, davor Bäume und ein Platz.",
+  "bildQuelle": "Foto: Radler59, CC BY-SA 4.0, Wikimedia Commons (verkleinert)",
+  "aufgaben": [
+    "1",
+    "2",
+    "3"
+  ],
+  "ersatz": {
+    "text": {
+      "standard": "Ihr seid heute nicht in Bautzen? Kein Problem. Schaut euch das Foto an und stellt euch vor, ihr steht am Fuß des schiefen Turms.",
+      "einfach": "Ihr seid heute nicht in Bautzen. Das macht nichts. Schaut euch das Foto an. Stellt euch vor: Ihr steht vor dem Turm."
+    },
+    "bild": "assets/spiele/orte/bautzen/reichenturm-strasse.webp",
+    "alt": "Der Reichenturm in Bautzen: ein hoher, weißer, runder Turm mit verziertem Aufsatz, davor Bäume und ein Platz."
+  }
+}

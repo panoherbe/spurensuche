@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <title>Ziegel</title>
+  <desc>Sammelstück: ein roter Ziegelstein im Dresdner Format mit einer Maurerkelle. Eigene Zeichnung, CC BY-SA 4.0.</desc>
+  <defs><clipPath id="ziegel-k"><circle cx="256" cy="248" r="212"/></clipPath><linearGradient id="ziegel-h" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FCEADC"/><stop offset="1" stop-color="#F6D5BF"/></linearGradient></defs>
+  <circle cx="256" cy="262" r="236" fill="#263238" opacity=".16"/>
+  <circle cx="256" cy="248" r="236" fill="#FFFFFF"/>
+  <circle cx="256" cy="248" r="212" fill="url(#ziegel-h)"/>
+  <g clip-path="url(#ziegel-k)" stroke-linejoin="round" stroke-linecap="round">
+
+    <path d="M30 360 H490 V480 H30 Z" fill="#F0CDB4"/>
+    <path d="M110 230 L310 170 L420 214 L222 278 Z" fill="#E07A55" stroke="#263238" stroke-width="7"/>
+    <path d="M110 230 L222 278 L222 360 L110 312 Z" fill="#B54C30" stroke="#263238" stroke-width="7"/>
+    <path d="M222 278 L420 214 L420 296 L222 360 Z" fill="#C95C3C" stroke="#263238" stroke-width="7"/>
+    <path d="M160 226 C180 220 200 222 214 230 M300 204 C320 200 340 204 352 212" fill="none" stroke="#F09B78" stroke-width="7"/>
+    <path d="M250 300 L262 296 M300 286 L316 280 M360 262 L374 258 M150 290 L162 296 M180 316 L192 322" stroke="#8E3A24" stroke-width="6"/>
+    <path d="M360 120 L300 176" stroke="#8A5A30" stroke-width="16"/>
+    <path d="M360 120 L300 176" stroke="#B07A47" stroke-width="8"/>
+    <path d="M330 80 L430 70 L420 150 Z" fill="#AEB8BE" stroke="#263238" stroke-width="7"/>
+    <path d="M350 92 L414 86" stroke="#DDE3E6" stroke-width="6"/>
+  </g>
+  <circle cx="256" cy="248" r="212" fill="none" stroke="#263238" stroke-width="7"/>
+</svg>

@@ -1,0 +1,53 @@
+/* Dilemma – nur Variablen aus basis.css (--spi-…), die aus den Variablen der App kommen. */
+
+.sp-dilemma-leiste { margin-bottom: calc(var(--spi-a) * 2); }
+.sp-dilemma, .sp-dilemma-schritt { display: grid; gap: calc(var(--spi-a) * 2); }
+.sp-dilemma-schritt { animation: sp-einblenden var(--spi-dauer) ease both; }
+.sp-schritt-titel { font-size: 1.2em; margin: 0; }
+.sp-situation { display: grid; gap: calc(var(--spi-a) * 2.5); grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 820px) { .sp-situation:has(.sp-situation-bild) { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: start; } }
+.sp-situation-bild { margin: 0; display: grid; gap: 4px; }
+.sp-situation-bild img { width: 100%; border-radius: calc(var(--spi-radius) * 0.75); box-shadow: var(--spi-schatten); }
+.sp-bildnachweis { font-size: 0.8em; color: var(--spi-leise); }
+.sp-situation-text { display: grid; gap: calc(var(--spi-a) * 1.5); justify-items: start; font-size: 1.05em; }
+.sp-dilemma-frage { font-size: 1.3em; font-weight: 750; line-height: 1.3; }
+
+.sp-meinungen { list-style: none; padding: 0; display: grid; gap: calc(var(--spi-a) * 1.5); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.sp-meinung { display: grid; grid-template-columns: auto 1fr; gap: calc(var(--spi-a) * 1.25); align-items: start; padding: calc(var(--spi-a) * 1.75); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie); }
+.sp-meinung-symbol { width: 2.2em; height: 2.2em; padding: 0.4em; border-radius: 50%; background: var(--spi-akzent-hell); color: var(--spi-akzent); }
+.sp-meinung-wer { font-weight: 750; font-size: 0.9em; color: var(--spi-leise); margin-bottom: 2px; }
+
+.sp-optionen { list-style: none; padding: 0; display: grid; gap: calc(var(--spi-a) * 2); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.sp-option { display: grid; gap: var(--spi-a); align-content: start; padding: calc(var(--spi-a) * 2.25); border-radius: var(--spi-radius); background: var(--spi-flaeche); border: 2px solid var(--spi-rand); }
+.sp-option-kopf { display: flex; gap: calc(var(--spi-a) * 1.25); align-items: center; }
+.sp-option-buchstabe { display: inline-grid; place-items: center; flex: none; width: 2.2em; height: 2.2em; border-radius: 50%; background: var(--spi-akzent); color: var(--spi-akzent-text); font-weight: 800; }
+.sp-option-titel { font-weight: 750; font-size: 1.1em; }
+.sp-stimmen { display: flex; gap: var(--spi-a); align-items: center; margin-top: var(--spi-a); }
+.sp-stimmen .sp-knopf { padding: 0.4em; min-width: 52px; }
+.sp-stimmzahl { min-width: 2.2ch; text-align: center; font-size: 1.7em; font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.sp-entscheidung { display: flex; gap: calc(var(--spi-a) * 1.25); align-items: center; font-weight: 700; padding: calc(var(--spi-a) * 1.5) calc(var(--spi-a) * 2); border-radius: calc(var(--spi-radius) * 0.75); background: var(--spi-akzent-hell); }
+.sp-argumente { list-style: none; padding: 0; display: grid; gap: calc(var(--spi-a) * 1.25); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.sp-argument {
+  display: grid; grid-template-columns: auto 1fr; gap: calc(var(--spi-a) * 1.25); align-items: start; width: 100%; height: 100%;
+  min-height: 48px; padding: calc(var(--spi-a) * 1.75); border-radius: calc(var(--spi-radius) * 0.75); text-align: left;
+  font: inherit; color: inherit; cursor: pointer; background: var(--spi-flaeche); border: 2px solid var(--spi-rand);
+}
+.sp-argument:hover { background: var(--spi-flaeche-2); }
+.sp-argument[aria-pressed='true'] { border-color: var(--spi-akzent); background: var(--spi-akzent-hell); box-shadow: 0 0 0 2px var(--spi-akzent); }
+.sp-argument--unpassend, .sp-argument--unpassend[aria-pressed='true'] { border-color: var(--spi-hinweis); background: var(--spi-hinweis-hell); box-shadow: 0 0 0 2px var(--spi-hinweis); }
+.sp-argument-haken { display: grid; place-items: center; width: 1.9em; height: 1.9em; border-radius: 8px; border: 2px solid var(--spi-rand); background: var(--spi-flaeche); color: transparent; }
+.sp-argument-haken .sp-symbol { width: 1.2em; height: 1.2em; }
+.sp-argument[aria-pressed='true'] .sp-argument-haken { background: var(--spi-akzent); border-color: var(--spi-akzent); color: var(--spi-akzent-text); }
+.sp-argument-wer { display: block; font-size: 0.85em; font-weight: 750; color: var(--spi-leise); margin-bottom: 2px; }
+.sp-argument-text { display: block; }
+.sp-argument-hinweis { display: block; margin-top: 4px; font-weight: 750; }
+
+.sp-folge, .sp-wirklich { display: grid; gap: var(--spi-a); justify-items: start; padding: calc(var(--spi-a) * 2) calc(var(--spi-a) * 2.25); border-radius: calc(var(--spi-radius) * 0.75); }
+.sp-folge { background: var(--spi-flaeche-2); border: 1px solid var(--spi-linie); }
+.sp-wirklich { background: var(--spi-erfolg-hell); border: 2px solid var(--spi-erfolg); }
+.sp-folge-titel { display: flex; gap: 0.4em; align-items: center; font-weight: 750; }
+.sp-wirklich .sp-folge-titel .sp-symbol { color: var(--spi-erfolg); }
+.sp-andere { padding: calc(var(--spi-a) * 1.5) calc(var(--spi-a) * 2); border-radius: calc(var(--spi-radius) * 0.75); border: 1px dashed var(--spi-rand); }
+.sp-andere summary { cursor: pointer; font-weight: 700; min-height: 44px; display: flex; align-items: center; }
+.sp-andere p { margin-top: var(--spi-a); }

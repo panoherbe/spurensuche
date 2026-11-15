@@ -41,6 +41,8 @@
 .sp-spiel p { margin: 0; }
 .sp-spiel h2, .sp-spiel h3 { margin: 0; line-height: 1.2; font-weight: 750; }
 .sp-spiel ul, .sp-spiel ol { margin: 0; }
+/* hidden gilt immer, auch wo eine Klasse display setzt */
+.sp-spiel [hidden] { display: none !important; }
 
 .sp-unsichtbar {
   position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
@@ -138,8 +140,20 @@
 
 .sp-aktionen { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 1.5); justify-content: flex-end; align-items: center; }
 .sp-aktionen--mitte { justify-content: center; }
+.sp-aktionen--start { justify-content: flex-start; }
 .sp-werkzeuge { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 1.25); align-items: center; }
 .sp-fuss { display: flex; flex-wrap: wrap; gap: calc(var(--spi-a) * 1.5); justify-content: space-between; align-items: center; border-top: 1px solid var(--spi-linie); padding-top: calc(var(--spi-a) * 2); }
+
+/* Kartenknopf: große Wahlfläche mit Symbol, Titel und Text */
+.sp-knopf--karte {
+  display: grid; grid-template-columns: auto 1fr; gap: 4px calc(var(--spi-a) * 1.5); align-items: start; justify-content: stretch;
+  text-align: left; border-radius: var(--spi-radius); padding: calc(var(--spi-a) * 2); min-height: 88px; font-weight: 500;
+  border: 2px solid var(--spi-rand); background: var(--spi-flaeche);
+}
+.sp-knopf--karte:hover { background: var(--spi-akzent-hell); border-color: var(--spi-akzent); }
+.sp-knopf--karte .sp-symbol { grid-row: span 2; width: 2.4em; height: 2.4em; padding: 0.45em; border-radius: 50%; background: var(--spi-akzent-hell); color: var(--spi-akzent); }
+.sp-wahl-titel { font-weight: 750; font-size: 1.05em; }
+.sp-wahl-text { color: var(--spi-leise); font-size: 0.92em; line-height: 1.35; }
 
 /* Rückmeldung: immer mit Wort und Symbol, nie nur Farbe */
 .sp-ansage { display: flex; gap: 0.55em; align-items: flex-start; font-weight: 650; border-radius: calc(var(--spi-radius) * 0.75); }
