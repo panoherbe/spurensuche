@@ -33,7 +33,8 @@ Spielfigur. Alles sind ES-Module ohne Build-Schritt und ohne Laufzeit-Abhängigk
 # Logik und Inhalte (Node 24, im Container ohne Netz)
 docker run --rm --network none -v "$PWD":/repo:ro -w /repo/spiele node:24-alpine node --test '_test/*.test.js'
 
-# Messlauf: Playwright mit axe-core, jede Aufgabe nur mit der Tastatur gelöst, Bilder, Collage, Figur
+# Messlauf: Playwright mit axe-core, jede Aufgabe nur mit der Tastatur gelöst, Bilder, Collage, Figur;
+# in jedem Zustand Prüfung auf Text über dem Kartenrand, dazu die Startkarten in 13 Fensterbreiten (WebKit: iPad-Breiten)
 REPO="$PWD" AUS=/tmp/messung AXE=/pfad/zu/axe.min.js sh spiele/_pruefung/laufen.sh --umfang voll
 ```
 

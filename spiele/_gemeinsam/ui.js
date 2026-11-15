@@ -8,7 +8,7 @@
 import { text } from './sprache.js';
 import { symbol } from './symbole.js';
 import { ullaElement } from './ulla.js';
-import { neuesProtokoll } from './protokoll.js';
+import { neuesProtokoll, rundenRollen } from './protokoll.js';
 import { erzeugeVorlesen } from './vorlesen.js';
 import { ton } from './ton.js';
 
@@ -38,8 +38,21 @@ let laufendeNummer = 0;
 /** Eindeutige id für aria-Verweise. */
 export const neueId = (vorsilbe = 'sp') => `${vorsilbe}-${++laufendeNummer}`;
 
-/** Pfad aus den Inhalten (relativ zur Repo-Wurzel) als URL. */
-export const pfad = (p) => (p ? new URL(p, WURZEL_URL).href : '');
+/** Pfad aus den Inhalten (relativ zur Repo-Wurzel) als URL; Basis ist umgebung.basisUrl (Vertrag 2.3), sonst die Wurzel
+ * neben diesem Modul. */
+export const pfad = (p, basis = WURZEL_URL) => (p ? new URL(p, basis).href : '');
+
+/** basisUrl der App, wenn sie eine gültige URL ist; endet immer auf „/“. Sonst die Wurzel neben diesem Modul. */
+function basisAus(wert) {
+  if (wert) {
+    try {
+      const url = new URL(String(wert), document.baseURI);
+      if (!url.pathname.endsWith('/')) url.pathname += '/';
+      return url.href;
+    } catch { /* ungültig: Rückfall auf die Modulwurzel */ }
+  }
+  return WURZEL_URL.href;
+}
 
 /** Stylesheet als <link> in `ziel` einhängen und auf das Laden warten (strenge CSP: kein <style>). */
 function verlinkeStil(ziel, href) {
@@ -55,10 +68,12 @@ function verlinkeStil(ziel, href) {
 }
 
 const kataloge = new Map();
-/** Sammelstücke der Belohnung: aus umgebung.items, sonst aus inhalte/items.json. */
+/** Sammelstücke der Belohnung: aus umgebung.katalog (Vertrag 2.3), sonst umgebung.items (frühere Fassung), sonst aus
+ * inhalte/items.json (nur ohne App, etwa auf den Testseiten). */
 async function ladeItems(umgebung) {
+  if (Array.isArray(umgebung.katalog)) return umgebung.katalog;
   if (Array.isArray(umgebung.items)) return umgebung.items;
-  const url = pfad('inhalte/items.json');
+  const url = pfad('inhalte/items.json', umgebung.basisUrl);
   if (!kataloge.has(url)) {
     kataloge.set(url, fetch(url).then((a) => (a.ok ? a.json() : [])).then((d) => (Array.isArray(d) ? d : d.items ?? [])).catch(() => []));
   }
@@ -80,6 +95,8 @@ export function normalisiere(umgebung = {}) {
     melde: typeof umgebung.melde === 'function' ? umgebung.melde : () => {},
     signal: umgebung.signal ?? null,
     ton: !!umgebung.ton,
+    basisUrl: basisAus(umgebung.basisUrl),
+    rollen: umgebung.rollen === false ? false : (Array.isArray(umgebung.rollen) ? umgebung.rollen : null),
   };
 }
 
@@ -104,7 +121,8 @@ export async function spielRahmen({ wurzel, aufgabe, umgebung, meta, stil, aufba
   if (!wurzel) throw new Error('starte(): Es fehlt das Element, in dem das Spiel laufen soll.');
   if (!aufgabe || aufgabe.format !== meta.id) throw new Error(`starte(): Die Aufgabe gehört nicht zum Format „${meta.id}“.`);
   const u = normalisiere(umgebung);
-  const protokoll = neuesProtokoll({ melde: u.melde, aufgabe });
+  const rollen = rundenRollen(aufgabe, u.rollen);
+  const protokoll = neuesProtokoll({ melde: u.melde, aufgabe, rollen });
   const t = (feld) => text(feld, u.sprache);
 
   const klassen = ['sp-spiel', u.hoherKontrast && 'sp-kontrast', u.reduzierteBewegung && 'sp-ruhig', u.sprache === 'einfach' && 'sp-einfach'].filter(Boolean).join(' ');
@@ -120,7 +138,8 @@ export async function spielRahmen({ wurzel, aufgabe, umgebung, meta, stil, aufba
   const aufraeumen = [];
   let beendet = false;
   const k = {
-    spiel, u, t, protokoll, aufgabe, meta, belohnung, aufraeumen, pfad, startbild,
+    spiel, u, t, protokoll, aufgabe, meta, belohnung, aufraeumen, startbild, rollen,
+    pfad: (p) => pfad(p, u.basisUrl),
     get beendet() { return beendet; },
     get animiert() { return !u.reduzierteBewegung; },
     ton: (art) => ton(art, u.ton),
@@ -183,7 +202,7 @@ export function itemSticker(k, item, klasse = '') {
 }
 
 function rollenBlock(k) {
-  const rollen = k.aufgabe.rollen ?? [];
+  const rollen = k.rollen ?? [];
   if (rollen.length === 0) return null;
   const alias = { lesen: 'vorlesen', navigation: 'steuern', recherche: 'nachschlagen', protokoll: 'pruefen' };
   const eintraege = rollen.map((kennung) => {
@@ -245,7 +264,7 @@ function baueFlaeche(k) {
   return { bereich, kopf, titel, auftrag, buehne, tippBox, ansage, werkzeuge, aktionen };
 }
 
-/** Schaltfläche. rolle: welche Knopf-Rolle sie bedient (meldet „rolle“, wenn die Aufgabe Rollen hat). */
+/** Schaltfläche. rolle: welche Knopf-Rolle sie bedient (meldet „rolle“, wenn die Runde Rollen hat). */
 function knopf(k, { text: beschriftung, symbol: name, art = 'zweit', rolle, beiKlick, gross, klein, label, ...attribute }) {
   const klassen = ['sp-knopf', `sp-knopf--${art}`, gross && 'sp-knopf--gross', klein && 'sp-knopf--klein'].filter(Boolean).join(' ');
   const el = h('button', { type: 'button', class: klassen, 'aria-label': label, ...attribute },

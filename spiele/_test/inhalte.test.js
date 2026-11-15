@@ -58,6 +58,11 @@ test('Gemeinsame Felder (Schnittstelle 2.2), Belohnungen, Bilder und Zählungen 
     for (const b of a.belohnung) assert.ok(itemIds.has(b), `${id}: Sammelstück ${b} fehlt in items.json`);
     const bilder = [a.bild?.datei, ...(a.karten ?? []).map((k) => k.bild?.datei), a.vergleich?.bild].filter(Boolean);
     for (const b of bilder) assert.ok(existsSync(WURZEL + b), `${id}: Datei fehlt: ${b}`);
+    // wie die Inhaltsprüfung der App (Schnittstelle 1.2): jeder Pfad assets/spiele/… irgendwo in der Aufgabe existiert
+    const pfade = [];
+    const sammle = (w) => { if (typeof w === 'string') { if (w.startsWith('assets/spiele/')) pfade.push(w); } else if (w && typeof w === 'object') Object.values(w).forEach(sammle); };
+    sammle(a);
+    for (const b of pfade) assert.ok(existsSync(WURZEL + b), `${id}: Datei ${b} fehlt`);
     if (a.format === 'bildpuzzle') assert.equal(a.teile.length, a.raster.spalten * a.raster.zeilen, `${id}: teile`);
     if (a.format === 'bildsuche') {
       if (a.felder) assert.equal(a.felder.length, a.raster.spalten * a.raster.zeilen, `${id}: felder`);

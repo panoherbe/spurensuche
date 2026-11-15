@@ -24,6 +24,7 @@ GERAETE = {
     "desktop": {"viewport": {"width": 1280, "height": 800}},
     "tablet": {"viewport": {"width": 800, "height": 1280}, "has_touch": True},
     "telefon": {"viewport": {"width": 390, "height": 844}, "is_mobile": True, "has_touch": True},
+    "ipad": {"viewport": {"width": 820, "height": 1180}, "has_touch": True},  # iPad hochkant (Air, 10. Generation)
 }
 EINSTELLUNGEN = {
     "standard": {},
@@ -33,6 +34,44 @@ EINSTELLUNGEN = {
     "ruhig-langsam": {"ruhig": "1", "tempo": "0.5"},
 }
 AXE_REGELN = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]
+
+# Überlauf: Text, der über den Rand seines Kastens läuft oder dort abgeschnitten wird (axe sieht das nicht).
+# Für jeden sichtbaren Textknoten werden seine Zeilenrechtecke mit den umgebenden Kästen verglichen, bis zum
+# ersten Kasten mit eigener Bildlaufleiste. Dazu: waagerechter Bildlauf der ganzen Seite.
+UEBERLAUF_JS = """() => {
+  const wurzel = document.querySelector('.sp-spiel') || document.body;
+  const name = (e) => e.tagName.toLowerCase() + (typeof e.className === 'string' && e.className.trim() ? '.' + e.className.trim().split(/\\s+/).join('.') : '');
+  const funde = [];
+  const bereich = document.createRange();
+  const gang = document.createTreeWalker(wurzel, NodeFilter.SHOW_TEXT);
+  for (let n = gang.nextNode(); n; n = gang.nextNode()) {
+    const text = n.textContent.trim();
+    const el = n.parentElement;
+    if (!text || !el || el.closest('svg, .sp-unsichtbar, [hidden]')) continue;
+    if (typeof el.checkVisibility === 'function' && !el.checkVisibility({ visibilityProperty: true })) continue;
+    bereich.selectNodeContents(n);
+    let fund = null;
+    for (const r of bereich.getClientRects()) {
+      if (r.width < 1) continue;
+      for (let a = el; a && a !== document.documentElement; a = a.parentElement) {
+        const st = getComputedStyle(a);
+        if (st.display === 'inline' || st.display === 'contents') continue;
+        const b = a.getBoundingClientRect();
+        const ueber = Math.max(r.right - b.right, b.left - r.left);
+        if (ueber > 1) { fund = { text: text.slice(0, 40), kasten: name(a), px: Math.round(ueber) }; break; }
+        if (st.overflowX === 'auto' || st.overflowX === 'scroll') break;
+      }
+      if (fund) break;
+    }
+    if (fund) funde.push(fund);
+  }
+  const seite = Math.max(0, document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  return { seite, anzahl: funde.length + (seite > 1 ? 1 : 0), stellen: funde.slice(0, 12) };
+}"""
+# Breiten-Durchlauf der Startkarten. Die Spalten der Startkarte richten sich nach der Breite der Karte
+# (Container-Abfrage), nicht nach dem Fenster; viele Fensterbreiten decken damit auch jeden Rahmen der App ab.
+BREITEN = [320, 360, 390, 600, 680, 744, 768, 800, 820, 900, 1024, 1180, 1280]
+IPAD_BREITEN = [744, 768, 820, 1024, 1180]  # WebKit: iPad mini, iPad, iPad Air hochkant; iPad und Air quer
 
 
 def lies(repo, aufgabe):
@@ -64,6 +103,7 @@ class Lauf:
     def __init__(self, seite, axe_quelle, name, bilder, fotos):
         self.seite, self.axe_quelle, self.name, self.bilder, self.fotos = seite, axe_quelle, name, bilder, fotos
         self.axe = {}
+        self.ueberlauf = {}
         self.schritte = []
 
     def ruhe(self):
@@ -85,6 +125,8 @@ class Lauf:
             AXE_REGELN,
         )
         self.axe[zustand] = ergebnis
+        self.seite.evaluate("() => document.fonts.ready.then(() => true)")
+        self.ueberlauf[zustand] = self.seite.evaluate(UEBERLAUF_JS)
         if foto and self.fotos:
             self.seite.screenshot(path=str(self.bilder / f"{self.name}-{zustand}.png"), full_page=True, caret="initial")
         return ergebnis
@@ -320,6 +362,7 @@ def collage_laeufe(browser, basis, aus, axe_quelle, wiederholungen=5):
             "kennungIstUuid": bool(__import__("re").match(r"^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$", m["kennung"])),
             "erstelltMitZeitzone": m["erstellt"].endswith("Z"),
             "axe": lauf.axe, "axeVerstoesse": sum(len(v) for v in lauf.axe.values()),
+            "ueberlaufStellen": sum(w["anzahl"] for w in lauf.ueberlauf.values()),
         })
         print(json.dumps({k: ergebnisse[-1][k] for k in ("anordnung", "farbstimmung", "anzahl", "dauerMs", "png", "axeVerstoesse")}, ensure_ascii=False), flush=True)
         kontext.close()
@@ -348,9 +391,35 @@ def figur_laeufe(browser, basis, aus, axe_quelle):
         lauf.taste(seite.get_by_role("button", name="Fertig"))
         warte_bis(seite, "window.figurTest && window.figurTest.fertig", 10000)
         auswahl = seite.evaluate("window.figurTest.auswahl")
-        ergebnisse.append({"geraet": geraet, "auswahl": auswahl, "gesperrt": gesperrt, "axe": lauf.axe, "axeVerstoesse": sum(len(v) for v in lauf.axe.values())})
+        ergebnisse.append({"geraet": geraet, "auswahl": auswahl, "gesperrt": gesperrt, "axe": lauf.axe, "axeVerstoesse": sum(len(v) for v in lauf.axe.values()),
+                           "ueberlaufStellen": sum(w["anzahl"] for w in lauf.ueberlauf.values())})
         print(json.dumps({"figur": geraet, "auswahl": {k: auswahl.get(k) for k in ("frisur", "kopfbedeckung", "begleiter")}, "gesperrt": gesperrt, "axeVerstoesse": ergebnisse[-1]["axeVerstoesse"]}, ensure_ascii=False), flush=True)
         kontext.close()
+    return ergebnisse
+
+
+def breiten_laeufe(browser_fuer, basis, aufgaben, aus, fotos):
+    """Startkarte jeder Aufgabe in vielen Fensterbreiten (Chromium) und in den iPad-Breiten (WebKit), in Standard- und
+    einfacher Sprache: Überlauf je Probe. Bildschirmfoto der Startkarte frauenkirche/2 in 820 px (iPad hochkant)."""
+    ergebnisse = []
+    for browsername, breiten in (("chromium", BREITEN), ("webkit", IPAD_BREITEN)):
+        for breite in breiten:
+            kontext = browser_fuer(browsername).new_context(viewport={"width": breite, "height": 1180}, device_scale_factor=1)
+            seite = kontext.new_page()
+            for aufgabe in aufgaben:
+                for einstellung in ("standard", "einfach"):
+                    parameter = {"a": aufgabe, **EINSTELLUNGEN[einstellung]}
+                    seite.goto(f"{basis}/spiele/_vorschau/spiel.html?" + "&".join(f"{k}={v}" for k, v in parameter.items()))
+                    seite.wait_for_selector(".sp-start", timeout=15000)
+                    Lauf(seite, "", "", aus / "bilder", False).ruhe()
+                    seite.evaluate("() => document.fonts.ready.then(() => true)")
+                    w = seite.evaluate(UEBERLAUF_JS)
+                    ergebnisse.append({"browser": browsername, "breite": breite, "aufgabe": aufgabe, "einstellung": einstellung, **w})
+                    if fotos and breite == 820 and aufgabe == "frauenkirche/2" and einstellung == "standard":
+                        seite.screenshot(path=str(aus / "bilder" / f"breite-820-{browsername}-frauenkirche-2-start.png"), full_page=True, caret="initial")
+            kontext.close()
+            print(json.dumps({"breiten": browsername, "breite": breite, "proben": sum(1 for e in ergebnisse if e["browser"] == browsername and e["breite"] == breite),
+                              "ueberlauf": sum(e["anzahl"] for e in ergebnisse if e["browser"] == browsername and e["breite"] == breite)}, ensure_ascii=False), flush=True)
     return ergebnisse
 
 
@@ -412,6 +481,11 @@ def konzeptbilder(browser, basis, aus):
     s.wait_for_selector(".sp-figur-baukasten svg")
     s.evaluate("() => { for (const e of document.querySelectorAll('.vs-kopf, .vs-protokoll')) e.style.setProperty('display', 'none'); }")
     ruhig(s); s.screenshot(path=str(ziel / "6-figur-baukasten.png")); bilder.append("6-figur-baukasten.png"); k.close()
+    # 7 Startkarte auf dem iPad hochkant (820 × 1180, doppelte Dichte: 1640 × 2360 px), Rollen 2 × 2
+    k, s = seite_neu((820, 1180))
+    s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=frauenkirche/2")
+    s.wait_for_selector(".sp-start")
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "7-startkarte-ipad-hochkant.png")); bilder.append("7-startkarte-ipad-hochkant.png"); k.close()
     return bilder
 
 
@@ -463,6 +537,8 @@ def ein_lauf(browser, basis, repo, aufgabe_id, geraet, einstellung, axe_quelle, 
     eintrag["axe"] = lauf.axe
     eintrag["axeVerstoesse"] = sum(len(v) for v in lauf.axe.values())
     eintrag["axeZustaende"] = len(lauf.axe)
+    eintrag["ueberlauf"] = {z: w for z, w in lauf.ueberlauf.items() if w["anzahl"]}
+    eintrag["ueberlaufStellen"] = sum(w["anzahl"] for w in lauf.ueberlauf.values())
     eintrag["tasten"] = len(lauf.schritte)
     eintrag["konsole"] = [z for z in konsole if "AtkinsonHyperlegible" not in z]
     kontext.close()
@@ -480,6 +556,7 @@ def main():
     arg.add_argument("--fotos", default="1")
     arg.add_argument("--collage", default="1")
     arg.add_argument("--konzept", default="0")
+    arg.add_argument("--breiten", default="1")
     arg.add_argument("--stand", default="")
     a = arg.parse_args()
     aus = Path(a.aus)
@@ -498,7 +575,7 @@ def main():
             plan += [("chromium", aufgabe, "tablet", "standard")]
             plan += [("chromium", aufgabe, "desktop", e) for e in ("einfach", "kontrast", "dunkel", "ruhig-langsam")]
             plan += [("chromium", aufgabe, "telefon", e) for e in ("einfach", "kontrast")]
-            plan += [("firefox", aufgabe, "desktop", "standard"), ("webkit", aufgabe, "tablet", "standard")]
+            plan += [("firefox", aufgabe, "desktop", "standard"), ("webkit", aufgabe, "ipad", "standard")]
     laeufe = []
     start = datetime.now(timezone.utc)
     with sync_playwright() as p:
@@ -514,6 +591,13 @@ def main():
         collagen = collage_laeufe(browser["chromium"], a.basis, aus, axe_quelle) if a.collage == "1" else []
         figuren = figur_laeufe(browser["chromium"], a.basis, aus, axe_quelle) if a.collage == "1" else []
         konzept = konzeptbilder(browser["chromium"], a.basis, aus) if a.konzept == "1" else []
+
+        def browser_fuer(name):
+            if name not in browser:
+                browser[name] = getattr(p, name).launch()
+                versionen[name] = browser[name].version
+            return browser[name]
+        breiten = breiten_laeufe(browser_fuer, a.basis, aufgaben, aus, fotos) if a.breiten == "1" else []
         for b in browser.values():
             b.close()
     ende = datetime.now(timezone.utc)
@@ -526,6 +610,10 @@ def main():
         "schemaFehler": sum(len(l.get("schemaFehler") or []) for l in laeufe),
         "ereignisFehler": sum(len(l.get("ereignisFehler") or []) for l in laeufe),
         "konsolenmeldungen": sum(len(l["konsole"]) for l in laeufe),
+        "ueberlauf": sum(l.get("ueberlaufStellen", 0) for l in laeufe),
+        "breitenProben": len(breiten),
+        "breitenMitUeberlauf": sum(1 for b in breiten if b["anzahl"]),
+        "breiten": sorted({b["breite"] for b in breiten}),
         "formate": sorted({l["format"] for l in laeufe}),
         "aufgaben": sorted({l["aufgabe"] for l in laeufe}),
     }
@@ -539,6 +627,7 @@ def main():
         "collagen": collagen,
         "figur": figuren,
         "konzeptbilder": konzept,
+        "breiten": breiten,
         "laeufe": laeufe,
     }
     (aus / "messwerte.json").write_text(json.dumps(messwerte, ensure_ascii=False, indent=2), encoding="utf-8")

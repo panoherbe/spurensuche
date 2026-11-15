@@ -27,3 +27,10 @@ const { png, vorschau, metadaten } = await erzeugeCollage(items, { anordnung: 'k
   immer 2048 px.
 - Inhaltsrichtlinie: Die Sticker kommen aus `assets/spiele/items/` (gleiche Herkunft); für die Vorschau als Bild braucht
   die Seite `img-src blob:`.
+
+## Vorschau auf Option 1 (KI-Bild, nicht angebunden)
+
+`prompt.js` setzt aus den gewählten Sammelstücken und den Reglern einen Prompt zusammen, nur aus geprüften Bausteinen in
+`inhalte/prompt-bausteine.json` (kein Freitextfeld; Ausschluss von Menschen, Gesichtern, Schrift, Logos). Deutsch zum Zeigen
+und Vorlesen, englisch für ein Bildmodell. Ein Bild entsteht erst mit einem angebundenen, austauschbaren Bildmodell; es wäre
+als „KI-generiert“ gekennzeichnet (`metadaten.art: "ki-generiert"`). Bis dahin gilt die Item-Collage.

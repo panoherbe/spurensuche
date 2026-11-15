@@ -9,7 +9,7 @@ set -eu
 : "${REPO:?REPO = Repo-Stand}"
 IDS="$(id -u):$(id -g)"
 mkdir -p "$NACHWEIS/bilder" "$NACHWEIS/collagen" "$NACHWEIS/konzept"
-cp "$AUS/messwerte.json" "$AUS/tests.tap" "$AUS/node.txt" "$NACHWEIS/"
+cp "$AUS/messwerte.json" "$AUS/tests.tap" "$AUS/node.txt" "$AUS/groessen.json" "$NACHWEIS/"
 cp "$AUS"/konzept/*.png "$NACHWEIS/konzept/" 2>/dev/null || true
 docker run --rm --network none --user "$IDS" -e HOME=/tmp -v "$REPO":/repo:ro -v "$NACHWEIS":/n spurensuche-pruefung:1.56.0 \
   python3 /repo/spiele/_pruefung/protokoll.py /n

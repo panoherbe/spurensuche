@@ -44,6 +44,19 @@ a(f"**{z['geloest']} von {z['laeufe']} Läufen gelöst**, jeder nur per Tastatur
 a(f"axe-core prüfte **{de(z['axeZustaende'])} Zustände** (Startkarte, Spiel, Tipp, Rückmeldung, Lösung, Abschluss):")
 a(f"**{z['axeVerstoesse']} Verstöße** gegen WCAG 2.0/2.1/2.2 A und AA. Schemafehler {z['schemaFehler']},")
 a(f"Ereignisse außerhalb der Schnittstelle {z['ereignisFehler']}, Konsolenmeldungen {z['konsolenmeldungen']}.")
+if "ueberlauf" in z:
+    a(f"Text über den Kartenrand oder abgeschnitten (in jedem geprüften Zustand gemessen): **{z['ueberlauf']} Stellen**.")
+if z.get("breitenProben"):
+    breiten = ", ".join(str(b) for b in z["breiten"])
+    a("")
+    a(f"**Breiten-Durchlauf:** Startkarte jeder Aufgabe in {len(z['breiten'])} Fensterbreiten ({breiten} px; Chromium, dazu WebKit in den")
+    a(f"iPad-Breiten), Standard- und einfache Sprache: {de(z['breitenProben'])} Proben, davon **{z['breitenMitUeberlauf']} mit Überlauf**.")
+    a("Die Spalten der Startkarte richten sich nach der Breite der Karte, nicht nach dem Fenster; damit decken die Breiten")
+    a("auch den Rahmen der App ab (iPad hochkant: 820 px Fenster, gut 700 px Karte).")
+    funde = [b for b in m.get("breiten", []) if b["anzahl"]]
+    for b in funde[:10]:
+        stellen = "; ".join(f"„{x['text']}“ in {x['kasten']} ({x['px']} px)" for x in b["stellen"][:3]) or f"Seite {b['seite']} px breiter"
+        a(f"- {b['browser']} {b['breite']} px {b['aufgabe']} {b['einstellung']}: {stellen}")
 if z["fehlgeschlagen"]:
     a("")
     a("**Nicht gelöst:** " + "; ".join(z["fehlgeschlagen"]))
@@ -105,7 +118,14 @@ a("")
 for f in m.get("figur", []):
     a(f"- {f['geraet']}: per Tastatur gewählt {', '.join(f'{k} = {v}' for k, v in f['auswahl'].items())}; gesperrt geblieben: {', '.join(f['gesperrt'])}; axe-Verstöße {f['axeVerstoesse']}.")
 a("")
-a("## 5. Was diese Messung nicht zeigt")
+if (ordner / "groessen.json").exists():
+    g = json.loads((ordner / "groessen.json").read_text(encoding="utf-8"))
+    a("## 5. Größe")
+    a("")
+    a("Je Format JS + CSS samt gemeinsamer Teile (Obergrenze, unkomprimiert): " + ", ".join(f"{k} {round(v / 1024)} KB" for k, v in g["formate"].items()) + ".")
+    a(f"Alles, was die App von den Spielen ausliefert (Spiele ohne Test- und Prüfordner, Inhalte, Bilder, Schrift): {g['dateien']} Dateien, {round(g['gesamt'] / 1024 / 1024, 1)} MB.")
+    a("")
+a("## 6. Was diese Messung nicht zeigt")
 a("")
 a("- Keine echten Geräte: Safari ist nur über die WebKit-Engine von Playwright geprüft, nicht auf einem iPad.")
 a("- axe-core findet einen Teil der WCAG-Verstöße automatisch; es ersetzt kein Audit durch Menschen und keinen Test mit")

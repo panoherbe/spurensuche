@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { pruefeSchema } from '../_gemeinsam/schema.js';
-import { neuesProtokoll, ereignisFehler, rollenZuordnung, sterne } from '../_gemeinsam/protokoll.js';
+import { neuesProtokoll, ereignisFehler, rollenZuordnung, rundenRollen, sterne } from '../_gemeinsam/protokoll.js';
 import { mische, mischeOhneFixpunkte, hash } from '../_gemeinsam/zufall.js';
 import { text, grosseZahl, mitEinheit } from '../_gemeinsam/sprache.js';
 import * as puzzle from '../bildpuzzle/logik.js';
@@ -215,4 +215,17 @@ test('Prompt-Baukasten (Vorschau Option 1): nur geprüfte Bausteine, kein Freite
   assert.doesNotMatch(p.de + p.en, /script/);
   const items = JSON.parse(readFileSync(new URL('../../inhalte/items.json', import.meta.url), 'utf8'));
   for (const item of items) assert.ok(bausteine.items[item.id], `Baustein für ${item.id} fehlt`);
+});
+
+test('Rollen der Runde nach Vertrag 2.3: umgebung.rollen false schaltet „rolle“ ab, sonst Ersatz für fehlende Aufgaben-Rollen', () => {
+  assert.deepEqual(rundenRollen({ rollen: ['vorlesen', 'steuern'] }, false), []);
+  assert.deepEqual(rundenRollen({ rollen: ['vorlesen', 'steuern'] }, ['pruefen']), ['vorlesen', 'steuern']);
+  assert.deepEqual(rundenRollen({}, ['pruefen']), ['pruefen']);
+  assert.deepEqual(rundenRollen({ rollen: [] }, null), []);
+  const gemeldet = [];
+  const ohne = neuesProtokoll({ melde: (e) => gemeldet.push(e), aufgabe: { rollen: ['vorlesen'] }, rollen: rundenRollen({ rollen: ['vorlesen'] }, false) });
+  assert.equal(ohne.rolle('vorlesen'), null);
+  const ersatz = neuesProtokoll({ melde: (e) => gemeldet.push(e), aufgabe: {}, rollen: rundenRollen({}, ['steuern']) });
+  ersatz.rolle('steuern');
+  assert.deepEqual(gemeldet.map((e) => [e.art, e.wert]), [['rolle', 'steuern']]);
 });
