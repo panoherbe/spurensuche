@@ -47,6 +47,8 @@ await schritt('Karte mit Fortschritt (simuliert)', async () => {
     await sp.schreibe('team', t);
     return true;
   })()`);
+  // erst zur Karte, dann neu laden: sonst lädt die Seite wieder den Beitritt (#/beitritt?code=…)
+  await springe(s, '#/karte');
   await s.sende('Page.reload', {});
   await warteText(s, 'Alle Orte');
   await bild('1-karte');
@@ -70,6 +72,10 @@ await schritt('Spiel mit einfacher Sprache und Vorlesen', async () => {
 await schritt('Collage mit Reglern', async () => {
   const da = await js(s, `fetch('spiele/collage/index.js').then((r) => r.ok).catch(() => false)`);
   if (!da) throw new Error('Collage-Modul fehlt noch (spiele/collage/index.js)');
+  // erst die Aufgabe verlassen: beim Verlassen speichert die App ihren Spielstand und würde den eingesetzten überschreiben
+  await springe(s, '#/karte');
+  await warteText(s, 'Alle Orte');
+  await pause(500);
   // Abschlussaufgabe als geschafft eintragen (simuliert), damit das Bild sich öffnet
   await js(s, `(async () => {
     const sp = await import('./app/js/speicher.js');
