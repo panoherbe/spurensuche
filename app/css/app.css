@@ -169,6 +169,8 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 128px; }
 
 /* Ort */
 .zurueck { display: inline-flex; align-items: center; gap: 0.35em; min-height: 44px; padding: 0 1em; margin-bottom: 14px; border-radius: 999px; border: 2px solid var(--sp-kontur); background: var(--sp-flaeche); color: var(--sp-text); text-decoration: none; font-weight: 700; }
+.ort-seite > section { margin-bottom: 22px; }
+main > form.karte, main > .karte { margin-bottom: 16px; }
 .ort-kopf { display: grid; gap: 20px; grid-template-columns: minmax(0, 1fr); align-items: center; margin-bottom: 18px; }
 @media (min-width: 720px) { .ort-kopf { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 .ortsfoto { margin: 4px; padding: 10px 10px 8px; background: #fff; border: 3px solid var(--sp-kontur); border-radius: 10px; box-shadow: 0 6px 0 rgb(27 35 64 / 0.2); transform: rotate(-1.5deg); }
