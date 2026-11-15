@@ -436,7 +436,8 @@ def breiten_laeufe(browser_fuer, basis, aufgaben, aus, fotos):
 
 
 def konzeptbilder(browser, basis, aus):
-    """Bilder für Konzept und README: 1280 × 800 bei doppelter Pixeldichte (2560 × 1600 px), nach allen Animationen."""
+    """Bilder für Konzept und README: Fenster 1280 × 800 bei doppelter Pixeldichte (2560 px breit), ganze Seitenhöhe
+    (sonst schneidet ein zum Fokus gescrolltes Fenster die erste Zeile ab), nach allen Animationen."""
     ziel = aus / "konzept"
     ziel.mkdir(exist_ok=True)
     def seite_neu(groesse=(1280, 800)):
@@ -455,7 +456,7 @@ def konzeptbilder(browser, basis, aus):
     s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=bastei/2&sprache=einfach")
     s.get_by_role("button", name="Los geht’s").click(); s.wait_for_selector(".sp-wahl")
     s.locator("[data-weg='gemeinsam']").click(); s.wait_for_selector(".sp-einigen")
-    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "1-schaetzfrage-einfache-sprache.png")); bilder.append("1-schaetzfrage-einfache-sprache.png"); k.close()
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "1-schaetzfrage-einfache-sprache.png"), full_page=True); bilder.append("1-schaetzfrage-einfache-sprache.png"); k.close()
     # 2 Dilemma: Begründen
     k, s = seite_neu()
     s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=frauenkirche/3")
@@ -464,13 +465,13 @@ def konzeptbilder(browser, basis, aus):
     s.get_by_role("button", name="eine Stimme mehr für B").click(); s.get_by_role("button", name="eine Stimme mehr für B").click(); s.get_by_role("button", name="eine Stimme mehr für A").click()
     s.locator(".sp-aktionen .sp-knopf--haupt").last.click(); s.wait_for_selector(".sp-argumente")
     s.locator("[data-argument='steinmetzin']").click(); s.locator("[data-argument='pfarrerin']").click()
-    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "2-dilemma-begruenden.png")); bilder.append("2-dilemma-begruenden.png"); k.close()
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "2-dilemma-begruenden.png"), full_page=True); bilder.append("2-dilemma-begruenden.png"); k.close()
     # 3 Bildsuche mit Tipp
     k, s = seite_neu()
     s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=bautzen/2")
     s.get_by_role("button", name="Los geht’s").click(); s.wait_for_selector(".sp-suche")
     s.locator(".sp-knopf--tipp").click(); s.locator(".sp-knopf--tipp").click()
-    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "3-bildsuche-tipp.png")); bilder.append("3-bildsuche-tipp.png"); k.close()
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "3-bildsuche-tipp.png"), full_page=True); bilder.append("3-bildsuche-tipp.png"); k.close()
     # 4 Abschluss mit Sammelstück
     k, s = seite_neu()
     s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=goeltzschtal/3")
@@ -480,24 +481,24 @@ def konzeptbilder(browser, basis, aus):
         if s.locator(".sp-ansage--gut").count(): break
         s.locator(".sp-knopf--tipp").click(); s.wait_for_timeout(300)
     s.get_by_role("button", name="Weiter").click(); s.wait_for_selector(".sp-abschluss")
-    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "4-abschluss-sammelstueck.png")); bilder.append("4-abschluss-sammelstueck.png"); k.close()
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "4-abschluss-sammelstueck.png"), full_page=True); bilder.append("4-abschluss-sammelstueck.png"); k.close()
     # 5 Collage mit Reglern
     k, s = seite_neu((1280, 900))
     s.goto(f"{basis}/spiele/_vorschau/collage.html?anordnung=wirbel&groesse=mittel&farbstimmung=abend&items=basteibruecke,felsturm,wanderschuh,alter-stein,kuppel,turmkreuz,dampflok,goeltzschtalbruecke,ziegel,ortsschild")
     warte_bis(s, "document.getElementById('cl-vorschau').src.startsWith('blob:')", 20000)
     s.evaluate("() => document.querySelector('.vs-kopf').style.setProperty('display', 'none')")
-    ruhig(s); s.screenshot(path=str(ziel / "5-collage-regler.png")); bilder.append("5-collage-regler.png"); k.close()
+    ruhig(s); s.screenshot(path=str(ziel / "5-collage-regler.png"), full_page=True); bilder.append("5-collage-regler.png"); k.close()
     # 6 Figur
     k, s = seite_neu((1280, 900))
     s.goto(f"{basis}/spiele/_vorschau/figur.html")
     s.wait_for_selector(".sp-figur-baukasten svg")
     s.evaluate("() => { for (const e of document.querySelectorAll('.vs-kopf, .vs-protokoll')) e.style.setProperty('display', 'none'); }")
-    ruhig(s); s.screenshot(path=str(ziel / "6-figur-baukasten.png")); bilder.append("6-figur-baukasten.png"); k.close()
+    ruhig(s); s.screenshot(path=str(ziel / "6-figur-baukasten.png"), full_page=True); bilder.append("6-figur-baukasten.png"); k.close()
     # 7 Startkarte auf dem iPad hochkant (820 × 1180, doppelte Dichte: 1640 × 2360 px), Rollen 2 × 2
     k, s = seite_neu((820, 1180))
     s.goto(f"{basis}/spiele/_vorschau/spiel.html?a=frauenkirche/2")
     s.wait_for_selector(".sp-start")
-    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "7-startkarte-ipad-hochkant.png")); bilder.append("7-startkarte-ipad-hochkant.png"); k.close()
+    nur_spiel(s); ruhig(s); s.screenshot(path=str(ziel / "7-startkarte-ipad-hochkant.png"), full_page=True); bilder.append("7-startkarte-ipad-hochkant.png"); k.close()
     return bilder
 
 
