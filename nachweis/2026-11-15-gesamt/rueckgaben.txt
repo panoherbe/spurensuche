@@ -1,0 +1,15 @@
+tests=0
+inhalte=0
+qr=0
+rauchtest=0
+vorfuehrung=0
+spiele=0
+konzeptbilder=1
+betriebsseite=0
+betriebstest=0
+nachbau=0
+last400=0
+rueckspiel=0
+archiv=0
+last600=0
+protokoll=0

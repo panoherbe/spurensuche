@@ -1,0 +1,905 @@
+{
+  "art": "simuliert",
+  "zeitpunkt": "2026-11-15T14:03:46.579Z",
+  "app": "http://localhost:8080",
+  "parameter": {
+    "sitzungen": 600,
+    "gruppenJeKlasse": 8,
+    "dauerMinuten": 15,
+    "rampeMinuten": 5,
+    "denkzeitSekunden": [
+      30,
+      60
+    ],
+    "lehrkraefte": 75,
+    "orte": 4,
+    "aufgaben": 12,
+    "dateienJeGeraet": 147,
+    "bytesJeGeraet": 4721242,
+    "bildBytes": 1708665
+  },
+  "dauerSekunden": 959,
+  "maxGleichzeitig": 600,
+  "zaehler": {
+    "beitritte": 600,
+    "laeufe": 9701,
+    "bilder": 600,
+    "stationen": 3631
+  },
+  "anfragen": 111646,
+  "fehler": 0,
+  "fehlerquote": 0,
+  "jeArt": {
+    "seite": {
+      "anfragen": 600,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 1,
+      "p95": 1,
+      "p99": 6,
+      "max": 26,
+      "status": {
+        "200": 600
+      }
+    },
+    "konfiguration": {
+      "anfragen": 600,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 0,
+      "p95": 1,
+      "p99": 1,
+      "max": 4,
+      "status": {
+        "200": 600
+      }
+    },
+    "offline-liste": {
+      "anfragen": 600,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 0,
+      "p95": 1,
+      "p99": 1,
+      "max": 4,
+      "status": {
+        "200": 600
+      }
+    },
+    "statisch": {
+      "anfragen": 88200,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 1,
+      "p95": 3,
+      "p99": 4,
+      "max": 38,
+      "status": {
+        "200": 88200
+      }
+    },
+    "beitritt": {
+      "anfragen": 600,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 1,
+      "p95": 1,
+      "p99": 5,
+      "max": 22,
+      "status": {
+        "200": 600
+      }
+    },
+    "sync": {
+      "anfragen": 13332,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 1,
+      "p95": 4,
+      "p99": 19,
+      "max": 61,
+      "status": {
+        "200": 13332
+      }
+    },
+    "lk-uebersicht": {
+      "anfragen": 6589,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 2,
+      "p95": 3,
+      "p99": 15,
+      "max": 50,
+      "status": {
+        "200": 6589
+      }
+    },
+    "lk-auswertung": {
+      "anfragen": 525,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 1,
+      "p95": 2,
+      "p99": 5,
+      "max": 6,
+      "status": {
+        "200": 525
+      }
+    },
+    "bildbeitrag": {
+      "anfragen": 600,
+      "fehler": 0,
+      "fehlerquote": 0,
+      "p50": 14,
+      "p95": 43,
+      "p99": 51,
+      "max": 54,
+      "status": {
+        "201": 600
+      }
+    }
+  },
+  "ersteFehler": [],
+  "verlauf": [
+    {
+      "sekunde": 10,
+      "sitzungen": 13,
+      "beitritte": 13,
+      "laeufe": 0,
+      "bilder": 0,
+      "stationen": 13
+    },
+    {
+      "sekunde": 20,
+      "sitzungen": 32,
+      "beitritte": 32,
+      "laeufe": 0,
+      "bilder": 0,
+      "stationen": 32
+    },
+    {
+      "sekunde": 30,
+      "sitzungen": 55,
+      "beitritte": 55,
+      "laeufe": 0,
+      "bilder": 0,
+      "stationen": 55
+    },
+    {
+      "sekunde": 40,
+      "sitzungen": 77,
+      "beitritte": 77,
+      "laeufe": 1,
+      "bilder": 0,
+      "stationen": 77
+    },
+    {
+      "sekunde": 50,
+      "sitzungen": 95,
+      "beitritte": 94,
+      "laeufe": 9,
+      "bilder": 0,
+      "stationen": 94
+    },
+    {
+      "sekunde": 60,
+      "sitzungen": 124,
+      "beitritte": 124,
+      "laeufe": 24,
+      "bilder": 0,
+      "stationen": 124
+    },
+    {
+      "sekunde": 70,
+      "sitzungen": 141,
+      "beitritte": 141,
+      "laeufe": 44,
+      "bilder": 0,
+      "stationen": 141
+    },
+    {
+      "sekunde": 80,
+      "sitzungen": 167,
+      "beitritte": 167,
+      "laeufe": 68,
+      "bilder": 0,
+      "stationen": 167
+    },
+    {
+      "sekunde": 90,
+      "sitzungen": 183,
+      "beitritte": 183,
+      "laeufe": 90,
+      "bilder": 0,
+      "stationen": 183
+    },
+    {
+      "sekunde": 100,
+      "sitzungen": 200,
+      "beitritte": 200,
+      "laeufe": 124,
+      "bilder": 0,
+      "stationen": 200
+    },
+    {
+      "sekunde": 110,
+      "sitzungen": 223,
+      "beitritte": 223,
+      "laeufe": 167,
+      "bilder": 0,
+      "stationen": 223
+    },
+    {
+      "sekunde": 120,
+      "sitzungen": 245,
+      "beitritte": 244,
+      "laeufe": 222,
+      "bilder": 0,
+      "stationen": 245
+    },
+    {
+      "sekunde": 130,
+      "sitzungen": 262,
+      "beitritte": 262,
+      "laeufe": 262,
+      "bilder": 0,
+      "stationen": 269
+    },
+    {
+      "sekunde": 140,
+      "sitzungen": 278,
+      "beitritte": 278,
+      "laeufe": 300,
+      "bilder": 0,
+      "stationen": 289
+    },
+    {
+      "sekunde": 150,
+      "sitzungen": 297,
+      "beitritte": 297,
+      "laeufe": 357,
+      "bilder": 2,
+      "stationen": 322
+    },
+    {
+      "sekunde": 160,
+      "sitzungen": 311,
+      "beitritte": 311,
+      "laeufe": 424,
+      "bilder": 6,
+      "stationen": 357
+    },
+    {
+      "sekunde": 170,
+      "sitzungen": 328,
+      "beitritte": 328,
+      "laeufe": 498,
+      "bilder": 10,
+      "stationen": 399
+    },
+    {
+      "sekunde": 180,
+      "sitzungen": 348,
+      "beitritte": 348,
+      "laeufe": 552,
+      "bilder": 11,
+      "stationen": 433
+    },
+    {
+      "sekunde": 190,
+      "sitzungen": 372,
+      "beitritte": 372,
+      "laeufe": 622,
+      "bilder": 13,
+      "stationen": 476
+    },
+    {
+      "sekunde": 200,
+      "sitzungen": 391,
+      "beitritte": 391,
+      "laeufe": 694,
+      "bilder": 17,
+      "stationen": 516
+    },
+    {
+      "sekunde": 210,
+      "sitzungen": 415,
+      "beitritte": 415,
+      "laeufe": 776,
+      "bilder": 20,
+      "stationen": 565
+    },
+    {
+      "sekunde": 220,
+      "sitzungen": 433,
+      "beitritte": 433,
+      "laeufe": 873,
+      "bilder": 24,
+      "stationen": 610
+    },
+    {
+      "sekunde": 230,
+      "sitzungen": 454,
+      "beitritte": 454,
+      "laeufe": 952,
+      "bilder": 26,
+      "stationen": 647
+    },
+    {
+      "sekunde": 240,
+      "sitzungen": 477,
+      "beitritte": 477,
+      "laeufe": 1032,
+      "bilder": 32,
+      "stationen": 691
+    },
+    {
+      "sekunde": 250,
+      "sitzungen": 498,
+      "beitritte": 498,
+      "laeufe": 1145,
+      "bilder": 34,
+      "stationen": 740
+    },
+    {
+      "sekunde": 260,
+      "sitzungen": 520,
+      "beitritte": 519,
+      "laeufe": 1241,
+      "bilder": 36,
+      "stationen": 779
+    },
+    {
+      "sekunde": 270,
+      "sitzungen": 535,
+      "beitritte": 535,
+      "laeufe": 1345,
+      "bilder": 46,
+      "stationen": 821
+    },
+    {
+      "sekunde": 280,
+      "sitzungen": 556,
+      "beitritte": 556,
+      "laeufe": 1467,
+      "bilder": 51,
+      "stationen": 871
+    },
+    {
+      "sekunde": 290,
+      "sitzungen": 579,
+      "beitritte": 579,
+      "laeufe": 1585,
+      "bilder": 57,
+      "stationen": 929
+    },
+    {
+      "sekunde": 300,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 1694,
+      "bilder": 66,
+      "stationen": 976
+    },
+    {
+      "sekunde": 310,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 1820,
+      "bilder": 77,
+      "stationen": 1016
+    },
+    {
+      "sekunde": 320,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 1951,
+      "bilder": 83,
+      "stationen": 1055
+    },
+    {
+      "sekunde": 330,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 2084,
+      "bilder": 91,
+      "stationen": 1098
+    },
+    {
+      "sekunde": 340,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 2217,
+      "bilder": 100,
+      "stationen": 1132
+    },
+    {
+      "sekunde": 350,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 2357,
+      "bilder": 112,
+      "stationen": 1182
+    },
+    {
+      "sekunde": 360,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 2491,
+      "bilder": 131,
+      "stationen": 1225
+    },
+    {
+      "sekunde": 370,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 2619,
+      "bilder": 142,
+      "stationen": 1268
+    },
+    {
+      "sekunde": 380,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 2750,
+      "bilder": 148,
+      "stationen": 1311
+    },
+    {
+      "sekunde": 390,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 2889,
+      "bilder": 163,
+      "stationen": 1362
+    },
+    {
+      "sekunde": 400,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 3023,
+      "bilder": 172,
+      "stationen": 1404
+    },
+    {
+      "sekunde": 410,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 3156,
+      "bilder": 184,
+      "stationen": 1448
+    },
+    {
+      "sekunde": 420,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 3286,
+      "bilder": 198,
+      "stationen": 1497
+    },
+    {
+      "sekunde": 430,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 3420,
+      "bilder": 220,
+      "stationen": 1546
+    },
+    {
+      "sekunde": 440,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 3566,
+      "bilder": 236,
+      "stationen": 1595
+    },
+    {
+      "sekunde": 450,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 3702,
+      "bilder": 251,
+      "stationen": 1632
+    },
+    {
+      "sekunde": 460,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 3822,
+      "bilder": 267,
+      "stationen": 1674
+    },
+    {
+      "sekunde": 470,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 3950,
+      "bilder": 282,
+      "stationen": 1714
+    },
+    {
+      "sekunde": 480,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 4087,
+      "bilder": 303,
+      "stationen": 1760
+    },
+    {
+      "sekunde": 490,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 4222,
+      "bilder": 323,
+      "stationen": 1807
+    },
+    {
+      "sekunde": 500,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 4344,
+      "bilder": 340,
+      "stationen": 1851
+    },
+    {
+      "sekunde": 510,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 4484,
+      "bilder": 352,
+      "stationen": 1896
+    },
+    {
+      "sekunde": 520,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 4620,
+      "bilder": 367,
+      "stationen": 1939
+    },
+    {
+      "sekunde": 530,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 4732,
+      "bilder": 387,
+      "stationen": 1980
+    },
+    {
+      "sekunde": 540,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 4880,
+      "bilder": 400,
+      "stationen": 2027
+    },
+    {
+      "sekunde": 550,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 5034,
+      "bilder": 417,
+      "stationen": 2077
+    },
+    {
+      "sekunde": 560,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 5163,
+      "bilder": 426,
+      "stationen": 2121
+    },
+    {
+      "sekunde": 570,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 5283,
+      "bilder": 440,
+      "stationen": 2162
+    },
+    {
+      "sekunde": 580,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 5414,
+      "bilder": 450,
+      "stationen": 2201
+    },
+    {
+      "sekunde": 590,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 5548,
+      "bilder": 457,
+      "stationen": 2238
+    },
+    {
+      "sekunde": 600,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 5688,
+      "bilder": 470,
+      "stationen": 2284
+    },
+    {
+      "sekunde": 610,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 5831,
+      "bilder": 481,
+      "stationen": 2337
+    },
+    {
+      "sekunde": 620,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 5951,
+      "bilder": 491,
+      "stationen": 2378
+    },
+    {
+      "sekunde": 630,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 6086,
+      "bilder": 502,
+      "stationen": 2427
+    },
+    {
+      "sekunde": 640,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 6237,
+      "bilder": 515,
+      "stationen": 2478
+    },
+    {
+      "sekunde": 650,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 6355,
+      "bilder": 520,
+      "stationen": 2518
+    },
+    {
+      "sekunde": 660,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 6497,
+      "bilder": 532,
+      "stationen": 2569
+    },
+    {
+      "sekunde": 670,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 6618,
+      "bilder": 538,
+      "stationen": 2613
+    },
+    {
+      "sekunde": 680,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 6752,
+      "bilder": 544,
+      "stationen": 2659
+    },
+    {
+      "sekunde": 690,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 6902,
+      "bilder": 555,
+      "stationen": 2706
+    },
+    {
+      "sekunde": 700,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 7019,
+      "bilder": 559,
+      "stationen": 2743
+    },
+    {
+      "sekunde": 710,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 7145,
+      "bilder": 562,
+      "stationen": 2786
+    },
+    {
+      "sekunde": 720,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 7303,
+      "bilder": 565,
+      "stationen": 2837
+    },
+    {
+      "sekunde": 730,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 7441,
+      "bilder": 569,
+      "stationen": 2874
+    },
+    {
+      "sekunde": 740,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 7566,
+      "bilder": 572,
+      "stationen": 2915
+    },
+    {
+      "sekunde": 750,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 7696,
+      "bilder": 572,
+      "stationen": 2964
+    },
+    {
+      "sekunde": 760,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 7830,
+      "bilder": 572,
+      "stationen": 3006
+    },
+    {
+      "sekunde": 770,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 7976,
+      "bilder": 577,
+      "stationen": 3059
+    },
+    {
+      "sekunde": 780,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 8118,
+      "bilder": 582,
+      "stationen": 3111
+    },
+    {
+      "sekunde": 790,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 8241,
+      "bilder": 584,
+      "stationen": 3152
+    },
+    {
+      "sekunde": 800,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 8366,
+      "bilder": 587,
+      "stationen": 3191
+    },
+    {
+      "sekunde": 810,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 8503,
+      "bilder": 592,
+      "stationen": 3235
+    },
+    {
+      "sekunde": 820,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 8639,
+      "bilder": 595,
+      "stationen": 3281
+    },
+    {
+      "sekunde": 830,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 8780,
+      "bilder": 598,
+      "stationen": 3326
+    },
+    {
+      "sekunde": 840,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 8905,
+      "bilder": 598,
+      "stationen": 3366
+    },
+    {
+      "sekunde": 850,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 9037,
+      "bilder": 599,
+      "stationen": 3413
+    },
+    {
+      "sekunde": 860,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 9173,
+      "bilder": 599,
+      "stationen": 3460
+    },
+    {
+      "sekunde": 870,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 9306,
+      "bilder": 599,
+      "stationen": 3503
+    },
+    {
+      "sekunde": 880,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 9438,
+      "bilder": 600,
+      "stationen": 3550
+    },
+    {
+      "sekunde": 890,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 9569,
+      "bilder": 600,
+      "stationen": 3591
+    },
+    {
+      "sekunde": 900,
+      "sitzungen": 600,
+      "beitritte": 600,
+      "laeufe": 9701,
+      "bilder": 600,
+      "stationen": 3631
+    },
+    {
+      "sekunde": 910,
+      "sitzungen": 468,
+      "beitritte": 600,
+      "laeufe": 9701,
+      "bilder": 600,
+      "stationen": 3631
+    },
+    {
+      "sekunde": 920,
+      "sitzungen": 331,
+      "beitritte": 600,
+      "laeufe": 9701,
+      "bilder": 600,
+      "stationen": 3631
+    },
+    {
+      "sekunde": 930,
+      "sitzungen": 201,
+      "beitritte": 600,
+      "laeufe": 9701,
+      "bilder": 600,
+      "stationen": 3631
+    },
+    {
+      "sekunde": 940,
+      "sitzungen": 85,
+      "beitritte": 600,
+      "laeufe": 9701,
+      "bilder": 600,
+      "stationen": 3631
+    },
+    {
+      "sekunde": 950,
+      "sitzungen": 16,
+      "beitritte": 600,
+      "laeufe": 9701,
+      "bilder": 600,
+      "stationen": 3631
+    }
+  ]
+}

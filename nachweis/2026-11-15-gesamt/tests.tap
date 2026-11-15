@@ -1,0 +1,208 @@
+TAP version 13
+# Subtest: Schema: eine Datenbank der Version 1 wird erweitert, Sitzungen und Daten bleiben
+ok 1 - Schema: eine Datenbank der Version 1 wird erweitert, Sitzungen und Daten bleiben
+  ---
+  duration_ms: 266.541148
+  type: 'test'
+  ...
+# Subtest: Anmeldung und Rollen: Betrieb sieht Technik, aber keine Lerngruppen; Verwaltung nicht den Betrieb
+ok 2 - Anmeldung und Rollen: Betrieb sieht Technik, aber keine Lerngruppen; Verwaltung nicht den Betrieb
+  ---
+  duration_ms: 167.123558
+  type: 'test'
+  ...
+# Subtest: Neustart: nur bestätigt und nur im Container; die Anwendung beendet sich, Docker startet sie neu
+ok 3 - Neustart: nur bestätigt und nur im Container; die Anwendung beendet sich, Docker startet sie neu
+  ---
+  duration_ms: 582.214747
+  type: 'test'
+  ...
+# Subtest: Sicherung: anlegen, zurückspielen (vorher gesichert, beim Start ausgeführt), angemeldet bleiben
+ok 4 - Sicherung: anlegen, zurückspielen (vorher gesichert, beim Start ausgeführt), angemeldet bleiben
+  ---
+  duration_ms: 1753.693247
+  type: 'test'
+  ...
+# Subtest: Sicherungen: besondere Arten bleiben getrennt erhalten (je zehn), tägliche nach Anzahl
+ok 5 - Sicherungen: besondere Arten bleiben getrennt erhalten (je zehn), tägliche nach Anzahl
+  ---
+  duration_ms: 199.582235
+  type: 'test'
+  ...
+# Subtest: Inhalt tauschen: prüfen, aktivieren, zurück; Fehlerhaftes wird abgelehnt und nichts ändert sich
+ok 6 - Inhalt tauschen: prüfen, aktivieren, zurück; Fehlerhaftes wird abgelehnt und nichts ändert sich
+  ---
+  duration_ms: 277.509802
+  type: 'test'
+  ...
+# Subtest: Inhaltspakete: Grenzen beim Lesen (Größe, Beschädigung, Verschlüsselung)
+ok 7 - Inhaltspakete: Grenzen beim Lesen (Größe, Beschädigung, Verschlüsselung)
+  ---
+  duration_ms: 29.492346
+  type: 'test'
+  ...
+# Subtest: Betriebsdienst und „letzte Version zurückspielen“: Auftrag, Ausführung am Server, Rückmeldung
+ok 8 - Betriebsdienst und „letzte Version zurückspielen“: Auftrag, Ausführung am Server, Rückmeldung
+  ---
+  duration_ms: 83.759928
+  type: 'test'
+  ...
+# Subtest: Messreihe: Anfragen, Fehler und Antwortzeit je Minute; jedes Fünf-Minuten-Fenster einmal, nach Neustart addiert
+ok 9 - Messreihe: Anfragen, Fehler und Antwortzeit je Minute; jedes Fünf-Minuten-Fenster einmal, nach Neustart addiert
+  ---
+  duration_ms: 21.484832
+  type: 'test'
+  ...
+# Subtest: Die Anwendung schreibt nichts außerhalb ihres Datenordners (Pakete, Vormerkung, Sicherungen)
+ok 10 - Die Anwendung schreibt nichts außerhalb ihres Datenordners (Pakete, Vormerkung, Sicherungen)
+  ---
+  duration_ms: 76.450085
+  type: 'test'
+  ...
+# Subtest: Schema: Typen, Pflichtfelder, Muster, Verweise, unbekannte Schlüsselwörter
+ok 11 - Schema: Typen, Pflichtfelder, Muster, Verweise, unbekannte Schlüsselwörter
+  ---
+  duration_ms: 2.150424
+  type: 'test'
+  ...
+# Subtest: Ereignisse: nur erlaubte Arten und Werte, kein Freitext
+ok 12 - Ereignisse: nur erlaubte Arten und Werte, kein Freitext
+  ---
+  duration_ms: 0.632916
+  type: 'test'
+  ...
+# Subtest: Ergebnis: Vertrag geprüft, Punkte nicht übernommen, Items nur aus der Belohnung
+ok 13 - Ergebnis: Vertrag geprüft, Punkte nicht übernommen, Items nur aus der Belohnung
+  ---
+  duration_ms: 0.430336
+  type: 'test'
+  ...
+# Subtest: Kompetenzraster: Belege nach festen Regeln, Vorschlag, Einschätzung geht vor
+ok 14 - Kompetenzraster: Belege nach festen Regeln, Vorschlag, Einschätzung geht vor
+  ---
+  duration_ms: 1.433725
+  type: 'test'
+  ...
+# Subtest: Beobachtungen und Entwurf: beschreibend, als Entwurf gekennzeichnet
+ok 15 - Beobachtungen und Entwurf: beschreibend, als Entwurf gekennzeichnet
+  ---
+  duration_ms: 1.836027
+  type: 'test'
+  ...
+# Subtest: PDF: gültiger Aufbau mit Querverweistabelle, Umlaute
+ok 16 - PDF: gültiger Aufbau mit Querverweistabelle, Umlaute
+  ---
+  duration_ms: 2.735001
+  type: 'test'
+  ...
+# Subtest: ZIP: Hin und zurück, CRC32 bekannt
+ok 17 - ZIP: Hin und zurück, CRC32 bekannt
+  ---
+  duration_ms: 1.342225
+  type: 'test'
+  ...
+# Subtest: QR: Größe je Version, Suchmarken, Zeitmuster
+ok 18 - QR: Größe je Version, Suchmarken, Zeitmuster
+  ---
+  duration_ms: 25.302162
+  type: 'test'
+  ...
+# Subtest: Löschfristen: zwölf Wochen, spätestens Ende des Schuljahres
+ok 19 - Löschfristen: zwölf Wochen, spätestens Ende des Schuljahres
+  ---
+  duration_ms: 0.604779
+  type: 'test'
+  ...
+# Subtest: Gruppenbezeichnungen: Vorschläge ohne Hinweis, freie Namen mit Hinweis, Unzulässiges abgelehnt
+ok 20 - Gruppenbezeichnungen: Vorschläge ohne Hinweis, freie Namen mit Hinweis, Unzulässiges abgelehnt
+  ---
+  duration_ms: 1.133733
+  type: 'test'
+  ...
+# Subtest: docs/openapi.json beschreibt genau die Routen aus server/app.js und server/betrieb.js
+ok 21 - docs/openapi.json beschreibt genau die Routen aus server/app.js und server/betrieb.js
+  ---
+  duration_ms: 4.833607
+  type: 'test'
+  ...
+# Subtest: Status, Startseite mit strenger Inhaltsrichtlinie, kein Zugriff außerhalb der Ordner
+ok 22 - Status, Startseite mit strenger Inhaltsrichtlinie, kein Zugriff außerhalb der Ordner
+  ---
+  duration_ms: 185.063056
+  type: 'test'
+  ...
+# Subtest: Gruppen: Vorschlag ohne Rückfrage, freie Bezeichnung erst nach Bestätigung
+ok 23 - Gruppen: Vorschlag ohne Rückfrage, freie Bezeichnung erst nach Bestätigung
+  ---
+  duration_ms: 11.882558
+  type: 'test'
+  ...
+# Subtest: Übertragung: bereinigt, wiederholungssicher, ohne Doppelzählung
+ok 24 - Übertragung: bereinigt, wiederholungssicher, ohne Doppelzählung
+  ---
+  duration_ms: 15.537773
+  type: 'test'
+  ...
+# Subtest: Auswertung: Beobachtungen, Raster mit Vorschlag, Einschätzung, Entwurf
+ok 25 - Auswertung: Beobachtungen, Raster mit Vorschlag, Einschätzung, Entwurf
+  ---
+  duration_ms: 14.183679
+  type: 'test'
+  ...
+# Subtest: Außerhalb der Klassen 4 bis 8 oder ohne Einwilligung entstehen keine Datensätze
+ok 26 - Außerhalb der Klassen 4 bis 8 oder ohne Einwilligung entstehen keine Datensätze
+  ---
+  duration_ms: 12.592274
+  type: 'test'
+  ...
+# Subtest: Bildbeiträge: Schule wartet auf Freigabe, Familie nur selbst freigegeben, Ausstellung sieht nur Freigegebenes
+ok 27 - Bildbeiträge: Schule wartet auf Freigabe, Familie nur selbst freigegeben, Ausstellung sieht nur Freigegebenes
+  ---
+  duration_ms: 34.804368
+  type: 'test'
+  ...
+# Subtest: Archiv: Export, Übernahme in eine leere Instanz, gleiche Prüfsummen
+ok 28 - Archiv: Export, Übernahme in eine leere Instanz, gleiche Prüfsummen
+  ---
+  duration_ms: 59.454991
+  type: 'test'
+  ...
+# Subtest: Löschfristen und vorzeitige Löschung: Gruppendaten weg, freigegebene Bilder bleiben ohne Gruppe
+ok 29 - Löschfristen und vorzeitige Löschung: Gruppendaten weg, freigegebene Bilder bleiben ohne Gruppe
+  ---
+  duration_ms: 119.517085
+  type: 'test'
+  ...
+# Subtest: Anmeldung über OpenID Connect: Rolle aus Merkmalen, Name und E-Mail nie gespeichert
+ok 30 - Anmeldung über OpenID Connect: Rolle aus Merkmalen, Name und E-Mail nie gespeichert
+  ---
+  duration_ms: 16.411589
+  type: 'test'
+  ...
+# Subtest: Anmeldung: fehlende Rolle, Schlüsselwechsel beim Anbieter, Ausfall des Anbieters
+ok 31 - Anmeldung: fehlende Rolle, Schlüsselwechsel beim Anbieter, Ausfall des Anbieters
+  ---
+  duration_ms: 155.852543
+  type: 'test'
+  ...
+# Subtest: Messwerte nur mit Schlüssel; Verwaltung sieht Übersicht ohne Personendaten
+ok 32 - Messwerte nur mit Schlüssel; Verwaltung sieht Übersicht ohne Personendaten
+  ---
+  duration_ms: 10.011744
+  type: 'test'
+  ...
+# Subtest: Sicherung verschlüsselt, Rückspielen ergibt dieselben Tabellen
+ok 33 - Sicherung verschlüsselt, Rückspielen ergibt dieselben Tabellen
+  ---
+  duration_ms: 94.511234
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 3560.33826

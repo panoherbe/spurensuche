@@ -1,0 +1,17 @@
+{
+  "zeitpunkt": "2026-11-15T14:11:44+01:00",
+  "stand": "33ee143",
+  "docker": "29.1.3",
+  "einrichtenMs": 3028,
+  "version": "0.1.0",
+  "neustartMs": 1317,
+  "sicherungMs": 342,
+  "zurueckspielenMs": 12219,
+  "aktualisierenMs": 12519,
+  "versionZurueck": {"auftrag":1,"von":"0.1.0-probe","auf":"0.1.0","status":"fertig","meldung":"Version 0.1.0 läuft wieder (12 Sekunden).","dauerMs":31066,"sekundenOhneAntwort":0},
+  "defektBisZurueckMs": 114210,
+  "defektAutomatischZurueck": "ja",
+  "haengerBisWiederDaMs": 112233,
+  "fehler": 0,
+  "hinweis": "Simuliert: eigene Testinstanz mit Testschlüsseln und Testdaten auf einem Testrechner. Zeiten in Millisekunden vom Befehl bis zur Antwort der Anwendung."
+}

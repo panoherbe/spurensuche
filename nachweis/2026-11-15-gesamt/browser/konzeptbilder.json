@@ -1,0 +1,10 @@
+{
+  "zeitpunkt": "2026-11-15T13:11:04.030Z",
+  "axe": "4.10.2",
+  "schritte": [],
+  "fehler": [
+    "Karte mit Fortschritt (simuliert): Wartezeit abgelaufen: document.body && document.body.innerText.includes(\"Alle Orte\")\nSeite: http://localhost:8090/spurensuche/index.html#/beitritt?code=DEMO-2026 | Zum Inhalt springen\nSpurensuche · Eule\nAlles übertragen\nMit der Klasse spielen\n\nEure Lehrkraft gibt euch einen Code für eure Gruppe.\n\nCode der Gruppe\n\nAcht Zeichen, zum Beispiel K7QH-M3PZ. Groß- und Kleinschreibung ist egal.\n\nBeitreten\nZurück\n\nEs werden keine Namen gespeichert. Bezugspunkt ist nur d\n",
+    "Collage mit Reglern: Wartezeit abgelaufen: document.body && document.body.innerText.includes(\"Alle Orte\")\nSeite: http://localhost:8090/spurensuche/index.html#/aufgabe/frauenkirche/2 | Zum Inhalt springen\nSpurensuche · Eule\nAlles übertragen\n\nAufgabe 2 von 3 · Frauenkirche Dresden\n\nDie Geschichte der Kirche\nStation verlassen\n\nSORTIEREN UND ZUORDNEN\n·\nETWA 6 MINUTEN\n\nDie Geschichte der Kirche\n\nBringt die Ereignisse in die richtige Reihenfolge: oben das früheste, unten das späteste.\n\n"
+  ],
+  "barrierefreiheit": {}
+}
