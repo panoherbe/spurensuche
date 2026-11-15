@@ -82,6 +82,56 @@ await schritt('Vorführung: Lehrkraft sieht die Gruppe Eule', async () => {
   await foto(lk, 'v10-lk-eule');
 });
 
+await schritt('Vorführung: Lehrkraft gibt eine Quest nach Zeitrahmen frei (Vorschlag aus ablaeufe.json)', async () => {
+  await springe(lk, '#/lerngruppe/lg-beispiel/freigeben');
+  await warteText(lk, 'Zeitrahmen wählen');
+  messung.zeitrahmen = await js(lk, `[...document.querySelectorAll('button')].map((b) => b.textContent.trim()).filter((t) => /Min\\.\\)$/.test(t))`);
+  await klick(lk, 'Unterrichtsstunde', 'button');
+  await lk.warte(`/\\d+ Aufgaben/.test(document.querySelector('p.marke[role=status]')?.textContent ?? '')`);
+  messung.vorschlagStunde = await js(lk, `document.querySelector('p.marke[role=status]').textContent + ' · ' + document.getElementById('q-titel').value`);
+  await foto(lk, 'v12-lk-freigabe-zeitrahmen');
+  await axe(lk, 'v-lk-freigabe-zeitrahmen');
+});
+
+await schritt('Vorführung: Figur gestalten und speichern', async () => {
+  await springe(spiel, '#/figur');
+  await warteText(spiel, 'Gestaltet eure', 15000);
+  await axe(spiel, 'v-figur-baukasten');
+  await foto(spiel, 'v13-figur');
+  await klick(spiel, 'Fertig', 'button');
+  await warteText(spiel, 'Figur gespeichert');
+  messung.figurText = await js(spiel, `document.querySelector('.figur-gross')?.getAttribute('aria-label') ?? ''`);
+  if (!messung.figurText) throw new Error('gespeicherte Figur ohne Beschreibung');
+  await axe(spiel, 'v-figur-gespeichert');
+});
+
+await schritt('Vorführung: Bild für die Ausstellung mit Reglern (Abschlussaufgabe simuliert)', async () => {
+  await js(spiel, `(async () => {
+    const sp = await import('./app/js/speicher.js');
+    const m = await import('./app/js/inhalte.js');
+    const i = await m.ladeInhalte();
+    const t = await sp.lies('team');
+    const f = i.ortNach.get(i.finale);
+    t.stationen[f.id] = { status: 'abgeschlossen', verifikation: 'ersatz', begonnen: new Date().toISOString(), beendet: new Date().toISOString(), aktivSekunden: 900 };
+    for (const nr of f.aufgaben) { const a = await m.aufgabe(f.id + '/' + nr); t.laeufe[a.kennung] = { id: crypto.randomUUID(), aufgabe: a.kennung, geloest: true, versuche: 1, dauerSekunden: 300, items: a.belohnung, beendet: new Date().toISOString() }; for (const x of a.belohnung) if (!t.items.includes(x)) t.items.push(x); }
+    t.bild = null;
+    await sp.schreibe('team', t);
+    return true;
+  })()`);
+  await springe(spiel, '#/karte'); // neu laden auf der Karte, damit die App den eingetragenen Stand liest
+  await warteText(spiel, 'Alle Orte', 15000);
+  await spiel.sende('Page.reload', {});
+  await warteText(spiel, 'Alle Orte', 15000);
+  await springe(spiel, '#/bild');
+  await warteText(spiel, 'Euer Bild für die Ausstellung', 15000);
+  await spiel.warte(`document.querySelector('.vorschau-rahmen img')`, 20000);
+  messung.collageRegler = await js(spiel, `[...document.querySelectorAll('fieldset legend')].map((l) => l.textContent)`);
+  await js(spiel, `(() => { const r = [...document.querySelectorAll('input[type=radio][name^=regler-]')].find((x) => !x.checked); r?.click(); return !!r; })()`);
+  await pause(800);
+  await foto(spiel, 'v14-bild-regler');
+  await axe(spiel, 'v-bild-regler');
+});
+
 const dunkel = await seite({ breite: 390, hoehe: 844, mobil: true, dunkel: true, kontext: await neuerKontext() });
 await schritt('Vorführung: Telefon dunkel', async () => {
   await dunkel.gehe(`${VORF}/index.html`);

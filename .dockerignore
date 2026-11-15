@@ -8,6 +8,9 @@ node_modules
 *.log
 spiele/_pruefung
 spiele/_vorschau
+spiele/_nachweis
+spiele/_test
+spiele/_werkzeuge
 docs
 .env
 .env.*

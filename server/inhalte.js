@@ -11,8 +11,9 @@ export const OFFLINE_ORDNER = {
   inhalt: ['spiele', 'inhalte', 'assets/spiele'],
 };
 const SEITEN = ['index.html', 'lehrkraefte.html'];
-// ausgelassen: versteckte Dateien, Entwürfe, Testordner, Lies-mich-Dateien, die Werkstatt-Seite
-const AUSGESCHLOSSEN = /(^|\/)(\.[^/]*|_entwurf[^/]*|tests?)(\/|$)|(^|\/)README\.md$|(^|\/)werkstatt\./;
+// ausgelassen: versteckte Dateien, Entwürfe, Testordner, Lies-mich-Dateien, die Werkstatt-Seite und Arbeitsordner
+// der Spiele mit Unterstrich (Prüfung, Nachweis, Vorschau, Werkzeuge); nur spiele/_gemeinsam brauchen die Geräte
+const AUSGESCHLOSSEN = /(^|\/)(\.[^/]*|_entwurf[^/]*|tests?)(\/|$)|(^|\/)README\.md$|(^|\/)werkstatt\.|(^|\/)_(?!gemeinsam(\/|$))[^/]*\//;
 
 async function dateienIn(wurzel, ordner) {
   const aus = [];
