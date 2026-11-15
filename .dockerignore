@@ -6,3 +6,8 @@ medien
 test
 node_modules
 *.log
+spiele/_pruefung
+spiele/_vorschau
+docs
+.env
+.env.*

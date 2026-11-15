@@ -1,13 +1,8 @@
 # Spurensuche: ein Container mit Node.js 24, ohne weitere Pakete. Daten in /daten (Volume).
 FROM node:24-alpine
 WORKDIR /srv/spurensuche
-COPY --chown=node:node package.json LICENSE ./
-COPY --chown=node:node app ./app
-COPY --chown=node:node server ./server
-COPY --chown=node:node tools ./tools
-COPY --chown=node:node spiele ./spiele
-COPY --chown=node:node inhalte ./inhalte
-COPY --chown=node:node assets ./assets
+# alles außer dem, was .dockerignore ausschließt (Tests, Nachweise, Medien, Git); fehlende Inhaltsordner sind erlaubt
+COPY --chown=node:node . .
 RUN mkdir -p /daten && chown node:node /daten
 USER node
 ENV NODE_ENV=production SPUR_HOST=0.0.0.0 SPUR_PORT=8080 SPUR_DATEN=/daten
