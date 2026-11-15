@@ -4,7 +4,7 @@
 import { h, leere, knopf, symbol, frage, melde } from '../ui.js';
 import { t, einstellungen, reduzierteBewegung } from '../einstellungen.js';
 import { vorlesen } from '../vorlesen.js';
-import { aufgabe as ladeAufgabe, aufgabenVon, url } from '../inhalte.js';
+import { aufgabe as ladeAufgabe, aufgabenVon, url, alsDatei } from '../inhalte.js';
 import { aktuellesTeam, orteDesTeams, stationVon, speichereLauf, zaehleAktiv, notiereRueckmeldung, erfassung } from '../spielstand.js';
 import { pruefeErgebnis, pruefeModul } from '../kern/ereignisse.js';
 import { schreibe, entferne } from '../speicher.js';
@@ -86,7 +86,7 @@ export async function zeige(ctx) {
 
   let roh;
   try {
-    roh = await modul.starte(wurzel, aufgabe, umgebung);
+    roh = await modul.starte(wurzel, alsDatei(aufgabe), umgebung); // genau der Inhalt der Datei (Vertrag 2.2)
   } catch (err) {
     console.error(err);
     if (abbruch.signal.aborted) return aufgabe.titel;

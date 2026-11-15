@@ -43,6 +43,12 @@ export async function aufgabe(kennung) {
   return aufgabenCache.get(kennung);
 }
 
+/** Die Aufgabe so, wie sie in der Datei steht (ohne die Felder, die die App ergänzt), für die Spielmodule. */
+export function alsDatei(aufgabe) {
+  const { kennung, ort, nr, ...datei } = aufgabe;
+  return datei;
+}
+
 /** Alle Aufgaben eines Orts (für Dauer und Belohnungen). */
 export async function aufgabenVon(ort, auswahl = null) {
   const nrn = auswahl ?? ort.aufgaben;

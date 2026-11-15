@@ -3,7 +3,7 @@
 import { h, leere, knopf } from './ui.js';
 import { ladeEinstellungen, aendere } from './einstellungen.js';
 import { vorlesen, setzeTempoQuelle } from './vorlesen.js';
-import { ladeInhalte, aufgabe as ladeAufgabe, url } from './inhalte.js';
+import { ladeInhalte, aufgabe as ladeAufgabe, url, alsDatei } from './inhalte.js';
 import { pruefeErgebnis, pruefeModul, bereinigeEreignisse } from './kern/ereignisse.js';
 import { pruefeSchema } from './kern/schema.js';
 import { AUFGABE_GEMEINSAM } from './kern/inhalte.js';
@@ -24,14 +24,16 @@ const wurzelRahmen = h('div', { class: 'aufgabe-rahmen' });
 const protokoll = h('pre', { class: 'karte', stil: { 'white-space': 'pre-wrap', 'font-size': '0.85rem', 'max-height': '24rem', overflow: 'auto' } });
 const bericht = h('div', {});
 let abbruch = null;
+let laufNr = 0;
 
 async function starte() {
   abbruch?.abort();
   abbruch = new AbortController();
+  const lauf = ++laufNr;
   leere(protokoll);
   leere(bericht);
   const kennung = wahl.value;
-  const aufgabe = await ladeAufgabe(kennung);
+  const aufgabe = alsDatei(await ladeAufgabe(kennung));
   await aendere({ sprache: sprache.value, tempo: Number(tempo.value), kontrast: kontrast.checked ? 'hoch' : 'normal', bewegung: bewegung.checked ? 'reduziert' : 'auto' });
   setzeTempoQuelle(() => Number(tempo.value));
   const fehler = [];
@@ -60,6 +62,7 @@ async function starte() {
   const start = performance.now();
   let roh;
   try { roh = await modul.starte(wurzel, aufgabe, umgebung); } catch (e) { fehler.push(`starte() hat geworfen: ${e.message}`); }
+  if (lauf !== laufNr) return; // inzwischen neu gestartet: dieses Ergebnis nicht mehr anzeigen
   const dauer = Math.round(performance.now() - start);
   if (roh) {
     const p = pruefeErgebnis(roh, aufgabe);

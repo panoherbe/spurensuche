@@ -12,8 +12,8 @@ services:
       SPUR_HOST: 127.0.0.1
       SPUR_VERWALTUNG_SCHLUESSEL: TEST-VERWALTUNG
       SPUR_MESSWERTE_TOKEN: test-messwerte
-    tmpfs:
-      - /daten:mode=1777
+    volumes:
+      - daten:/daten
 
   last:
     image: node:24-alpine
@@ -37,3 +37,19 @@ services:
       spur:
         condition: service_healthy
     command: ["node", "test/last.js"]
+
+  # nach dem Lasttest: Rückspieltest und Archiv-Probelauf auf der Datenbank des Laufs
+  nachtest:
+    image: node:24-alpine
+    profiles: [nachtest]
+    working_dir: /app
+    user: "${UID_GID:-1000:1000}"
+    environment:
+      HOME: /tmp
+      NODE_NO_WARNINGS: "1"
+    volumes:
+      - .:/app
+      - daten:/daten
+
+volumes:
+  daten:
