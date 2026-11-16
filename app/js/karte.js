@@ -35,10 +35,20 @@ function auseinander(punkte) {
   return punkte;
 }
 
+/** Berührt das Rechteck `r` das runde Bild in `k` (Rechteck des Kreises, dazu 3 px Umriss)? */
+function ueberKreis(r, k) {
+  const cx = (k.left + k.right) / 2;
+  const cy = (k.top + k.bottom) / 2;
+  const nx = Math.max(r.left, Math.min(cx, r.right));
+  const ny = Math.max(r.top, Math.min(cy, r.bottom));
+  return Math.hypot(nx - cx, ny - cy) < k.width / 2 + 3;
+}
+
 /**
- * Namensschild über dem Bild einer anderen Marke: zur Seite schieben, auf der es weniger weit muss. Danach Stadtnamen,
- * die eine Ortsmarke (Bild, Name, Stempel, Zähler) verdecken würde oder die über den Kartenrand ragen: erst links vom
- * Punkt versuchen, sonst ausblenden. Hängt von der Größe der Karte ab, darum bei jeder Größenänderung neu.
+ * Namensschild über dem Bild einer anderen Marke: zur Seite schieben, auf der es weniger weit muss; ein Stempel dort:
+ * auf die andere Seite der eigenen Marke. Danach Stadtnamen, die eine Ortsmarke (Bild, Name, Stempel, Zähler)
+ * verdecken würde oder die über den Kartenrand ragen: erst links vom Punkt versuchen, sonst ausblenden. Hängt von der
+ * Größe der Karte ab, darum bei jeder Größenänderung neu.
  */
 function stadtnamenOrdnen(flaeche) {
   const rahmen = flaeche.getBoundingClientRect();
@@ -58,6 +68,15 @@ function stadtnamenOrdnen(flaeche) {
       dx = links < rechts ? -links : rechts;
     }
     if (dx) n.style.setProperty('--schieben', `${Math.round(dx)}px`);
+  }
+  // Stempel (geschaffter Ort) über dem Bild einer anderen Marke: auf die linke Seite, wenn es dort frei ist
+  const bilder = [...flaeche.querySelectorAll('.marker-punkt')];
+  const aufBild = (st) => bilder.some((m) => !st.parentElement.contains(m) && ueberKreis(st.getBoundingClientRect(), m.getBoundingClientRect()));
+  for (const st of flaeche.querySelectorAll('.marker-stempel')) {
+    st.classList.remove('links');
+    if (!aufBild(st)) continue;
+    st.classList.add('links');
+    if (aufBild(st)) st.classList.remove('links');
   }
   const marken = [...flaeche.querySelectorAll('.karte-marker, .karte-marker > *')]
     .map((el) => el.getBoundingClientRect()).filter((r) => r.width && r.height);

@@ -145,6 +145,7 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 128px; }
 .karte-marker:hover .marker-punkt { transform: scale(1.08) rotate(-4deg); }
 .marker-stempel, .marker-ziel { position: absolute; top: 50%; width: 66%; height: 66%; pointer-events: none; }
 .marker-stempel { right: -36%; transform: translateY(-58%) rotate(12deg); }
+.marker-stempel.links { right: auto; left: -36%; transform: translateY(-58%) rotate(-12deg); }
 .marker-ziel { left: -30%; transform: translateY(-70%) rotate(-8deg); width: 56%; height: 56%; }
 .marker-teil { position: absolute; right: -34%; top: 50%; transform: translateY(-50%); min-width: 2.3em; padding: 0 0.4em; border-radius: 999px; background: var(--sp-sonne); color: var(--sp-tinte); border: 2.5px solid var(--sp-kontur); font-family: var(--sp-schrift-titel); font-weight: 800; font-size: 0.8rem; line-height: 1.5; }
 .marker-name { position: absolute; left: 50%; top: calc(100% + 12px); transform: translateX(calc(-50% + var(--schieben, 0px))); font-family: var(--sp-schrift-titel); font-size: 0.85rem; font-weight: 800; white-space: nowrap; padding: 1px 10px; border-radius: 999px;
