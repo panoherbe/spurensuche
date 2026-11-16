@@ -1,0 +1,125 @@
+{
+  "zeitpunkt": "2026-11-16T15:38:30.253Z",
+  "axe": "4.10.2",
+  "schritte": [
+    "v01-lk-uebersicht",
+    "v02-lk-laufend",
+    "v03-lk-auswertung",
+    "v04-start",
+    "v05-karte",
+    "v06-ort",
+    "v07-spiel-start",
+    "v08-offline-aufgabe",
+    "v09-offline-sammelbuch",
+    "v10-lk-eule",
+    "v12-lk-freigabe-zeitrahmen",
+    "v13-figur",
+    "v14-bild-regler",
+    "v11-telefon-dunkel-karte"
+  ],
+  "fehler": [],
+  "barrierefreiheit": {
+    "v-lk-anmeldung": {
+      "verstoesse": [],
+      "bestanden": 24,
+      "unvollstaendig": 0
+    },
+    "v-lk-uebersicht": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 0
+    },
+    "v-lk-laufend": {
+      "verstoesse": [],
+      "bestanden": 24,
+      "unvollstaendig": 0
+    },
+    "v-lk-auswertung": {
+      "verstoesse": [],
+      "bestanden": 29,
+      "unvollstaendig": 1
+    },
+    "v-start": {
+      "verstoesse": [],
+      "bestanden": 17,
+      "unvollstaendig": 0
+    },
+    "v-karte": {
+      "verstoesse": [],
+      "bestanden": 23,
+      "unvollstaendig": 1
+    },
+    "v-ort": {
+      "verstoesse": [],
+      "bestanden": 23,
+      "unvollstaendig": 0
+    },
+    "v-spiel-start": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "v-lk-freigabe-zeitrahmen": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "v-figur-baukasten": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "v-figur-gespeichert": {
+      "verstoesse": [],
+      "bestanden": 21,
+      "unvollstaendig": 0
+    },
+    "v-bild-regler": {
+      "verstoesse": [],
+      "bestanden": 25,
+      "unvollstaendig": 0
+    },
+    "v-telefon-dunkel-start": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 1
+    },
+    "v-telefon-dunkel-karte": {
+      "verstoesse": [],
+      "bestanden": 20,
+      "unvollstaendig": 1
+    }
+  },
+  "messung": {
+    "vorschlaegeBiber": [
+      "Teamleistung: Teamleistung, Beurteilen / Sich positionieren",
+      "Problemlösung: Problemlösung, Beurteilen / Sich positionieren",
+      "Beteiligung: Beteiligung, Gestalten"
+    ],
+    "orte": 4,
+    "spielText": "BILDPUZZLE · ETWA 6 MINUTEN Die Brücke im Nebel Das Foto der Basteibrücke ist durcheinandergeraten. Setzt es wieder zusammen: Tippt auf zwei Teile, dann tauschen sie die Plätze. Vorlesen So teilt i",
+    "offlinePaket": {
+      "dateien": 155,
+      "bytes": 4915380,
+      "vorhanden": 155,
+      "cache": [
+        "spurensuche-c57a68f5be946cdb"
+      ]
+    },
+    "offlineGeladen": true,
+    "zeileEule": "Eule gerade: Bastei In Arbeit (0/3) – Noch nicht begonnen – Noch nicht begonnen – Noch nicht begonnen gerade eben",
+    "zeitrahmen": [
+      "Unterrichtsstunde (45 Min.)",
+      "Projekttag (240 Min.)",
+      "Tagesausflug (300 Min.)"
+    ],
+    "vorschlagStunde": "1 Ort, 3 Aufgaben, etwa 23 Minuten · Unterrichtsstunde: Frauenkirche Dresden",
+    "figurText": "Spielfigur: Haut mittel, Frisur kurz, dunkelbraun, Gesicht fröhlich, T-Shirt grün, Hose Jeans, in der Hand: Landkarte, Rucksack",
+    "collageRegler": [
+      "Sammelstücke fürs Bild (höchstens 12)",
+      "Anordnung",
+      "Größe",
+      "Farbstimmung"
+    ]
+  }
+}
