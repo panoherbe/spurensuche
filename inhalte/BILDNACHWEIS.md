@@ -8,7 +8,6 @@ Eigene Werke, ohne Bildgenerator gezeichnet (Panagiotis Herbe):
 
 - Sammelstücke und die Vergleichsbilder in `assets/spiele/vergleich/` (Frauenkirche, Kind, Ziegel): CC BY-SA 4.0.
 - Spielfigur und Ulla Uhu sind Programmcode (AGPL-3.0-only); die Zeichnungen stehen zusätzlich unter CC BY-SA 4.0.
-
 - Wappen der Gruppen (Tierköpfe, Wimpel), Stern, Stempel, Konfetti und der Schmuck der Karte (Bäume, Berge, Felsen,
   Windrose, Weg) in `app/js/zeichnungen.js` sind Programmcode (AGPL-3.0-only); die Zeichnungen stehen zusätzlich
   unter CC BY-SA 4.0.

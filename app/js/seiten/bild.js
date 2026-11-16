@@ -141,7 +141,7 @@ function zeigeFertig({ haupt, neuZeichnen }, b, team) {
         h('p', { class: `hinweisfeld${team.bild.status === 'freigegeben' ? ' gut' : ''}`, role: 'status' }, `Stand: ${STATUS[team.bild.status] ?? team.bild.status}.`),
         h('dl', {},
           h('dt', {}, 'Erstellt'), h('dd', {}, datumZeit(b.metadaten.erstellt)),
-          h('dt', {}, 'Art'), h('dd', {}, 'Item-Collage (ohne KI, nach festen Regeln)'),
+          h('dt', {}, 'Art'), h('dd', {}, 'Sammelbild (ohne KI, nach festen Regeln)'),
           h('dt', {}, 'Format'), h('dd', {}, 'PNG, 2048 × 2048 Pixel'),
           h('dt', {}, 'Kennung'), h('dd', { class: 'leise' }, b.metadaten.kennung)),
         h('div', { class: 'knopfreihe' },

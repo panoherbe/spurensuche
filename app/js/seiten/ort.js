@@ -88,7 +88,7 @@ export async function zeige(ctx) {
   leere(haupt, h('div', { class: `ort-seite ${ortFarbe(inhalte, ort.id)}` },
     h('a', { class: 'zurueck', href: '#/karte' }, symbol('zurueck'), 'Karte'),
     h('div', { class: 'ort-kopf' },
-      h('figure', { class: 'ortsfoto' }, h('img', { class: 'ortsbild', src: url(ort.bild), alt: ort.alt }), h('figcaption', {}, `Bild: ${ort.bildQuelle}`)),
+      h('figure', { class: 'ortsfoto' }, h('img', { class: 'ortsbild', src: url(ort.bild), alt: ort.alt }), h('figcaption', {}, /^(Foto|Bild|Zeichnung|Grafik)\b/.test(ort.bildQuelle) ? ort.bildQuelle : `Bild: ${ort.bildQuelle}`)),
       h('div', { class: 'ort-titel' },
         h('h1', { 'data-vorlesen': '' }, ort.name.replace(/\//g, '/\u200b')),
         h('p', { class: 'region' }, ort.region, ort.id === inhalte.finale ? ' · Abschluss der Reise' : ''),

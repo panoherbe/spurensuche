@@ -1,6 +1,7 @@
 // Vorschau auf ein KI-Bild (Erweiterung, nicht angebunden): Der Prompt entsteht nur aus geprüften Bausteinen der gewählten Sammelstücke und der
 // Regler; es gibt kein Freitextfeld. So lassen sich unangemessene Bilder schon beim Prompt vermeiden, und die Gruppe sieht
-// in einfachen Worten, was die KI malen soll. Ohne angebundenes Bildmodell bleibt es bei der Item-Collage.
+// in einfachen Worten, was die KI malen soll. Ohne angebundenes Bildmodell bleibt es beim Sammelbild, das nach festen
+// Regeln ohne KI entsteht (collage/index.js).
 
 import { einstellungen } from './regeln.js';
 

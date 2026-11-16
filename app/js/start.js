@@ -49,8 +49,11 @@ function netzAnzeige() {
   const team = aktuellesTeam();
   if (!team || team.modus !== 'schule') return h('span', { class: 'netz', id: 'netz', hidden: true });
   const offline = !navigator.onLine;
-  const text = offline ? (z.offen ? `Offline · ${z.offen} warten` : 'Offline') : z.offen ? `${z.offen} werden übertragen` : 'Alles übertragen';
-  return h('span', { class: `netz${offline ? ' offline' : ''}`, id: 'netz', role: 'status' }, symbol(offline ? 'ohneNetz' : 'wolke'), h('span', { class: 'netz-text' }, text));
+  // In der Vorführung gibt es keinen Server: Ergebnisse werden im Browser gespeichert, nicht übertragen.
+  const vorf = app.api?.vorfuehrung;
+  const text = offline ? (z.offen ? `Offline · ${z.offen} warten` : 'Offline')
+    : z.offen ? `${z.offen} werden ${vorf ? 'gespeichert' : 'übertragen'}` : vorf ? 'Alles gespeichert' : 'Alles übertragen';
+  return h('span', { class: `netz${offline ? ' offline' : ''}`, id: 'netz', role: 'status' }, symbol(offline ? 'ohneNetz' : vorf ? 'haken' : 'wolke'), h('span', { class: 'netz-text' }, text));
 }
 
 function zeichneKopf() {

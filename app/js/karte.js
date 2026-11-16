@@ -10,6 +10,67 @@ import { kartenSchmuck, stempel, faehnchen } from './zeichnungen.js';
 
 const STATUS_TEXT = { offen: 'noch offen', begonnen: 'begonnen', abgeschlossen: 'geschafft', abgebrochen: 'unterbrochen' };
 const GROSSE_STAEDTE = new Set(['Leipzig', 'Dresden', 'Chemnitz']);
+// Liegen zwei Orte dichter als MIN_ABSTAND (Karteneinheiten, die Karte ist 1000 breit), würden sich ihre runden Marken
+// auf einem Tablet überdecken (Frauenkirche und Bastei: 102). Dann rückt eine Marke ein Stück weg, höchstens
+// MAX_RUECKEN; nur die Anzeige, die Lage im Inhalt bleibt.
+const MIN_ABSTAND = 140;
+const MAX_RUECKEN = 40;
+
+/** Marken auseinanderrücken: Es bewegt sich nie der Abschlussort, sonst der spätere Ort der Liste. */
+function auseinander(punkte) {
+  for (let i = 0; i < punkte.length; i++) {
+    for (let j = 0; j < punkte.length; j++) {
+      const p = punkte[i];
+      const q = punkte[j];
+      if (p === q || p.finale || (!q.finale && j > i)) continue;
+      const dx = p.x - q.x;
+      const dy = p.y - q.y;
+      const d = Math.hypot(dx, dy);
+      if (!d || d >= MIN_ABSTAND) continue;
+      const weg = Math.min(MIN_ABSTAND - d, MAX_RUECKEN);
+      p.x += (dx / d) * weg;
+      p.y += (dy / d) * weg;
+    }
+  }
+  return punkte;
+}
+
+/**
+ * Namensschild über dem Bild einer anderen Marke: zur Seite schieben, auf der es weniger weit muss. Danach Stadtnamen,
+ * die eine Ortsmarke (Bild, Name, Stempel, Zähler) verdecken würde oder die über den Kartenrand ragen: erst links vom
+ * Punkt versuchen, sonst ausblenden. Hängt von der Größe der Karte ab, darum bei jeder Größenänderung neu.
+ */
+function stadtnamenOrdnen(flaeche) {
+  const rahmen = flaeche.getBoundingClientRect();
+  if (!rahmen.width) return;
+  const schneidet = (a, b, rand = 0) => a.left < b.right + rand && a.right > b.left - rand && a.top < b.bottom + rand && a.bottom > b.top - rand;
+  for (const n of flaeche.querySelectorAll('.marker-name')) {
+    n.style.removeProperty('--schieben');
+    const r = n.getBoundingClientRect();
+    if (!r.width) continue;
+    let dx = 0;
+    for (const m of flaeche.querySelectorAll('.marker-punkt')) {
+      if (n.parentElement.contains(m)) continue;
+      const b = m.getBoundingClientRect();
+      if (!schneidet(r, b)) continue;
+      const links = r.right - b.left + 6;
+      const rechts = b.right - r.left + 6;
+      dx = links < rechts ? -links : rechts;
+    }
+    if (dx) n.style.setProperty('--schieben', `${Math.round(dx)}px`);
+  }
+  const marken = [...flaeche.querySelectorAll('.karte-marker, .karte-marker > *')]
+    .map((el) => el.getBoundingClientRect()).filter((r) => r.width && r.height);
+  const RAND = 4;
+  const stoesst = (r) => r.left < rahmen.left + RAND || r.right > rahmen.right - RAND || marken.some((m) => schneidet(r, m, RAND));
+  for (const el of flaeche.querySelectorAll('.karte-stadt')) {
+    el.classList.remove('links', 'verdeckt');
+    const r = el.getBoundingClientRect();
+    if (!r.width || !stoesst(r)) continue;
+    el.classList.add('links');
+    if (stoesst(el.getBoundingClientRect())) el.classList.replace('links', 'verdeckt');
+  }
+}
 
 /** Reihenfolge des gezeichneten Wegs: im Westen beginnen, immer zum nächsten Ort, der Abschlussort zuletzt. */
 function wegFolge(punkte) {
@@ -47,10 +108,10 @@ function wegPfad(folge) {
  * Liefert ein <figure>-Element.
  */
 export function zeichneKarte(eintraege, beiWahl, { titel = 'Karte von Sachsen' } = {}) {
-  const punkte = eintraege.map((e) => {
+  const punkte = auseinander(eintraege.map((e) => {
     const [x, y] = projiziere(e.ort.lage.lat, e.ort.lage.lon);
     return { ...e, x, y };
-  });
+  }));
   const weg = wegPfad(wegFolge(punkte));
   const svg = s('svg', { viewBox: `0 0 ${KARTE.breite} ${KARTE.hoehe}`, 'aria-hidden': 'true', focusable: 'false', class: 'karte-svg', preserveAspectRatio: 'xMidYMid meet' },
     s('rect', { class: 'karte-grund', x: 0, y: 0, width: KARTE.breite, height: KARTE.hoehe }),
@@ -70,8 +131,9 @@ export function zeichneKarte(eintraege, beiWahl, { titel = 'Karte von Sachsen' }
   }
   for (const p of punkte) {
     const status = p.status ?? 'offen';
-    // Liegt ein anderer Ort dicht darunter, steht der Name über der Marke statt darunter.
-    const oben = punkte.some((q) => q !== p && Math.abs(q.x - p.x) < 170 && q.y > p.y && q.y - p.y < 110);
+    // Liegt ein anderer Ort dicht darunter, steht der Name über der Marke statt darunter (160: auch die Bastei nach
+    // dem Wegrücken unter Bautzen).
+    const oben = punkte.some((q) => q !== p && Math.abs(q.x - p.x) < 170 && q.y > p.y && q.y - p.y < 160);
     const anzahl = p.aufgaben?.length ?? 0;
     flaeche.append(h('button', {
       type: 'button', class: `karte-marker status-${status}${p.finale ? ' finale' : ''} ${p.farbe ?? ''}`.trim(),
@@ -84,6 +146,8 @@ export function zeichneKarte(eintraege, beiWahl, { titel = 'Karte von Sachsen' }
     status !== 'abgeschlossen' && p.fertig > 0 && anzahl ? h('span', { class: 'marker-teil', 'aria-hidden': 'true' }, `${p.fertig}/${anzahl}`) : null,
     h('span', { class: `marker-name${oben ? ' oben' : ''}`, 'aria-hidden': 'true' }, p.ort.name)));
   }
+  if (typeof ResizeObserver === 'function') new ResizeObserver(() => stadtnamenOrdnen(flaeche)).observe(flaeche);
+  document.fonts?.ready.then(() => stadtnamenOrdnen(flaeche)).catch(() => {});
   return h('figure', { class: 'karte-rahmen' },
     h('div', { class: 'nur-vorlesbar' }, `${titel} mit ${eintraege.length} Orten. Die Orte stehen auch in der Liste unter der Karte.`),
     flaeche,

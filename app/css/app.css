@@ -125,6 +125,9 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 128px; }
 .karte-stadt { position: absolute; transform: translate(9px, -50%); font-size: 0.72rem; color: var(--sp-text); font-weight: 700; pointer-events: none; white-space: nowrap; display: none; }
 .karte-stadt.gross { display: block; }
 @media (min-width: 760px) { .karte-stadt { display: block; } }
+/* von einer Ortsmarke verdeckt oder am Rand (karte.js, stadtnamenOrdnen): Name links vom Punkt oder ausgeblendet */
+.karte-stadt.links { transform: translate(calc(-100% - 9px), -50%); }
+.karte-stadt.verdeckt { visibility: hidden; }
 .karte-marker {
   --marker: clamp(44px, 8vw, 64px);
   position: absolute; transform: translate(-50%, -50%); z-index: 2; display: grid; place-items: center;
@@ -144,7 +147,7 @@ main { max-width: 64rem; margin: 0 auto; padding: 18px 16px 128px; }
 .marker-stempel { right: -36%; transform: translateY(-58%) rotate(12deg); }
 .marker-ziel { left: -30%; transform: translateY(-70%) rotate(-8deg); width: 56%; height: 56%; }
 .marker-teil { position: absolute; right: -34%; top: 50%; transform: translateY(-50%); min-width: 2.3em; padding: 0 0.4em; border-radius: 999px; background: var(--sp-sonne); color: var(--sp-tinte); border: 2.5px solid var(--sp-kontur); font-family: var(--sp-schrift-titel); font-weight: 800; font-size: 0.8rem; line-height: 1.5; }
-.marker-name { position: absolute; left: 50%; top: calc(100% + 12px); transform: translateX(-50%); font-family: var(--sp-schrift-titel); font-size: 0.85rem; font-weight: 800; white-space: nowrap; padding: 1px 10px; border-radius: 999px;
+.marker-name { position: absolute; left: 50%; top: calc(100% + 12px); transform: translateX(calc(-50% + var(--schieben, 0px))); font-family: var(--sp-schrift-titel); font-size: 0.85rem; font-weight: 800; white-space: nowrap; padding: 1px 10px; border-radius: 999px;
   background: var(--ort-kraeftig, var(--sp-flaeche)); color: var(--ort-tinte, var(--sp-text)); border: 2.5px solid var(--sp-kontur); display: none; }
 .marker-name.oben { top: auto; bottom: calc(100% + 9px); }
 @media (min-width: 620px) { .marker-name { display: block; } }

@@ -5,7 +5,7 @@
 // png: Blob image/png, 2048 × 2048 px (mit optionen.kantenlaenge kleiner, nur für die schnelle Vorschau beim Einstellen);
 // vorschau: Blob image/webp (sonst image/jpeg), höchstens 512 × 512 px; metadaten: { kennung, erstellt, art, items }.
 // Das Bild enthält keinen Namen, keine Gruppenbezeichnung und keinen Text über die Gruppe; unten rechts steht nur die
-// Art des Bildes („Item-Collage“). Läuft im Browser ohne Netz (Canvas); die Sticker kommen aus assets/spiele/items/.
+// Art des Bildes („Sammelbild“). Läuft im Browser ohne Netz (Canvas); die Sticker kommen aus assets/spiele/items/.
 
 import { REGLER, STIMMUNGEN, anordnen, einstellungen } from './regeln.js';
 import { zufallsquelle, hash } from '../_gemeinsam/zufall.js';
@@ -162,7 +162,7 @@ function zeichneRahmen(ctx, k, s) {
   rundesRechteck(ctx, 0.028 * k, 0.028 * k, 0.944 * k, 0.944 * k, 0.05 * k);
   ctx.stroke();
   // Art des Bildes, klein unten rechts (kein Text über die Gruppe)
-  const text = 'Item-Collage';
+  const text = 'Sammelbild';
   ctx.font = `600 ${Math.round(0.022 * k)}px "Atkinson Hyperlegible Next", system-ui, sans-serif`;
   const breite = ctx.measureText(text).width + 0.03 * k;
   const hoehe = 0.04 * k;

@@ -47,5 +47,5 @@ Sprache, Tempo, Kontrast, Bewegung, dunkel), `collage.html`, `figur.html`. Ergeb
 
 Aufgaben und Orte in [`../inhalte/`](../inhalte/), Bilder in [`../assets/spiele/`](../assets/spiele/). Eigene Texte,
 Zeichnungen (Sammelstücke, Figur, Ulla Uhu) und Aufgaben: CC BY-SA 4.0. Fotos aus Wikimedia Commons unter freien
-Lizenzen: [`../inhalte/BILDNACHWEIS.md`](../inhalte/BILDNACHWEIS.md). Schrift Atkinson Hyperlegible Next: SIL OFL 1.1.
-Code: AGPL-3.0-only.
+Lizenzen: [`../inhalte/BILDNACHWEIS.md`](../inhalte/BILDNACHWEIS.md). Schriften Atkinson Hyperlegible Next (Lesetext)
+und Grandstander (Überschriften und Knöpfe in der App): SIL OFL 1.1. Code: AGPL-3.0-only.
