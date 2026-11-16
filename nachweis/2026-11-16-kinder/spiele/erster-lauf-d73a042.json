@@ -1,0 +1,96 @@
+{
+ "hinweis": "Zusammenfassung und Fundstellen des ersten eigenen Prüflaufs der Spiele auf d73a042 (16.11.2026, 00:40 bis 00:48 Uhr MEZ), vor der Korrektur in 1cffbad. Die vollständige messwerte.json dieses Laufs liegt nicht im Repository; die Zahlen hier sind unverändert aus ihr kopiert.",
+ "stand": "d73a042",
+ "beginn": "2026-11-15T23:40:10+00:00",
+ "ende": "2026-11-15T23:48:57+00:00",
+ "zusammenfassung": {
+  "laeufe": 81,
+  "geloest": 81,
+  "fehlgeschlagen": [],
+  "axeZustaende": 537,
+  "axeVerstoesse": 0,
+  "schemaFehler": 0,
+  "ereignisFehler": 0,
+  "konsolenmeldungen": 33,
+  "ueberlauf": 2,
+  "ueberlaufCollageFigur": 0,
+  "breitenProben": 432,
+  "breitenMitUeberlauf": 0,
+  "breiten": [
+   320,
+   360,
+   390,
+   600,
+   680,
+   744,
+   768,
+   800,
+   820,
+   900,
+   1024,
+   1180,
+   1280
+  ],
+  "formate": [
+   "bildpuzzle",
+   "bildsuche",
+   "dilemma",
+   "schaetzen",
+   "sortieren"
+  ],
+  "aufgaben": [
+   "bastei/1",
+   "bastei/2",
+   "bastei/3",
+   "bautzen/1",
+   "bautzen/2",
+   "bautzen/3",
+   "frauenkirche/1",
+   "frauenkirche/2",
+   "frauenkirche/3",
+   "goeltzschtal/1",
+   "goeltzschtal/2",
+   "goeltzschtal/3"
+  ]
+ },
+ "laeufeMitUeberlauf": [
+  {
+   "browser": "chromium",
+   "geraet": "klein",
+   "einstellung": "standard",
+   "aufgabe": "bastei/3",
+   "ueberlauf": {
+    "abstimmen": {
+     "seite": 0,
+     "anzahl": 1,
+     "stellen": [
+      {
+       "text": "Jede und jeder hat eine Stimme: Reicht d",
+       "kasten": "div.sp-dilemma",
+       "px": 2
+      }
+     ]
+    }
+   }
+  },
+  {
+   "browser": "chromium",
+   "geraet": "klein",
+   "einstellung": "standard",
+   "aufgabe": "frauenkirche/3",
+   "ueberlauf": {
+    "abstimmen": {
+     "seite": 0,
+     "anzahl": 1,
+     "stellen": [
+      {
+       "text": "Jede und jeder hat eine Stimme: Reicht d",
+       "kasten": "div.sp-dilemma",
+       "px": 2
+      }
+     ]
+    }
+   }
+  }
+ ]
+}
