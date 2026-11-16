@@ -4,12 +4,12 @@
 Netz. Lehrkräfte sehen, wie ihre Gruppen zusammenarbeiten: ohne Noten und ohne Namen. Das läuft heute, als offener
 Prototyp, den Sie selbst ausprobieren und prüfen können.**
 
-![Rundgang durch die Spurensuche in sechs Szenen: die Karte mit den Orten, die Gruppe wählt einen Ort, ein Bildpuzzle im Team, ein Sammelstück als Belohnung, das Bild aus den Sammelstücken, die Übersicht der Lehrkraft](medien/rundgang.gif)
+![Rundgang durch die Spurensuche in sechs Szenen: die Karte mit den Orten, die Gruppe wählt einen Ort, ein Bildpuzzle im Team, ein Sammelstück als Belohnung, das Bild aus den Sammelstücken, die Übersicht der Lehrkraft; zum Schluss ein Abspann mit Name und Lizenzen](medien/rundgang.gif)
 
-<sub>Rundgang aus Sicht einer Schülergruppe: 68 Sekunden, sechs kurze Sätze, ohne Ton; aufgenommen am 16.11.2026 in der
-Vorführung (Spielstand teils vorbereitet, Gruppen simuliert). Bewegtes Bild oben: 3,0 MB.
-[Video herunterladen (MP4, 2,7 MB)](https://github.com/panoherbe/spurensuche/raw/main/medien/rundgang.mp4)
-· Text des Rundgangs weiter unten.</sub>
+<sub>Rundgang aus Sicht einer Schülergruppe: 70 Sekunden, sechs kurze Sätze und ein Abspann, ohne Ton; aufgenommen am
+16.11.2026 in der Vorführung (Spielstand teils vorbereitet, Gruppen simuliert). Bewegtes Bild oben: 3,1 MB.
+[Video herunterladen (MP4, 2,8 MB)](https://github.com/panoherbe/spurensuche/raw/main/medien/rundgang.mp4)
+· [Text des Rundgangs](#text-des-rundgangs) weiter unten.</sub>
 
 **Selbst ausprobieren:** die [Vorführung](https://panoherbe.com/projekte/spurensuche/vorfuehrung/index.html) öffnen,
 „Mit der Klasse“ wählen und mit dem Code `DEMO-2026` beitreten. In einem zweiten Fenster zeigt „Für Lehrkräfte“ →
@@ -28,7 +28,8 @@ Vorführung (Spielstand teils vorbereitet, Gruppen simuliert). Bewegtes Bild obe
 
 Kurz: Jede Zeile ist im Prototyp umgesetzt. Jede Zahl steht mit Datum im Messprotokoll
 [`nachweis/2026-11-15-gesamt/PROTOKOLL.md`](nachweis/2026-11-15-gesamt/PROTOKOLL.md), die Nachmessung nach der
-Gestaltung für Kinder in [`nachweis/2026-11-16-kinder/`](nachweis/2026-11-16-kinder/LIESMICH.md). Alle Nutzerinnen und
+Gestaltung für Kinder in [`nachweis/2026-11-16-kinder/`](nachweis/2026-11-16-kinder/LIESMICH.md) und nach den letzten
+Korrekturen in [`nachweis/2026-11-16-kinder-2/`](nachweis/2026-11-16-kinder-2/LIESMICH.md). Alle Nutzerinnen und
 Nutzer in den Messungen sind simuliert: Ein Skript klickt im Browser oder schickt Anfragen.
 
 | Sie brauchen | Läuft hier schon | Gemessen am 15. und 16.11.2026 |
@@ -75,10 +76,10 @@ Schnittstelle (OpenAPI), Fehlerkatalog. Die Betriebsseite lässt sich in der Vor
 ([betrieb.html](https://panoherbe.com/projekte/spurensuche/vorfuehrung/betrieb.html), Schlüssel `BETRIEB-DEMO`; die
 Werte dort sind nachgebildet).
 
-<details>
-<summary><b>Text des Rundgangs</b> (die Sätze im Video)</summary>
+## Text des Rundgangs
 
-Sechs Szenen, je ein Satz. Rechts unten steht die ganze Zeit: Selbst ausprobieren, panoherbe.com/projekte/spurensuche.
+Kurz: die Sätze im Video zum Nachlesen. Sechs Szenen, je ein Satz, danach der Abspann. Rechts unten steht die ganze
+Zeit: Selbst ausprobieren, panoherbe.com/projekte/spurensuche.
 
 | ab | Satz | Was man sieht |
 |---|---|---|
@@ -88,8 +89,7 @@ Sechs Szenen, je ein Satz. Rechts unten steht die ganze Zeit: Selbst ausprobiere
 | 0:33 | Dafür gibt es ein Sammelstück. | Sterne, das Sammelstück, es klebt sich ins Sammelbuch |
 | 0:46 | Am Ende baut ihr ein Bild. *(klein darunter: Spielstand für den Rundgang vorbereitet.)* | alle Orte geschafft, das Bild aus den Sammelstücken, eine andere Anordnung |
 | 1:00 | Lehrkräfte sehen Gruppen, nie einzelne Kinder. *(klein darunter: Beispielklasse, Gruppen simuliert.)* | die laufende Übersicht der Lehrkraft |
-
-</details>
+| 1:07 | Abspann: Selbst ausprobieren. panoherbe.com/projekte/spurensuche. Im Browser, ohne Konto. | darunter: Panagiotis Herbe · Code AGPL-3.0-only · Texte und Zeichnungen CC BY-SA 4.0 · Fotos: Wikimedia Commons, Urheber und Lizenz je Bild im Repository |
 
 ## Was der Prototyp noch nicht ist
 
@@ -107,7 +107,7 @@ Sechs Szenen, je ein Satz. Rechts unten steht die ganze Zeit: Selbst ausprobiere
 
 ## Kontakt
 
-[panoherbe.com](https://panoherbe.com)
+Panagiotis Herbe · kontakt [at] panoherbe.com · [panoherbe.com](https://panoherbe.com)
 
 ---
 
@@ -127,7 +127,10 @@ npm-Pakete zur Laufzeit); ein Container; alle Daten exportierbar.
 - Abhängigkeiten und Lizenzen: [`docs/ABHAENGIGKEITEN.md`](docs/ABHAENGIGKEITEN.md)
 - Tests: `docker run --rm -v "$PWD":/app -w /app node:24-alpine node --test test/*.test.js`; Browser-Prüfläufe,
   Lasttest und der ganze Messlauf: [`docs/TESTUMGEBUNG.md`](docs/TESTUMGEBUNG.md), `tools/messlauf.sh`
-- Nachweise: [`nachweis/2026-11-16-kinder/`](nachweis/2026-11-16-kinder/LIESMICH.md) (Gestaltung für Kinder, `1cffbad`:
+- Nachweise: [`nachweis/2026-11-16-kinder-2/`](nachweis/2026-11-16-kinder-2/LIESMICH.md) (letzte Korrekturen an Karte,
+  Vorführung und Sammelbild, `5e1df13`: Tests, Browser-Prüfläufe und Prüflauf der Spiele erneut, 33 von 33,
+  77 Ansichten ohne Verstoß, Spiele 81 von 81 ohne Überlauf, Paket 155 Dateien, Bilder und Rundgang mit Abspann neu),
+  [`nachweis/2026-11-16-kinder/`](nachweis/2026-11-16-kinder/LIESMICH.md) (Gestaltung für Kinder, `1cffbad`:
   Tests, alle Browser-Prüfläufe des Messlaufs und der Prüflauf der Spiele erneut, 33 von 33, 77 Ansichten ohne Verstoß,
   Spiele 81 von 81 gelöst und ohne Überlauf, Paket 155 Dateien, Bilder und Rundgang neu),
   [`nachweis/2026-11-15-gesamt/`](nachweis/2026-11-15-gesamt/) (offizieller Messlauf, Code-Stand: Tag
@@ -138,8 +141,8 @@ npm-Pakete zur Laufzeit); ein Container; alle Daten exportierbar.
   [`nachweis/2026-11-15-konzeptbilder/`](nachweis/2026-11-15-konzeptbilder/) (Nachlauf zweier Bilder),
   [`nachweis/2026-11-15/`](nachweis/2026-11-15/) (Probeläufe)
 
-**Lizenz:** Programmcode GNU AGPL-3.0-only seit dem ersten Commit ([`LICENSE`](LICENSE)); Texte, Aufgaben und eigene
-Zeichnungen CC BY-SA 4.0; Fotos der Orte aus Wikimedia Commons unter freien Lizenzen, je Bild in
-[`inhalte/BILDNACHWEIS.md`](inhalte/BILDNACHWEIS.md); Karte nach Natural Earth (gemeinfrei); Schriften Atkinson
-Hyperlegible Next (Lesetext) und Grandstander (Überschriften und Knöpfe), beide SIL Open Font License 1.1. Auftraggeber
-erhalten im Auftrag die vertraglich vereinbarten Rechte.
+**Lizenz:** © 2026 Panagiotis Herbe. Programmcode GNU AGPL-3.0-only seit dem ersten Commit ([`LICENSE`](LICENSE));
+Texte, Aufgaben und eigene Zeichnungen CC BY-SA 4.0; Fotos der Orte aus Wikimedia Commons unter freien Lizenzen, je
+Bild in [`inhalte/BILDNACHWEIS.md`](inhalte/BILDNACHWEIS.md); Karte nach Natural Earth (gemeinfrei); Schriften
+Atkinson Hyperlegible Next (Lesetext) und Grandstander (Überschriften und Knöpfe), beide SIL Open Font License 1.1.
+Auftraggeber erhalten im Auftrag die vertraglich vereinbarten Rechte.
