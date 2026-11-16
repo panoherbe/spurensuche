@@ -12,7 +12,7 @@
 .sp-frage { font-size: clamp(1.3em, 1.2vw + 1em, 1.65em); font-weight: 750; line-height: 1.3; }
 .sp-phase { display: grid; gap: calc(var(--spi-a) * 2); grid-template-columns: minmax(0, 1fr); }
 .sp-phase > section { display: grid; gap: calc(var(--spi-a) * 2); grid-template-columns: minmax(0, 1fr); animation: sp-einblenden var(--spi-dauer) ease both; }
-.sp-wahl-optionen { display: grid; gap: calc(var(--spi-a) * 1.5); grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+.sp-wahl-optionen { display: grid; gap: calc(var(--spi-a) * 1.5); grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); }
 
 .sp-zahlfeld { display: flex; flex-wrap: wrap; gap: var(--spi-a); align-items: center; }
 .sp-zahlfeld label { font-weight: 700; }
