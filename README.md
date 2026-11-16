@@ -4,10 +4,11 @@
 Netz. Lehrkräfte sehen, wie ihre Gruppen zusammenarbeiten: ohne Noten und ohne Namen. Das läuft heute, als offener
 Prototyp, den Sie selbst ausprobieren und prüfen können.**
 
-![Rundgang durch die Spurensuche: Beitritt mit Code, Karte mit freier Reihenfolge, ein Ort im Klassenzimmer, ein kurzes Spiel in einfacher Sprache mit Rollen, das Bild aus Sammelstücken, die Übersicht der Lehrkraft, das Kompetenzraster und die Betriebsseite mit Ampel](medien/rundgang.gif)
+![Rundgang durch die Spurensuche in sechs Szenen: die Karte mit den Orten, die Gruppe wählt einen Ort, ein Bildpuzzle im Team, ein Sammelstück als Belohnung, das Bild aus den Sammelstücken, die Übersicht der Lehrkraft](medien/rundgang.gif)
 
-<sub>Rundgang, 90 Sekunden, ohne Ton, mit Untertiteln; aufgenommen am 15.11.2026 in der Vorführung (Beispielklasse,
-Gruppen simuliert). [Video herunterladen (MP4, 2,9 MB)](https://github.com/panoherbe/spurensuche/raw/main/medien/rundgang.mp4)
+<sub>Rundgang aus Sicht einer Schülergruppe: 68 Sekunden, sechs kurze Sätze, ohne Ton; aufgenommen am 16.11.2026 in der
+Vorführung (Spielstand teils vorbereitet, Gruppen simuliert). Bewegtes Bild oben: 3,0 MB.
+[Video herunterladen (MP4, 2,7 MB)](https://github.com/panoherbe/spurensuche/raw/main/medien/rundgang.mp4)
 · Text des Rundgangs weiter unten.</sub>
 
 **Selbst ausprobieren:** die [Vorführung](https://panoherbe.com/projekte/spurensuche/vorfuehrung/index.html) öffnen,
@@ -15,31 +16,31 @@ Gruppen simuliert). [Video herunterladen (MP4, 2,9 MB)](https://github.com/panoh
 „Vorführung ansehen“ die Gruppe live. Alles läuft im Browser; nichts wird übertragen.
 
 <p align="center">
-  <img src="medien/1-karte.png" width="24%" alt="Karte von Sachsen mit vier Orten, einer davon geschafft">
+  <img src="medien/1-karte.png" width="24%" alt="Entdeckerkarte von Sachsen mit vier Orten als runde Bilder, einer davon geschafft">
   <img src="medien/2-spiel-einfach-vorlesen.png" width="24%" alt="Ein Spiel in einfacher Sprache, der vorgelesene Text ist gerahmt">
   <img src="medien/3-collage-regler.png" width="24%" alt="Das Bild der Gruppe aus ihren Sammelstücken, darunter die Auswahl">
   <img src="medien/4-kompetenzraster.png" width="24%" alt="Kompetenzraster der Lehrkraft mit Vorschlag und Belegen">
 </p>
 
-<sub>Bilder im Format iPad hochkant aus den Prüfläufen vom 15.11.2026; Spielstand und Gruppen simuliert.</sub>
+<sub>Bilder im Format iPad hochkant aus den Prüfläufen vom 16.11.2026; Spielstand und Gruppen simuliert.</sub>
 
 ## Was Sie brauchen, läuft hier schon
 
 Kurz: Jede Zeile ist im Prototyp umgesetzt. Jede Zahl steht mit Datum im Messprotokoll
-[`nachweis/2026-11-15-gesamt/PROTOKOLL.md`](nachweis/2026-11-15-gesamt/PROTOKOLL.md), die Nachmessung nach der neuen
-Gestaltung in [`nachweis/2026-11-15-gestaltung/`](nachweis/2026-11-15-gestaltung/). Alle Nutzerinnen und Nutzer in
-den Messungen sind simuliert: Ein Skript klickt im Browser oder schickt Anfragen.
+[`nachweis/2026-11-15-gesamt/PROTOKOLL.md`](nachweis/2026-11-15-gesamt/PROTOKOLL.md), die Nachmessung nach der
+Gestaltung für Kinder in [`nachweis/2026-11-16-kinder/`](nachweis/2026-11-16-kinder/LIESMICH.md). Alle Nutzerinnen und
+Nutzer in den Messungen sind simuliert: Ein Skript klickt im Browser oder schickt Anfragen.
 
-| Sie brauchen | Läuft hier schon | Gemessen am 15.11.2026 |
+| Sie brauchen | Läuft hier schon | Gemessen am 15. und 16.11.2026 |
 |---|---|---|
 | Orte auf einer Karte, freie Reihenfolge | Sachsen-Karte aus offenen Daten, vier echte Orte, kein Ort gesperrt | – |
 | Kurze Spiele, die sich wiederverwenden lassen | fünf Spielformate, zwölf Aufgaben, ein fester Bauplan für neue Spiele | alle 12 Aufgaben laden im Browser und halten den Bauplan ein, 0 Fehler |
-| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 150 Dateien, 4,6 MB im Gerät (nach der Gestaltung vom 15.11. abends neu gemessen; im Messlauf 147 Dateien, 4,5 MB); ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
+| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 155 Dateien, 4,7 MB im Gerät (nach der Gestaltung für Kinder am 16.11. neu gemessen; im Messlauf 147 Dateien, 4,5 MB); ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
 | Vor Ort oder im Klassenzimmer | QR-Code, Code vom Schild oder Standort; je Ort eine Fassung für die Schule | QR-Codes von fremder Software (zbar) gelesen: 17 von 17 |
 | Sammeln und ein eigenes Bild | Sammelbuch zeigt, wo es was gibt (kein Zufall); Bild 2048 × 2048 aus den Sammelstücken, mit Reglern | Test: Schule wartet auf die Freigabe, die Ausstellung sieht nur Freigegebenes |
-| Auswertung für Lehrkräfte | Gruppen, Freigabe, laufende Übersicht, Beobachtungen, Kompetenzraster, PDF-Bericht, Textentwürfe, Löschen | 33 von 33 automatischen Tests bestanden |
+| Auswertung für Lehrkräfte | Gruppen, Freigabe, laufende Übersicht, Beobachtungen, Kompetenzraster, PDF-Bericht, Textentwürfe, Löschen | 33 von 33 automatischen Tests bestanden (am 16.11. erneut 33 von 33) |
 | Datenschutz | keine Daten über einzelne Kinder; Familien ohne Konto; Gruppendaten nach zwölf Wochen gelöscht | Test: Name und E-Mail der Schulanmeldung werden nie gespeichert |
-| Barrierefreiheit | Vorlesen, einfache Sprache, Tempo, hoher Kontrast, dunkel, große Schrift | 0 von axe-core 4.10.2 gefundene Verstöße (WCAG 2.1 AA) in 77 Ansichten; nach der neuen Gestaltung vom selben Abend erneut 77 Ansichten, 0 Verstöße |
+| Barrierefreiheit | Vorlesen, einfache Sprache, Tempo, hoher Kontrast, dunkel, große Schrift | 0 von axe-core 4.10.2 gefundene Verstöße (WCAG 2.1 AA) in 77 Ansichten; nach der Gestaltung für Kinder am 16.11. erneut 77 Ansichten, 0 Verstöße; dazu jedes Spiel nur mit der Tastatur in drei Browsern: 537 Zustände, 0 Verstöße (bis WCAG 2.2 AA) |
 | Schulanmeldung | Standard OpenID Connect; fällt der Dienst aus, läuft die Stunde weiter | gegen Keycloak 26.0 geprüft: 5 von 5 Fällen ([Probelauf](nachweis/2026-11-15/keycloak/keycloak.json)); Ausfall und Schlüsselwechsel im Test |
 | Bilder für die Ausstellung | Freigabe durch die Lehrkraft, offene Schnittstelle, Archiv im offenen Format BagIt | Archiv: 99 Dateien exportiert, in eine leere Instanz übernommen und wieder exportiert, alle 99 Prüfsummen gleich (in diesem Lauf ohne Bildbeiträge) |
 | Viele Klassen zugleich | ein kleiner Server (2 CPU-Kerne, 2 GB) | 400 simulierte Gruppen gleichzeitig, 45 Minuten: 105.566 Anfragen, 0 Fehler; 95 % der Übertragungen in 2 ms, 99 % in 17 ms; mit 600 Gruppen: 0 Fehler |
@@ -75,22 +76,18 @@ Schnittstelle (OpenAPI), Fehlerkatalog. Die Betriebsseite lässt sich in der Vor
 Werte dort sind nachgebildet).
 
 <details>
-<summary><b>Text des Rundgangs</b> (die Untertitel des Videos)</summary>
+<summary><b>Text des Rundgangs</b> (die Sätze im Video)</summary>
 
-| ab | Untertitel |
-|---|---|
-| 0:00 | **Titel:** Sachsen entdecken, in der Gruppe, auch ohne Netz. Kurze Spiele an Orten, für Schulklassen und Familien. |
-| 0:06 | Jede Gruppe tritt mit einem Code bei. Keine Namen, keine Konten. |
-| 0:15 | Die Karte zeigt die Orte. Die Reihenfolge wählt die Gruppe, kein Ort ist gesperrt. |
-| 0:22 | Vor Ort bestätigt die Gruppe den Besuch mit Code oder Standort. Im Klassenzimmer gibt es eine eigene Fassung. |
-| 0:31 | Kurze Spiele, fünf bis zehn Minuten, hier in einfacher Sprache. Jede Person hat eine Rolle. |
-| 0:38 | Zum Schluss gestaltet die Gruppe aus ihren Sammelstücken ein Bild für die Ausstellung. (Spielstand für den Rundgang vorbereitet.) |
-| 0:46 | Die Lehrkraft sieht live, an welchem Ort ihre Gruppen gerade sind. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 0:53 | Danach Beobachtungen im Kompetenzraster, mit Vorschlag und Belegen. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 0:59 | Keine Noten, keine Rangfolge. Die Einschätzung trifft die Lehrkraft. (Beispielklasse der Vorführung, Gruppen simuliert.) |
-| 1:05 | Für den Betrieb: eine Ampel, die sagt, was zu tun ist, und vier sichere Knöpfe. (In der Vorführung sind die Werte nachgebildet.) |
-| 1:13 | **Gemessen am 15.11.2026:** 33 von 33 Tests bestanden · 400 Gruppen gleichzeitig, 0 Fehler (simuliert) · 4,6 MB: alle Orte im Gerät, ohne Netz · 0 Verstöße: Barrierefreiheit, WCAG 2.1 AA. Alle Gruppen in Lasttest und Prüfläufen sind simuliert. |
-| 1:22 | **Selbst ausprobieren:** panoherbe.com/projekte/spurensuche. Im Browser, ohne Konto. (Code AGPL-3.0: github.com/panoherbe/spurensuche · Texte und Zeichnungen CC BY-SA 4.0 · Fotos der Orte: Wikimedia Commons, Urheber und Lizenz je Bild im Repository) |
+Sechs Szenen, je ein Satz. Rechts unten steht die ganze Zeit: Selbst ausprobieren, panoherbe.com/projekte/spurensuche.
+
+| ab | Satz | Was man sieht |
+|---|---|---|
+| 0:00 | Die Karte zeigt eure Orte. | die Karte der Gruppe mit vier Orten |
+| 0:06 | Ihr wählt einen Ort. | die Gruppe tippt auf die Bastei, der Ort mit Foto und kurzem Text |
+| 0:15 | Ihr löst ein Rätsel im Team. | ein Bildpuzzle: zwei Teile antippen, sie tauschen die Plätze |
+| 0:33 | Dafür gibt es ein Sammelstück. | Sterne, das Sammelstück, es klebt sich ins Sammelbuch |
+| 0:46 | Am Ende baut ihr ein Bild. *(klein darunter: Spielstand für den Rundgang vorbereitet.)* | alle Orte geschafft, das Bild aus den Sammelstücken, eine andere Anordnung |
+| 1:00 | Lehrkräfte sehen Gruppen, nie einzelne Kinder. *(klein darunter: Beispielklasse, Gruppen simuliert.)* | die laufende Übersicht der Lehrkraft |
 
 </details>
 
@@ -130,7 +127,10 @@ npm-Pakete zur Laufzeit); ein Container; alle Daten exportierbar.
 - Abhängigkeiten und Lizenzen: [`docs/ABHAENGIGKEITEN.md`](docs/ABHAENGIGKEITEN.md)
 - Tests: `docker run --rm -v "$PWD":/app -w /app node:24-alpine node --test test/*.test.js`; Browser-Prüfläufe,
   Lasttest und der ganze Messlauf: [`docs/TESTUMGEBUNG.md`](docs/TESTUMGEBUNG.md), `tools/messlauf.sh`
-- Nachweise: [`nachweis/2026-11-15-gesamt/`](nachweis/2026-11-15-gesamt/) (offizieller Messlauf, Code-Stand: Tag
+- Nachweise: [`nachweis/2026-11-16-kinder/`](nachweis/2026-11-16-kinder/LIESMICH.md) (Gestaltung für Kinder, `1cffbad`:
+  Tests, alle Browser-Prüfläufe des Messlaufs und der Prüflauf der Spiele erneut, 33 von 33, 77 Ansichten ohne Verstoß,
+  Spiele 81 von 81 gelöst und ohne Überlauf, Paket 155 Dateien, Bilder und Rundgang neu),
+  [`nachweis/2026-11-15-gesamt/`](nachweis/2026-11-15-gesamt/) (offizieller Messlauf, Code-Stand: Tag
   `messlauf-2026-11-15`; spätere Commits änderten Texte, Lizenzangaben und die Bremse gegen das Durchprobieren von
   Codes, die Tests liefen danach erneut mit 33 von 33), [`nachweis/2026-11-15-gestaltung/`](nachweis/2026-11-15-gestaltung/)
   (neue Gestaltung mit eigener Schrift, `b34b4bd`: Tests und alle Browser-Prüfläufe des Messlaufs erneut, 33 von 33,
@@ -140,6 +140,6 @@ npm-Pakete zur Laufzeit); ein Container; alle Daten exportierbar.
 
 **Lizenz:** Programmcode GNU AGPL-3.0-only seit dem ersten Commit ([`LICENSE`](LICENSE)); Texte, Aufgaben und eigene
 Zeichnungen CC BY-SA 4.0; Fotos der Orte aus Wikimedia Commons unter freien Lizenzen, je Bild in
-[`inhalte/BILDNACHWEIS.md`](inhalte/BILDNACHWEIS.md); Karte nach Natural Earth (gemeinfrei); Schrift Atkinson
-Hyperlegible Next (SIL Open Font License 1.1). Auftraggeber erhalten im
-Auftrag die vertraglich vereinbarten Rechte.
+[`inhalte/BILDNACHWEIS.md`](inhalte/BILDNACHWEIS.md); Karte nach Natural Earth (gemeinfrei); Schriften Atkinson
+Hyperlegible Next (Lesetext) und Grandstander (Überschriften und Knöpfe), beide SIL Open Font License 1.1. Auftraggeber
+erhalten im Auftrag die vertraglich vereinbarten Rechte.
