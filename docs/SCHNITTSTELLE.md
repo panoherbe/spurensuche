@@ -1,6 +1,6 @@
 # Schnittstelle zwischen App und Spielen
 
-> **Version 1.2, Stand 15.11.2026.** Dieses Dokument ist der Vertrag zwischen der App (Karte, Ablauf, Speicher,
+> **Version 1.3, Stand 19.11.2026.** Dieses Dokument ist der Vertrag zwischen der App (Karte, Ablauf, Speicher,
 > Auswertung) und den Spielen (Minigames, Sammelstücke, Collage). Beide Seiten bauen gegen genau diese Fassung.
 > Jede Änderung erhöht die Versionsnummer und steht unten im Verlauf; eine Änderung, die bestehende Spiele bricht,
 > gibt es nur gemeinsam und mit Übergangsfrist.

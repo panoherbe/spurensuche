@@ -159,9 +159,9 @@ export function herunterladen(inhalt, name, typ) {
 const LIZENZEN = [
   [/\bCC BY-SA 4\.0\b/i, 'https://creativecommons.org/licenses/by-sa/4.0/deed.de'],
   [/\bCC BY-SA 3\.0 DE\b/i, 'https://creativecommons.org/licenses/by-sa/3.0/de/deed.de'],
-  [/\bCC BY-SA 3\.0\b/i, 'https://creativecommons.org/licenses/by-sa/3.0/deed.de'],
+  [/\bCC BY-SA 3\.0\b(?! [a-z])/i, 'https://creativecommons.org/licenses/by-sa/3.0/deed.de'],
   [/\bCC BY 4\.0\b/i, 'https://creativecommons.org/licenses/by/4.0/deed.de'],
-  [/\bCC BY 3\.0\b/i, 'https://creativecommons.org/licenses/by/3.0/deed.de'],
+  [/\bCC BY 3\.0\b(?! [a-z])/i, 'https://creativecommons.org/licenses/by/3.0/deed.de'],
   [/\bCC0(?: 1\.0)?\b/i, 'https://creativecommons.org/publicdomain/zero/1.0/deed.de'],
   [/\bFreie-Kunst-Lizenz(?: 1\.3)? \(FAL(?: 1\.3)?\)|\bFAL 1\.3\b/i, 'https://artlibre.org/licence/lal/de1-3/'],
 ];

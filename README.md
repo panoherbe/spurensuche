@@ -49,9 +49,11 @@ und Nutzer in den Messungen sind simuliert.
 Belege: das [Messprotokoll vom 15.11.2026](nachweis/2026-11-15-gesamt/PROTOKOLL.md), die
 [Nachmessung vom 16.11.2026 nach der Gestaltung für Kinder](nachweis/2026-11-16-kinder/LIESMICH.md) und die
 [Nachmessung nach den letzten Korrekturen, ebenfalls 16.11.2026](nachweis/2026-11-16-kinder-2/LIESMICH.md).
-Simuliert heißt: Ein Programm spielt die Nutzerinnen und Nutzer nach, im Browser oder direkt am Server. Größen in MB
-zu 1.000.000 Byte: 155 Dateien sind 4.915.380 Byte (letzte Nachmessung), 147 Dateien 4.721.242 Byte. Die Belege und
-die Info-Seite der App rechnen mit 1.048.576 Byte je MB und zeigen für dieselben Pakete 4,7 und 4,5 MB.
+Simuliert heißt: Ein Programm spielt die Nutzerinnen und Nutzer nach, im Browser oder direkt am Server.
+
+Ein MB sind hier 1.000.000 Byte: Das Paket mit 155 Dateien hat 4.915.380 Byte (letzte Nachmessung), das mit 147
+Dateien im Messlauf 4.721.242 Byte. Die Belege und die Info-Seite der App rechnen mit 1.048.576 Byte je MB und zeigen
+deshalb 4,7 und 4,5 MB.
 
 ## In zwei Minuten selbst prüfen
 
