@@ -52,7 +52,7 @@ export function gruppenbericht({ auswertung, entwurf, jetzt = new Date() }) {
   pdf.platz(40);
   pdf.linie(pdf.rand, pdf.y + 4, pdf.rand + breite, pdf.y + 4, { farbe: '#cfc7b6' });
   pdf.y += 10;
-  pdf.absatz('Dieser Bericht verbleibt in der Verantwortung der Lehrkraft. Die Daten der Gruppe in der Anwendung werden automatisch gelöscht'
+  pdf.absatz('Für diesen Bericht ist ab jetzt die Lehrkraft zuständig. Die Daten der Gruppe in der Anwendung werden automatisch gelöscht'
     + (a.loeschenAm ? ` (spätestens am ${datum(a.loeschenAm)}).` : '.'), { groesse: 9, farbe: GRAU });
   return pdf.alsBytes({ erstellt: jetzt });
 }

@@ -1,8 +1,8 @@
 # Auswertung für Lehrkräfte: Regeln
 
 Kurz: Die Auswertung beschreibt, was eine Gruppe beim Spielen getan hat, und ordnet es im Kompetenzraster ein. Sie
-schlägt eine Stufe vor; die Einschätzung trifft die Lehrkraft. Es gibt keine Note, keine Punktzahl, keinen
-Prozentwert als Gesamturteil und keine Rangfolge zwischen Gruppen. Alle Regeln stehen in `app/js/kern/raster.js`
+schlägt eine Stufe vor; die Einschätzung trifft die Lehrkraft. Sie vergibt weder Noten noch Punkte, rechnet kein
+Gesamturteil in Prozent aus und vergleicht Gruppen nicht miteinander. Alle Regeln stehen in `app/js/kern/raster.js`
 und hier; dieselbe Datei läuft auf dem Server und in der Vorführung.
 
 ## Bereiche und Stufen
