@@ -27,14 +27,14 @@ und Vorführung auf einer Seite: [panoherbe.com/projekte/spurensuche](https://pa
 
 ## Was Sie brauchen, läuft hier schon
 
-Kurz: Jede Zeile läuft heute im Prototyp. Jede Zahl ist gemessen und belegt; die Nutzerinnen und Nutzer in den
-Messungen sind simuliert.
+Kurz: Jede Zeile läuft heute im Prototyp. Die Zahlen in der rechten Spalte sind gemessen und belegt; die Nutzerinnen
+und Nutzer in den Messungen sind simuliert.
 
 | Sie brauchen | Läuft hier schon | Gemessen am 15. und 16.11.2026 |
 |---|---|---|
 | Orte auf einer Karte, freie Reihenfolge | Sachsen-Karte aus offenen Daten, vier echte Orte, kein Ort gesperrt | – |
 | Kurze Spiele, die sich wiederverwenden lassen | fünf Spielformate, zwölf Aufgaben, ein fester Bauplan für neue Spiele | alle 12 Aufgaben laden im Browser und halten den Bauplan ein, 0 Fehler |
-| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 155 Dateien, 4,9 MB im Gerät (nach der Gestaltung für Kinder am 16.11. neu gemessen; im Messlauf 147 Dateien, 4,7 MB); ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
+| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 155 Dateien, 4,9 MB (4.910.612 Byte) im Gerät (nach der Gestaltung für Kinder am 16.11. neu gemessen; im Messlauf 147 Dateien, 4,7 MB, 4.721.242 Byte); ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
 | Vor Ort oder im Klassenzimmer | QR-Code, Code vom Schild oder Standort; je Ort eine Fassung für die Schule | QR-Codes von fremder Software (zbar) gelesen: 17 von 17 |
 | Sammeln und ein eigenes Bild | Sammelbuch zeigt, wo es was gibt (kein Zufall); Bild 2048 × 2048 aus den Sammelstücken, mit Reglern | Test: Schule wartet auf die Freigabe, die Ausstellung sieht nur Freigegebenes |
 | Auswertung für Lehrkräfte | Gruppen, Freigabe, laufende Übersicht, Beobachtungen, Kompetenzraster, PDF-Bericht, Textentwürfe, Löschen | 33 von 33 automatischen Tests bestanden (am 16.11. erneut 33 von 33) |
@@ -46,10 +46,10 @@ Messungen sind simuliert.
 | Betrieb ohne uns | ein Container-Image für die App und die tägliche verschlüsselte Sicherung, ein kleiner Betriebsdienst am Server, Anleitung, Export im offenen Archivformat | frischer Klon → laufende Instanz in 2,3 s (Basis-Image lag vor); Sicherung zurückgespielt: alle 19 Tabellen mit gleicher Prüfsumme |
 | Betrieb ohne Entwicklerwissen | Betriebsseite mit Ampel (jeder Punkt sagt „Was tun“) und vier Knöpfen: Neu starten, Sicherung zurückspielen, Inhalt tauschen, Letzte Version zurückspielen; Handbuch für den Telefondienst | Knöpfe im Prüflauf gedrückt: wieder erreichbar nach 1,0 s, Sicherung zurückgespielt (Meldung nach 1,1 s), letzte Version zurück in 31,1 s; mit dem Werkzeug am Server: Zurückspielen 12,2 s; eine absichtlich defekte Prüfversion wurde nach 114 s automatisch zurückgenommen (simuliert) |
 
-Belege mit Datum: das Messprotokoll [`nachweis/2026-11-15-gesamt/PROTOKOLL.md`](nachweis/2026-11-15-gesamt/PROTOKOLL.md),
-die Nachmessung nach der Gestaltung für Kinder [`nachweis/2026-11-16-kinder/`](nachweis/2026-11-16-kinder/LIESMICH.md)
-und nach den letzten Korrekturen [`nachweis/2026-11-16-kinder-2/`](nachweis/2026-11-16-kinder-2/LIESMICH.md).
-Simuliert heißt: Ein Skript klickt im Browser oder schickt Anfragen.
+Belege: das [Messprotokoll vom 15.11.2026](nachweis/2026-11-15-gesamt/PROTOKOLL.md), die
+[Nachmessung vom 16.11.2026 nach der Gestaltung für Kinder](nachweis/2026-11-16-kinder/LIESMICH.md) und die
+[Nachmessung nach den letzten Korrekturen, ebenfalls 16.11.2026](nachweis/2026-11-16-kinder-2/LIESMICH.md).
+Simuliert heißt: Ein Programm spielt die Nutzerinnen und Nutzer nach, im Browser oder direkt am Server.
 
 ## In zwei Minuten selbst prüfen
 
@@ -76,7 +76,7 @@ Rechner oder lässt die Tests laufen.
 
 ## Was Sie heute schon prüfen können
 
-Kurz: Alles, was zu einer Übergabe gehört, liegt schon offen: Code, Messwerte, Tests und Unterlagen für den Betrieb.
+Kurz: Code, Messwerte, Tests und Unterlagen für den Betrieb liegen schon offen.
 
 Den ganzen Quellcode, das Messprotokoll mit allen Zahlen, die Tests und die Unterlagen für den Betrieb: Installation,
 Betriebshandbuch für den Telefondienst, technischer Betrieb, Datenschutz, Anmeldung, Regeln der Auswertung,
@@ -108,7 +108,7 @@ eigene Illustrationen kommen in einem Projekt dazu.
   Fachseite und werden über dasselbe Format eingespielt.
 - **Schulanmeldung:** gegen einen Testanbieter (Keycloak) geprüft. Die Vorgaben des Betreibers werden im Projekt
   eingebaut.
-- **QR-Code in der App:** nutzt die eingebaute Erkennung des Browsers (Chrome auf Android, ChromeOS und macOS).
+- **QR-Code in der App:** nutzt die eingebaute Erkennung des Browsers (etwa Chrome auf Android, ChromeOS und macOS).
   Sonst, etwa auf Windows-Laptops, dem iPad und in Firefox, liest die Kamera-App den Code, oder die Gruppe tippt den
   Code vom Schild ein.
 - **Prüfungen von außen:** axe-core findet nur einen Teil der Barrierefreiheitsprobleme; ein Audit nach EN 301 549 und
