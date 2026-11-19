@@ -372,8 +372,8 @@ gibt das Team selbst frei) und stellt nur freigegebene Beiträge über die Schni
   (`assets/spiele/schrift/OFL.txt`).
 - Fremdes Material nur mit einer Lizenz, die CC BY-SA 4.0 erlaubt (z. B. CC0, CC BY, CC BY-SA), mit Quelle und Lizenz
   im Feld `quelle` bzw. `bildQuelle`. App und Spiele zeigen den Lizenznamen dort als Link zum Lizenztext
-  (`bildnachweis()` in `spiele/_gemeinsam/ui.js` und `app/js/ui.js`); bekannt sind CC BY, CC BY-SA, CC0 und die
-  Freie-Kunst-Lizenz. Eine neue Lizenz kommt dort in die Tabelle, sonst prüft der Inhaltstest rot.
+  (`bildnachweis()` in `spiele/_gemeinsam/ui.js` und `app/js/ui.js`); bekannt sind CC BY 3.0 und 4.0, CC BY-SA 3.0,
+  3.0 DE und 4.0, CC0 1.0 und die Freie-Kunst-Lizenz 1.3. Eine neue Lizenz kommt dort in die Tabelle, sonst prüft der Inhaltstest rot.
 - Keine Texte, Bilder oder Logos von Einrichtungen, die einen Ort betreiben.
 
 ## 9. Verlauf
@@ -383,3 +383,4 @@ gibt das Team selbst frei) und stellt nur freigegebene Beiträge über die Schni
 | 1 | 15.11.2026 | erste Fassung |
 | 1.1 | 15.11.2026 | `umgebung` um `basisUrl`, `ton`, `rollen`, `katalog` ergänzt; Abschlusskarte im Spiel erlaubt; `zeit` ausdrücklich als Zahl; `inhalte/ablaeufe.json` (3.4) und Figur (4.1) neu. Alles abwärtskompatibel. |
 | 1.2 | 15.11.2026 | Figur (4.1) wie gebaut: `starteGestaltung` mit Katalog, `figurSvg`, `figurText`; die ältere Form bleibt gültig. Inhalte lassen sich als Inhaltspaket tauschen (docs/BETRIEB.md): `inhalte/` und `assets/spiele/` ohne Programmcode. |
+| 1.3 | 19.11.2026 | §8: Lizenzname der Bildquelle als Link zum Lizenztext (`bildnachweis()`); eine neue Lizenz kommt in die Tabelle, sonst prüft der Inhaltstest rot |

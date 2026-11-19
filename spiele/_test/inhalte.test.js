@@ -144,7 +144,7 @@ test('Bildquellen: jede Lizenz verlinkt auf ihren Lizenztext, gleich in Spielen 
     ...orte.orte.map((ort) => lies(`inhalte/${ort}/ort.json`).bildQuelle),
     ...aufgaben.map((a) => a.daten.bild?.quelle).filter(Boolean),
   ];
-  assert.ok(quellen.length >= 16, `nur ${quellen.length} Bildquellen gefunden`);
+  assert.ok(quellen.length >= 15, `nur ${quellen.length} Bildquellen gefunden`); // 4 Orte, 11 Aufgaben mit Bild
   for (const q of quellen) {
     const teile = spiele.lizenzTeile(q);
     const links = teile.filter((t) => typeof t === 'object');

@@ -10,13 +10,13 @@ Eigene Werke, ohne Bildgenerator gezeichnet (Panagiotis Herbe):
 - Spielfigur und Ulla Uhu sind Programmcode (AGPL-3.0-only); die Zeichnungen stehen zusätzlich unter [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de).
 - Wappen der Gruppen (Tierköpfe, Wimpel), Stern, Stempel, Konfetti und der Schmuck der Karte (Bäume, Berge, Felsen,
   Windrose, Weg) in `app/js/zeichnungen.js` sind Programmcode (AGPL-3.0-only); die Zeichnungen stehen zusätzlich
-  unter CC BY-SA 4.0.
+  unter [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.de).
 
 Schriften: Atkinson Hyperlegible Next für den Lesetext, SIL Open Font License 1.1 (`assets/spiele/schrift/OFL.txt`,
 `app/schrift/OFL.txt`); Grandstander für Überschriften und Knöpfe, SIL Open Font License 1.1
 (`app/schrift/OFL-Grandstander.txt`).
 Stand der Lizenzangaben: 16.11.2026; jede Lizenz verlinkt auf ihren Lizenztext (seit 19.11.2026, ebenso die
-Bildquellen in der App).
+Bildquellen in App und Spielen).
 
 | Datei | Werk | Urheber | Lizenz | Quelle |
 |---|---|---|---|---|

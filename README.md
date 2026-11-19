@@ -34,7 +34,7 @@ und Nutzer in den Messungen sind simuliert.
 |---|---|---|
 | Orte auf einer Karte, freie Reihenfolge | Sachsen-Karte aus offenen Daten, vier echte Orte, kein Ort gesperrt | – |
 | Kurze Spiele, die sich wiederverwenden lassen | fünf Spielformate, zwölf Aufgaben, ein fester Bauplan für neue Spiele | alle 12 Aufgaben laden im Browser und halten den Bauplan ein, 0 Fehler |
-| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 155 Dateien, 4,9 MB (4.910.612 Byte) im Gerät (nach der Gestaltung für Kinder am 16.11. neu gemessen; im Messlauf 147 Dateien, 4,7 MB, 4.721.242 Byte); ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
+| Spielen ohne Netz | die ganze App und alle Orte liegen im Gerät; Ergebnisse gehen später hinaus, nichts doppelt | 155 Dateien, 4,9 MB im Gerät (nach der Gestaltung für Kinder am 16.11. neu gemessen; im Messlauf 147 Dateien, 4,7 MB); ohne Netz neu geladen und gespielt; in der Prüfinstanz danach ohne Doppelzählung übertragen |
 | Vor Ort oder im Klassenzimmer | QR-Code, Code vom Schild oder Standort; je Ort eine Fassung für die Schule | QR-Codes von fremder Software (zbar) gelesen: 17 von 17 |
 | Sammeln und ein eigenes Bild | Sammelbuch zeigt, wo es was gibt (kein Zufall); Bild 2048 × 2048 aus den Sammelstücken, mit Reglern | Test: Schule wartet auf die Freigabe, die Ausstellung sieht nur Freigegebenes |
 | Auswertung für Lehrkräfte | Gruppen, Freigabe, laufende Übersicht, Beobachtungen, Kompetenzraster, PDF-Bericht, Textentwürfe, Löschen | 33 von 33 automatischen Tests bestanden (am 16.11. erneut 33 von 33) |
@@ -49,7 +49,9 @@ und Nutzer in den Messungen sind simuliert.
 Belege: das [Messprotokoll vom 15.11.2026](nachweis/2026-11-15-gesamt/PROTOKOLL.md), die
 [Nachmessung vom 16.11.2026 nach der Gestaltung für Kinder](nachweis/2026-11-16-kinder/LIESMICH.md) und die
 [Nachmessung nach den letzten Korrekturen, ebenfalls 16.11.2026](nachweis/2026-11-16-kinder-2/LIESMICH.md).
-Simuliert heißt: Ein Programm spielt die Nutzerinnen und Nutzer nach, im Browser oder direkt am Server.
+Simuliert heißt: Ein Programm spielt die Nutzerinnen und Nutzer nach, im Browser oder direkt am Server. Größen in MB
+zu 1.000.000 Byte: 155 Dateien sind 4.915.380 Byte (letzte Nachmessung), 147 Dateien 4.721.242 Byte. Die Belege und
+die Info-Seite der App rechnen mit 1.048.576 Byte je MB und zeigen für dieselben Pakete 4,7 und 4,5 MB.
 
 ## In zwei Minuten selbst prüfen
 
