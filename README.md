@@ -13,7 +13,8 @@ Prototyp, den Sie selbst ausprobieren und prüfen können.**
 
 **Selbst ausprobieren:** die [Vorführung](https://panoherbe.com/projekte/spurensuche/vorfuehrung/index.html) öffnen,
 „Mit der Klasse“ wählen und mit dem Code `DEMO-2026` beitreten. In einem zweiten Fenster zeigt „Für Lehrkräfte“ →
-„Vorführung ansehen“ die Gruppe live. Alles läuft im Browser; nichts wird übertragen.
+„Vorführung ansehen“ die Gruppe live. Alles läuft im Browser; nichts wird übertragen. Video und Vorführung auf einer
+Seite: [panoherbe.com/projekte/spurensuche](https://panoherbe.com/projekte/spurensuche).
 
 <p align="center">
   <img src="medien/1-karte.png" width="24%" alt="Entdeckerkarte von Sachsen mit vier Orten als runde Bilder, einer davon geschafft">
@@ -50,6 +51,9 @@ Nutzer in den Messungen sind simuliert: Ein Skript klickt im Browser oder schick
 
 ## In zwei Minuten selbst prüfen
 
+Kurz: am schnellsten im Browser, ohne Konto und ohne Installation; wer mag, startet die App mit Docker auf dem eigenen
+Rechner oder lässt die Tests laufen.
+
 1. **Im Browser:** die [Vorführung](https://panoherbe.com/projekte/spurensuche/vorfuehrung/index.html) mit
    Beispielklasse, ohne Server.
 2. **Auf dem eigenen Rechner** (Linux mit Docker):
@@ -69,6 +73,8 @@ Nutzer in den Messungen sind simuliert: Ein Skript klickt im Browser oder schick
    ```
 
 ## Was Sie heute schon prüfen können
+
+Kurz: Was ein Auftrag später übergibt, liegt schon offen: Code, Messwerte, Tests und Unterlagen für den Betrieb.
 
 Den ganzen Quellcode, das Messprotokoll mit allen Zahlen, die Tests und die Unterlagen für den Betrieb: Installation,
 Betriebshandbuch für den Telefondienst, technischer Betrieb, Datenschutz, Anmeldung, Regeln der Auswertung,
@@ -92,6 +98,9 @@ Zeit: Selbst ausprobieren, panoherbe.com/projekte/spurensuche.
 | 1:07 | Abspann: Selbst ausprobieren. panoherbe.com/projekte/spurensuche. Im Browser, ohne Konto. | darunter: Panagiotis Herbe · Code AGPL-3.0-only · Texte und Zeichnungen CC BY-SA 4.0 · Fotos: Wikimedia Commons, Urheber und Lizenz je Bild im Repository |
 
 ## Was der Prototyp noch nicht ist
+
+Kurz: ein Prototyp mit Beispielinhalten. Echte Inhalte, die Schulanmeldung des Betreibers, Prüfungen von außen und
+eigene Illustrationen kommen in einem Projekt dazu.
 
 - **Inhalte:** vier Beispielorte mit eigenen Texten und freien Fotos. Die Inhalte eines echten Projekts kommen von der
   Fachseite und werden über dasselbe Format eingespielt.
