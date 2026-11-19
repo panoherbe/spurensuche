@@ -2,7 +2,7 @@
 // bis das Bild wieder stimmt. Tippen, Ziehen oder Tastatur (Pfeiltasten, Leertaste); ohne Zeitdruck.
 // Tipps: 1 ganzes Foto zeigen, 2 richtige Teile markieren, 3 ein Teil legen (wiederholbar).
 
-import { spielRahmen, h, bewege, neueId } from '../_gemeinsam/ui.js';
+import { spielRahmen, h, bewege, neueId, bildnachweis } from '../_gemeinsam/ui.js';
 import { symbol } from '../_gemeinsam/symbole.js';
 import { sterne } from '../_gemeinsam/protokoll.js';
 import { startlage, tausche, geloest, richtigAnzahl, liegtRichtig, naechsterZug, stelle, nachbar } from './logik.js';
@@ -203,7 +203,7 @@ function aufbau(k) {
     h('img', { src: bildUrl, alt: t(bild.alt), width: bild.breite, height: bild.hoehe }),
     h('figcaption', {}, k.u.sprache === 'einfach' ? 'So sieht das ganze Foto aus.' : 'So soll das Foto am Ende aussehen.'));
   const seite = h('div', { class: 'sp-puzzle-seite' }, anleitung, vorlage);
-  const nachweis = bild.quelle ? h('p', { class: 'sp-bildnachweis' }, bild.quelle) : null;
+  const nachweis = bild.quelle ? h('p', { class: 'sp-bildnachweis' }, bildnachweis(bild.quelle)) : null;
   flaeche.buehne.append(h('div', { class: 'sp-puzzle-feld' }, h('div', { class: 'sp-puzzle-spalte' }, brett, nachweis), seite), ansageLeise);
   ordne();
   beschrifte();

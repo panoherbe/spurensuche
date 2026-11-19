@@ -2,7 +2,7 @@
 // einigt sich auf einen Wert und sieht dann die Auflösung mit einem Vergleich zum Anfassen.
 // Regler, Zahlenfeld und Knöpfe „weniger“/„mehr“; Tastatur und Bildschirmleser vollständig. Kein Zeitdruck.
 
-import { spielRahmen, h, neueId } from '../_gemeinsam/ui.js';
+import { spielRahmen, h, neueId, bildnachweis } from '../_gemeinsam/ui.js';
 import { symbol } from '../_gemeinsam/symbole.js';
 import { mitEinheit, grosseZahl } from '../_gemeinsam/sprache.js';
 import { REGLER_MAX, reglerZuWert, wertZuRegler, schrittWert, leseZahl, bewerte, mitte, inRichtigeRichtung, runde } from './logik.js';
@@ -31,7 +31,7 @@ function aufbau(k) {
   const frage = h('p', { class: 'sp-frage', 'data-vorlesen': '' }, t(aufgabe.frage));
   const bild = aufgabe.bild ? h('figure', { class: 'sp-frage-bild' },
     h('img', { src: k.pfad(aufgabe.bild.datei), alt: t(aufgabe.bild.alt), width: aufgabe.bild.breite, height: aufgabe.bild.hoehe, decoding: 'async' }),
-    h('figcaption', { class: 'sp-bildnachweis' }, aufgabe.bild.quelle)) : null;
+    h('figcaption', { class: 'sp-bildnachweis' }, bildnachweis(aufgabe.bild.quelle))) : null;
   k.vorleseText = () => `${t(aufgabe.text)} ${t(aufgabe.frage)}`;
   flaeche.buehne.append(h('div', { class: 'sp-schaetzen' }, h('div', { class: 'sp-schaetzen-kopf' }, bild, h('div', { class: 'sp-frage-feld' }, frage)), phase));
 

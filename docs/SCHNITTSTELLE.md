@@ -371,7 +371,9 @@ gibt das Team selbst frei) und stellt nur freigegebene Beiträge über die Schni
 - Die Schrift Atkinson Hyperlegible Next in `assets/spiele/schrift/` steht unter der SIL Open Font License 1.1
   (`assets/spiele/schrift/OFL.txt`).
 - Fremdes Material nur mit einer Lizenz, die CC BY-SA 4.0 erlaubt (z. B. CC0, CC BY, CC BY-SA), mit Quelle und Lizenz
-  im Feld `quelle` bzw. `bildQuelle`.
+  im Feld `quelle` bzw. `bildQuelle`. App und Spiele zeigen den Lizenznamen dort als Link zum Lizenztext
+  (`bildnachweis()` in `spiele/_gemeinsam/ui.js` und `app/js/ui.js`); bekannt sind CC BY, CC BY-SA, CC0 und die
+  Freie-Kunst-Lizenz. Eine neue Lizenz kommt dort in die Tabelle, sonst prüft der Inhaltstest rot.
 - Keine Texte, Bilder oder Logos von Einrichtungen, die einen Ort betreiben.
 
 ## 9. Verlauf

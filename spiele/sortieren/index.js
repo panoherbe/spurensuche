@@ -2,7 +2,7 @@
 // Arbeitsschritte) oder Gruppen zuordnen (art „gruppen“, etwa deutsche und sorbische Ortsnamen).
 // Bedienung: Pfeil-Knöpfe, Ziehen am Griff oder Auswählen und Ablegen; alles auch mit der Tastatur. Kein Zeitdruck.
 
-import { spielRahmen, h, neueId, bewege } from '../_gemeinsam/ui.js';
+import { spielRahmen, h, neueId, bewege, bildnachweis } from '../_gemeinsam/ui.js';
 import { symbol } from '../_gemeinsam/symbole.js';
 import { sterne } from '../_gemeinsam/protokoll.js';
 import { startreihe, verschiebe, setze, pruefeReihe, naechsteKarte, pruefeGruppen, naechsteZuordnung } from './logik.js';
@@ -136,7 +136,7 @@ function reihenfolge(k) {
 
   const enden = (text, art) => (text ? h('p', { class: `sp-ende sp-ende--${art}`, 'aria-hidden': 'true' }, symbol(art === 'anfang' ? 'hoch' : 'runter'), h('span', {}, text)) : null);
   flaeche.buehne.append(h('div', { class: 'sp-sortieren' },
-    aufgabe.bild ? h('figure', { class: 'sp-sortier-bild' }, h('img', { src: k.pfad(aufgabe.bild.datei), alt: t(aufgabe.bild.alt), width: aufgabe.bild.breite, height: aufgabe.bild.hoehe }), h('figcaption', { class: 'sp-bildnachweis' }, aufgabe.bild.quelle)) : null,
+    aufgabe.bild ? h('figure', { class: 'sp-sortier-bild' }, h('img', { src: k.pfad(aufgabe.bild.datei), alt: t(aufgabe.bild.alt), width: aufgabe.bild.breite, height: aufgabe.bild.hoehe }), h('figcaption', { class: 'sp-bildnachweis' }, bildnachweis(aufgabe.bild.quelle))) : null,
     h('div', { class: 'sp-sortier-spalte' },
       h('p', { class: 'sp-hilfetext' }, u.sprache === 'einfach' ? 'Verschiebt die Karten mit den Pfeilen.' : 'Verschiebt die Karten mit den Pfeilen oder zieht sie am Griff links.'),
       enden(t(aufgabe.enden?.anfang), 'anfang'), liste, enden(t(aufgabe.enden?.ende), 'ende'))), ansageLeise);
@@ -269,7 +269,7 @@ function zuordnen(k) {
   }
 
   flaeche.buehne.append(h('div', { class: 'sp-sortieren' },
-    aufgabe.bild ? h('figure', { class: 'sp-sortier-bild sp-sortier-bild--klein' }, h('img', { src: k.pfad(aufgabe.bild.datei), alt: t(aufgabe.bild.alt), width: aufgabe.bild.breite, height: aufgabe.bild.hoehe }), h('figcaption', { class: 'sp-bildnachweis' }, aufgabe.bild.quelle)) : null,
+    aufgabe.bild ? h('figure', { class: 'sp-sortier-bild sp-sortier-bild--klein' }, h('img', { src: k.pfad(aufgabe.bild.datei), alt: t(aufgabe.bild.alt), width: aufgabe.bild.breite, height: aufgabe.bild.hoehe }), h('figcaption', { class: 'sp-bildnachweis' }, bildnachweis(aufgabe.bild.quelle))) : null,
     h('div', { class: 'sp-sortier-spalte' },
       h('p', { class: 'sp-hilfetext' }, u.sprache === 'einfach' ? 'Tippt eine Karte an. Tippt dann bei der passenden Gruppe auf „Hierher legen“.' : 'Tippt eine Karte an und dann bei der passenden Gruppe auf „Hierher legen“.'),
       ablage,

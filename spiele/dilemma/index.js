@@ -2,7 +2,7 @@
 // Entscheidung mit Meinungen, die dazu passen, nimmt eine Meinung der Gegenseite ernst und sieht dann, was passieren
 // könnte und was wirklich geschah. Es gibt keine falsche Entscheidung, nur passende und unpassende Begründungen.
 
-import { spielRahmen, h, neueId, schritte } from '../_gemeinsam/ui.js';
+import { spielRahmen, h, neueId, schritte, bildnachweis } from '../_gemeinsam/ui.js';
 import { symbol } from '../_gemeinsam/symbole.js';
 import { auszaehlen, pruefeBegruendung, dilemmaSterne } from './logik.js';
 
@@ -53,7 +53,7 @@ function aufbau(k) {
   function lesen() {
     const bild = aufgabe.bild ? h('figure', { class: 'sp-situation-bild' },
       h('img', { src: k.pfad(aufgabe.bild.datei), alt: t(aufgabe.bild.alt), width: aufgabe.bild.breite, height: aufgabe.bild.hoehe, decoding: 'async' }),
-      h('figcaption', { class: 'sp-bildnachweis' }, aufgabe.bild.quelle)) : null;
+      h('figcaption', { class: 'sp-bildnachweis' }, bildnachweis(aufgabe.bild.quelle))) : null;
     zeige(0, einfach ? 'Was ist los?' : 'Worum es geht',
       h('div', { class: 'sp-situation' }, bild,
         h('div', { class: 'sp-situation-text' },

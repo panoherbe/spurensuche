@@ -1,6 +1,6 @@
 // Ein Ort: Bild, Text, Ortsprüfung (QR, Code, GPS) oder ortsunabhängige Fassung, danach die Aufgaben.
 
-import { h, leere, knopf, symbol, dialog, melde, frage } from '../ui.js';
+import { h, leere, knopf, symbol, dialog, melde, frage, bildnachweis } from '../ui.js';
 import { t } from '../einstellungen.js';
 import { url, aufgabenVon } from '../inhalte.js';
 import { aktuellesTeam, orteDesTeams, stationVon, beginneStation, brichStationAb } from '../spielstand.js';
@@ -88,7 +88,7 @@ export async function zeige(ctx) {
   leere(haupt, h('div', { class: `ort-seite ${ortFarbe(inhalte, ort.id)}` },
     h('a', { class: 'zurueck', href: '#/karte' }, symbol('zurueck'), 'Karte'),
     h('div', { class: 'ort-kopf' },
-      h('figure', { class: 'ortsfoto' }, h('img', { class: 'ortsbild', src: url(ort.bild), alt: ort.alt }), h('figcaption', {}, /^(Foto|Bild|Zeichnung|Grafik)\b/.test(ort.bildQuelle) ? ort.bildQuelle : `Bild: ${ort.bildQuelle}`)),
+      h('figure', { class: 'ortsfoto' }, h('img', { class: 'ortsbild', src: url(ort.bild), alt: ort.alt }), h('figcaption', {}, bildnachweis(/^(Foto|Bild|Zeichnung|Grafik)\b/.test(ort.bildQuelle) ? ort.bildQuelle : `Bild: ${ort.bildQuelle}`))),
       h('div', { class: 'ort-titel' },
         h('h1', { 'data-vorlesen': '' }, ort.name.replace(/\//g, '/\u200b')),
         h('p', { class: 'region' }, ort.region, ort.id === inhalte.finale ? ' · Abschluss der Reise' : ''),

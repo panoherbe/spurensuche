@@ -180,6 +180,7 @@ main > form.karte, main > .karte { margin-bottom: 16px; }
 .ortsfoto { margin: 4px; padding: 10px 10px 8px; background: #fff; border: 3px solid var(--sp-kontur); border-radius: 10px; box-shadow: 0 6px 0 rgb(27 35 64 / 0.2); transform: rotate(-1.5deg); }
 .ortsfoto .ortsbild { aspect-ratio: 4 / 3; max-height: none; margin: 0; border-width: 2px; border-radius: 4px; }
 .ortsfoto figcaption { font-size: 0.72rem; color: #46506e; margin-top: 6px; overflow-wrap: anywhere; }
+.ortsfoto figcaption a { color: inherit; font-weight: inherit; text-decoration: underline; }
 .ort-titel h1 { font-size: clamp(1.8rem, 5.6vw, 2.5rem); margin-bottom: 0.2em; }
 .ort-titel .region { display: inline-block; margin: 0 0 12px; padding: 1px 14px; border-radius: 999px; font-family: var(--sp-schrift-titel); font-weight: 700; background: var(--ort-kraeftig); color: var(--ort-tinte); border: 2.5px solid var(--sp-kontur); }
 .ort-titel .marke { margin-bottom: 10px; }

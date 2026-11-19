@@ -136,3 +136,21 @@ test('Abläufe nach Zeit: nur vorhandene Aufgaben, Dauer passt in die Zeit', () 
     assert.ok(summe <= ablauf.minuten, `${ablauf.id}: ${summe} Minuten Spiel passen nicht in ${ablauf.minuten}`);
   }
 });
+
+test('Bildquellen: jede Lizenz verlinkt auf ihren Lizenztext, gleich in Spielen und App', async () => {
+  const spiele = await import('../_gemeinsam/ui.js');
+  const app = await import('../../app/js/ui.js');
+  const quellen = [
+    ...orte.orte.map((ort) => lies(`inhalte/${ort}/ort.json`).bildQuelle),
+    ...aufgaben.map((a) => a.daten.bild?.quelle).filter(Boolean),
+  ];
+  assert.ok(quellen.length >= 16, `nur ${quellen.length} Bildquellen gefunden`);
+  for (const q of quellen) {
+    const teile = spiele.lizenzTeile(q);
+    const links = teile.filter((t) => typeof t === 'object');
+    assert.equal(links.length, 1, `keine bekannte Lizenz in „${q}“`);
+    assert.match(links[0].url, /^https:\/\/(creativecommons\.org|artlibre\.org)\//);
+    assert.equal(teile.map((t) => (typeof t === 'string' ? t : t.name)).join(''), q, 'Text bleibt unverändert');
+    assert.deepEqual(app.lizenzTeile(q), teile, `App und Spiele teilen „${q}“ verschieden`);
+  }
+});

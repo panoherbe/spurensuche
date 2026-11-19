@@ -2,7 +2,7 @@
 // Antippen genügt; per Tastatur wandert ein Suchrahmen über ein Raster (Pfeiltasten, Eingabe). Für Bildschirmleser
 // beschreibt jedes Feld, was darin zu sehen ist. Vergrößern per Knopf. Tipps je Detail: Hinweis, Bereich, genaue Stelle.
 
-import { spielRahmen, h, neueId } from '../_gemeinsam/ui.js';
+import { spielRahmen, h, neueId, bildnachweis } from '../_gemeinsam/ui.js';
 import { symbol } from '../_gemeinsam/symbole.js';
 import { sterne } from '../_gemeinsam/protokoll.js';
 import { trifft, feldTrifft, zielKreis, lageInWorten, anderswo } from './logik.js';
@@ -80,7 +80,7 @@ function aufbau(k) {
 
   flaeche.buehne.append(h('div', { class: 'sp-suche' },
     h('div', { class: 'sp-suche-bild' }, rahmen,
-      h('div', { class: 'sp-suche-unter' }, h('div', { class: 'sp-zoom' }, kleiner, zoomAnzeige, groesser), h('p', { class: 'sp-bildnachweis' }, bild.quelle))),
+      h('div', { class: 'sp-suche-unter' }, h('div', { class: 'sp-zoom' }, kleiner, zoomAnzeige, groesser), h('p', { class: 'sp-bildnachweis' }, bildnachweis(bild.quelle)))),
     h('div', { class: 'sp-suche-seite' },
       h('h3', { class: 'sp-zwischentitel' }, u.sprache === 'einfach' ? 'Findet diese Dinge:' : 'Das sollt ihr finden'),
       zielListe,

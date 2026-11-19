@@ -152,3 +152,30 @@ export function herunterladen(inhalt, name, typ) {
   a.click();
   setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 2000);
 }
+
+// Lizenzname → Lizenztext. CC BY, CC BY-SA und die Freie-Kunst-Lizenz verlangen bei jeder Nutzung einen Link zum
+// Lizenztext. Gleiche Tabelle in app/js/ui.js und spiele/_gemeinsam/ui.js; spiele/_test/inhalte.test.js prüft, dass
+// jede Bildquelle der Inhalte in beiden genau einen Link bekommt. Spezielle Namen vor allgemeinen.
+const LIZENZEN = [
+  [/\bCC BY-SA 4\.0\b/, 'https://creativecommons.org/licenses/by-sa/4.0/deed.de'],
+  [/\bCC BY-SA 3\.0 DE\b/, 'https://creativecommons.org/licenses/by-sa/3.0/de/deed.de'],
+  [/\bCC BY-SA 3\.0\b/, 'https://creativecommons.org/licenses/by-sa/3.0/deed.de'],
+  [/\bCC BY 4\.0\b/, 'https://creativecommons.org/licenses/by/4.0/deed.de'],
+  [/\bCC BY 3\.0\b/, 'https://creativecommons.org/licenses/by/3.0/deed.de'],
+  [/\bCC0(?: 1\.0)?\b/, 'https://creativecommons.org/publicdomain/zero/1.0/deed.de'],
+  [/\bFreie-Kunst-Lizenz(?: 1\.3)? \(FAL(?: 1\.3)?\)|\bFAL 1\.3\b/, 'https://artlibre.org/licence/lal/de1-3/'],
+];
+
+/** Teilt eine Quellenangabe in Text und Lizenz: ['Foto: …, ', { name: 'CC BY-SA 4.0', url }, ', Wikimedia …']. */
+export function lizenzTeile(text) {
+  const s = String(text ?? '');
+  for (const [muster, url] of LIZENZEN) {
+    const m = muster.exec(s);
+    if (m) return [s.slice(0, m.index), { name: m[0], url }, s.slice(m.index + m[0].length)].filter((teil) => teil !== '');
+  }
+  return s ? [s] : [];
+}
+
+/** Quellenangabe als Kinder für h(): der Lizenzname als Link zum Lizenztext, in einem neuen Fenster (die App bleibt offen). */
+export const bildnachweis = (text) => lizenzTeile(text).map((teil) => (typeof teil === 'string' ? teil
+  : h('a', { href: teil.url, rel: 'license noopener', target: '_blank' }, teil.name)));

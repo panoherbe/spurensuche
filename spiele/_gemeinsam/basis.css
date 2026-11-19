@@ -231,3 +231,6 @@
 @media (prefers-reduced-motion: reduce) {
   .sp-spiel *, .sp-spiel *::before, .sp-spiel *::after { animation: none !important; transition: none !important; }
 }
+
+/* Bildquelle: Lizenzname als Link zum Lizenztext, in der Farbe der Bildquelle, unterstrichen */
+.sp-bildnachweis a { color: inherit; text-decoration: underline; text-underline-offset: 0.15em; }
